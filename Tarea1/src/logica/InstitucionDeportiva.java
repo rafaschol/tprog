@@ -7,9 +7,9 @@ public class InstitucionDeportiva {
 	private String URL;
 
 	public InstitucionDeportiva(String n, String des, String url){
-		this.setNombre(n);
-		this.setDescripcion(des);
-		this.setURL(url);
+		this.nombre = n;
+		this.descripcion = des;
+		this.URL = url;
 	}
 
 	public String getNombre() {
@@ -35,5 +35,4 @@ public class InstitucionDeportiva {
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
-
 }

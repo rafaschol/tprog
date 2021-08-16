@@ -1,6 +1,6 @@
 package logica;
-
 import java.util.Date;
+import java.util.Map;
 
 public class Profesor extends Usuario {
 	
@@ -8,6 +8,7 @@ public class Profesor extends Usuario {
 	private String biografia;
 	private String sitioWeb;
 	private InstitucionDeportiva institucion;
+	private Map<String, Clase> clases;
 
 	public Profesor(String nick, String n, String ap, String email, Date fecha, 
 					String des, String bio, String web, InstitucionDeportiva i){
