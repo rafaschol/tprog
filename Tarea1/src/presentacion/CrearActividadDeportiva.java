@@ -3,15 +3,15 @@ package presentacion;
 import javax.swing.JInternalFrame;
 import javax.swing.JFrame;
 
-public class ConsultarUsuario extends JInternalFrame {
+public class CrearActividadDeportiva extends JInternalFrame {
 
-    public ConsultarUsuario() {
+    public CrearActividadDeportiva() {
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setSize(350,500);
-        setTitle("Consultar usuario");
+        setTitle("Crear actividad deportiva");
     }
 }
