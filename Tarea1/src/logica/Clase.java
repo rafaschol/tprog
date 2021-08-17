@@ -5,13 +5,12 @@ public class Clase {
 	private String nombre;
 	private Date fecha;
 	private Date horaInicio;
-	private int minPersonas;
-	private int maxPersonas;
+	private Integer minPersonas;
+	private Integer maxPersonas;
 	private String URL;
 	private Date fechaAlta;	
 	
-	public Clase(String n, Date f, Date ini, int min, int max, String url, 
-			Date alta){
+	public Clase(String n, Date f, Date ini, Integer min, Integer max, String url, Date alta){
 		this.nombre = n;
 		this.fecha = f;
 		this.horaInicio = ini;
@@ -49,7 +48,7 @@ public class Clase {
 		return minPersonas;
 	}
 
-	public void setMinPersonas(int minPersonas) {
+	public void setMinPersonas(Integer minPersonas) {
 		this.minPersonas = minPersonas;
 	}
 
@@ -57,7 +56,7 @@ public class Clase {
 		return maxPersonas;
 	}
 
-	public void setMaxPersonas(int maxPersonas) {
+	public void setMaxPersonas(Integer maxPersonas) {
 		this.maxPersonas = maxPersonas;
 	}
 

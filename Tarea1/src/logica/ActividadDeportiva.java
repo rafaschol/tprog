@@ -1,14 +1,16 @@
 package logica;
 import java.util.Date;
+import java.util.Map;
 
 public class ActividadDeportiva {
 	private Date fecha;
 	private String nombre;
 	private String descripcion;
-	private int duracion;
-	private float costo;
+	private Integer duracion;
+	private Float costo;
+	private Map<String, Clase> clases;
 	
-	public ActividadDeportiva(Date fecha, String nombre, String descripcion, int duracion, float costo){
+	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo){
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
@@ -44,7 +46,7 @@ public class ActividadDeportiva {
 		return duracion;
 	}
 
-	public void setDuracion(int duracion) {
+	public void setDuracion(Integer duracion) {
 		this.duracion = duracion;
 	}
 
@@ -52,7 +54,7 @@ public class ActividadDeportiva {
 		return costo;
 	}
 
-	public void setCosto(float costo) {
+	public void setCosto(Float costo) {
 		this.costo = costo;
 	}
 
