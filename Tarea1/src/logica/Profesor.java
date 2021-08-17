@@ -1,5 +1,6 @@
 package logica;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Profesor extends Usuario {
@@ -21,6 +22,7 @@ public class Profesor extends Usuario {
 		this.biografia = bio;
 		this.sitioWeb = web;
 		this.institucion = i;
+		this.clases = new HashMap<String, Clase>();
 
 	}
 

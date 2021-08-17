@@ -1,5 +1,6 @@
 package logica;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ActividadDeportiva {
@@ -16,6 +17,7 @@ public class ActividadDeportiva {
 		this.descripcion = descripcion;
 		this.duracion = duracion;
 		this.costo = costo;
+		this.clases = new HashMap<String, Clase>();
 
 	}
 	public String getNombre() {

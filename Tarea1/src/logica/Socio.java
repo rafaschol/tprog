@@ -1,5 +1,6 @@
 package logica;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Socio extends Usuario {
@@ -12,6 +13,7 @@ public class Socio extends Usuario {
 		this.apellido = ap;
 		this.email = email;
 		this.fechaNacimiento = fecha;
+		this.registros = new HashMap<Integer, Registro>();
 	}
 
 }
