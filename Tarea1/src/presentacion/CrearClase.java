@@ -20,8 +20,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Font;
 
 public class CrearClase extends JInternalFrame {
+	private final JDateChooser dateChooser = new JDateChooser();
+	private final JDateChooser dateChooser_1 = new JDateChooser();
 	
     public CrearClase() {
         setResizable(true);
@@ -32,7 +37,7 @@ public class CrearClase extends JInternalFrame {
         setSize(350,500);
         setTitle("Crear clase");
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[] {97, 45, 69, 10};
+        gridBagLayout.columnWidths = new int[] {148, 45, 69, 10};
         gridBagLayout.rowHeights = new int[] {30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
         gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
         gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
@@ -47,6 +52,8 @@ public class CrearClase extends JInternalFrame {
         getContentPane().add(lblInstitucion, gbc_lblInstitucion);
         
         JComboBox comboBox = new JComboBox();
+        comboBox.setEditable(true);
+        comboBox.setBackground(Color.WHITE);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -64,6 +71,8 @@ public class CrearClase extends JInternalFrame {
         getContentPane().add(lblActividad, gbc_lblActividad);
         
         JComboBox comboBox_1 = new JComboBox();
+        comboBox_1.setEditable(true);
+        comboBox_1.setBackground(Color.WHITE);
         GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
         gbc_comboBox_1.gridwidth = 2;
         gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
@@ -72,8 +81,10 @@ public class CrearClase extends JInternalFrame {
         gbc_comboBox_1.gridy = 1;
         getContentPane().add(comboBox_1, gbc_comboBox_1);
         
-        JLabel lblDatosClase = new JLabel("Datos Clase");
+        JLabel lblDatosClase = new JLabel("Datos Clase:");
+        lblDatosClase.setFont(new Font("Dialog", Font.BOLD, 12));
         GridBagConstraints gbc_lblDatosClase = new GridBagConstraints();
+        gbc_lblDatosClase.fill = GridBagConstraints.VERTICAL;
         gbc_lblDatosClase.insets = new Insets(0, 0, 5, 5);
         gbc_lblDatosClase.gridx = 0;
         gbc_lblDatosClase.gridy = 3;
@@ -107,6 +118,13 @@ public class CrearClase extends JInternalFrame {
         gbc_datePickerImpl.insets = new Insets(0, 0, 5, 5);
         gbc_datePickerImpl.gridx = 1;
         gbc_datePickerImpl.gridy = 5;
+        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+        gbc_dateChooser.fill = GridBagConstraints.BOTH;
+        gbc_dateChooser.gridwidth = 2;
+        gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
+        gbc_dateChooser.gridx = 1;
+        gbc_dateChooser.gridy = 5;
+        getContentPane().add(dateChooser, gbc_dateChooser);
         
         JLabel lblHora = new JLabel("Hora:");
         GridBagConstraints gbc_lblHora = new GridBagConstraints();
@@ -115,6 +133,26 @@ public class CrearClase extends JInternalFrame {
         gbc_lblHora.gridx = 0;
         gbc_lblHora.gridy = 6;
         getContentPane().add(lblHora, gbc_lblHora);
+        
+        JComboBox comboBox_1_1 = new JComboBox();
+        comboBox_1_1.setEditable(true);
+        comboBox_1_1.setBackground(Color.WHITE);
+        GridBagConstraints gbc_comboBox_1_1 = new GridBagConstraints();
+        gbc_comboBox_1_1.insets = new Insets(0, 0, 5, 5);
+        gbc_comboBox_1_1.fill = GridBagConstraints.BOTH;
+        gbc_comboBox_1_1.gridx = 1;
+        gbc_comboBox_1_1.gridy = 6;
+        getContentPane().add(comboBox_1_1, gbc_comboBox_1_1);
+        
+        JComboBox comboBox_1_2 = new JComboBox();
+        comboBox_1_2.setEditable(true);
+        comboBox_1_2.setBackground(Color.WHITE);
+        GridBagConstraints gbc_comboBox_1_2 = new GridBagConstraints();
+        gbc_comboBox_1_2.insets = new Insets(0, 0, 5, 0);
+        gbc_comboBox_1_2.fill = GridBagConstraints.BOTH;
+        gbc_comboBox_1_2.gridx = 2;
+        gbc_comboBox_1_2.gridy = 6;
+        getContentPane().add(comboBox_1_2, gbc_comboBox_1_2);
         
         JLabel lblProfesor = new JLabel("Profesor:");
         GridBagConstraints gbc_lblProfesor = new GridBagConstraints();
@@ -125,6 +163,7 @@ public class CrearClase extends JInternalFrame {
         getContentPane().add(lblProfesor, gbc_lblProfesor);
         
         JComboBox comboBox_2 = new JComboBox();
+        comboBox_2.setBackground(Color.WHITE);
         GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
         gbc_comboBox_2.gridwidth = 2;
         gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
@@ -189,6 +228,13 @@ public class CrearClase extends JInternalFrame {
         gbc_lblFechaAlta.gridx = 0;
         gbc_lblFechaAlta.gridy = 11;
         getContentPane().add(lblFechaAlta, gbc_lblFechaAlta);
+        GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
+        gbc_dateChooser_1.fill = GridBagConstraints.BOTH;
+        gbc_dateChooser_1.gridwidth = 2;
+        gbc_dateChooser_1.insets = new Insets(0, 0, 5, 0);
+        gbc_dateChooser_1.gridx = 1;
+        gbc_dateChooser_1.gridy = 11;
+        getContentPane().add(dateChooser_1, gbc_dateChooser_1);
         
         JButton btnNewButton = new JButton("Aceptar");
         GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
