@@ -7,7 +7,7 @@ public class Registro {
 	private Date fecha;
 	private Float costo;
 	private Boolean conCuponera;
-	private Clase clase;
+	private Clase clase; // Clase a la cual corresponde el registro.
 	
 	public Registro(Integer id, Date fecha, Float costo, Boolean cuponera, Clase clase){
 		this.id = id;
