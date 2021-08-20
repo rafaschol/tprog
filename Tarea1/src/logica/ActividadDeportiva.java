@@ -10,14 +10,16 @@ public class ActividadDeportiva {
 	private Integer duracion;
 	private Float costo;
 	private Map<String, Clase> clases;
+	private InstitucionDeportiva institucion;
 	
-	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo){
+	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.duracion = duracion;
 		this.costo = costo;
 		this.clases = new HashMap<String, Clase>();
+		this.institucion = institucion;
 
 	}
 	public String getNombre() {
