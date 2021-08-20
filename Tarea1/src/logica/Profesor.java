@@ -12,7 +12,7 @@ public class Profesor extends Usuario {
 	private Map<String, Clase> clases;
 
 	public Profesor(String nick, String n, String ap, String email, Date fecha, 
-					String des, InstitucionDeportiva i){
+					String des, InstitucionDeportiva i,  String biografia, String sitioWeb){
 		this.nickname = nick;
 		this.nombre = n;
 		this.apellido = ap;
@@ -21,6 +21,8 @@ public class Profesor extends Usuario {
 		this.descripcion = des;
 		this.institucion = i;
 		this.clases = new HashMap<String, Clase>();
+		this.biografia = biografia;
+		this.sitioWeb = sitioWeb;
 
 	}
 

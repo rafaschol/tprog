@@ -1,15 +1,17 @@
 package logica;
 import java.util.Date;
 
+import excepciones.MailRepetidoException;
 import excepciones.UsuarioRepetidoException;
 
 public interface IControladorUsuario {
 	
 	public abstract void altaSocio(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento) throws UsuarioRepetidoException;
+	    	Date fechaNacimiento) throws UsuarioRepetidoException, MailRepetidoException;
 	
 	public abstract void altaProfesor(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento, String descripcion, InstitucionDeportiva institucion) throws UsuarioRepetidoException;
+	    	Date fechaNacimiento, String descripcion, InstitucionDeportiva institucion, 
+	    	String biografia, String sitioWeb) throws UsuarioRepetidoException,MailRepetidoException;
 
 
 }
