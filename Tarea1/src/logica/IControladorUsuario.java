@@ -7,6 +7,9 @@ public interface IControladorUsuario {
 	
 	public abstract void altaSocio(String nickname, String nombre,String apellido, String email,
 	    	Date fechaNacimiento) throws UsuarioRepetidoException;
+	
+	public abstract void altaProfesor(String nickname, String nombre,String apellido, String email,
+	    	Date fechaNacimiento, String descripcion, Institucion institucion) throws UsuarioRepetidoException;
 
 
 }
