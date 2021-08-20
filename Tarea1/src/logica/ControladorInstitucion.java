@@ -3,6 +3,7 @@ package logica;
 import java.util.Date;
 
 import excepciones.ActividadRepetidaException;
+import excepciones.InstitucionRepetidaException;
 
 public class ControladorInstitucion implements IControladorInstitucion {
 
@@ -21,6 +22,25 @@ public class ControladorInstitucion implements IControladorInstitucion {
         ma.addActividad(a);
     	
     	
+    }
+    
+    public void altaInstitucionDeportiva(String nombreInstitucion, String descripcion, String url)
+    	throws InstitucionRepetidaException{
+    	ManejadorInstitucion mi = ManejadorInstitucion.getinstance();
+        InstitucionDeportiva i = mi.obtenerInstitucion(nombreInstitucion);
+    	  
+        if (i != null)
+            throw new InstitucionRepetidaException("Ya existe una Institucion deportiva con nombre '" + nombreInstitucion + "' en el sistema");
+        
+        i = new InstitucionDeportiva(nombreInstitucion, descripcion, url);
+        mi.addInstitucion(i);  	
+    	
+    }
+    
+    public  String[] listarInstituciones() {
+    	ManejadorInstitucion mi = ManejadorInstitucion.getinstance();
+        String[] lista = mi.getInstituciones();
+        return lista;
     }
 
 }
