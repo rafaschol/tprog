@@ -18,16 +18,16 @@ public class ManejadorProfesores {
         return instancia;
     }
 
-    public void addUsuario(Usuario profesor) {
+    public void addProfesor(Usuario profesor) {
         String nick = profesor.getNickname();
         niknames.put(nick, profesor);
     }
 
-    public Usuario obtenerUsuario(String nick) {
+    public Usuario obtenerProfesor(String nick) {
         return ((Usuario) niknames.get(nick));
     }
 
-    public Usuario[] getUsuarios() {
+    public Usuario[] getProfesores() {
         if (niknames.isEmpty())
             return null;
         else {

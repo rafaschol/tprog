@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManejadorSocios {
-    private Map<String, Usuario> niknames;
+    private Map<String, Socio> niknames;
     private static ManejadorSocios instancia = null;
 
     private ManejadorSocios() {
-    	niknames = new HashMap<String, Usuario>();
+    	niknames = new HashMap<String, Socio>();
     }
 
     public static ManejadorSocios getinstance() {
@@ -18,24 +18,24 @@ public class ManejadorSocios {
         return instancia;
     }
 
-    public void addUsuario(Usuario socio) {
+    public void addSocio(Socio socio) {
         String nick = socio.getNickname();
         niknames.put(nick, socio);
     }
 
-    public Usuario obtenerUsuario(String nick) {
-        return ((Usuario) niknames.get(nick));
+    public Socio obtenerSocio(String nick) {
+        return ((Socio) niknames.get(nick));
     }
 
-    public Usuario[] getUsuarios() {
+    public Socio[] getUsuarios() {
         if (niknames.isEmpty())
             return null;
         else {
-            Collection<Usuario> soci = niknames.values();
+            Collection<Socio> soci = niknames.values();
             Object[] o = soci.toArray();
-            Usuario[] socios = new Usuario[o.length];
+            Socio[] socios = new Socio[o.length];
             for (int i = 0; i < o.length; i++) {
-                socios[i] = (Usuario) o[i];
+                socios[i] = (Socio) o[i];
             }
 
             return socios;
