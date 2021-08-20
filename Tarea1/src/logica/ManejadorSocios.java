@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManejadorSocios {
-    private Map<String, Socio> niknames;
+    private Map<String, Socio> niknames; // Coleccion de Socios.
+    private Map<String, Socio> mails; // Coleccion para validar mail.
     private static ManejadorSocios instancia = null;
 
     private ManejadorSocios() {
     	niknames = new HashMap<String, Socio>();
+    	mails = new HashMap<String, Socio>();
     }
 
     public static ManejadorSocios getinstance() {
@@ -26,8 +28,12 @@ public class ManejadorSocios {
     public Socio obtenerSocio(String nick) {
         return ((Socio) niknames.get(nick));
     }
+    
+    public Socio obtenerMail(String mail) {
+        return ((Socio) mails.get(mail));
+    }
 
-    public Socio[] getUsuarios() {
+    public Socio[] getSocios() {
         if (niknames.isEmpty())
             return null;
         else {
