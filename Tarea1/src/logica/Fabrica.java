@@ -14,8 +14,16 @@ public class Fabrica {
         return instancia;
     }
 
-    public IControlador getIControladorUsuario() {
-        return new Controlador();
+    public IControladorUsuario getIControladorUsuario() {
+        return new ControladorUsuario();
+    }
+    
+    public IControladorInstitucion getIControladorInstitucion() {
+        return new ControladorInstitucion();
+    }
+    
+    public IControladorCuponera getIControladorCuponera() {
+        return new ControladorCuponera();
     }
 
 }
