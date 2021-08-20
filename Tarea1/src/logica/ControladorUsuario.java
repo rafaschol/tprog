@@ -22,7 +22,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento, String descripcion, Institucion institucion) throws UsuarioRepetidoException {
+	    	Date fechaNacimiento, String descripcion, InstitucionDeportiva institucion) throws UsuarioRepetidoException {
     	    ManejadorProfesores ms = ManejadorProfesores.getinstance();
             Profesor p = ms.obtenerProfesor(nickname); 
             if (p != null) // Valida nickname
@@ -37,4 +37,4 @@ public class ControladorUsuario implements IControladorUsuario {
 
     }
 
-}
+

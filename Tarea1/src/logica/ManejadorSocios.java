@@ -23,6 +23,8 @@ public class ManejadorSocios {
     public void addSocio(Socio socio) {
         String nick = socio.getNickname();
         niknames.put(nick, socio);
+        String email = socio.getEmail();
+        mails.put(email, socio);
     }
 
     public Socio obtenerSocio(String nick) {

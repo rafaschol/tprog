@@ -23,6 +23,8 @@ public class ManejadorProfesores {
     public void addProfesor(Profesor profesor) {
     	String nick = profesor.getNickname();
         niknames.put(nick, profesor);
+        String email = profesor.getEmail();
+        mails.put(email, profesor);
     }
 
     public Profesor obtenerProfesor(String nick) {
