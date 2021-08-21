@@ -1,14 +1,12 @@
 package logica;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ActividadDeCuponera {
 	private Integer cantidadDeClases;
-	private Map<String, ActividadDeportiva> actividades;
+	private ActividadDeportiva actividad;
+	private Cuponera cuponera;
 
 	public ActividadDeCuponera(Integer cant) {
 		this.cantidadDeClases = cant;
-		this.actividades = new HashMap<String, ActividadDeportiva>();
 	}
 
 	public Integer getCantidadDeClases() {
@@ -17,5 +15,21 @@ public class ActividadDeCuponera {
 
 	public void setCantidadDeClases(Integer cantidadDeClases) {
 		this.cantidadDeClases = cantidadDeClases;
+	}
+
+	public ActividadDeportiva getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(ActividadDeportiva actividades) {
+		this.actividad = actividades;
+	}
+
+	public Cuponera getCuponera() {
+		return cuponera;
+	}
+
+	public void setCuponera(Cuponera cuponera) {
+		this.cuponera = cuponera;
 	}
 }

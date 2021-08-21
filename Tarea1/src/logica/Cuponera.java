@@ -68,4 +68,12 @@ public class Cuponera {
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+
+	public HashSet<ActividadDeCuponera> getActividadCuponera() {
+		return actividadCuponera;
+	}
+
+	public void setActividadCuponera(HashSet<ActividadDeCuponera> actividadCuponera) {
+		this.actividadCuponera = actividadCuponera;
+	}
 }

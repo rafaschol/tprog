@@ -25,5 +25,9 @@ public class ManejadorActividad {
         String nombre = actividad.getNombre();
         actividades.put(nombre, actividad);
     }
+    
+    public Map<String, ActividadDeportiva> getActividades(){
+    	return this.actividades;
+    }
 
 }

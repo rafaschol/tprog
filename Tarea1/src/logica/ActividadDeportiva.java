@@ -90,5 +90,8 @@ public class ActividadDeportiva {
 		return res;
 	}
 	
+	public Clase obtenerClase(String nombre) {
+		return (clases.get(nombre));
+	}
 	
 }

@@ -69,4 +69,8 @@ public class InstitucionDeportiva {
 		return res;
 		
 	}
+	public void addActividad(ActividadDeportiva actividad) {
+		String nombre = actividad.getNombre();
+		this.actividades.put(nombre, actividad);
+	}
 }

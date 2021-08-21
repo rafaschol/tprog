@@ -3,6 +3,7 @@ import java.sql.Time;
 import java.util.Date;
 
 import excepciones.ActividadRepetidaException;
+import excepciones.ClaseRepetidaException;
 import excepciones.InstitucionRepetidaException;
 
 
@@ -19,9 +20,10 @@ public interface IControladorInstituciones {
 	public abstract DataInstitucion[] listarDataInstituciones(); 
 	
 	public abstract void altaClase(String nombre, Date fecha, Time horaIni, Integer minimo,
-			Integer maximo, String url, Date fechaAlta, String profesor, String actividad);
+		Integer maximo, String url, Date fechaAlta, String profesor, String actividad)
+		throws ClaseRepetidaException;
 	
 	//Para el caso de uso consultar clase
-	public abstract DataClase[] listarClases(String actividad);
+	public abstract DataClase[] listarDataClases(String actividad);
 	
 }
