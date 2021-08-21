@@ -5,11 +5,19 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import logica.Fabrica;
+import logica.IControladorCuponera;
+import logica.IControladorInstituciones;
+import logica.IControladorUsuario;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class Principal {
 
+	private IControladorUsuario icu;
+	private IControladorInstituciones ici;
+	private IControladorCuponera icc;
     private JFrame mainFrame;
     private CrearUsuario crearUsuarioIF;
     private CrearActividadDeportiva crearActividadDeportivaIF;
@@ -39,12 +47,17 @@ class Principal {
 
     public Principal() {
         initialize();
+        
+        Fabrica fabrica = Fabrica.getInstance();
+        icu = fabrica.getIControladorUsuario();
+        ici = fabrica.getIControladorInstitucion();
+        icc = fabrica.getIControladorCuponera();
 
-        crearUsuarioIF = new CrearUsuario();
-        crearActividadDeportivaIF = new CrearActividadDeportiva();
-        crearClaseIF = new CrearClase();
+        crearUsuarioIF = new CrearUsuario(icu, ici);
+        crearActividadDeportivaIF = new CrearActividadDeportiva(ici);
+        crearClaseIF = new CrearClase(ici);
         crearCuponeraIF = new CrearCuponera();
-        crearInstitucionIF = new CrearInstitucion();
+        crearInstitucionIF = new CrearInstitucion(ici);
         consultarUsuarioIF = new ConsultarUsuario();
         consultarActividadDeportivaIF = new ConsultarActividadDeportiva();
         consultarClaseIF = new ConsultarClase();
@@ -81,7 +94,8 @@ class Principal {
     }
 
     private void initialize() {
-        mainFrame = new JFrame("Administración | entrenamos.uy");
+        mainFrame = new JFrame();
+        mainFrame.setTitle("Administraci\u00F3n | entrenamos.uy");
         mainFrame.setSize(400,600);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,7 +115,7 @@ class Principal {
         JMenuItem crearActividadDeportivaMI = new JMenuItem("Crear actividad deportiva");
         JMenuItem crearClaseMI = new JMenuItem("Crear clase");
         JMenuItem crearCuponeraMI = new JMenuItem("Crear cuponera");
-        JMenuItem crearInstitucionMI = new JMenuItem("Crear institución deportiva");
+        JMenuItem crearInstitucionMI = new JMenuItem("Crear instituci\u00F3n deportiva");
         JMenuItem consultarUsuarioMI = new JMenuItem("Consultar usuario");
         JMenuItem consultarActividadDeportivaMI = new JMenuItem("Consultar actividad deportiva");
         JMenuItem consultarClaseMI = new JMenuItem("Consultar clase");
@@ -112,16 +126,19 @@ class Principal {
 
         crearUsuarioMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	crearUsuarioIF.cargarInstituciones();
                 crearUsuarioIF.setVisible(true);
             }
         });
         crearActividadDeportivaMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	crearActividadDeportivaIF.cargarInstituciones();
                 crearActividadDeportivaIF.setVisible(true);
             }
         });
         crearClaseMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	crearClaseIF.cargarInstituciones();
                 crearClaseIF.setVisible(true);
             }
         });
