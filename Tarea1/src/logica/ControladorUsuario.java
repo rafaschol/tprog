@@ -36,6 +36,7 @@ public class ControladorUsuario implements IControladorUsuario {
             InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
             p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb);
             mp.addProfesor(p);
+            ins.addProfesor(p);
         }
 
     }

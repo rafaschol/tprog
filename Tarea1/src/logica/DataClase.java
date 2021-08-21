@@ -5,7 +5,6 @@ import java.util.Date;
 public class DataClase {
 	private String nombre;
 	private Date fecha;
-	private Date horaInicio;
 	private Integer minPersonas;
 	private Integer maxPersonas;
 	private String URL;
@@ -16,7 +15,6 @@ public class DataClase {
 	public DataClase(Clase clase){
 		this.setNombre(clase.getNombre());
 		this.setFecha(clase.getFecha());
-		this.setHoraInicio(clase.getHoraInicio());
 		this.setMinPersonas(clase.getMinPersonas());
 		this.setMaxPersonas(clase.getMaxPersonas());
 		this.setURL(clase.getURL());
@@ -38,14 +36,6 @@ public class DataClase {
 	
 	private  void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-
-	public Date getHoraInicio() {
-		return horaInicio;
-	}
-
-	private  void setHoraInicio(Date horaInicio) {
-		this.horaInicio = horaInicio;
 	}
 
 	public Integer getMinPersonas() {

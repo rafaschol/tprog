@@ -115,13 +115,13 @@ public class CrearActividadDeportiva extends JInternalFrame {
         datosActividadPanel.add(nombreTextField, gbc_nombreTextField);
         nombreTextField.setColumns(10);
         
-        JLabel descripciónLabel = new JLabel("Descripci\u00F3n");
-        GridBagConstraints gbc_descripciónLabel = new GridBagConstraints();
-        gbc_descripciónLabel.anchor = GridBagConstraints.EAST;
-        gbc_descripciónLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_descripciónLabel.gridx = 0;
-        gbc_descripciónLabel.gridy = 2;
-        datosActividadPanel.add(descripciónLabel, gbc_descripciónLabel);
+        JLabel descripcionLabel = new JLabel("Descripci\u00F3n");
+        GridBagConstraints gbc_descripcionLabel = new GridBagConstraints();
+        gbc_descripcionLabel.anchor = GridBagConstraints.EAST;
+        gbc_descripcionLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_descripcionLabel.gridx = 0;
+        gbc_descripcionLabel.gridy = 2;
+        datosActividadPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
         descripcionTextArea.setLineWrap(true);
@@ -222,7 +222,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	if (esValido()) {
     		try {
     			controladorInstitucion.altaActividadDeportiva(institucion, nombre, descripcion, duracion, duracion, fechaAlta);
-    			JOptionPane.showMessageDialog(this, "Se creó la actividad deportiva correctamente.");
+    			JOptionPane.showMessageDialog(this, "Se creï¿½ la actividad deportiva correctamente.");
     			cerrarFormulario();
     		} catch (ActividadRepetidaException ex) {
     			JOptionPane.showMessageDialog(this, "Ya existe una actividad deportiva con ese nombre.", null, JOptionPane.ERROR_MESSAGE);
@@ -254,7 +254,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es vï¿½lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else {

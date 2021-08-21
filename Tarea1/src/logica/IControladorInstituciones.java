@@ -19,7 +19,7 @@ public interface IControladorInstituciones {
 	//Para el caso de uso crear clase y consultar clase
 	public abstract DataInstitucion[] listarDataInstituciones(); 
 	
-	public abstract void altaClase(String nombre, Date fecha, Time horaIni, Integer minimo,
+	public abstract void altaClase(String nombre, Date fecha, Integer minimo,
 		Integer maximo, String url, Date fechaAlta, String profesor, String actividad)
 		throws ClaseRepetidaException;
 	

@@ -4,7 +4,6 @@ import java.util.Date;
 public class Clase {
 	private String nombre;
 	private Date fecha;
-	private Date horaInicio;
 	private Integer minPersonas;
 	private Integer maxPersonas;
 	private String URL;
@@ -12,10 +11,9 @@ public class Clase {
 	private Profesor profesor;
 	private ActividadDeportiva actividad;
 	
-	public Clase(String n, Date f, Date ini, Integer min, Integer max, String url, Date alta){
+	public Clase(String n, Date f, Integer min, Integer max, String url, Date alta){
 		this.nombre = n;
 		this.fecha = f;
-		this.horaInicio = ini;
 		this.minPersonas = min;
 		this.maxPersonas = max;
 		this.URL = url;
@@ -36,14 +34,6 @@ public class Clase {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-
-	public Date getHoraInicio() {
-		return horaInicio;
-	}
-
-	public void setHoraInicio(Date horaInicio) {
-		this.horaInicio = horaInicio;
 	}
 
 	public int getMinPersonas() {
