@@ -18,8 +18,8 @@ public class Fabrica {
         return new ControladorUsuario();
     }
     
-    public IControladorInstitucion getIControladorInstitucion() {
-        return new ControladorInstitucion();
+    public IControladorInstituciones getIControladorInstitucion() {
+        return new ControladorInstituciones();
     }
     
     public IControladorCuponera getIControladorCuponera() {

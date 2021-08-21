@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManejadorProfesores {
-    private Map<String, Profesor> niknames; // Coleccion de Socios.
+    private Map<String, Profesor> niknames; // Coleccion de Profesores.
     private Map<String, Profesor> mails; // Coleccion para validar mail.
     private static ManejadorProfesores instancia = null;
 

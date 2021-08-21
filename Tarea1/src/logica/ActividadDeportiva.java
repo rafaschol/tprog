@@ -61,6 +61,22 @@ public class ActividadDeportiva {
 	public void setCosto(Float costo) {
 		this.costo = costo;
 	}
+	public Map<String, Clase> getClases() {
+		return clases;
+	}
+	public void setClases(Map<String, Clase> clases) {
+		this.clases = clases;
+	}
+	public InstitucionDeportiva getInstitucion() {
+		return institucion;
+	}
+	public void setInstitucion(InstitucionDeportiva institucion) {
+		this.institucion = institucion;
+	}
+	public void addClase(Clase clase) {
+		String nombreClase = clase.getNombre();
+		this.clases.put(nombreClase, clase);
+	}
 
 	
 	

@@ -1,22 +1,20 @@
 package logica;
 
-import java.util.Collection;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ManejadorInstitucion {
+public class ManejadorInstituciones {
 	private Map<String, InstitucionDeportiva> instituciones;
-    private static ManejadorInstitucion instancia = null;
+    private static ManejadorInstituciones instancia = null;
 
-    private ManejadorInstitucion() {
+    private ManejadorInstituciones() {
     	instituciones = new HashMap<String, InstitucionDeportiva>();
     }
 
-    public static ManejadorInstitucion getinstance() {
+    public static ManejadorInstituciones getinstance() {
         if (instancia == null)
-            instancia = new ManejadorInstitucion();
+            instancia = new ManejadorInstituciones();
         return instancia;
     }
     
@@ -30,11 +28,15 @@ public class ManejadorInstitucion {
     }
     
     //lista todas las instituciones del sistema
-    public String[] getInstituciones() {
-        String[] res = new String[instituciones.size()];
+    public DataInstitucion[] getInstituciones() {
+        DataInstitucion[] res = new DataInstitucion[instituciones.size()];
         int i = 0;
 		for (Entry<String, InstitucionDeportiva> iter : instituciones.entrySet()) {
-			res[i] = iter.getKey();
+			String inst = iter.getKey();
+			String[] p = iter.getValue().listarProfesores();
+			String[] a = iter.getValue().listarActividades();
+			DataInstitucion di = new DataInstitucion(inst, p, a);
+			res[i] = di;
 			i++;
 		}		
         return res;

@@ -21,4 +21,28 @@ public class Socio extends Usuario {
 		this.participa = new HashSet<Participa>();
 	}
 
+	public Map<Integer, Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(Map<Integer, Registro> registros) {
+		this.registros = registros;
+	}
+
+	public HashSet<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(HashSet<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public HashSet<Participa> getParticipa() {
+		return participa;
+	}
+
+	public void setParticipa(HashSet<Participa> participa) {
+		this.participa = participa;
+	}
+
 }

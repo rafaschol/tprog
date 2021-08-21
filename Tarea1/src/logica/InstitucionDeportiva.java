@@ -1,15 +1,23 @@
 package logica;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class InstitucionDeportiva {
 	
 	private String nombre;
 	private String descripcion;
 	private String URL;
+	//colecciones para visibilidad
+	private Map<String, Profesor> profesores;
+	private Map<String, ActividadDeportiva> actividades;
 
 	public InstitucionDeportiva(String n, String des, String url){
 		this.nombre = n;
 		this.descripcion = des;
 		this.URL = url;
+		this.profesores = new HashMap<String, Profesor>();
+		this.actividades = new HashMap<String, ActividadDeportiva>();
 	}
 
 	public String getNombre() {
@@ -34,5 +42,31 @@ public class InstitucionDeportiva {
 
 	public void setURL(String uRL) {
 		URL = uRL;
+	}
+
+	public Map<String, Profesor> getProfesores() {
+		return profesores;
+	}
+
+	public void setProfesores(Map<String, Profesor> profesores) {
+		this.profesores = profesores;
+	}
+
+	public Map<String, ActividadDeportiva> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(Map<String, ActividadDeportiva> actividades) {
+		this.actividades = actividades;
+	}
+	//transforma la colecciones en arreglos con sus respectivas claves 
+	public String[] listarProfesores() {
+		String[] res = profesores.keySet().toArray(new String[0]);
+		return res;
+	}
+	public String[] listarActividades() {
+		String[] res = actividades.keySet().toArray(new String[0]);
+		return res;
+		
 	}
 }

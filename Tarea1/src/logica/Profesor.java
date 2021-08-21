@@ -57,4 +57,17 @@ public class Profesor extends Usuario {
 	public void setInstitucion(InstitucionDeportiva institucion) {
 		this.institucion = institucion;
 	}
+
+	public Map<String, Clase> getClases() {
+		return clases;
+	}
+
+	public void setClases(Map<String, Clase> clases) {
+		this.clases = clases;
+	}
+	
+	public void addClase(Clase clase) {
+		String nombreClase = clase.getNombre();
+		this.clases.put(nombreClase, clase);
+	}
 }

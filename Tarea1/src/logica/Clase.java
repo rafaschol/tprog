@@ -9,6 +9,8 @@ public class Clase {
 	private Integer maxPersonas;
 	private String URL;
 	private Date fechaAlta;	
+	private Profesor profesor;
+	private ActividadDeportiva actividad;
 	
 	public Clase(String n, Date f, Date ini, Integer min, Integer max, String url, Date alta){
 		this.nombre = n;
@@ -74,5 +76,21 @@ public class Clase {
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+	public ActividadDeportiva getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(ActividadDeportiva actividad) {
+		this.actividad = actividad;
 	}
 }
