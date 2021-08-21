@@ -15,9 +15,13 @@ public interface IControladorInstituciones {
 	public abstract void altaInstitucionDeportiva(String nombreInstitucion, String descripcion, String url)
 		throws InstitucionRepetidaException; 
 	
+	//Para el caso de uso crear clase y consultar clase
 	public abstract DataInstitucion[] listarDataInstituciones(); 
 	
 	public abstract void altaClase(String nombre, Date fecha, Time horaIni, Integer minimo,
 			Integer maximo, String url, Date fechaAlta, String profesor, String actividad);
+	
+	//Para el caso de uso consultar clase
+	public abstract DataClase[] listarClases(String actividad);
 	
 }

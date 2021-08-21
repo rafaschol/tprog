@@ -10,7 +10,7 @@ public interface IControladorUsuario {
 	    	Date fechaNacimiento) throws UsuarioRepetidoException, MailRepetidoException;
 	
 	public abstract void altaProfesor(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento, String descripcion, InstitucionDeportiva institucion, 
+	    	Date fechaNacimiento, String descripcion, String institucion, 
 	    	String biografia, String sitioWeb) throws UsuarioRepetidoException,MailRepetidoException;
 
 

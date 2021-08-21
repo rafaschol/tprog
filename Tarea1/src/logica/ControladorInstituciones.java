@@ -56,5 +56,12 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	ma.obtenerActividad(actividad).addClase(c);
       	
     }
-
+    
+    public DataClase[] listarClases(String actividad) {
+    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	ActividadDeportiva ad = ma.obtenerActividad(actividad);
+    	DataClase[] clases = ad.getDataClases();
+    	return clases;
+    	
+    }
 }

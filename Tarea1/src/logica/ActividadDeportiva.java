@@ -2,6 +2,7 @@ package logica;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ActividadDeportiva {
 	private Date fecha;
@@ -78,6 +79,16 @@ public class ActividadDeportiva {
 		this.clases.put(nombreClase, clase);
 	}
 
+	public DataClase[] getDataClases() {
+		DataClase[] res = new DataClase[clases.size()];
+		int i = 0;
+		for (Entry<String, Clase> iter : clases.entrySet()) {
+			DataClase c = new DataClase(iter.getValue());
+			res[i] = c;
+			i++;	
+		}
+		return res;
+	}
 	
 	
 }

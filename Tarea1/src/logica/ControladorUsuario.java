@@ -23,18 +23,19 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento, String descripcion, InstitucionDeportiva institucion, String biografia, 
+	    	Date fechaNacimiento, String descripcion, String institucion, String biografia, 
 	    	String sitioWeb) throws UsuarioRepetidoException, MailRepetidoException {
-    	    ManejadorProfesores ms = ManejadorProfesores.getinstance();
-            Profesor p = ms.obtenerProfesor(nickname); 
+    	    ManejadorProfesores mp = ManejadorProfesores.getinstance();
+            Profesor p = mp.obtenerProfesor(nickname); 
             if (p != null) // Valida nickname
                 throw new UsuarioRepetidoException("El nickname " + nickname + " ya esta registrado");
-            p = ms.obtenerMail(email); 
+            p = mp.obtenerMail(email); 
             if (p != null) // Valida mail
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
-
-            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, institucion, biografia, sitioWeb);
-            ms.addProfesor(p);
+            ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
+            InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
+            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb);
+            mp.addProfesor(p);
         }
 
     }
