@@ -23,7 +23,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
-	    	Date fechaNacimiento, String descripcion, String institucion, String biografia, 
+	    	Date fechaNacimiento, String institucion, String descripcion, String biografia, 
 	    	String sitioWeb) throws UsuarioRepetidoException, MailRepetidoException {
     	    ManejadorProfesores mp = ManejadorProfesores.getinstance();
             Profesor p = mp.obtenerProfesor(nickname); 

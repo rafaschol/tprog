@@ -19,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class CrearInstitucion extends JInternalFrame {
 	
@@ -29,6 +31,12 @@ public class CrearInstitucion extends JInternalFrame {
 	private JTextArea descripcionTextArea;
 
     public CrearInstitucion(IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
     	
     	controladorInstitucion = ici;
     	

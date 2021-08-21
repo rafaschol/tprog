@@ -29,7 +29,6 @@ public class ConsultarClase extends JInternalFrame {
 	private JTextField minSociosTextField;
 	private JTextField maxSociosTextField;
 	private JTextField urlTextField;
-	private JTextField datosActividadTextField;
 
     public ConsultarClase() {
         setResizable(true);
@@ -43,7 +42,7 @@ public class ConsultarClase extends JInternalFrame {
         contentPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         GridBagLayout gbl_contentPane = new GridBagLayout();
-        gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0};
+        gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 1.0};
         gbl_contentPane.columnWeights = new double[]{1.0};
         contentPane.setLayout(gbl_contentPane);
         
@@ -124,7 +123,7 @@ public class ConsultarClase extends JInternalFrame {
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos de la clase"),
             BorderFactory.createEmptyBorder(5,10,5,10)));
         GridBagLayout gbl_datosClasePanel = new GridBagLayout();
-        gbl_datosClasePanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+        gbl_datosClasePanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         gbl_datosClasePanel.columnWeights = new double[]{0.0, 1.0};
         datosClasePanel.setLayout(gbl_datosClasePanel);
         GridBagConstraints gbc_datosClasePanel = new GridBagConstraints();
@@ -152,30 +151,12 @@ public class ConsultarClase extends JInternalFrame {
         datosClasePanel.add(nombreTextField, gbc_nombreTextField);
         nombreTextField.setColumns(10);
         
-        JLabel datosActividadLabel = new JLabel("Actividad deportiva");
-        GridBagConstraints gbc_datosActividadLabel = new GridBagConstraints();
-        gbc_datosActividadLabel.anchor = GridBagConstraints.EAST;
-        gbc_datosActividadLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_datosActividadLabel.gridx = 0;
-        gbc_datosActividadLabel.gridy = 1;
-        datosClasePanel.add(datosActividadLabel, gbc_datosActividadLabel);
-        
-        datosActividadTextField = new JTextField();
-        datosActividadTextField.setEnabled(false);
-        GridBagConstraints gbc_datosActividadTextField = new GridBagConstraints();
-        gbc_datosActividadTextField.insets = new Insets(0, 0, 5, 0);
-        gbc_datosActividadTextField.fill = GridBagConstraints.HORIZONTAL;
-        gbc_datosActividadTextField.gridx = 1;
-        gbc_datosActividadTextField.gridy = 1;
-        datosClasePanel.add(datosActividadTextField, gbc_datosActividadTextField);
-        datosActividadTextField.setColumns(10);
-        
         JLabel fechaClaseLabel = new JLabel("Fecha");
         GridBagConstraints gbc_fechaClaseLabel = new GridBagConstraints();
         gbc_fechaClaseLabel.anchor = GridBagConstraints.EAST;
         gbc_fechaClaseLabel.insets = new Insets(0, 0, 5, 5);
         gbc_fechaClaseLabel.gridx = 0;
-        gbc_fechaClaseLabel.gridy = 2;
+        gbc_fechaClaseLabel.gridy = 1;
         datosClasePanel.add(fechaClaseLabel, gbc_fechaClaseLabel);
         
         JDateChooser fechaClaseDateChooser = new JDateChooser();
@@ -184,7 +165,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_fechaClaseDateChooser.insets = new Insets(0, 0, 5, 0);
         gbc_fechaClaseDateChooser.fill = GridBagConstraints.BOTH;
         gbc_fechaClaseDateChooser.gridx = 1;
-        gbc_fechaClaseDateChooser.gridy = 2;
+        gbc_fechaClaseDateChooser.gridy = 1;
         datosClasePanel.add(fechaClaseDateChooser, gbc_fechaClaseDateChooser);
         
         JLabel horaInicioLabel = new JLabel("Hora de inicio");
@@ -192,7 +173,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_horaInicioLabel.anchor = GridBagConstraints.EAST;
         gbc_horaInicioLabel.insets = new Insets(0, 0, 5, 5);
         gbc_horaInicioLabel.gridx = 0;
-        gbc_horaInicioLabel.gridy = 3;
+        gbc_horaInicioLabel.gridy = 2;
         datosClasePanel.add(horaInicioLabel, gbc_horaInicioLabel);
         
         JFormattedTextField horaInicioTextField = new JFormattedTextField();
@@ -201,7 +182,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_horaInicioTextField.insets = new Insets(0, 0, 5, 0);
         gbc_horaInicioTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_horaInicioTextField.gridx = 1;
-        gbc_horaInicioTextField.gridy = 3;
+        gbc_horaInicioTextField.gridy = 2;
         datosClasePanel.add(horaInicioTextField, gbc_horaInicioTextField);
         
         JLabel profesorLabel = new JLabel("Profesor");
@@ -209,7 +190,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_profesorLabel.anchor = GridBagConstraints.EAST;
         gbc_profesorLabel.insets = new Insets(0, 0, 5, 5);
         gbc_profesorLabel.gridx = 0;
-        gbc_profesorLabel.gridy = 4;
+        gbc_profesorLabel.gridy = 3;
         datosClasePanel.add(profesorLabel, gbc_profesorLabel);
         
         profesorTextField = new JTextField();
@@ -218,7 +199,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_profesorTextField.insets = new Insets(0, 0, 5, 0);
         gbc_profesorTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_profesorTextField.gridx = 1;
-        gbc_profesorTextField.gridy = 4;
+        gbc_profesorTextField.gridy = 3;
         datosClasePanel.add(profesorTextField, gbc_profesorTextField);
         profesorTextField.setColumns(10);
         
@@ -227,7 +208,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_minSociosLabel.anchor = GridBagConstraints.EAST;
         gbc_minSociosLabel.insets = new Insets(0, 0, 5, 5);
         gbc_minSociosLabel.gridx = 0;
-        gbc_minSociosLabel.gridy = 5;
+        gbc_minSociosLabel.gridy = 4;
         datosClasePanel.add(minSociosLabel, gbc_minSociosLabel);
         
         minSociosTextField = new JTextField();
@@ -236,7 +217,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_minSociosTextField.insets = new Insets(0, 0, 5, 0);
         gbc_minSociosTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_minSociosTextField.gridx = 1;
-        gbc_minSociosTextField.gridy = 5;
+        gbc_minSociosTextField.gridy = 4;
         datosClasePanel.add(minSociosTextField, gbc_minSociosTextField);
         minSociosTextField.setColumns(10);
         
@@ -245,7 +226,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_maxSociosLabel.anchor = GridBagConstraints.EAST;
         gbc_maxSociosLabel.insets = new Insets(0, 0, 5, 5);
         gbc_maxSociosLabel.gridx = 0;
-        gbc_maxSociosLabel.gridy = 6;
+        gbc_maxSociosLabel.gridy = 5;
         datosClasePanel.add(maxSociosLabel, gbc_maxSociosLabel);
         
         maxSociosTextField = new JTextField();
@@ -254,7 +235,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_maxSociosTextField.insets = new Insets(0, 0, 5, 0);
         gbc_maxSociosTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_maxSociosTextField.gridx = 1;
-        gbc_maxSociosTextField.gridy = 6;
+        gbc_maxSociosTextField.gridy = 5;
         datosClasePanel.add(maxSociosTextField, gbc_maxSociosTextField);
         maxSociosTextField.setColumns(10);
         
@@ -263,7 +244,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_urlLabel.anchor = GridBagConstraints.EAST;
         gbc_urlLabel.insets = new Insets(0, 0, 5, 5);
         gbc_urlLabel.gridx = 0;
-        gbc_urlLabel.gridy = 7;
+        gbc_urlLabel.gridy = 6;
         datosClasePanel.add(urlLabel, gbc_urlLabel);
         
         urlTextField = new JTextField();
@@ -272,24 +253,25 @@ public class ConsultarClase extends JInternalFrame {
         gbc_urlTextField.insets = new Insets(0, 0, 5, 0);
         gbc_urlTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_urlTextField.gridx = 1;
-        gbc_urlTextField.gridy = 7;
+        gbc_urlTextField.gridy = 6;
         datosClasePanel.add(urlTextField, gbc_urlTextField);
         urlTextField.setColumns(10);
         
         JLabel fechaAltaLabel = new JLabel("Fecha de alta");
         GridBagConstraints gbc_fechaAltaLabel = new GridBagConstraints();
         gbc_fechaAltaLabel.anchor = GridBagConstraints.EAST;
-        gbc_fechaAltaLabel.insets = new Insets(0, 0, 0, 5);
+        gbc_fechaAltaLabel.insets = new Insets(0, 0, 5, 5);
         gbc_fechaAltaLabel.gridx = 0;
-        gbc_fechaAltaLabel.gridy = 8;
+        gbc_fechaAltaLabel.gridy = 7;
         datosClasePanel.add(fechaAltaLabel, gbc_fechaAltaLabel);
         
         JDateChooser fechaAltaDateChooser = new JDateChooser();
         fechaAltaDateChooser.setEnabled(false);
         GridBagConstraints gbc_fechaAltaDateChooser = new GridBagConstraints();
+        gbc_fechaAltaDateChooser.insets = new Insets(0, 0, 5, 0);
         gbc_fechaAltaDateChooser.fill = GridBagConstraints.BOTH;
         gbc_fechaAltaDateChooser.gridx = 1;
-        gbc_fechaAltaDateChooser.gridy = 8;
+        gbc_fechaAltaDateChooser.gridy = 7;
         datosClasePanel.add(fechaAltaDateChooser, gbc_fechaAltaDateChooser);
         
         JButton cerrarButton = new JButton("Cerrar");

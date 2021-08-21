@@ -31,6 +31,8 @@ import excepciones.UsuarioRepetidoException;
 import logica.DataInstitucion;
 import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class CrearUsuario extends JInternalFrame {
 	
@@ -53,6 +55,12 @@ public class CrearUsuario extends JInternalFrame {
 	private JDateChooser nacimientoDateChooser;
 
     public CrearUsuario(IControladorUsuario icu, IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
     	
     	controladorUsuario = icu;
     	controladorInstitucion = ici;
@@ -356,7 +364,7 @@ public class CrearUsuario extends JInternalFrame {
     	String correo = correoTextField.getText();
     	Date fechaNacimiento = nacimientoDateChooser.getDate();
     	boolean esProfesor = profesorRadioButton.isSelected();
-    	String institucion = ((DataInstitucion) institucionComboBox.getSelectedItem()).toString();
+    	DataInstitucion institucion = ((DataInstitucion) institucionComboBox.getSelectedItem());
     	String descripcion = descripcionTextArea.getText();
     	String biografia = biografiaTextArea.getText();
     	String sitioWeb = sitioWebTextField.getText();
@@ -364,7 +372,7 @@ public class CrearUsuario extends JInternalFrame {
 		if (esValido()) {
 			try {
 				if (esProfesor) {
-					//controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, institucion, descripcion, biografia);
+					controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, institucion.getNombre(), descripcion, biografia, sitioWeb);
 				}
 				else {
 					controladorUsuario.altaSocio(nickname, nombre, apellido, correo, fechaNacimiento);
@@ -445,7 +453,6 @@ public class CrearUsuario extends JInternalFrame {
     	correoTextField.setText("");
     	nacimientoDateChooser.setDate(null);
     	institucionComboBox.setModel(new DefaultComboBoxModel());
-    	System.out.println(institucionComboBox.getSelectedIndex());
     	descripcionTextArea.setText("");
     	biografiaTextArea.setText("");
     	sitioWebTextField.setText("");

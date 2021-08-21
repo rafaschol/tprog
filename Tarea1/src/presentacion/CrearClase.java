@@ -40,6 +40,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class CrearClase extends JInternalFrame {
 	
@@ -58,6 +60,12 @@ public class CrearClase extends JInternalFrame {
 	private JDateChooser fechaAltaDateChooser;
 	
     public CrearClase(IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
     	
     	controladorInstitucion = ici;
     	
@@ -103,8 +111,7 @@ public class CrearClase extends JInternalFrame {
         institucionComboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (institucionComboBox.getSelectedIndex() != -1) {
-        			cargarActividades();        			
-        			cargarProfesores();
+        			cargarActividadesProfesores();
         		}
         	}
         });
@@ -324,6 +331,7 @@ public class CrearClase extends JInternalFrame {
     	if (esValido()) {
     		Date fechaHoraClase = new Date(fechaClase.getYear(), fechaClase.getMonth(), fechaClase.getDate(), horaInicio.getHours(), horaInicio.getMinutes());
     		try {
+    			//controladorInstitucion.altaClase(nombre, fechaHoraClase, minSocios, maxSocios, url, fechaAlta, profesor, actividad);
     			// crearClase(actividad, nombre, fechaHoraClase, profesor, minSocios, maxSocios, fechaAlta);
     			JOptionPane.showMessageDialog(this, "Se creó la clase correctamente.");
     			cerrarFormulario();
@@ -346,22 +354,20 @@ public class CrearClase extends JInternalFrame {
     	} catch (Exception e) {}
     }
     
-    private void cargarActividades() {
-    	DefaultComboBoxModel<String> model;
+    private void cargarActividadesProfesores() {
+    	DefaultComboBoxModel<String> modelActividades;
+    	DefaultComboBoxModel<String> modelProfesores;
     	String nombreInstitucion = ((DataInstitucion) institucionComboBox.getSelectedItem()).getNombre();
     	for (DataInstitucion i : dataInstituciones) {
     		if (i.getNombre() == nombreInstitucion) {
-    			model = new DefaultComboBoxModel<String>(i.getActividades());
-    			actividadDeportivaComboBox.setModel(model);
+    			modelActividades = new DefaultComboBoxModel<String>(i.getActividades());
+    			modelProfesores = new DefaultComboBoxModel<String>(i.getProfesores());
+    			actividadDeportivaComboBox.setModel(modelActividades);
     			actividadDeportivaComboBox.setSelectedIndex(-1);
+    			profesorComboBox.setModel(modelProfesores);
+    			profesorComboBox.setSelectedIndex(-1);
     		}
     	}
-    }
-    
-    private void cargarProfesores() {
-    	// pedir los profesores a la lógica
-    	// RECORDAR PARA EL FUTURO:
-    	// Cuando cargo los profesores, solo puedo cargar aquellos de la institución de la actividad deportiva
     }
     
     private boolean esValido() {

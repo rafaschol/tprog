@@ -34,6 +34,8 @@ import logica.DataInstitucion;
 import logica.IControladorInstituciones;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class CrearActividadDeportiva extends JInternalFrame {
 	
@@ -47,6 +49,12 @@ public class CrearActividadDeportiva extends JInternalFrame {
 	private JDateChooser fechaAltaDateChooser;
 
     public CrearActividadDeportiva(IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
     	
     	controladorInstitucion = ici;
     	
@@ -222,7 +230,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	if (esValido()) {
     		try {
     			controladorInstitucion.altaActividadDeportiva(institucion, nombre, descripcion, duracion, duracion, fechaAlta);
-    			JOptionPane.showMessageDialog(this, "Se creï¿½ la actividad deportiva correctamente.");
+    			JOptionPane.showMessageDialog(this, "Se creó la actividad deportiva correctamente.");
     			cerrarFormulario();
     		} catch (ActividadRepetidaException ex) {
     			JOptionPane.showMessageDialog(this, "Ya existe una actividad deportiva con ese nombre.", null, JOptionPane.ERROR_MESSAGE);
@@ -254,7 +262,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es vï¿½lida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else {

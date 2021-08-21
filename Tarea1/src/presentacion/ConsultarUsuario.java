@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import com.toedter.calendar.JDateChooser;
 
 public class ConsultarUsuario extends JInternalFrame {
 
@@ -25,7 +26,7 @@ public class ConsultarUsuario extends JInternalFrame {
 	private JTextField nombreTextField;
 	private JTextField apellidoTextField;
 	private JTextField correoTextField;
-	private JSpinner nacimientoSpinner;
+	private JTextField tipoUsuarioTextField;
 
 	public ConsultarUsuario() {
         setResizable(true);
@@ -39,7 +40,7 @@ public class ConsultarUsuario extends JInternalFrame {
         contentPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         GridBagLayout gbl_contentPane = new GridBagLayout();
-        gbl_contentPane.rowWeights = new double[]{1.0};
+        gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0};
         gbl_contentPane.columnWeights = new double[]{1.0, 1.0};
         contentPane.setLayout(gbl_contentPane);
         
@@ -59,8 +60,8 @@ public class ConsultarUsuario extends JInternalFrame {
         contentPane.add(seleccionarUsuarioPanel, gbc_seleccionarUsuarioPanel);
         
         JComboBox usuarioComboBox = new JComboBox();
-        usuarioComboBox.setModel(new DefaultComboBoxModel(new String[] {"Juan Perez", "Rafael Schol"}));
         GridBagConstraints gbc_usuarioComboBox = new GridBagConstraints();
+        gbc_usuarioComboBox.fill = GridBagConstraints.HORIZONTAL;
         gbc_usuarioComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_usuarioComboBox.gridx = 0;
         gbc_usuarioComboBox.gridy = 0;
@@ -77,6 +78,7 @@ public class ConsultarUsuario extends JInternalFrame {
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos del usuario"),
             BorderFactory.createEmptyBorder(5,10,5,10)));
         GridBagLayout gbl_datosUsuarioPanel = new GridBagLayout();
+        gbl_datosUsuarioPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
         gbl_datosUsuarioPanel.columnWeights = new double[]{1.0, 1.0};
         datosUsuarioPanel.setLayout(gbl_datosUsuarioPanel);
         GridBagConstraints gbc_datosUsuarioPanel = new GridBagConstraints();
@@ -105,12 +107,30 @@ public class ConsultarUsuario extends JInternalFrame {
         datosUsuarioPanel.add(nicknameTextField, gbc_nicknameTextField);
         nicknameTextField.setColumns(10);
         
+        JLabel tipoUsuarioLabel = new JLabel("Tipo de usuario");
+        GridBagConstraints gbc_tipoUsuarioLabel = new GridBagConstraints();
+        gbc_tipoUsuarioLabel.anchor = GridBagConstraints.EAST;
+        gbc_tipoUsuarioLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_tipoUsuarioLabel.gridx = 0;
+        gbc_tipoUsuarioLabel.gridy = 1;
+        datosUsuarioPanel.add(tipoUsuarioLabel, gbc_tipoUsuarioLabel);
+        
+        tipoUsuarioTextField = new JTextField();
+        tipoUsuarioTextField.setEnabled(false);
+        GridBagConstraints gbc_tipoUsuarioTextField = new GridBagConstraints();
+        gbc_tipoUsuarioTextField.insets = new Insets(0, 0, 5, 0);
+        gbc_tipoUsuarioTextField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_tipoUsuarioTextField.gridx = 1;
+        gbc_tipoUsuarioTextField.gridy = 1;
+        datosUsuarioPanel.add(tipoUsuarioTextField, gbc_tipoUsuarioTextField);
+        tipoUsuarioTextField.setColumns(10);
+        
         JLabel nombreLabel = new JLabel("Nombre");
         GridBagConstraints gbc_nombreLabel = new GridBagConstraints();
         gbc_nombreLabel.anchor = GridBagConstraints.EAST;
         gbc_nombreLabel.insets = new Insets(0, 0, 5, 5);
         gbc_nombreLabel.gridx = 0;
-        gbc_nombreLabel.gridy = 1;
+        gbc_nombreLabel.gridy = 2;
         datosUsuarioPanel.add(nombreLabel, gbc_nombreLabel);
         
         nombreTextField = new JTextField();
@@ -119,7 +139,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_nombreTextField.insets = new Insets(0, 0, 5, 0);
         gbc_nombreTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_nombreTextField.gridx = 1;
-        gbc_nombreTextField.gridy = 1;
+        gbc_nombreTextField.gridy = 2;
         datosUsuarioPanel.add(nombreTextField, gbc_nombreTextField);
         nombreTextField.setColumns(10);
         
@@ -128,7 +148,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_apellidoLabel.anchor = GridBagConstraints.EAST;
         gbc_apellidoLabel.insets = new Insets(0, 0, 5, 5);
         gbc_apellidoLabel.gridx = 0;
-        gbc_apellidoLabel.gridy = 2;
+        gbc_apellidoLabel.gridy = 3;
         datosUsuarioPanel.add(apellidoLabel, gbc_apellidoLabel);
         
         apellidoTextField = new JTextField();
@@ -137,7 +157,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_apellidoTextField.insets = new Insets(0, 0, 5, 0);
         gbc_apellidoTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_apellidoTextField.gridx = 1;
-        gbc_apellidoTextField.gridy = 2;
+        gbc_apellidoTextField.gridy = 3;
         datosUsuarioPanel.add(apellidoTextField, gbc_apellidoTextField);
         apellidoTextField.setColumns(10);
         
@@ -146,7 +166,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_correoLabel.anchor = GridBagConstraints.EAST;
         gbc_correoLabel.insets = new Insets(0, 0, 5, 5);
         gbc_correoLabel.gridx = 0;
-        gbc_correoLabel.gridy = 3;
+        gbc_correoLabel.gridy = 4;
         datosUsuarioPanel.add(correoLabel, gbc_correoLabel);
         
         correoTextField = new JTextField();
@@ -155,28 +175,75 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_correoTextField.insets = new Insets(0, 0, 5, 0);
         gbc_correoTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_correoTextField.gridx = 1;
-        gbc_correoTextField.gridy = 3;
+        gbc_correoTextField.gridy = 4;
         datosUsuarioPanel.add(correoTextField, gbc_correoTextField);
         correoTextField.setColumns(10);
         
         JLabel nacimientoLabel = new JLabel("Fecha de nacimiento");
         GridBagConstraints gbc_nacimientoLabel = new GridBagConstraints();
         gbc_nacimientoLabel.anchor = GridBagConstraints.EAST;
-        gbc_nacimientoLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_nacimientoLabel.insets = new Insets(0, 0, 0, 5);
         gbc_nacimientoLabel.gridx = 0;
-        gbc_nacimientoLabel.gridy = 4;
+        gbc_nacimientoLabel.gridy = 5;
         datosUsuarioPanel.add(nacimientoLabel, gbc_nacimientoLabel);
         
-        nacimientoSpinner = new JSpinner();
-        nacimientoSpinner.setEnabled(false);
-        nacimientoSpinner.setModel(new SpinnerDateModel(new Date(), null, new Date(), Calendar.DAY_OF_YEAR));
-        nacimientoSpinner.setEditor(new JSpinner.DateEditor(nacimientoSpinner, "dd/MM/yyyy"));
-        GridBagConstraints gbc_nacimientoSpinner = new GridBagConstraints();
-        gbc_nacimientoSpinner.insets = new Insets(0, 0, 5, 0);
-        gbc_nacimientoSpinner.fill = GridBagConstraints.HORIZONTAL;
-        gbc_nacimientoSpinner.gridx = 1;
-        gbc_nacimientoSpinner.gridy = 4;
-        datosUsuarioPanel.add(nacimientoSpinner, gbc_nacimientoSpinner);
+        JDateChooser nacimientoDateChooser = new JDateChooser();
+        nacimientoDateChooser.setEnabled(false);
+        GridBagConstraints gbc_nacimientoDateChooser = new GridBagConstraints();
+        gbc_nacimientoDateChooser.fill = GridBagConstraints.BOTH;
+        gbc_nacimientoDateChooser.gridx = 1;
+        gbc_nacimientoDateChooser.gridy = 5;
+        datosUsuarioPanel.add(nacimientoDateChooser, gbc_nacimientoDateChooser);
+        
+        JPanel datosClasesPanel = new JPanel();
+        datosClasesPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Clases asociadas"),
+            BorderFactory.createEmptyBorder(5,10,5,10)));
+        GridBagLayout gbl_datosClasesPanel = new GridBagLayout();
+        gbl_datosClasesPanel.columnWeights = new double[]{1.0};
+        datosClasesPanel.setLayout(gbl_datosClasesPanel);
+        GridBagConstraints gbc_datosClasesPanel = new GridBagConstraints();
+        gbc_datosClasesPanel.gridwidth = 2;
+        gbc_datosClasesPanel.fill = GridBagConstraints.BOTH;
+        gbc_datosClasesPanel.insets = new Insets(0, 0, 5, 0);
+        gbc_datosClasesPanel.gridx = 0;
+        gbc_datosClasesPanel.gridy = 2;
+        contentPane.add(datosClasesPanel, gbc_datosClasesPanel);
+        
+        JComboBox comboBox = new JComboBox();
+        comboBox.setEnabled(false);
+        GridBagConstraints gbc_comboBox = new GridBagConstraints();
+        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+        gbc_comboBox.gridx = 0;
+        gbc_comboBox.gridy = 0;
+        datosClasesPanel.add(comboBox, gbc_comboBox);
+        
+        JButton datosClaseButton = new JButton("Detalles de la clase");
+        datosClaseButton.setEnabled(false);
+        GridBagConstraints gbc_datosClaseButton = new GridBagConstraints();
+        gbc_datosClaseButton.fill = GridBagConstraints.HORIZONTAL;
+        gbc_datosClaseButton.insets = new Insets(0, 0, 5, 5);
+        gbc_datosClaseButton.gridx = 0;
+        gbc_datosClaseButton.gridy = 1;
+        datosClasesPanel.add(datosClaseButton, gbc_datosClaseButton);
+        
+        JButton datosActividadButton = new JButton("Detalles de la actividad deportiva");
+        datosActividadButton.setEnabled(false);
+        GridBagConstraints gbc_datosActividadButton = new GridBagConstraints();
+        gbc_datosActividadButton.fill = GridBagConstraints.HORIZONTAL;
+        gbc_datosActividadButton.insets = new Insets(0, 0, 0, 5);
+        gbc_datosActividadButton.gridx = 0;
+        gbc_datosActividadButton.gridy = 2;
+        datosClasesPanel.add(datosActividadButton, gbc_datosActividadButton);
+        
+        JButton cerrarButton = new JButton("Cerrar");
+        GridBagConstraints gbc_cerrarButton = new GridBagConstraints();
+        gbc_cerrarButton.gridwidth = 2;
+        gbc_cerrarButton.insets = new Insets(0, 0, 0, 5);
+        gbc_cerrarButton.gridx = 0;
+        gbc_cerrarButton.gridy = 3;
+        contentPane.add(cerrarButton, gbc_cerrarButton);
         
         pack();
     }
