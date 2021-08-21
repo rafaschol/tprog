@@ -1,8 +1,11 @@
 package logica;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class ActividadDeportiva {
 	private Date fecha;
@@ -11,7 +14,8 @@ public class ActividadDeportiva {
 	private Integer duracion;
 	private Float costo;
 	private Map<String, Clase> clases;
-	private InstitucionDeportiva institucion;
+	private HashSet<ActividadDeCuponera> actividadesCuponera;
+	private InstitucionDeportiva institucion; //Sacar despues
 	
 	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
 		this.nombre = nombre;
@@ -62,18 +66,31 @@ public class ActividadDeportiva {
 	public void setCosto(Float costo) {
 		this.costo = costo;
 	}
+	
 	public Map<String, Clase> getClases() {
 		return clases;
 	}
+	
 	public void setClases(Map<String, Clase> clases) {
 		this.clases = clases;
 	}
+	
 	public InstitucionDeportiva getInstitucion() {
 		return institucion;
 	}
+	
 	public void setInstitucion(InstitucionDeportiva institucion) {
 		this.institucion = institucion;
 	}
+	
+	public HashSet<ActividadDeCuponera> getActividadesCuponera() {
+		return actividadesCuponera;
+	}
+	
+	public void setActividadesCuponera(HashSet<ActividadDeCuponera> actividadesCuponera) {
+		this.actividadesCuponera = actividadesCuponera;
+	}
+	
 	public void addClase(Clase clase) {
 		String nombreClase = clase.getNombre();
 		this.clases.put(nombreClase, clase);
@@ -93,5 +110,22 @@ public class ActividadDeportiva {
 	public Clase obtenerClase(String nombre) {
 		return (clases.get(nombre));
 	}
+	
+	public String[] listarClases() {
+		String[] res = clases.keySet().toArray(new String[0]);
+		return res;
+		
+	}
+	public String[] listarCuponeras() {
+		String[] res = new String[actividadesCuponera.size()];
+		int i = 0;
+		for(ActividadDeCuponera ac : actividadesCuponera) {
+			res[i] = ac.getCuponera().getNombre();
+			i++;		
+		}
+		return res;
+		
+	}
+	
 	
 }

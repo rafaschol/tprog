@@ -26,4 +26,6 @@ public interface IControladorInstituciones {
 	//Para el caso de uso consultar clase
 	public abstract DataClase[] listarDataClases(String actividad);
 	
+	public abstract DataActividad listarDataActividad(String nombre);
+	
 }

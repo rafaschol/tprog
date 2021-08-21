@@ -76,4 +76,17 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	return clases;
     	
     }
+    
+    public DataActividad listarDataActividad(String nombre) {
+    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	ActividadDeportiva ad = ma.obtenerActividad(nombre);
+    	//Conseguir strings para crear Data Actividad
+    	String[] clases = ad.listarClases();
+    	String[] cuponeras = ad.listarCuponeras();
+    	DataActividad dataActividad = new DataActividad(ad,clases,cuponeras);
+    	return dataActividad;
+    	
+    }
+    
+    
 }
