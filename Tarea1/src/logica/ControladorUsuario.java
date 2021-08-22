@@ -15,11 +15,14 @@ public class ControladorUsuario implements IControladorUsuario {
     public void altaSocio(String nickname, String nombre,String apellido, String email,
     	Date fechaNacimiento) throws UsuarioRepetidoException, MailRepetidoException {
         ManejadorSocios ms = ManejadorSocios.getinstance();
+        ManejadorProfesores mp = ManejadorProfesores.getinstance();
         Socio s = ms.obtenerSocio(nickname); 
-        if (s != null) // Valida nickname
+        Profesor p =  mp.obtenerProfesor(nickname);
+        if ((s != null) | (p != null)) // Valida nickname
             throw new UsuarioRepetidoException("El nickname " + nickname + " ya esta registrado");
         s = ms.obtenerMail(email); 
-        if (s != null) // Valida mail
+        p = mp.obtenerMail(email);
+        if ((s != null) | (p != null)) // Valida mail
             throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
 
         s = new Socio(nickname, nombre, apellido, email, fechaNacimiento);
@@ -29,12 +32,15 @@ public class ControladorUsuario implements IControladorUsuario {
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
 	    	Date fechaNacimiento, String institucion, String descripcion, String biografia, 
 	    	String sitioWeb) throws UsuarioRepetidoException, MailRepetidoException {
-    	    ManejadorProfesores mp = ManejadorProfesores.getinstance();
-            Profesor p = mp.obtenerProfesor(nickname); 
-            if (p != null) // Valida nickname
+    		ManejadorSocios ms = ManejadorSocios.getinstance();
+    		ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    		Socio s = ms.obtenerSocio(nickname); 
+    		Profesor p =  mp.obtenerProfesor(nickname);
+    		if ((s != null) | (p != null)) // Valida nickname
                 throw new UsuarioRepetidoException("El nickname " + nickname + " ya esta registrado");
-            p = mp.obtenerMail(email); 
-            if (p != null) // Valida mail
+    		s = ms.obtenerMail(email); 
+            p = mp.obtenerMail(email);
+            if ((s != null) | (p != null)) // Valida mail
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
             ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
             InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
