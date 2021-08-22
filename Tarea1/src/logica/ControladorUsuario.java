@@ -1,5 +1,7 @@
 package logica;
 import java.util.Date;
+import java.util.Map;
+//import java.util.Arrays;
 
 import excepciones.MailRepetidoException;
 import excepciones.UsuarioRepetidoException;
@@ -38,8 +40,59 @@ public class ControladorUsuario implements IControladorUsuario {
             mp.addProfesor(p);
             ins.addProfesor(p);
         }
-
+    
+    // devuelve la lista de string de los usuarios en el sistema.
+    public String[] listarUsuarios()
+    {
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	
+		String[] resSoc = ms.getNicknames().keySet().toArray(new String[0]);
+		String[] resProf = mp.getNicknames().keySet().toArray(new String[0]);
+		String[] res = new String[resSoc.length + resProf.length];
+		
+		// concatenar arrays resSoc + resProf
+		System.arraycopy(resSoc, 0, res, 0, resSoc.length);
+		System.arraycopy(resProf, 0, res, resSoc.length, resProf.length);
+		
+		return res;
     }
+    
+    // devuelve el DataUsuario del usuario identificado con "nickname".
+    public DataUsuario mostrarDataUsuario(String nickname)
+    {
+    	DataUsuario res;
+    	
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	
+    	Socio socio = ms.obtenerSocio(nickname);
+    	if (socio == null) {
+    		// usuario es un profesor
+    		Profesor profesor = mp.obtenerProfesor(nickname);
+    		
+    		String[] clases = profesor.getClases().keySet().toArray(new String[0]);
+    		res = new DataUsuario(profesor, clases);
+    	}
+    	else {
+    		// usuario es un socio
+    		Map<Integer, Registro> regs = socio.getRegistros();
+    		
+    		String[] clases = new String[regs.size()];
+    		
+    		int i = 0;
+    		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
+    			clases[i] = iter.getValue().getClase().getNombre();
+    			i++;
+    		}
+    		
+    		res = new DataUsuario(socio, clases);
+    	}
+    	
+    	return res;
+    }
+    
+}
 	
 
 

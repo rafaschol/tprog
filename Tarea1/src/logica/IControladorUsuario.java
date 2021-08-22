@@ -13,5 +13,9 @@ public interface IControladorUsuario {
 	    	Date fechaNacimiento, String descripcion, String institucion, 
 	    	String biografia, String sitioWeb) throws UsuarioRepetidoException,MailRepetidoException;
 
+	public abstract String[] listarUsuarios();
+    
+    public abstract DataUsuario mostrarDataUsuario(String nickname);
+
 
 }

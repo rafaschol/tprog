@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManejadorProfesores {
-    private Map<String, Profesor> niknames; // Coleccion de Profesores.
+    private Map<String, Profesor> nicknames; // Coleccion de Profesores.
     private Map<String, Profesor> mails; // Coleccion para validar mail.
     private static ManejadorProfesores instancia = null;
 
     private ManejadorProfesores() {
-    	niknames = new HashMap<String, Profesor>();
+    	nicknames = new HashMap<String, Profesor>();
     	mails = new HashMap<String, Profesor>();
     }
 
@@ -20,15 +20,19 @@ public class ManejadorProfesores {
         return instancia;
     }
 
+    public Map<String, Profesor> getNicknames(){
+    	return this.nicknames;
+    }
+    
     public void addProfesor(Profesor profesor) {
     	String nick = profesor.getNickname();
-        niknames.put(nick, profesor);
+        nicknames.put(nick, profesor);
         String email = profesor.getEmail();
         mails.put(email, profesor);
     }
 
     public Profesor obtenerProfesor(String nick) {
-        return ((Profesor) niknames.get(nick));
+        return ((Profesor) nicknames.get(nick));
     }
     
     public Profesor obtenerMail(String mail) {
@@ -36,10 +40,10 @@ public class ManejadorProfesores {
     }
 
     public Profesor[] getProfesoers() {
-        if (niknames.isEmpty())
+        if (nicknames.isEmpty())
             return null;
         else {
-            Collection<Profesor> prof = niknames.values();
+            Collection<Profesor> prof = nicknames.values();
             Object[] o = prof.toArray();
             Profesor[] profesores = new Profesor[o.length];
             for (int i = 0; i < o.length; i++) {
