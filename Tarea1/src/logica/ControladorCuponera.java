@@ -17,7 +17,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     	Cuponera c = mc.obtenerCuponera(nombre);
     	if(c != null) 
-    		throw new CuponeraRepetidaException("Ya existe una Institucion deportiva con nombre '" 
+    		throw new CuponeraRepetidaException("Ya existe una Cuponera con nombre '" 
     		+ nombre + "' en el sistema");
     	c = new Cuponera(nombre,descripcion,inicio,fin,descuento,fechaAlta);
     	mc.addCuponera(c); 	
