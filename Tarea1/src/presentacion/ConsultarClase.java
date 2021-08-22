@@ -3,6 +3,7 @@ package presentacion;
 import javax.swing.JInternalFrame;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import javax.swing.JTextField;
@@ -20,17 +21,44 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JSlider;
 import com.toedter.calendar.JDateChooser;
+
+import logica.DataClase;
+import logica.DataInstitucion;
+import logica.IControladorInstituciones;
+
 import javax.swing.JSpinner;
 import javax.swing.JFormattedTextField;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
 
 public class ConsultarClase extends JInternalFrame {
+	
+	IControladorInstituciones controladorInstitucion;
+	
 	private JTextField nombreTextField;
 	private JTextField profesorTextField;
 	private JTextField minSociosTextField;
 	private JTextField maxSociosTextField;
 	private JTextField urlTextField;
-
-    public ConsultarClase() {
+	private JComboBox institucionComboBox;
+	private JComboBox actividadComboBox;
+	private JComboBox claseComboBox;
+	private JDateChooser fechaClaseDateChooser;
+	private JFormattedTextField horaInicioTextField;
+	private JDateChooser fechaAltaDateChooser;
+    public ConsultarClase(IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
+    	
+    	controladorInstitucion = ici;
+    	
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -68,7 +96,14 @@ public class ConsultarClase extends JInternalFrame {
         gbc_institucionLabel.gridy = 0;
         seleccionarClasePanel.add(institucionLabel, gbc_institucionLabel);
         
-        JComboBox institucionComboBox = new JComboBox();
+        institucionComboBox = new JComboBox();
+        institucionComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (institucionComboBox.getSelectedIndex() != -1) {
+        			cargarActividades();
+        		}
+        	}
+        });
         institucionComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_institucionComboBox = new GridBagConstraints();
         gbc_institucionComboBox.insets = new Insets(0, 0, 5, 0);
@@ -85,8 +120,17 @@ public class ConsultarClase extends JInternalFrame {
         gbc_actividadLabel.gridy = 1;
         seleccionarClasePanel.add(actividadLabel, gbc_actividadLabel);
         
-        JComboBox actividadComboBox = new JComboBox();
-        actividadComboBox.setSelectedIndex(-1);
+        actividadComboBox = new JComboBox();
+        actividadComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (actividadComboBox.getSelectedIndex() != -1) {
+        			cargarClases();
+        		} else {
+        			claseComboBox.setModel(new DefaultComboBoxModel());
+        			claseComboBox.setSelectedIndex(-1);
+        		}
+        	}
+        });
         GridBagConstraints gbc_actividadComboBox = new GridBagConstraints();
         gbc_actividadComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_actividadComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -102,7 +146,9 @@ public class ConsultarClase extends JInternalFrame {
         gbc_claseLabel.gridy = 2;
         seleccionarClasePanel.add(claseLabel, gbc_claseLabel);
         
-        JComboBox claseComboBox = new JComboBox();
+        claseComboBox = new JComboBox();
+        actividadComboBox.setSelectedIndex(-1);
+        claseComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_claseComboBox = new GridBagConstraints();
         gbc_claseComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_claseComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -111,6 +157,13 @@ public class ConsultarClase extends JInternalFrame {
         seleccionarClasePanel.add(claseComboBox, gbc_claseComboBox);
         
         JButton seleccionarClaseButton = new JButton("Ver datos");
+        seleccionarClaseButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (claseComboBox.getSelectedIndex() != -1) {
+        			cargarDatosClase();
+        		}
+        	}
+        });
         GridBagConstraints gbc_seleccionarClaseButton = new GridBagConstraints();
         gbc_seleccionarClaseButton.gridwidth = 2;
         gbc_seleccionarClaseButton.insets = new Insets(0, 0, 0, 5);
@@ -159,7 +212,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_fechaClaseLabel.gridy = 1;
         datosClasePanel.add(fechaClaseLabel, gbc_fechaClaseLabel);
         
-        JDateChooser fechaClaseDateChooser = new JDateChooser();
+        fechaClaseDateChooser = new JDateChooser();
         fechaClaseDateChooser.setEnabled(false);
         GridBagConstraints gbc_fechaClaseDateChooser = new GridBagConstraints();
         gbc_fechaClaseDateChooser.insets = new Insets(0, 0, 5, 0);
@@ -176,7 +229,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_horaInicioLabel.gridy = 2;
         datosClasePanel.add(horaInicioLabel, gbc_horaInicioLabel);
         
-        JFormattedTextField horaInicioTextField = new JFormattedTextField();
+        horaInicioTextField = new JFormattedTextField(new SimpleDateFormat("HH:mm"));
         horaInicioTextField.setEnabled(false);
         GridBagConstraints gbc_horaInicioTextField = new GridBagConstraints();
         gbc_horaInicioTextField.insets = new Insets(0, 0, 5, 0);
@@ -265,7 +318,7 @@ public class ConsultarClase extends JInternalFrame {
         gbc_fechaAltaLabel.gridy = 7;
         datosClasePanel.add(fechaAltaLabel, gbc_fechaAltaLabel);
         
-        JDateChooser fechaAltaDateChooser = new JDateChooser();
+        fechaAltaDateChooser = new JDateChooser();
         fechaAltaDateChooser.setEnabled(false);
         GridBagConstraints gbc_fechaAltaDateChooser = new GridBagConstraints();
         gbc_fechaAltaDateChooser.insets = new Insets(0, 0, 5, 0);
@@ -281,5 +334,57 @@ public class ConsultarClase extends JInternalFrame {
         contentPane.add(cerrarButton, gbc_cerrarButton);
         
         pack();
+    }
+    
+    private void cargarDatosClase() {
+    	DataClase clase = (DataClase) claseComboBox.getSelectedItem();
+    	
+    	nombreTextField.setText(clase.getNombre());
+    	fechaClaseDateChooser.setDate(clase.getFecha());
+    	horaInicioTextField.setValue(clase.getFecha());
+    	profesorTextField.setText(clase.getProfesor());
+    	minSociosTextField.setText(clase.getMinPersonas().toString());
+    	maxSociosTextField.setText(clase.getMaxPersonas().toString());
+    	urlTextField.setText(clase.getURL());
+    	fechaAltaDateChooser.setDate(clase.getFechaAlta());
+    }
+    
+    public void cargarInstituciones() {
+    	DefaultComboBoxModel<DataInstitucion> model;
+    	try {
+    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+    		institucionComboBox.setModel(model);
+    		institucionComboBox.setSelectedIndex(-1);
+    	//} catch (UsuarioNoExisteException e) {}
+    	} catch (Exception e) {}
+    }
+    
+    private void cargarActividades() {
+    	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
+		actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+		actividadComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cargarClases() {
+    	String nombreActividad = (String) actividadComboBox.getSelectedItem();
+    	DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+    	claseComboBox.setModel(new DefaultComboBoxModel<DataClase>(clases));
+    	claseComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cerrarFormulario() {
+    	institucionComboBox.setModel(new DefaultComboBoxModel());
+    	actividadComboBox.setModel(new DefaultComboBoxModel());
+    	claseComboBox.setModel(new DefaultComboBoxModel());
+    	nombreTextField.setText("");
+    	fechaClaseDateChooser.setDate(null);
+    	horaInicioTextField.setText("");
+    	profesorTextField.setText("");
+    	minSociosTextField.setText("");
+    	maxSociosTextField.setText("");
+    	urlTextField.setText("");
+    	fechaAltaDateChooser.setDate(null);
+    	
+    	setVisible(false);
     }
 }

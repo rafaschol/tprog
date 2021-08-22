@@ -74,7 +74,7 @@ public class InstitucionDeportiva {
 		this.actividades.put(nombre, actividad);
 	}
 	public void addProfesor(Profesor profesor) {
-		String nombre = profesor.getNombre();
-		this.profesores.put(nombre, profesor);
+		String nickname = profesor.getNickname();
+		this.profesores.put(nickname, profesor);
 	}
 }

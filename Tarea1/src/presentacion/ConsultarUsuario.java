@@ -20,15 +20,39 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 
+import logica.DataInstitucion;
+import logica.DataUsuario;
+import logica.IControladorUsuario;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class ConsultarUsuario extends JInternalFrame {
+	
+	IControladorUsuario controladorUsuario;
 
     private JTextField nicknameTextField;
 	private JTextField nombreTextField;
 	private JTextField apellidoTextField;
 	private JTextField correoTextField;
 	private JTextField tipoUsuarioTextField;
-
-	public ConsultarUsuario() {
+	private JDateChooser nacimientoDateChooser;
+	private JComboBox claseComboBox;
+	private JButton datosClaseButton;
+	private JButton datosActividadButton;
+	private JComboBox usuarioComboBox;
+	
+	public ConsultarUsuario(IControladorUsuario icu) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				cerrarFormulario();
+			}
+		});
+		
+		controladorUsuario = icu;
+		
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -59,7 +83,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_seleccionarUsuarioPanel.gridy = 0;
         contentPane.add(seleccionarUsuarioPanel, gbc_seleccionarUsuarioPanel);
         
-        JComboBox usuarioComboBox = new JComboBox();
+        usuarioComboBox = new JComboBox();
         GridBagConstraints gbc_usuarioComboBox = new GridBagConstraints();
         gbc_usuarioComboBox.fill = GridBagConstraints.HORIZONTAL;
         gbc_usuarioComboBox.insets = new Insets(0, 0, 5, 0);
@@ -68,6 +92,13 @@ public class ConsultarUsuario extends JInternalFrame {
         seleccionarUsuarioPanel.add(usuarioComboBox, gbc_usuarioComboBox);
         
         JButton verDatosButton = new JButton("Ver datos");
+        verDatosButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (usuarioComboBox.getSelectedIndex() != -1) {
+        			cargarDatosUsuario();
+        		}
+        	}
+        });
         GridBagConstraints gbc_verDatosButton = new GridBagConstraints();
         gbc_verDatosButton.gridx = 0;
         gbc_verDatosButton.gridy = 1;
@@ -187,7 +218,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_nacimientoLabel.gridy = 5;
         datosUsuarioPanel.add(nacimientoLabel, gbc_nacimientoLabel);
         
-        JDateChooser nacimientoDateChooser = new JDateChooser();
+        nacimientoDateChooser = new JDateChooser();
         nacimientoDateChooser.setEnabled(false);
         GridBagConstraints gbc_nacimientoDateChooser = new GridBagConstraints();
         gbc_nacimientoDateChooser.fill = GridBagConstraints.BOTH;
@@ -210,16 +241,16 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_datosClasesPanel.gridy = 2;
         contentPane.add(datosClasesPanel, gbc_datosClasesPanel);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setEnabled(false);
-        GridBagConstraints gbc_comboBox = new GridBagConstraints();
-        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 0;
-        gbc_comboBox.gridy = 0;
-        datosClasesPanel.add(comboBox, gbc_comboBox);
+        claseComboBox = new JComboBox();
+        claseComboBox.setEnabled(false);
+        GridBagConstraints gbc_claseComboBox = new GridBagConstraints();
+        gbc_claseComboBox.insets = new Insets(0, 0, 5, 0);
+        gbc_claseComboBox.fill = GridBagConstraints.HORIZONTAL;
+        gbc_claseComboBox.gridx = 0;
+        gbc_claseComboBox.gridy = 0;
+        datosClasesPanel.add(claseComboBox, gbc_claseComboBox);
         
-        JButton datosClaseButton = new JButton("Detalles de la clase");
+        datosClaseButton = new JButton("Detalles de la clase");
         datosClaseButton.setEnabled(false);
         GridBagConstraints gbc_datosClaseButton = new GridBagConstraints();
         gbc_datosClaseButton.fill = GridBagConstraints.HORIZONTAL;
@@ -228,7 +259,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_datosClaseButton.gridy = 1;
         datosClasesPanel.add(datosClaseButton, gbc_datosClaseButton);
         
-        JButton datosActividadButton = new JButton("Detalles de la actividad deportiva");
+        datosActividadButton = new JButton("Detalles de la actividad deportiva");
         datosActividadButton.setEnabled(false);
         GridBagConstraints gbc_datosActividadButton = new GridBagConstraints();
         gbc_datosActividadButton.fill = GridBagConstraints.HORIZONTAL;
@@ -238,6 +269,11 @@ public class ConsultarUsuario extends JInternalFrame {
         datosClasesPanel.add(datosActividadButton, gbc_datosActividadButton);
         
         JButton cerrarButton = new JButton("Cerrar");
+        cerrarButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cerrarFormulario();
+        	}
+        });
         GridBagConstraints gbc_cerrarButton = new GridBagConstraints();
         gbc_cerrarButton.gridwidth = 2;
         gbc_cerrarButton.insets = new Insets(0, 0, 0, 5);
@@ -247,4 +283,46 @@ public class ConsultarUsuario extends JInternalFrame {
         
         pack();
     }
+	
+	private void cargarDatosUsuario() {
+		DataUsuario usuarioSeleccionado = controladorUsuario.mostrarDataUsuario((String)usuarioComboBox.getSelectedItem());
+		
+		nicknameTextField.setText(usuarioSeleccionado.getNickname());
+		tipoUsuarioTextField.setText(usuarioSeleccionado.getTipoUsuario());
+		nombreTextField.setText(usuarioSeleccionado.getNombre());
+		apellidoTextField.setText(usuarioSeleccionado.getApellido());
+		correoTextField.setText(usuarioSeleccionado.getEmail());
+		nacimientoDateChooser.setDate(usuarioSeleccionado.getFechaNacimiento());
+		
+		claseComboBox.setModel(new DefaultComboBoxModel<String>(usuarioSeleccionado.getClases()));
+		claseComboBox.setEnabled(true);
+		claseComboBox.setSelectedIndex(-1);
+		datosClaseButton.setEnabled(true);
+		datosActividadButton.setEnabled(true);
+	}
+	
+	public void cargarUsuarios() {
+		DefaultComboBoxModel<String> model;
+		try {
+			model = new DefaultComboBoxModel<String>(controladorUsuario.listarUsuarios());
+    		usuarioComboBox.setModel(model);
+    		usuarioComboBox.setSelectedIndex(-1);
+		//} catch (UsuarioNoExisteException e) {}
+		} catch (Exception e) {}
+	}
+	
+	private void cerrarFormulario() {
+		nicknameTextField.setText("");
+		tipoUsuarioTextField.setText("");
+		nombreTextField.setText("");
+		apellidoTextField.setText("");
+		correoTextField.setText("");
+		nacimientoDateChooser.setDate(null);
+		claseComboBox.setModel(new DefaultComboBoxModel());
+		claseComboBox.setEnabled(false);
+		datosClaseButton.setEnabled(false);
+		datosActividadButton.setEnabled(false);
+		
+		setVisible(false);
+	}
 }

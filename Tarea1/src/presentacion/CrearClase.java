@@ -31,6 +31,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import excepciones.ClaseRepetidaException;
 import logica.DataInstitucion;
 import logica.IControladorInstituciones;
 
@@ -331,13 +332,11 @@ public class CrearClase extends JInternalFrame {
     	if (esValido()) {
     		Date fechaHoraClase = new Date(fechaClase.getYear(), fechaClase.getMonth(), fechaClase.getDate(), horaInicio.getHours(), horaInicio.getMinutes());
     		try {
-    			//controladorInstitucion.altaClase(nombre, fechaHoraClase, minSocios, maxSocios, url, fechaAlta, profesor, actividad);
-    			// crearClase(actividad, nombre, fechaHoraClase, profesor, minSocios, maxSocios, fechaAlta);
-    			JOptionPane.showMessageDialog(this, "Se creó la clase correctamente.");
+    			controladorInstitucion.altaClase(nombre, fechaHoraClase, minSocios, maxSocios, url, fechaAlta, profesor, actividad);
+    			JOptionPane.showMessageDialog(this, "Se cre\u00F3 la clase correctamente.");
     			cerrarFormulario();
     		}
-    		// catch (ExisteClaseException ex) {
-    		catch (Exception ex) {
+    		catch (ClaseRepetidaException ex) {
     			JOptionPane.showMessageDialog(this, "Ya existe una clase con ese nombre.", null, JOptionPane.ERROR_MESSAGE);
     		}
     	}
@@ -355,19 +354,13 @@ public class CrearClase extends JInternalFrame {
     }
     
     private void cargarActividadesProfesores() {
-    	DefaultComboBoxModel<String> modelActividades;
-    	DefaultComboBoxModel<String> modelProfesores;
-    	String nombreInstitucion = ((DataInstitucion) institucionComboBox.getSelectedItem()).getNombre();
-    	for (DataInstitucion i : dataInstituciones) {
-    		if (i.getNombre() == nombreInstitucion) {
-    			modelActividades = new DefaultComboBoxModel<String>(i.getActividades());
-    			modelProfesores = new DefaultComboBoxModel<String>(i.getProfesores());
-    			actividadDeportivaComboBox.setModel(modelActividades);
-    			actividadDeportivaComboBox.setSelectedIndex(-1);
-    			profesorComboBox.setModel(modelProfesores);
-    			profesorComboBox.setSelectedIndex(-1);
-    		}
-    	}
+    	DefaultComboBoxModel<String> actividadesModel;
+    	DefaultComboBoxModel<String> profesoresModel;
+    	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
+		actividadDeportivaComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+		actividadDeportivaComboBox.setSelectedIndex(-1);
+		profesorComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getProfesores()));
+		profesorComboBox.setSelectedIndex(-1);
     }
     
     private boolean esValido() {

@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
@@ -17,11 +18,41 @@ import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
 import com.toedter.calendar.JDateChooser;
 
+import logica.DataActividad;
+import logica.DataInstitucion;
+import logica.IControladorInstituciones;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.awt.event.ActionEvent;
+
 public class ConsultarActividadDeportiva extends JInternalFrame {
+	
+	IControladorInstituciones controladorInstitucion;
+	
 	private JTextField nombreTextField;
 	private JTextField duracionTextField;
+	private JComboBox institucionComboBox;
+	private JComboBox actividadComboBox;
+	private JTextArea descripcionTextArea;
+	private JFormattedTextField costoTextField;
+	private JDateChooser fechaAltaDateChooser;
+	private JComboBox claseComboBox;
+	private JComboBox cuponeraComboBox;
+	private JButton datosCuponeraButton;
+	private JButton datosClaseButton;
 
-    public ConsultarActividadDeportiva() {
+    public ConsultarActividadDeportiva(IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
+    	
+    	controladorInstitucion = ici;
+    	
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -60,7 +91,14 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_institucionLabel.gridy = 0;
         seleccionarActividadPanel.add(institucionLabel, gbc_institucionLabel);
         
-        JComboBox institucionComboBox = new JComboBox();
+        institucionComboBox = new JComboBox();
+        institucionComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (institucionComboBox.getSelectedIndex() != -1) {
+        			cargarActividades();
+        		}
+        	}
+        });
         institucionComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_institucionComboBox = new GridBagConstraints();
         gbc_institucionComboBox.insets = new Insets(0, 0, 5, 0);
@@ -77,7 +115,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_actividadLabel.gridy = 1;
         seleccionarActividadPanel.add(actividadLabel, gbc_actividadLabel);
         
-        JComboBox actividadComboBox = new JComboBox();
+        actividadComboBox = new JComboBox();
         actividadComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_actividadComboBox = new GridBagConstraints();
         gbc_actividadComboBox.insets = new Insets(0, 0, 5, 0);
@@ -87,6 +125,13 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         seleccionarActividadPanel.add(actividadComboBox, gbc_actividadComboBox);
         
         JButton verDatosButton = new JButton("Ver datos");
+        verDatosButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (actividadComboBox.getSelectedIndex() != -1) {        			
+        			cargarDatosActividad();
+        		}
+        	}
+        });
         GridBagConstraints gbc_verDatosButton = new GridBagConstraints();
         gbc_verDatosButton.gridwidth = 2;
         gbc_verDatosButton.insets = new Insets(0, 0, 0, 5);
@@ -136,7 +181,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_descripcionLabel.gridy = 1;
         datosActividadPanel.add(descripcionLabel, gbc_descripcionLabel);
         
-        JTextArea descripcionTextArea = new JTextArea();
+        descripcionTextArea = new JTextArea();
         descripcionTextArea.setEnabled(false);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(2);
@@ -173,7 +218,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_costoLabel.gridy = 3;
         datosActividadPanel.add(costoLabel, gbc_costoLabel);
         
-        JFormattedTextField costoTextField = new JFormattedTextField();
+        costoTextField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
         costoTextField.setEnabled(false);
         GridBagConstraints gbc_costoTextField = new GridBagConstraints();
         gbc_costoTextField.insets = new Insets(0, 0, 5, 0);
@@ -190,7 +235,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_fechaAltaLabel.gridy = 4;
         datosActividadPanel.add(fechaAltaLabel, gbc_fechaAltaLabel);
         
-        JDateChooser fechaAltaDateChooser = new JDateChooser();
+        fechaAltaDateChooser = new JDateChooser();
         fechaAltaDateChooser.setEnabled(false);
         GridBagConstraints gbc_fechaAltaDateChooser = new GridBagConstraints();
         gbc_fechaAltaDateChooser.fill = GridBagConstraints.BOTH;
@@ -213,22 +258,22 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_datosClasesPanel.gridy = 2;
         contentPane.add(datosClasesPanel, gbc_datosClasesPanel);
         
-        JComboBox clasesComboBox = new JComboBox();
-        clasesComboBox.setEnabled(false);
-        GridBagConstraints gbc_clasesComboBox = new GridBagConstraints();
-        gbc_clasesComboBox.insets = new Insets(0, 0, 5, 0);
-        gbc_clasesComboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_clasesComboBox.gridx = 0;
-        gbc_clasesComboBox.gridy = 0;
-        datosClasesPanel.add(clasesComboBox, gbc_clasesComboBox);
+        claseComboBox = new JComboBox();
+        claseComboBox.setEnabled(false);
+        GridBagConstraints gbc_claseComboBox = new GridBagConstraints();
+        gbc_claseComboBox.insets = new Insets(0, 0, 5, 0);
+        gbc_claseComboBox.fill = GridBagConstraints.HORIZONTAL;
+        gbc_claseComboBox.gridx = 0;
+        gbc_claseComboBox.gridy = 0;
+        datosClasesPanel.add(claseComboBox, gbc_claseComboBox);
         
-        JButton verClaseButton = new JButton("Detalles de la clase");
-        verClaseButton.setEnabled(false);
-        GridBagConstraints gbc_verClaseButton = new GridBagConstraints();
-        gbc_verClaseButton.fill = GridBagConstraints.HORIZONTAL;
-        gbc_verClaseButton.gridx = 0;
-        gbc_verClaseButton.gridy = 1;
-        datosClasesPanel.add(verClaseButton, gbc_verClaseButton);
+        datosClaseButton = new JButton("Detalles de la clase");
+        datosClaseButton.setEnabled(false);
+        GridBagConstraints gbc_datosClaseButton = new GridBagConstraints();
+        gbc_datosClaseButton.fill = GridBagConstraints.HORIZONTAL;
+        gbc_datosClaseButton.gridx = 0;
+        gbc_datosClaseButton.gridy = 1;
+        datosClasesPanel.add(datosClaseButton, gbc_datosClaseButton);
         
         JPanel datosCuponerasPanel = new JPanel();
         datosCuponerasPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -245,7 +290,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_datosCuponerasPanel.gridy = 3;
         contentPane.add(datosCuponerasPanel, gbc_datosCuponerasPanel);
         
-        JComboBox cuponeraComboBox = new JComboBox();
+        cuponeraComboBox = new JComboBox();
         cuponeraComboBox.setEnabled(false);
         GridBagConstraints gbc_cuponeraComboBox = new GridBagConstraints();
         gbc_cuponeraComboBox.insets = new Insets(0, 0, 5, 0);
@@ -254,13 +299,13 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_cuponeraComboBox.gridy = 0;
         datosCuponerasPanel.add(cuponeraComboBox, gbc_cuponeraComboBox);
         
-        JButton cuponeraButton = new JButton("Detalles de la cuponera");
-        cuponeraButton.setEnabled(false);
-        GridBagConstraints gbc_cuponeraButton = new GridBagConstraints();
-        gbc_cuponeraButton.fill = GridBagConstraints.HORIZONTAL;
-        gbc_cuponeraButton.gridx = 0;
-        gbc_cuponeraButton.gridy = 1;
-        datosCuponerasPanel.add(cuponeraButton, gbc_cuponeraButton);
+        datosCuponeraButton = new JButton("Detalles de la cuponera");
+        datosCuponeraButton.setEnabled(false);
+        GridBagConstraints gbc_datosCuponeraButton = new GridBagConstraints();
+        gbc_datosCuponeraButton.fill = GridBagConstraints.HORIZONTAL;
+        gbc_datosCuponeraButton.gridx = 0;
+        gbc_datosCuponeraButton.gridy = 1;
+        datosCuponerasPanel.add(datosCuponeraButton, gbc_datosCuponeraButton);
         
         JButton cerrarButton = new JButton("Cerrar");
         GridBagConstraints gbc_cerrarButton = new GridBagConstraints();
@@ -270,5 +315,45 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         contentPane.add(cerrarButton, gbc_cerrarButton);
         
         pack();
+    }
+    
+    private void cargarDatosActividad() {
+    	String nombreActividad = (String) actividadComboBox.getSelectedItem();
+    	DataActividad actividad = controladorInstitucion.listarDataActividad(nombreActividad);
+    	
+    	nombreTextField.setText(actividad.getNombre());
+    	descripcionTextArea.setText(actividad.getDescripcion());
+    	duracionTextField.setText(actividad.getDuracion().toString());
+    	costoTextField.setValue(actividad.getCosto());
+    	fechaAltaDateChooser.setDate(actividad.getFecha());
+    	
+		claseComboBox.setModel(new DefaultComboBoxModel<String>(actividad.getClases()));
+		claseComboBox.setEnabled(true);
+		claseComboBox.setSelectedIndex(-1);
+		datosClaseButton.setEnabled(true);
+		cuponeraComboBox.setModel(new DefaultComboBoxModel<String>(actividad.getCuponeras()));
+		cuponeraComboBox.setEnabled(true);
+		cuponeraComboBox.setSelectedIndex(-1);
+		datosCuponeraButton.setEnabled(true);
+    }
+    
+    public void cargarInstituciones() {
+    	DefaultComboBoxModel<DataInstitucion> model;
+    	try {
+    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+    		institucionComboBox.setModel(model);
+    		institucionComboBox.setSelectedIndex(-1);
+    	//} catch (UsuarioNoExisteException e) {}
+    	} catch (Exception e) {}
+    }
+    
+    private void cargarActividades() {
+    	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
+		actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+		actividadComboBox.setSelectedIndex(-1);
+    }
+    
+    public void cerrarFormulario() {
+    	setVisible(false);
     }
 }

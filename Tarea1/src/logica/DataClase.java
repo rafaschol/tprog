@@ -19,7 +19,7 @@ public class DataClase {
 		this.setMaxPersonas(clase.getMaxPersonas());
 		this.setURL(clase.getURL());
 		this.setFechaAlta(clase.getFechaAlta());
-		this.setProfesor(clase.getProfesor().getNombre());	
+		this.setProfesor(clase.getProfesor().getNickname());	
 	}
 	
 	public String getNombre() {
@@ -77,6 +77,10 @@ public class DataClase {
 	private void setProfesor(String profesor) {
 		this.profesor = profesor;
 	}
+	
+	public String toString() {
+    	return this.nombre;
+    }
 
 
 }
