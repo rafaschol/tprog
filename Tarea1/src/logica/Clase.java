@@ -1,5 +1,7 @@
 package logica;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Clase {
 	private String nombre;
@@ -10,6 +12,7 @@ public class Clase {
 	private Date fechaAlta;	
 	private Profesor profesor;
 	private ActividadDeportiva actividad;
+	private Map<Integer, Registro> registros;
 	
 	public Clase(String n, Date f, Integer min, Integer max, String url, Date alta){
 		this.nombre = n;
@@ -18,6 +21,7 @@ public class Clase {
 		this.maxPersonas = max;
 		this.URL = url;
 		this.fechaAlta = alta;
+		this.registros = new HashMap<Integer,Registro>();
 	}
 
 	public String getNombre() {
@@ -82,5 +86,22 @@ public class Clase {
 
 	public void setActividad(ActividadDeportiva actividad) {
 		this.actividad = actividad;
+	}
+
+	public Map<Integer, Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(Map<Integer, Registro> registros) {
+		this.registros = registros;
+	}
+	
+	public Integer cantRegistros() {
+		return registros.size();
+	}
+	
+	public void addRegistro(Registro registro) {
+		Integer id = registro.getId();
+		this.registros.put(id, registro);
 	}
 }

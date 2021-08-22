@@ -3,7 +3,9 @@ import java.util.Date;
 import java.util.Map;
 //import java.util.Arrays;
 
+import excepciones.CuposAgotadosException;
 import excepciones.MailRepetidoException;
+import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
 
 public class ControladorUsuario implements IControladorUsuario {
@@ -91,6 +93,55 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	return res;
     }
+    
+    //Lista de socios para caso de uso Registro Dictado a Clase
+    public String[] listarSocios() {
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	String[] res = ms.getNicknames().keySet().toArray(new String[0]);
+    	return res;	
+    }
+    
+    public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera,
+    	Date fecha	) throws CuposAgotadosException, SocioRegistradoException{
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	Socio socio = ms.obtenerSocio(nickname);
+    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad =  ma.obtenerActividad(nombreActividad);
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	int cantRegistros = clase.cantRegistros();
+    	int maxCupos = clase.getMaxPersonas();
+    	Registro r;
+    	Clase c = null;
+    	
+    	for (Map.Entry<Integer, Registro> iter : socio.getRegistros().entrySet()) {
+    		if (c == null && iter.getValue().getClase() == clase)  
+    			c = iter.getValue().getClase();
+    		
+    	if(c != null)	
+    		throw new SocioRegistradoException("El socio ya esta registrado a esta clase");
+    	}
+    	if(cantRegistros >= maxCupos) 
+    		throw new CuposAgotadosException("No hay cupos disponibles");
+    	
+    	ms.setIdentificadorRegistro(ms.getIdentificadorRegistro() + 1);
+    	Integer id = ms.getIdentificadorRegistro();
+    	
+    	float costo = 0;
+    	if (!conCuponera) {
+    		costo = actividad.getCosto();
+    	
+    	}
+    	else {
+    		 
+    	}
+    	r = new Registro(id,fecha,costo,false,clase);	
+    	clase.addRegistro(r);
+    	socio.addRegistro(r);
+    	r.setClase(clase);
+    	
+    	
+    }
+    
     
 }
 	

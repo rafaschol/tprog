@@ -44,5 +44,10 @@ public class Socio extends Usuario {
 	public void setParticipa(HashSet<Participa> participa) {
 		this.participa = participa;
 	}
+	
+	public void addRegistro(Registro registro) {
+		Integer id = registro.getId();
+		this.registros.put(id, registro);
+	}
 
 }
