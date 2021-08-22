@@ -24,6 +24,7 @@ public class ActividadDeportiva {
 		this.duracion = duracion;
 		this.costo = costo;
 		this.clases = new HashMap<String, Clase>();
+		this.actividadesCuponera = new HashSet<ActividadDeCuponera>();
 		this.institucion = institucion;
 
 	}

@@ -7,11 +7,11 @@ public class Cuponera {
 	private String descripcion;
 	private Date fechaIni;
 	private Date fechaFin;
-	private Integer descuento;
+	private Float descuento;
 	private Date fechaAlta;
 	private HashSet<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
 	
-	public Cuponera(String n, String d, Date fIni, Date fFin, Integer des, Date fAlta) {
+	public Cuponera(String n, String d, Date fIni, Date fFin, Float des, Date fAlta) {
 		this.nombre = n;
 		this.descripcion = d;
 		this.fechaIni = fIni;
@@ -53,11 +53,11 @@ public class Cuponera {
 		this.fechaFin = fechaFin;
 	}
 
-	public Integer getDescuento() {
+	public Float getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(Integer descuento) {
+	public void setDescuento(Float descuento) {
 		this.descuento = descuento;
 	}
 
@@ -75,5 +75,9 @@ public class Cuponera {
 
 	public void setActividadCuponera(HashSet<ActividadDeCuponera> actividadCuponera) {
 		this.actividadCuponera = actividadCuponera;
+	}
+	
+	public void addActividadDeCuponera(ActividadDeCuponera ac) {
+    	actividadCuponera.add(ac);
 	}
 }
