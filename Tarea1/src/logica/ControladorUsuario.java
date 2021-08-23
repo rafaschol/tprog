@@ -138,7 +138,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	}
     	else {
-    		 
+    		 // Fata desarrollar este caso
     	}
     	r = new Registro(id,fecha,costo,false,clase);	
     	clase.addRegistro(r);

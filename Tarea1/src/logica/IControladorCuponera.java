@@ -10,5 +10,7 @@ public interface IControladorCuponera {
 	    Float descuento, Date fechaAlta) throws CuponeraRepetidaException;
 	
 	public abstract String[] listarCuponeras(); 
+	
+	public abstract String[] listarActividadesNoEnCuponera(String cuponera , String institucion);
 
 }
