@@ -344,13 +344,10 @@ public class CrearClase extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-    	try {
-    		dataInstituciones = controladorInstitucion.listarDataInstituciones();
-    		model = new DefaultComboBoxModel<DataInstitucion>(dataInstituciones);
-    		institucionComboBox.setModel(model);
-    		institucionComboBox.setSelectedIndex(-1);
-    	// catch (UsuarioNoExisteException e) {}
-    	} catch (Exception e) {}
+		dataInstituciones = controladorInstitucion.listarDataInstituciones();
+		model = new DefaultComboBoxModel<DataInstitucion>(dataInstituciones);
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
     }
     
     private void cargarActividadesProfesores() {

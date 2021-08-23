@@ -56,14 +56,14 @@ class Principal {
         crearUsuarioIF = new CrearUsuario(icu, ici);
         crearActividadDeportivaIF = new CrearActividadDeportiva(ici);
         crearClaseIF = new CrearClase(ici);
-        crearCuponeraIF = new CrearCuponera();
+        crearCuponeraIF = new CrearCuponera(icc);
         crearInstitucionIF = new CrearInstitucion(ici);
         consultarUsuarioIF = new ConsultarUsuario(icu);
         consultarActividadDeportivaIF = new ConsultarActividadDeportiva(ici);
         consultarClaseIF = new ConsultarClase(ici);
         consultarCuponeraIF = new ConsultarCuponera();
         modificarUsuarioIF = new ModificarUsuario();
-        registrarSocioIF = new RegistrarSocio();
+        registrarSocioIF = new RegistrarSocio(icu, ici);
         agregarActividadCuponeraIF = new AgregarActividadCuponera();
         crearUsuarioIF.setVisible(false);
         crearActividadDeportivaIF.setVisible(false);
@@ -182,6 +182,8 @@ class Principal {
         });
         registrarSocioMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	registrarSocioIF.cargarInstituciones();
+            	registrarSocioIF.cargarSocios();
                 registrarSocioIF.setVisible(true);
             }
         });

@@ -2,11 +2,13 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -14,13 +16,53 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+
 import com.toedter.calendar.JDateChooser;
+
+import excepciones.CuposAgotadosException;
+import excepciones.SocioRegistradoException;
+import logica.DataActividad;
+import logica.DataClase;
+import logica.DataInstitucion;
+import logica.IControladorInstituciones;
+import logica.IControladorUsuario;
+
 import javax.swing.JFormattedTextField;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.awt.event.ActionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class RegistrarSocio extends JInternalFrame {
+	
+	private IControladorUsuario controladorUsuario;
+	private IControladorInstituciones controladorInstitucion;
+	
 	private final ButtonGroup tipoRegistroButtonGroup = new ButtonGroup();
-
-    public RegistrarSocio() {
+	private float costoActividad;
+	private JComboBox institucionComboBox;
+	private JComboBox actividadComboBox;
+	private JComboBox claseComboBox;
+	private JComboBox socioComboBox;
+	private JRadioButton registroGeneralRadioButton;
+	private JRadioButton registroCuponeraRadioButton;
+	private JComboBox cuponeraComboBox;
+	private JDateChooser fechaRegistroDateChooser;
+	private JFormattedTextField costoTextField;
+	
+    public RegistrarSocio(IControladorUsuario icu, IControladorInstituciones ici) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
+    	
+    	controladorUsuario = icu;
+    	controladorInstitucion = ici;
+    	
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -59,7 +101,14 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_institucionLabel.gridy = 0;
         seleccionarClasePanel.add(institucionLabel, gbc_institucionLabel);
         
-        JComboBox institucionComboBox = new JComboBox();
+        institucionComboBox = new JComboBox();
+        institucionComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (institucionComboBox.getSelectedIndex() != -1) {
+        			cargarActividades();
+        		}
+        	}
+        });
         institucionComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_institucionComboBox = new GridBagConstraints();
         gbc_institucionComboBox.insets = new Insets(0, 0, 5, 0);
@@ -76,8 +125,7 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_actividadLabel.gridy = 1;
         seleccionarClasePanel.add(actividadLabel, gbc_actividadLabel);
         
-        JComboBox actividadComboBox = new JComboBox();
-        actividadComboBox.setSelectedIndex(-1);
+        actividadComboBox = new JComboBox();
         GridBagConstraints gbc_actividadComboBox = new GridBagConstraints();
         gbc_actividadComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_actividadComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -93,7 +141,9 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_claseLabel.gridy = 2;
         seleccionarClasePanel.add(claseLabel, gbc_claseLabel);
         
-        JComboBox claseComboBox = new JComboBox();
+        claseComboBox = new JComboBox();
+        actividadComboBox.setSelectedIndex(-1);
+        claseComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_claseComboBox = new GridBagConstraints();
         gbc_claseComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_claseComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -124,7 +174,8 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_socioLabel.gridy = 0;
         seleccionarSocioPanel.add(socioLabel, gbc_socioLabel);
         
-        JComboBox socioComboBox = new JComboBox();
+        socioComboBox = new JComboBox();
+        socioComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_socioComboBox = new GridBagConstraints();
         gbc_socioComboBox.insets = new Insets(0, 0, 5, 0);
         gbc_socioComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -140,7 +191,7 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_tipoRegistroLabel.gridy = 1;
         seleccionarSocioPanel.add(tipoRegistroLabel, gbc_tipoRegistroLabel);
         
-        JRadioButton registroGeneralRadioButton = new JRadioButton("general");
+        registroGeneralRadioButton = new JRadioButton("general");
         registroGeneralRadioButton.setSelected(true);
         tipoRegistroButtonGroup.add(registroGeneralRadioButton);
         GridBagConstraints gbc_registroGeneralRadioButton = new GridBagConstraints();
@@ -149,7 +200,7 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_registroGeneralRadioButton.gridy = 2;
         seleccionarSocioPanel.add(registroGeneralRadioButton, gbc_registroGeneralRadioButton);
         
-        JRadioButton registroCuponeraRadioButton = new JRadioButton("con cuponera");
+        registroCuponeraRadioButton = new JRadioButton("con cuponera");
         tipoRegistroButtonGroup.add(registroCuponeraRadioButton);
         GridBagConstraints gbc_registroCuponeraRadioButton = new GridBagConstraints();
         gbc_registroCuponeraRadioButton.anchor = GridBagConstraints.WEST;
@@ -166,12 +217,47 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_cuponeraLabel.gridy = 4;
         seleccionarSocioPanel.add(cuponeraLabel, gbc_cuponeraLabel);
         
-        JComboBox cuponeraComboBox = new JComboBox();
+        cuponeraComboBox = new JComboBox();
+        cuponeraComboBox.setSelectedIndex(-1);
         GridBagConstraints gbc_cuponeraComboBox = new GridBagConstraints();
         gbc_cuponeraComboBox.fill = GridBagConstraints.HORIZONTAL;
         gbc_cuponeraComboBox.gridx = 1;
         gbc_cuponeraComboBox.gridy = 4;
         seleccionarSocioPanel.add(cuponeraComboBox, gbc_cuponeraComboBox);
+        
+        actividadComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (actividadComboBox.getSelectedIndex() != -1) {
+        			cargarClases();
+        			String nombreActividad = (String) actividadComboBox.getSelectedItem();
+        			DataActividad actividad = controladorInstitucion.listarDataActividad(nombreActividad);
+        			costoActividad = actividad.getCosto();
+        			cargarCosto();
+        		} else {
+        			claseComboBox.setModel(new DefaultComboBoxModel());
+        			claseComboBox.setSelectedIndex(-1);
+        			costoTextField.setText("");
+        		}
+        	}
+        });
+        registroGeneralRadioButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cuponeraComboBox.setSelectedIndex(-1);
+        		cuponeraComboBox.setEnabled(false);
+        		if (actividadComboBox.getSelectedIndex() != -1) {
+        			cargarCosto();
+        		}
+        	}
+        });
+        registroCuponeraRadioButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cuponeraComboBox.setSelectedIndex(-1);
+        		cuponeraComboBox.setEnabled(true);
+        		if (actividadComboBox.getSelectedIndex() != -1) {
+        			cargarCosto();
+        		}
+        	}
+        });
         
         JPanel datosRegistroPanel = new JPanel();
         datosRegistroPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -197,13 +283,13 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_fechaRegistroLabel.gridy = 0;
         datosRegistroPanel.add(fechaRegistroLabel, gbc_fechaRegistroLabel);
         
-        JDateChooser dateChooser = new JDateChooser();
-        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-        gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
-        gbc_dateChooser.fill = GridBagConstraints.BOTH;
-        gbc_dateChooser.gridx = 1;
-        gbc_dateChooser.gridy = 0;
-        datosRegistroPanel.add(dateChooser, gbc_dateChooser);
+        fechaRegistroDateChooser = new JDateChooser(new Date());
+        GridBagConstraints gbc_fechaRegistroDateChooser = new GridBagConstraints();
+        gbc_fechaRegistroDateChooser.insets = new Insets(0, 0, 5, 0);
+        gbc_fechaRegistroDateChooser.fill = GridBagConstraints.BOTH;
+        gbc_fechaRegistroDateChooser.gridx = 1;
+        gbc_fechaRegistroDateChooser.gridy = 0;
+        datosRegistroPanel.add(fechaRegistroDateChooser, gbc_fechaRegistroDateChooser);
         
         JLabel costoLabel = new JLabel("Costo");
         GridBagConstraints gbc_costoLabel = new GridBagConstraints();
@@ -213,7 +299,7 @@ public class RegistrarSocio extends JInternalFrame {
         gbc_costoLabel.gridy = 1;
         datosRegistroPanel.add(costoLabel, gbc_costoLabel);
         
-        JFormattedTextField costoTextField = new JFormattedTextField();
+        costoTextField = new JFormattedTextField();
         costoTextField.setEnabled(false);
         GridBagConstraints gbc_costoTextField = new GridBagConstraints();
         gbc_costoTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -237,5 +323,107 @@ public class RegistrarSocio extends JInternalFrame {
         contentPane.add(cancelarButton, gbc_cancelarButton);
         
         pack();
+    }
+    
+    private void altaRegistroActionPerformed(ActionEvent e) {
+    	String socio = (String) socioComboBox.getSelectedItem();
+    	String clase = ((DataClase) claseComboBox.getSelectedItem()).getNombre();
+    	boolean registroConCuponera = registroCuponeraRadioButton.isSelected();
+    	String cuponera;
+    	//String cuponera = (String) cuponeraComboBox.getSelectedItem();
+    	Date fechaRegistro = fechaRegistroDateChooser.getDate();
+    	
+    	if (esValido()) {
+    		try {
+    			//controladorUsuario.registrarSocio(socio, clase, cuponera, null, fechaRegistro);
+    			JOptionPane.showMessageDialog(this, "Se registr\u00F3 al socio en la clase correctamente.");
+    			cerrarFormulario();
+    		} catch (Exception ex) {
+    		//} catch (SocioRegistradoException ex) {
+    			JOptionPane.showMessageDialog(this, "El socio seleccionado ya est\u00E1 registrado en la clase seleccionada.", null, JOptionPane.ERROR_MESSAGE);
+    		//} catch (CuposAgotadosException ex) {
+    			//JOptionPane.showMessageDialog(this, "La clase seleccionada ya no tiene cupos disponibles.", null, JOptionPane.ERROR_MESSAGE);
+    		}
+    	}
+    	
+    }
+    
+    public void cargarInstituciones() {
+    	DefaultComboBoxModel<DataInstitucion> model;
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
+    }
+    
+    public void cargarSocios() {
+		DefaultComboBoxModel<String> model;
+		model = new DefaultComboBoxModel<String>(controladorUsuario.listarSocios());
+		socioComboBox.setModel(model);
+		socioComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cargarActividades() {
+    	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
+		actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+		actividadComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cargarClases() {
+    	String nombreActividad = (String) actividadComboBox.getSelectedItem();
+    	DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+    	claseComboBox.setModel(new DefaultComboBoxModel<DataClase>(clases));
+    	claseComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cargarCosto() {
+    	if (registroGeneralRadioButton.isSelected()) {
+    		NumberFormat costoFormat = NumberFormat.getCurrencyInstance();
+    		String costoString = costoFormat.format(costoActividad);
+    		costoTextField.setText(costoString);
+    	} else {
+    		costoTextField.setText("n/a");
+    	}
+    }
+    
+    private boolean esValido() {
+    	String socio = (String) socioComboBox.getSelectedItem();
+    	boolean registroConCuponera = registroCuponeraRadioButton.isSelected();
+    	String cuponera;
+    	//String cuponera = (String) cuponeraComboBox.getSelectedItem();
+    	Date fechaRegistro = fechaRegistroDateChooser.getDate();
+    	
+    	if (claseComboBox.getSelectedIndex() == -1) {
+    		JOptionPane.showMessageDialog(this, "Debe haber una clase seleccionada.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (socioComboBox.getSelectedIndex() == -1) {
+    		JOptionPane.showMessageDialog(this, "Debe haber un socio seleccionado.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (registroConCuponera && cuponeraComboBox.getSelectedIndex() == -1 ) {
+    		JOptionPane.showMessageDialog(this, "Debe haber una cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (fechaRegistro == null) {
+    		JOptionPane.showMessageDialog(this, "La fecha de registro ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else {
+    		return true;
+    	}
+    }
+    
+    private void cerrarFormulario() {
+    	institucionComboBox.setModel(new DefaultComboBoxModel());
+    	actividadComboBox.setModel(new DefaultComboBoxModel());
+    	claseComboBox.setModel(new DefaultComboBoxModel());
+    	socioComboBox.setModel(new DefaultComboBoxModel());
+    	registroGeneralRadioButton.setSelected(true);
+    	cuponeraComboBox.setModel(new DefaultComboBoxModel());
+    	cuponeraComboBox.setEnabled(false);
+    	fechaRegistroDateChooser.setDate(new Date());
+    	costoTextField.setText("");
+    	
+    	setVisible(false);
     }
 }

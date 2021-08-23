@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 
 public class ConsultarUsuario extends JInternalFrame {
 	
-	IControladorUsuario controladorUsuario;
+	private IControladorUsuario controladorUsuario;
 
     private JTextField nicknameTextField;
 	private JTextField nombreTextField;
@@ -303,12 +303,9 @@ public class ConsultarUsuario extends JInternalFrame {
 	
 	public void cargarUsuarios() {
 		DefaultComboBoxModel<String> model;
-		try {
-			model = new DefaultComboBoxModel<String>(controladorUsuario.listarUsuarios());
-    		usuarioComboBox.setModel(model);
-    		usuarioComboBox.setSelectedIndex(-1);
-		//} catch (UsuarioNoExisteException e) {}
-		} catch (Exception e) {}
+		model = new DefaultComboBoxModel<String>(controladorUsuario.listarUsuarios());
+		usuarioComboBox.setModel(model);
+		usuarioComboBox.setSelectedIndex(-1);
 	}
 	
 	private void cerrarFormulario() {

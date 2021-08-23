@@ -36,7 +36,7 @@ import java.awt.event.ActionEvent;
 
 public class ConsultarClase extends JInternalFrame {
 	
-	IControladorInstituciones controladorInstitucion;
+	private IControladorInstituciones controladorInstitucion;
 	
 	private JTextField nombreTextField;
 	private JTextField profesorTextField;
@@ -49,6 +49,7 @@ public class ConsultarClase extends JInternalFrame {
 	private JDateChooser fechaClaseDateChooser;
 	private JFormattedTextField horaInicioTextField;
 	private JDateChooser fechaAltaDateChooser;
+	
     public ConsultarClase(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
     		@Override
@@ -351,12 +352,9 @@ public class ConsultarClase extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-    	try {
-    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
-    		institucionComboBox.setModel(model);
-    		institucionComboBox.setSelectedIndex(-1);
-    	//} catch (UsuarioNoExisteException e) {}
-    	} catch (Exception e) {}
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
     }
     
     private void cargarActividades() {

@@ -219,16 +219,6 @@ public class CrearUsuario extends JInternalFrame {
         gbc_nacimientoDateChooser.gridy = 4;
         datosUsuarioPanel.add(nacimientoDateChooser, gbc_nacimientoDateChooser);
         
-        /*nacimientoSpinner = new JSpinner();
-        nacimientoSpinner.setModel(new SpinnerDateModel(new Date(), null, new Date(), Calendar.DAY_OF_YEAR));
-        nacimientoSpinner.setEditor(new JSpinner.DateEditor(nacimientoSpinner, "dd/MM/yyyy"));
-        GridBagConstraints gbc_nacimientoSpinner = new GridBagConstraints();
-        gbc_nacimientoSpinner.insets = new Insets(0, 0, 5, 0);
-        gbc_nacimientoSpinner.fill = GridBagConstraints.HORIZONTAL;
-        gbc_nacimientoSpinner.gridx = 1;
-        gbc_nacimientoSpinner.gridy = 4;
-        datosUsuarioPanel.add(nacimientoSpinner, gbc_nacimientoSpinner);*/
-        
         JPanel datosProfesorPanel = new JPanel();
         datosProfesorPanel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos del profesor"),
@@ -383,7 +373,7 @@ public class CrearUsuario extends JInternalFrame {
 				int res = JOptionPane.showOptionDialog(this,
 	    			"Ya existe un usuario con ese nickname.\n"
 	    			+ "¿Quieres elegir otro?",
-	    			"Error al crear usuario",
+	    			null,
 	    			JOptionPane.YES_NO_OPTION,
 	    			JOptionPane.ERROR_MESSAGE,
 	    			null,
@@ -400,15 +390,13 @@ public class CrearUsuario extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-    	try {
-    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
-    		institucionComboBox.setModel(model);
-    		institucionComboBox.setSelectedIndex(-1);
-    	//} catch (UsuarioNoExisteException e) {}
-    	} catch (Exception e) {}
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
     }
     
     private void cambiarEstadoProfesorPanel(boolean nuevoEstado) {
+    	institucionComboBox.setSelectedIndex(-1);
     	institucionComboBox.setEnabled(nuevoEstado);
     	descripcionTextArea.setEnabled(nuevoEstado);
     	biografiaTextArea.setEnabled(nuevoEstado);

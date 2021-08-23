@@ -224,12 +224,12 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	String nombre = nombreTextField.getText();
     	String descripcion = descripcionTextArea.getText();
     	int duracion = ((Number) duracionSpinner.getValue()).intValue();
-    	double costo = ((Number) costoTextField.getValue()).doubleValue();
+    	float costo = ((Number) costoTextField.getValue()).floatValue();
     	Date fechaAlta = fechaAltaDateChooser.getDate();
     	
     	if (esValido()) {
     		try {
-    			controladorInstitucion.altaActividadDeportiva(institucion, nombre, descripcion, duracion, duracion, fechaAlta);
+    			controladorInstitucion.altaActividadDeportiva(institucion, nombre, descripcion, duracion, costo, fechaAlta);
     			JOptionPane.showMessageDialog(this, "Se creó la actividad deportiva correctamente.");
     			cerrarFormulario();
     		} catch (ActividadRepetidaException ex) {
@@ -240,12 +240,9 @@ public class CrearActividadDeportiva extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-    	try {
-    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
-    		institucionComboBox.setModel(model);
-    		institucionComboBox.setSelectedIndex(-1);
-    	//} catch (UsuarioNoExisteException e) {}
-    	} catch (Exception ex) {}
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
     }
     
     private boolean esValido() {

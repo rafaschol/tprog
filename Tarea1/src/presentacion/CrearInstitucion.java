@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
+import excepciones.InstitucionRepetidaException;
+
 public class CrearInstitucion extends JInternalFrame {
 	
 	private IControladorInstituciones controladorInstitucion;
@@ -162,8 +164,7 @@ public class CrearInstitucion extends JInternalFrame {
     			JOptionPane.showMessageDialog(this, "Se creó la institución deportiva correctamente.");
     			cerrarFormulario();
     		}
-    		//catch (ExisteInstitucionException ex) {
-    		catch (Exception ex) {
+    		catch (InstitucionRepetidaException ex) {
     			JOptionPane.showMessageDialog(this, "Ya existe una instituci\u00F3n con ese nombre.", null, JOptionPane.ERROR_MESSAGE);
     		}
     	}

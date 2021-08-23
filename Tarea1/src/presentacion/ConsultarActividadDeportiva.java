@@ -29,7 +29,7 @@ import java.awt.event.ActionEvent;
 
 public class ConsultarActividadDeportiva extends JInternalFrame {
 	
-	IControladorInstituciones controladorInstitucion;
+	private IControladorInstituciones controladorInstitucion;
 	
 	private JTextField nombreTextField;
 	private JTextField duracionTextField;
@@ -339,12 +339,9 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-    	try {
-    		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
-    		institucionComboBox.setModel(model);
-    		institucionComboBox.setSelectedIndex(-1);
-    	//} catch (UsuarioNoExisteException e) {}
-    	} catch (Exception e) {}
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
+		institucionComboBox.setSelectedIndex(-1);
     }
     
     private void cargarActividades() {
@@ -354,6 +351,20 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     }
     
     public void cerrarFormulario() {
+    	institucionComboBox.setModel(new DefaultComboBoxModel());
+    	actividadComboBox.setModel(new DefaultComboBoxModel());
+    	nombreTextField.setText("");
+    	descripcionTextArea.setText("");
+    	duracionTextField.setText("");
+    	costoTextField.setValue(null);
+    	fechaAltaDateChooser.setDate(null);
+		claseComboBox.setModel(new DefaultComboBoxModel());
+		claseComboBox.setEnabled(false);
+		datosClaseButton.setEnabled(false);
+		cuponeraComboBox.setModel(new DefaultComboBoxModel());
+		cuponeraComboBox.setEnabled(true);
+		datosCuponeraButton.setEnabled(false);
+    	
     	setVisible(false);
     }
 }
