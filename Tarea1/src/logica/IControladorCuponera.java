@@ -12,5 +12,8 @@ public interface IControladorCuponera {
 	public abstract String[] listarCuponeras(); 
 	
 	public abstract String[] listarActividadesNoEnCuponera(String cuponera , String institucion);
+	
+	public abstract void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
 
+	public abstract DataCuponera consultaCuponera(String nombreCuponera);
 }

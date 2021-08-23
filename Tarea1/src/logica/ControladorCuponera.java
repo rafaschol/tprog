@@ -62,6 +62,33 @@ public class ControladorCuponera implements IControladorCuponera {
     	String[] res = MapAux.keySet().toArray(new String[0]);
     	return res;
     }
+    
+    public void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases) {
+    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
+    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
+    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	ActividadDeportiva ad = ma.obtenerActividad(nombreActividad);
+    	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
+    	c.addActividadDeCuponera(adc);
+    	adc.setCuponera(c);
+    	adc.setActividad(ad);
+    	ad.addActividadDeCuponera(adc);
+   	
+    }
+    
+    public DataCuponera consultaCuponera(String nombreCuponera) {
+    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
+    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
+    	DataActividadCuponera[] dac = new DataActividadCuponera[c.getActividadCuponera().size()];
+    	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
+    	for (int j = 0; j < arrActCup.length; j++) 
+    		dac[j] = new DataActividadCuponera(arrActCup[j]);		
+    	DataCuponera dc = new DataCuponera(c,dac);
+    	return dc;
+    	
+    }
+    
+    
   }
     	
     

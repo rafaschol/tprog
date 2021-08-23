@@ -23,6 +23,12 @@ public interface IControladorUsuario {
     
     public abstract void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera,
     	Date fecha) throws CuposAgotadosException, SocioRegistradoException;
+    
+    public abstract void modificarDatosSocio(String nickname, String nombre,String apellido, Date fechaNacimiento); 
+    
+    public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento,
+    		String institucion, String descripcion, String biografia, 
+	    	String sitioWeb);
     	
     
     

@@ -128,5 +128,9 @@ public class ActividadDeportiva {
 		
 	}
 	
+	public void addActividadDeCuponera(ActividadDeCuponera adc) {
+		this.actividadesCuponera.add(adc);
+	}
+	
 	
 }

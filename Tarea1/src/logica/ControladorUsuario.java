@@ -148,6 +148,30 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     }
     
+    public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento,
+    		String institucion, String descripcion, String biografia, 
+	    	String sitioWeb) {
+    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	Profesor p = mp.obtenerProfesor(nickname);
+    	p.setNombre(nombre);
+    	p.setApellido(apellido);
+    	p.setFechaNacimiento(fechaNacimiento);
+    	p.setBiografia(biografia);
+    	//Preguntar si se puede cambiar la institucion, y que pasaria con las clases
+    	p.setDescripcion(descripcion);
+    	p.setBiografia(biografia);	
+    	
+    }
+    
+    public void modificarDatosSocio(String nickname, String nombre,String apellido, Date fechaNacimiento) {
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	Socio s = ms.obtenerSocio(nickname);
+    	s.setNombre(nombre);
+    	s.setApellido(apellido);
+    	s.setFechaNacimiento(fechaNacimiento); 	
+    	
+    }
+    
     
 }
 	
