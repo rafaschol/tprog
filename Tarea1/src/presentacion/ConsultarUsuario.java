@@ -154,7 +154,6 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_tipoUsuarioTextField.gridx = 1;
         gbc_tipoUsuarioTextField.gridy = 1;
         datosUsuarioPanel.add(tipoUsuarioTextField, gbc_tipoUsuarioTextField);
-        tipoUsuarioTextField.setColumns(10);
         
         JLabel nombreLabel = new JLabel("Nombre");
         GridBagConstraints gbc_nombreLabel = new GridBagConstraints();

@@ -61,10 +61,10 @@ class Principal {
         consultarUsuarioIF = new ConsultarUsuario(icu);
         consultarActividadDeportivaIF = new ConsultarActividadDeportiva(ici);
         consultarClaseIF = new ConsultarClase(ici);
-        consultarCuponeraIF = new ConsultarCuponera();
-        modificarUsuarioIF = new ModificarUsuario();
+        consultarCuponeraIF = new ConsultarCuponera(icc);
+        modificarUsuarioIF = new ModificarUsuario(icu);
         registrarSocioIF = new RegistrarSocio(icu, ici);
-        agregarActividadCuponeraIF = new AgregarActividadCuponera();
+        agregarActividadCuponeraIF = new AgregarActividadCuponera(ici, icc);
         crearUsuarioIF.setVisible(false);
         crearActividadDeportivaIF.setVisible(false);
         crearClaseIF.setVisible(false);
@@ -172,11 +172,13 @@ class Principal {
         });
         consultarCuponeraMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	consultarCuponeraIF.cargarCuponeras();
                 consultarCuponeraIF.setVisible(true);
             }
         });
         modificarUsuarioMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	modificarUsuarioIF.cargarUsuarios();
                 modificarUsuarioIF.setVisible(true);
             }
         });
@@ -189,6 +191,7 @@ class Principal {
         });
         agregarActividadCuponeraMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	agregarActividadCuponeraIF.cargarCuponeras();
                 agregarActividadCuponeraIF.setVisible(true);
             }
         });

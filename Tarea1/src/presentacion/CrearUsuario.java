@@ -43,7 +43,6 @@ public class CrearUsuario extends JInternalFrame {
 	private JTextField nombreTextField;
 	private JTextField apellidoTextField;
 	private JTextField correoTextField;
-	private JSpinner nacimientoSpinner;
 	private JComboBox institucionComboBox;
 	private JTextArea descripcionTextArea;
 	private JTextArea biografiaTextArea;

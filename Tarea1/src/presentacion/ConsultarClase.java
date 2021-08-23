@@ -329,6 +329,11 @@ public class ConsultarClase extends JInternalFrame {
         datosClasePanel.add(fechaAltaDateChooser, gbc_fechaAltaDateChooser);
         
         JButton cerrarButton = new JButton("Cerrar");
+        cerrarButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cerrarFormulario();
+        	}
+        });
         GridBagConstraints gbc_cerrarButton = new GridBagConstraints();
         gbc_cerrarButton.gridx = 0;
         gbc_cerrarButton.gridy = 2;
