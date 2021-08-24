@@ -27,7 +27,7 @@ public class DataUsuario
 		return nickname;
 	}
 
-	public void setNickname(String nickname) {
+	private void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
@@ -35,7 +35,7 @@ public class DataUsuario
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(String tipoUsuario) {
+	private void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
@@ -43,7 +43,7 @@ public class DataUsuario
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	private void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -51,7 +51,7 @@ public class DataUsuario
 		return apellido;
 	}
 
-	public void setApellido(String apellido) {
+	private void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
@@ -59,7 +59,7 @@ public class DataUsuario
 		return email;
 	}
 
-	public void setEmail(String email) {
+	private void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -67,7 +67,7 @@ public class DataUsuario
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	private void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -75,7 +75,7 @@ public class DataUsuario
 		return clases;
 	}
 
-	public void setClases(String[] clases) {
+	private void setClases(String[] clases) {
 		this.clases = clases;
 	}
 }

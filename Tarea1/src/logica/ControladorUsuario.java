@@ -80,7 +80,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		Profesor profesor = mp.obtenerProfesor(nickname);
     		
     		String[] clases = profesor.getClases().keySet().toArray(new String[0]);
-    		res = new DataUsuario(profesor, clases);
+    		res = new DataProfesor(profesor, clases);
     	}
     	else {
     		// usuario es un socio
