@@ -1,6 +1,7 @@
 package logica;
 import java.util.Date;
 
+import excepciones.ClasesRestantesException;
 import excepciones.CuposAgotadosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
@@ -22,7 +23,7 @@ public interface IControladorUsuario {
     public abstract String[] listarSocios();
     
     public abstract void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera,
-    	String nombreCuponera,Date fecha) throws CuposAgotadosException, SocioRegistradoException;
+    	String nombreCuponera,Date fecha) throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException;
     
     public abstract void modificarDatosSocio(String nickname, String nombre,String apellido, Date fechaNacimiento); 
     
@@ -32,6 +33,8 @@ public interface IControladorUsuario {
     
     //Funcion para carga de datos
     public abstract void compraCuponera(String nickname, String nombreCuponera, Date fecha);
+    
+    public abstract String[]  listarCuponerasActividad(String nickname, String nombreActividad);
     	
     
     

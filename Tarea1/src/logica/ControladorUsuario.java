@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Map;
 //import java.util.Arrays;
 
+import excepciones.ClasesRestantesException;
 import excepciones.CuposAgotadosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
@@ -112,7 +113,7 @@ public class ControladorUsuario implements IControladorUsuario {
     //hacer funcion mostrar cuponeras de un usuario;
     
     public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera, 
-    		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException{
+    		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException{
     	ManejadorSocios ms = ManejadorSocios.getinstance();
     	Socio socio = ms.obtenerSocio(nickname);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
@@ -149,8 +150,13 @@ public class ControladorUsuario implements IControladorUsuario {
         	for (int j = 0; j < arrPart.length; j++) {
         		Participa participa = arrPart[j];
         		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
-        		if((acd.getCuponera().getNombre() == nombreCuponera) &&  (acd.getActividad().getNombre() == nombreActividad)) 
-        			participa.setClasesRestantes(participa.getClasesRestantes() - 1);	
+        		if((acd.getCuponera().getNombre() == nombreCuponera) &&  (acd.getActividad().getNombre() == nombreActividad)) {
+        			if(participa.getClasesRestantes() == 0)	
+        	    		throw new ClasesRestantesException("El socio ya agotó las clases disponibles para esta actividad con esta cuponera");
+        			
+        			participa.setClasesRestantes(participa.getClasesRestantes() - 1);
+        		}
+        				
         	}
         	float descuento = cuponera.getDescuento() / (float) 100;
         	costo = actividad.getCosto();
@@ -208,9 +214,24 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     }
     
-   
-   
-    
+    //Dada una actividad y un socio, lista todas las cuponeras del socio que contienen a esa actividad
+    public String[]  listarCuponerasActividad(String nickname, String nombreActividad){
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	Socio socio = ms.obtenerSocio(nickname);
+    	HashSet<String> cuponeras = new HashSet<String>();
+    	HashSet<Participa> participaciones = socio.getParticipa();
+    	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
+    	for (int j = 0; j < arrPart.length; j++) {
+    		Participa participa = arrPart[j];
+    		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
+    		if(acd.getActividad().getNombre() == nombreActividad) 
+    			cuponeras.add(acd.getCuponera().getNombre());	
+    	}
+    	
+    	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
+    	return arrCupo;  	
+    } 
+      
 }
 	
 
