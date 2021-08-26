@@ -1,5 +1,6 @@
 package logica;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
 //import java.util.Arrays;
 
@@ -107,8 +108,11 @@ public class ControladorUsuario implements IControladorUsuario {
     	return res;	
     }
     
-    public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera,
-    	Date fecha	) throws CuposAgotadosException, SocioRegistradoException{
+    
+    //hacer funcion mostrar cuponeras de un usuario;
+    
+    public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera, 
+    		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException{
     	ManejadorSocios ms = ManejadorSocios.getinstance();
     	Socio socio = ms.obtenerSocio(nickname);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
@@ -138,14 +142,27 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	}
     	else {
-    		 // Fata desarrollar este caso
+    		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
+    		Cuponera cuponera = mc.obtenerCuponera(nombreCuponera);
+    		HashSet<Participa> participaciones = socio.getParticipa();
+        	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
+        	for (int j = 0; j < arrPart.length; j++) {
+        		Participa participa = arrPart[j];
+        		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
+        		if((acd.getCuponera().getNombre() == nombreCuponera) &&  (acd.getActividad().getNombre() == nombreActividad)) 
+        			participa.setClasesRestantes(participa.getClasesRestantes() - 1);	
+        	}
+        	float descuento = cuponera.getDescuento() / (float) 100;
+        	costo = actividad.getCosto();
+        	costo -= costo*descuento; 
+    		
+    		
     	}
     	r = new Registro(id,fecha,costo,false,clase);	
     	clase.addRegistro(r);
     	socio.addRegistro(r);
     	r.setClase(clase);
-    	
-    	
+    	 	
     }
     
     public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento,
@@ -172,6 +189,27 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     }
     
+    public void compraCuponera(String nickname, String nombreCuponera, Date fecha) {
+    	//No hago validaciones porque es para carga de datos nada mas
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	Socio s = ms.obtenerSocio(nickname);
+    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
+    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
+    	Compra compra = new Compra(fecha,c);
+    	s.addCompra(compra);
+    	HashSet<ActividadDeCuponera> actividadesCuponera = c.getActividadCuponera();
+    	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
+    	for (int j = 0; j < arrActCup.length; j++) {
+    		ActividadDeCuponera adc = arrActCup[j];
+    		Participa p = new Participa(adc.getCantidadDeClases(),adc);
+    		s.addParticipa(p);		
+    	}
+    	
+    	
+    }
+    
+   
+   
     
 }
 	

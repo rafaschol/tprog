@@ -49,5 +49,11 @@ public class Socio extends Usuario {
 		Integer id = registro.getId();
 		this.registros.put(id, registro);
 	}
+	public void addCompra(Compra compra) {
+		this.compras.add(compra);
+	}
+	public void addParticipa(Participa participa) {
+		this.participa.add(participa);
+	}
 
 }

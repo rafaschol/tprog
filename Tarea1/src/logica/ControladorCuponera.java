@@ -37,7 +37,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	Cuponera c = mc.obtenerCuponera(cuponera);
     	//Obtengo las Actividades asocioadas a la cuponera.
     	HashSet<ActividadDeCuponera> actividadesCuponera = c.getActividadCuponera();
-    	//Convierto Map a Array
+    	//Convierto Set a Array
     	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
     	
     	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
@@ -87,6 +87,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	return dc;
     	
     }
+    
     
     
   }
