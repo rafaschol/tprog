@@ -18,6 +18,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
+import excepciones.ActividadDeCuponeraRepetidaException;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -216,7 +219,12 @@ public class AgregarActividadCuponera extends JInternalFrame {
     	int cantidadClases = (Integer) cantidadClasesSpinner.getValue();
     	
     	if (esValido()) {
-    		controladorCuponera.agregarActividadACuponera(nombreCuponera, nombreActividad, cantidadClases);
+    		try {
+				controladorCuponera.agregarActividadACuponera(nombreCuponera, nombreActividad, cantidadClases);
+			} catch (ActividadDeCuponeraRepetidaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
     	}
     }
     

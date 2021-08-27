@@ -2,6 +2,7 @@ package presentacion;
 
 import java.util.Date;
 
+import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
@@ -34,7 +35,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15));
 			controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15));
 			controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28));
-			controladorUsuario.altaSocio("andy", "Andrés", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17));
+			controladorUsuario.altaSocio("andy", "Andrï¿½s", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17));
 			controladorUsuario.altaSocio("tonyp", "Antonio", "Paz", "eltony@gmail.org.uy", new Date(55, 1, 14));
 			controladorUsuario.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(87, 1, 23));
 			controladorUsuario.altaSocio("charly", "Carlos", "Boston", "charly@gmail.com.uy", new Date(37, 4, 8));
@@ -46,39 +47,39 @@ public class CargarDatosPrueba {
 	public void cargarProfesores() {
 		try {
 			controladorUsuario.altaProfesor("viktor", "Victor", "Perez", "vperez@fuerza.com", new Date(77, 0, 1), "Fuerza Bruta",
-					"Victor es un apasionado de los músculos. Sus clases son organizadas en función de distintos aparatos y pesas con el objetivo de desarrollar músculos",
-					"Victor nació en Moscow en 1977. En el año 2005 emigró a Uruguay luego de quedar encantado con el país en un viaje turístico.",
+					"Victor es un apasionado de los mï¿½sculos. Sus clases son organizadas en funciï¿½n de distintos aparatos y pesas con el objetivo de desarrollar mï¿½sculos",
+					"Victor naciï¿½ en Moscow en 1977. En el aï¿½o 2005 emigrï¿½ a Uruguay luego de quedar encantado con el paï¿½s en un viaje turï¿½stico.",
 					"www.vikgym.com");
-			controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Telón",
+			controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Telï¿½n",
 					"A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball",
 					"Denis fue un jugador de voleibol profesional.",
 					"www.depecho.co");
 			controladorUsuario.altaProfesor("clazar", "Carlos", "Lazaro", "claz4r0@hotmail.com", new Date(53, 5, 22), "Instituto Natural",
-					"Carlos es un profesor muy divertido cuyas clases de aeróbica están cargadas de energía.",
-					"El interés por la actividad física llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.",
+					"Carlos es un profesor muy divertido cuyas clases de aerï¿½bica estï¿½n cargadas de energï¿½a.",
+					"El interï¿½s por la actividad fï¿½sica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.",
 					"www.enforma.co");
 			controladorUsuario.altaProfesor("TheBoss", "Bruno", "Sosa", "bruceTheBoss@gmail.com", new Date(49, 8, 23), "Fuerza Bruta",
 					"Bruno es un ex-boxeardor que busca entrenar a futuros campeones.",
-					"Bruno, mejor conocido como Bruce en el ring, compitió como boxeador entre los años 60s y 70s.",
+					"Bruno, mejor conocido como Bruce en el ring, compitiï¿½ como boxeador entre los aï¿½os 60s y 70s.",
 					"www.bruce.net");
-			controladorUsuario.altaProfesor("Nelson", "Luis", "Nelson", "nelson@hotmail.com", new Date(98, 0, 1), "Telón",
-					"Profesor de natación. Especializado en braza y mariposa.",
+			controladorUsuario.altaProfesor("Nelson", "Luis", "Nelson", "nelson@hotmail.com", new Date(98, 0, 1), "Telï¿½n",
+					"Profesor de nataciï¿½n. Especializado en braza y mariposa.",
 					"",
 					"www.nelson.uy");
-			controladorUsuario.altaProfesor("lale", "Laura", "Leyes", "la_le@outlook.com", new Date(87, 1, 14), "Telón",
-					"Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a enseñar tácticas de futbol",
+			controladorUsuario.altaProfesor("lale", "Laura", "Leyes", "la_le@outlook.com", new Date(87, 1, 14), "Telï¿½n",
+					"Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a enseï¿½ar tï¿½cticas de futbol",
 					"Jugadora profesional de futbol desde 2010 a 2020.",
 					"www.laley.com");
 			controladorUsuario.altaProfesor("prisc", "Priscila", "Pappo", "pripa@gmail.com", new Date(81, 7, 13), "Olympic",
-					"Laura tiene un gran interés por los deportes olímpicos.",
+					"Laura tiene un gran interï¿½s por los deportes olï¿½mpicos.",
 					"",
 					"www.pi314.net");
 			controladorUsuario.altaProfesor("dagost", "Daiana", "Agostini", "d_1940_ago@gmail.com", new Date(40, 2, 5), "Olympic",
-					"Profesora dedicada y exigente. No acepta un “no puedo” como respuesta.",
+					"Profesora dedicada y exigente. No acepta un ï¿½no puedoï¿½ como respuesta.",
 					"",
 					"www.dygym.com");
-			controladorUsuario.altaProfesor("aldo", "Aldo", "Vivaldi", "aldo@outlook.com", new Date(52, 6, 17), "Telón",
-					"Dada su gran estatura Aldo siempre jugó al basquetbol, hoy se dedica a enseñarlo.",
+			controladorUsuario.altaProfesor("aldo", "Aldo", "Vivaldi", "aldo@outlook.com", new Date(52, 6, 17), "Telï¿½n",
+					"Dada su gran estatura Aldo siempre jugï¿½ al basquetbol, hoy se dedica a enseï¿½arlo.",
 					"",
 					"www.sportsaldo.net");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
@@ -89,12 +90,12 @@ public class CargarDatosPrueba {
 	public void cargarInstituciones() {
 		try {
 			controladorInstitucion.altaInstitucionDeportiva("Instituto Natural",
-					"Clases de gimnasia, aeróbica, spinning y yoga.",
+					"Clases de gimnasia, aerï¿½bica, spinning y yoga.",
 					"https://www.inatural.com");
 			controladorInstitucion.altaInstitucionDeportiva("Fuerza Bruta",
 					"Gimnasio especializado en el desarrollo de la musculatura.",
 					"https://www.musculos.com/");
-			controladorInstitucion.altaInstitucionDeportiva("Telón",
+			controladorInstitucion.altaInstitucionDeportiva("Telï¿½n",
 					"Actividades deportivas para todas las edades.",
 					"https://telon.com.uy");
 			controladorInstitucion.altaInstitucionDeportiva("Olympic",
@@ -110,20 +111,20 @@ public class CargarDatosPrueba {
 			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
 					90, (float) 550.0, new Date(121, 2, 31));
-			controladorInstitucion.altaActividadDeportiva("Telón", "Voleibol",
+			controladorInstitucion.altaActividadDeportiva("Telï¿½n", "Voleibol",
 					"Voleibol en todas sus formas",
 					120, (float) 750.0, new Date(121, 3, 20));
-			controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aeróbica",
+			controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aerï¿½bica",
 					"Para cuidar el aparato cardiovascular",
 					110, (float) 800.0, new Date(121, 4, 30));
 			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Kickboxing",
-					"En busca del nuevo campeón de boxeo.",
+					"En busca del nuevo campeï¿½n de boxeo.",
 					100, (float) 980.0, new Date(121, 5, 7));
-			controladorInstitucion.altaActividadDeportiva("Telón", "Atletismo",
+			controladorInstitucion.altaActividadDeportiva("Telï¿½n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
 					150, (float) 500.0, new Date(121, 6, 8));
-			controladorInstitucion.altaActividadDeportiva("Telón", "Basquetbol",
-					"Espectáculo conmemorando los 30 años de Violeta.",
+			controladorInstitucion.altaActividadDeportiva("Telï¿½n", "Basquetbol",
+					"Espectï¿½culo conmemorando los 30 aï¿½os de Violeta.",
 					80, (float) 450.0, new Date(121, 6, 31));
 		} catch (ActividadRepetidaException e) {
 			e.printStackTrace();
@@ -138,12 +139,12 @@ public class CargarDatosPrueba {
 			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol");
 			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol");
 			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol");
-			controladorInstitucion.altaClase("Aeróbica niños", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aeróbica");
-			controladorInstitucion.altaClase("Aeróbico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aeróbica");
-			controladorInstitucion.altaClase("Aeróbica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aeróbica");
+			controladorInstitucion.altaClase("Aerï¿½bica niï¿½os", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aerï¿½bica");
+			controladorInstitucion.altaClase("Aerï¿½bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aerï¿½bica");
+			controladorInstitucion.altaClase("Aerï¿½bica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aerï¿½bica");
 			controladorInstitucion.altaClase("Boxeo I", new Date(121, 8, 1, 19, 30), 1, 4, "https://www.musculos.com/boxeo1", new Date(121, 5, 7), "TheBoss", "Kickboxing");
 			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing");
-			controladorInstitucion.altaClase("Músculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing");
+			controladorInstitucion.altaClase("Mï¿½sculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing");
 			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo");
 			controladorInstitucion.altaClase("200 M", new Date(121, 9, 25, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo");
 			controladorInstitucion.altaClase("Posta", new Date(121, 10, 25, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo");
@@ -176,21 +177,21 @@ public class CargarDatosPrueba {
 			controladorUsuario.registrarSocio("charly", "Mariposa", "Voleibol", false, null, new Date(121, 6, 5));
 			controladorUsuario.registrarSocio("sergiop", "Mariposa", "Voleibol", false, null, new Date(121, 6, 11));
 			controladorUsuario.registrarSocio("andy", "Mariposa", "Voleibol", false, null, new Date(121, 6, 18));
-			controladorUsuario.registrarSocio("m1k4", "Aeróbica niños", "Aeróbica", false, null, new Date(121, 6, 19));
-			controladorUsuario.registrarSocio("Emi71", "Aeróbico adulto mayor", "Aeróbica", false, null, new Date(121, 7, 17));
-			controladorUsuario.registrarSocio("guille", "Aeróbico adulto mayor", "Aeróbica", false, null, new Date(121, 7, 20));
-			controladorUsuario.registrarSocio("andy", "Aeróbico adulto mayor", "Aeróbica", false, null, new Date(121, 7, 23));
-			controladorUsuario.registrarSocio("caro", "Aeróbica", "Aeróbica", false, null, new Date(121, 7, 15));
-			controladorUsuario.registrarSocio("euge", "Aeróbica", "Aeróbica", false, null, new Date(121, 7, 26));
+			controladorUsuario.registrarSocio("m1k4", "Aerï¿½bica niï¿½os", "Aerï¿½bica", false, null, new Date(121, 6, 19));
+			controladorUsuario.registrarSocio("Emi71", "Aerï¿½bico adulto mayor", "Aerï¿½bica", false, null, new Date(121, 7, 17));
+			controladorUsuario.registrarSocio("guille", "Aerï¿½bico adulto mayor", "Aerï¿½bica", false, null, new Date(121, 7, 20));
+			controladorUsuario.registrarSocio("andy", "Aerï¿½bico adulto mayor", "Aerï¿½bica", false, null, new Date(121, 7, 23));
+			controladorUsuario.registrarSocio("caro", "Aerï¿½bica", "Aerï¿½bica", false, null, new Date(121, 7, 15));
+			controladorUsuario.registrarSocio("euge", "Aerï¿½bica", "Aerï¿½bica", false, null, new Date(121, 7, 26));
 			controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", false, null, new Date(121, 6, 19));
 			controladorUsuario.registrarSocio("tonyp", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("m1k4", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 24));
 			controladorUsuario.registrarSocio("sergiop", "Boxeo II", "Kickboxing", false, null, new Date(121, 7, 1));
 			controladorUsuario.registrarSocio("guille", "Boxeo II", "Kickboxing", false, null, new Date(121, 7, 30));
-			controladorUsuario.registrarSocio("Emi71", "Músculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
-			controladorUsuario.registrarSocio("caro", "Músculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
-			controladorUsuario.registrarSocio("euge", "Músculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 1));
-			controladorUsuario.registrarSocio("sergiop", "Músculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 5));
+			controladorUsuario.registrarSocio("Emi71", "Mï¿½sculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
+			controladorUsuario.registrarSocio("caro", "Mï¿½sculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
+			controladorUsuario.registrarSocio("euge", "Mï¿½sculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 1));
+			controladorUsuario.registrarSocio("sergiop", "Mï¿½sculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 5));
 			controladorUsuario.registrarSocio("guille", "100 M", "Atletismo", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("charly", "100 M", "Atletismo", false, null, new Date(121, 8, 3));
 			controladorUsuario.registrarSocio("Emi71", "200 M", "Atletismo", false, null, new Date(121, 7, 16));
@@ -215,9 +216,9 @@ public class CargarDatosPrueba {
 					"Deportes con pelota.",
 					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30));
 			controladorCuponera.altaCuponera("Gimnasia",
-					"Aeróbica y aparatos.",
+					"Aerï¿½bica y aparatos.",
 					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15));
-			controladorCuponera.altaCuponera("Músculos",
+			controladorCuponera.altaCuponera("Mï¿½sculos",
 					"Pesas.",
 					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1));
 		} catch (CuponeraRepetidaException e) {
@@ -226,12 +227,19 @@ public class CargarDatosPrueba {
 	}
 	
 	public void cargarActividadesCuponeras() {
-		controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 7);
-		controladorCuponera.agregarActividadACuponera("Pelota", "Basquetbol", 18);
-		controladorCuponera.agregarActividadACuponera("Gimnasia", "Aeróbica", 2);
-		controladorCuponera.agregarActividadACuponera("Gimnasia", "Aparatos y pesas", 8);
-		controladorCuponera.agregarActividadACuponera("Músculos", "Kickboxing", 11);
-		controladorCuponera.agregarActividadACuponera("Músculos", "Aparatos y pesas", 12);
+		
+		try {
+			controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 7);
+			controladorCuponera.agregarActividadACuponera("Pelota", "Basquetbol", 18);
+			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aerï¿½bica", 2);
+			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aparatos y pesas", 8);
+			controladorCuponera.agregarActividadACuponera("Mï¿½sculos", "Kickboxing", 11);
+			controladorCuponera.agregarActividadACuponera("Mï¿½sculos", "Aparatos y pesas", 12);
+		} catch (ActividadDeCuponeraRepetidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

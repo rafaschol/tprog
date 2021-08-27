@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
@@ -299,7 +300,7 @@ class TestSistema {
 	};
 	
 	@Test
-	void testAgregarActividadACuponera() {
+	void testAgregarActividadACuponera() throws ActividadDeCuponeraRepetidaException {
 		//agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
 		ctrlC.agregarActividadACuponera("Musculos", "Tenis", 2);
 		//HACER VALIDACION
@@ -307,7 +308,7 @@ class TestSistema {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	void testConsultaCuponera() throws CuponeraRepetidaException {
+	void testConsultaCuponera() throws CuponeraRepetidaException, ActividadDeCuponeraRepetidaException {
 		//DataCuponera consultaCuponera(String nombreCuponera);
 		ctrlC.altaCuponera("Gymnacia", "asd", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1));
 		ctrlC.agregarActividadACuponera("Gymnacia","Tenis", 4);

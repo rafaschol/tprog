@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import excepciones.ActividadDeCuponeraRepetidaException;
+import excepciones.ActividadRepetidaException;
 import excepciones.CuponeraRepetidaException;
 
 public class ControladorCuponera implements IControladorCuponera {
@@ -63,11 +65,17 @@ public class ControladorCuponera implements IControladorCuponera {
     	return res;
     }
     
-    public void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases) {
+    public void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases) throws ActividadDeCuponeraRepetidaException {
     	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     	Cuponera c = mc.obtenerCuponera(nombreCuponera);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
     	ActividadDeportiva ad = ma.obtenerActividad(nombreActividad);
+    	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
+    	for (int j = 0; j < arrActCup.length; j++)
+    		if(arrActCup[j].getActividad().getNombre() == nombreActividad) 
+    			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva con nombre '" + nombreActividad + 
+    					 "' en la cuponera '" + nombreCuponera);
+    	
     	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
     	c.addActividadDeCuponera(adc);
     	adc.setCuponera(c);

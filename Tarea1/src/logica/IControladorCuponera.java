@@ -2,6 +2,7 @@ package logica;
 
 import java.util.Date;
 
+import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.CuponeraRepetidaException;
 
 public interface IControladorCuponera {
@@ -13,7 +14,8 @@ public interface IControladorCuponera {
 	
 	public abstract String[] listarActividadesNoEnCuponera(String cuponera , String institucion);
 	
-	public abstract void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
+	public abstract void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases)
+		throws ActividadDeCuponeraRepetidaException;
 
 	public abstract DataCuponera consultaCuponera(String nombreCuponera);
 }
