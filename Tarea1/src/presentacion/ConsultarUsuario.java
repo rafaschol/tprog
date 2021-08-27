@@ -20,8 +20,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 
+import logica.DataClase;
 import logica.DataInstitucion;
 import logica.DataUsuario;
+import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
@@ -31,6 +33,9 @@ import java.awt.event.ActionEvent;
 public class ConsultarUsuario extends JInternalFrame {
 	
 	private IControladorUsuario controladorUsuario;
+	private IControladorInstituciones controladorInstitucion;
+	private ConsultarClase consultarClaseIF;
+	private ConsultarActividadDeportiva consultarActividadDeportivaIF;
 
     private JTextField nicknameTextField;
 	private JTextField nombreTextField;
@@ -43,7 +48,7 @@ public class ConsultarUsuario extends JInternalFrame {
 	private JButton datosActividadButton;
 	private JComboBox usuarioComboBox;
 	
-	public ConsultarUsuario(IControladorUsuario icu) {
+	public ConsultarUsuario(IControladorUsuario icu, IControladorInstituciones ici) {
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
@@ -52,6 +57,7 @@ public class ConsultarUsuario extends JInternalFrame {
 		});
 		
 		controladorUsuario = icu;
+		controladorInstitucion = ici;
 		
         setResizable(true);
         setIconifiable(true);
@@ -250,6 +256,17 @@ public class ConsultarUsuario extends JInternalFrame {
         datosClasesPanel.add(claseComboBox, gbc_claseComboBox);
         
         datosClaseButton = new JButton("Detalles de la clase");
+        datosClaseButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (claseComboBox.getSelectedIndex() != -1) {
+        			String nombreClase = (String) claseComboBox.getSelectedItem();
+        			cerrarFormulario();
+                	consultarClaseIF.cargarInstituciones();
+                	consultarClaseIF.initialize(nombreClase);
+                    consultarClaseIF.setVisible(true);
+        		}
+        	}
+        });
         datosClaseButton.setEnabled(false);
         GridBagConstraints gbc_datosClaseButton = new GridBagConstraints();
         gbc_datosClaseButton.fill = GridBagConstraints.HORIZONTAL;
@@ -259,6 +276,19 @@ public class ConsultarUsuario extends JInternalFrame {
         datosClasesPanel.add(datosClaseButton, gbc_datosClaseButton);
         
         datosActividadButton = new JButton("Detalles de la actividad deportiva");
+        datosActividadButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (claseComboBox.getSelectedIndex() != -1) {
+        			String nombreClase = (String) claseComboBox.getSelectedItem();
+					DataClase clase = controladorInstitucion.obtenerDataClase(nombreClase);
+					String nombreActividad = clase.getActividad();
+					cerrarFormulario();
+					consultarActividadDeportivaIF.cargarInstituciones();
+					consultarActividadDeportivaIF.initialize(nombreActividad);
+					consultarActividadDeportivaIF.setVisible(true);
+        		}
+        	}
+        });
         datosActividadButton.setEnabled(false);
         GridBagConstraints gbc_datosActividadButton = new GridBagConstraints();
         gbc_datosActividadButton.fill = GridBagConstraints.HORIZONTAL;
@@ -282,6 +312,14 @@ public class ConsultarUsuario extends JInternalFrame {
         
         pack();
     }
+	
+	public void setConsultarClaseIF(ConsultarClase ccIF) {
+		this.consultarClaseIF = ccIF;
+	}
+	
+	public void setConsultarActividadDeportivaIF(ConsultarActividadDeportiva cadIF) {
+		this.consultarActividadDeportivaIF = cadIF;
+	}
 	
 	private void cargarDatosUsuario() {
 		DataUsuario usuarioSeleccionado = controladorUsuario.mostrarDataUsuario((String)usuarioComboBox.getSelectedItem());

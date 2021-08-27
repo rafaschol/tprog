@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 public class ConsultarActividadDeportiva extends JInternalFrame {
 	
 	private IControladorInstituciones controladorInstitucion;
+	private ConsultarClase consultarClaseIF;
 	
 	private JTextField nombreTextField;
 	private JTextField duracionTextField;
@@ -42,6 +43,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
 	private JComboBox cuponeraComboBox;
 	private JButton datosCuponeraButton;
 	private JButton datosClaseButton;
+	private DataInstitucion[] instituciones;
 
     public ConsultarActividadDeportiva(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -268,6 +270,17 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         datosClasesPanel.add(claseComboBox, gbc_claseComboBox);
         
         datosClaseButton = new JButton("Detalles de la clase");
+        datosClaseButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (claseComboBox.getSelectedIndex() != -1) {
+        			String nombreClase = (String) claseComboBox.getSelectedItem();
+        			cerrarFormulario();
+                	consultarClaseIF.cargarInstituciones();
+                	consultarClaseIF.initialize(nombreClase);
+                    consultarClaseIF.setVisible(true);
+        		}
+        	}
+        });
         datosClaseButton.setEnabled(false);
         GridBagConstraints gbc_datosClaseButton = new GridBagConstraints();
         gbc_datosClaseButton.fill = GridBagConstraints.HORIZONTAL;
@@ -317,6 +330,23 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         pack();
     }
     
+    public void initialize(String nombreActividad) {
+    	DataActividad actividad = controladorInstitucion.listarDataActividad(nombreActividad);
+    	String nombreInstitucion = actividad.getInstitucion();
+    	
+    	for (DataInstitucion ins : instituciones) {
+			if (ins.getNombre() == nombreInstitucion) {
+				institucionComboBox.setSelectedItem(ins);
+			}
+    	}
+    	actividadComboBox.setSelectedItem(nombreActividad);
+    	cargarDatosActividad();
+    }
+    
+	public void setConsultarClaseIF(ConsultarClase ccIF) {
+		this.consultarClaseIF = ccIF;
+	}
+    
     private void cargarDatosActividad() {
     	String nombreActividad = (String) actividadComboBox.getSelectedItem();
     	DataActividad actividad = controladorInstitucion.listarDataActividad(nombreActividad);
@@ -339,7 +369,8 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+    	instituciones = controladorInstitucion.listarDataInstituciones();
+		model = new DefaultComboBoxModel<DataInstitucion>(instituciones);
 		institucionComboBox.setModel(model);
 		institucionComboBox.setSelectedIndex(-1);
     }

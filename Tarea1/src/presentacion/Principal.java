@@ -63,13 +63,18 @@ class Principal {
         crearClaseIF = new CrearClase(ici);
         crearCuponeraIF = new CrearCuponera(icc);
         crearInstitucionIF = new CrearInstitucion(ici);
-        consultarUsuarioIF = new ConsultarUsuario(icu);
+        consultarUsuarioIF = new ConsultarUsuario(icu, ici);
         consultarActividadDeportivaIF = new ConsultarActividadDeportiva(ici);
         consultarClaseIF = new ConsultarClase(ici);
         consultarCuponeraIF = new ConsultarCuponera(icc);
         modificarUsuarioIF = new ModificarUsuario(icu);
         registrarSocioIF = new RegistrarSocio(icu, ici);
         agregarActividadCuponeraIF = new AgregarActividadCuponera(ici, icc);
+        
+        consultarUsuarioIF.setConsultarClaseIF(consultarClaseIF);
+        consultarUsuarioIF.setConsultarActividadDeportivaIF(consultarActividadDeportivaIF);
+        consultarActividadDeportivaIF.setConsultarClaseIF(consultarClaseIF);
+        
         datosPrueba = new CargarDatosPrueba(icu, ici, icc);
         crearUsuarioIF.setVisible(false);
         crearActividadDeportivaIF.setVisible(false);

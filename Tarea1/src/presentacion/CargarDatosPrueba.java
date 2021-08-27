@@ -31,7 +31,7 @@ public class CargarDatosPrueba {
 		try {
 			controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31));
 			controladorUsuario.altaSocio("caro", "Carolina", "Omega", "caro@gmail.com", new Date(83, 10, 15));
-			controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 31));
+			controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15));
 			controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15));
 			controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28));
 			controladorUsuario.altaSocio("andy", "Andrés", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17));
@@ -205,6 +205,8 @@ public class CargarDatosPrueba {
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException e) {
 			e.printStackTrace();
 		}
+
+
 	}
 	
 	public void cargarCuponeras() {

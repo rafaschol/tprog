@@ -49,6 +49,9 @@ public class ConsultarClase extends JInternalFrame {
 	private JDateChooser fechaClaseDateChooser;
 	private JFormattedTextField horaInicioTextField;
 	private JDateChooser fechaAltaDateChooser;
+	private DataInstitucion[] instituciones;
+	private String[] actividades;
+	private DataClase[] clases;
 	
     public ConsultarClase(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -342,6 +345,26 @@ public class ConsultarClase extends JInternalFrame {
         pack();
     }
     
+	public void initialize(String nombreClase) {
+		DataClase clase = controladorInstitucion.obtenerDataClase(nombreClase);
+		String nombreInstitucion = clase.getInstitucion();
+		String nombreActividad = clase.getActividad();
+		
+		for (DataInstitucion ins : instituciones) {
+			if (ins.getNombre() == nombreInstitucion) {
+				institucionComboBox.setSelectedItem(ins);
+			}
+		}
+		actividadComboBox.setSelectedItem(nombreActividad);
+		
+		for (DataClase cla : clases) {
+			if (cla.getNombre() == nombreClase) {
+				claseComboBox.setSelectedItem(cla);
+			}
+		}
+		cargarDatosClase();
+	}
+    
     private void cargarDatosClase() {
     	DataClase clase = (DataClase) claseComboBox.getSelectedItem();
     	
@@ -357,20 +380,22 @@ public class ConsultarClase extends JInternalFrame {
     
     public void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+    	instituciones = controladorInstitucion.listarDataInstituciones();
+		model = new DefaultComboBoxModel<DataInstitucion>(instituciones);
 		institucionComboBox.setModel(model);
 		institucionComboBox.setSelectedIndex(-1);
     }
     
     private void cargarActividades() {
     	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
-		actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+    	actividades = institucion.getActividades();
+		actividadComboBox.setModel(new DefaultComboBoxModel<String>(actividades));
 		actividadComboBox.setSelectedIndex(-1);
     }
     
     private void cargarClases() {
     	String nombreActividad = (String) actividadComboBox.getSelectedItem();
-    	DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+    	clases = controladorInstitucion.listarDataClases(nombreActividad);
     	claseComboBox.setModel(new DefaultComboBoxModel<DataClase>(clases));
     	claseComboBox.setSelectedIndex(-1);
     }
