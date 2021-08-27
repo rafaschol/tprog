@@ -24,12 +24,6 @@ public class DataInstitucion {
 	        return actividades;
 	    }
 
-	    /* Sirve para mostrar textualmente la información del usuario, por ejemplo en un ComboBox
-	     
-	    */
-	    public String toString() {
-	    	return this.nombre;
-	    }
 
 	    private void setNombre(String nombre) {
 	        this.nombre = nombre;

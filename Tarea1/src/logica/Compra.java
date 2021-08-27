@@ -6,8 +6,8 @@ public class Compra {
 	private Cuponera cuponera; // Cuponera a la cual corresponde la compra.
 	
 	public Compra(Date fecha, Cuponera cuponera){
-		this.fecha = fecha;
-		this.cuponera = cuponera;
+		this.setFecha(fecha);
+		this.setCuponera(cuponera);
 	}
 
 	public Date getFecha() {

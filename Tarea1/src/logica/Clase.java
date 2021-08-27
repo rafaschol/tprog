@@ -15,13 +15,13 @@ public class Clase {
 	private Map<Integer, Registro> registros;
 	
 	public Clase(String n, Date f, Integer min, Integer max, String url, Date alta){
-		this.nombre = n;
-		this.fecha = f;
-		this.minPersonas = min;
-		this.maxPersonas = max;
-		this.URL = url;
-		this.fechaAlta = alta;
-		this.registros = new HashMap<Integer,Registro>();
+		this.setNombre(n);
+		this.setFecha(f);
+		this.setMinPersonas(min);
+		this.setMaxPersonas(max);
+		this.setURL(url);
+		this.setFechaAlta(alta);
+		this.setRegistros(new HashMap<Integer,Registro>());
 	}
 
 	public String getNombre() {

@@ -18,14 +18,14 @@ public class ActividadDeportiva {
 	private InstitucionDeportiva institucion; //Sacar despues
 	
 	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
-		this.nombre = nombre;
-		this.fecha = fecha;
-		this.descripcion = descripcion;
-		this.duracion = duracion;
-		this.costo = costo;
-		this.clases = new HashMap<String, Clase>();
-		this.actividadesCuponera = new HashSet<ActividadDeCuponera>();
-		this.institucion = institucion;
+		this.setNombre(nombre);
+		this.setFecha(fecha);
+		this.setDescripcion(descripcion);
+		this.setDuracion(duracion);
+		this.setCosto(costo);
+		this.setClases(new HashMap<String, Clase>());
+		this.setActividadesCuponera(new HashSet<ActividadDeCuponera>());
+		this.setInstitucion(institucion);
 
 	}
 	public String getNombre() {

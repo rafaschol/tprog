@@ -78,9 +78,6 @@ public class DataClase {
 		this.profesor = profesor;
 	}
 	
-	public String toString() {
-    	return this.nombre;
-    }
 
 
 }

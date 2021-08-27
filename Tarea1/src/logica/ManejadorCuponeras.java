@@ -8,7 +8,7 @@ public class ManejadorCuponeras {
     private static ManejadorCuponeras instancia = null;
 
     private ManejadorCuponeras() {
-    	cuponeras = new HashMap<String, Cuponera>();
+    	this.setCuponeras(new HashMap<String, Cuponera>());
     }
 
     public static ManejadorCuponeras getinstance() {

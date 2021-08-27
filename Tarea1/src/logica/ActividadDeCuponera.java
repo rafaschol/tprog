@@ -6,7 +6,7 @@ public class ActividadDeCuponera {
 	private Cuponera cuponera;
 
 	public ActividadDeCuponera(Integer cant) {
-		this.cantidadDeClases = cant;
+		this.setCantidadDeClases(cant);
 	}
 
 	public Integer getCantidadDeClases() {

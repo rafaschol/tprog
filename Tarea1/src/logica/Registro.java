@@ -10,11 +10,11 @@ public class Registro {
 	private Clase clase; // Clase a la cual corresponde el registro.
 	
 	public Registro(Integer id, Date fecha, Float costo, Boolean cuponera, Clase clase){
-		this.id = id;
-		this.fecha = fecha;
-		this.costo = costo;
-		this.conCuponera = cuponera;
-		this.clase = clase;
+		this.setId(id);
+		this.setFecha(fecha);
+		this.setCosto(costo);
+		this.setConCuponera(cuponera);
+		this.setClase(clase);
 	}
 	
 	public int getId() {

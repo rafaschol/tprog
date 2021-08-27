@@ -41,7 +41,7 @@ public class ManejadorSocios {
         return ((Socio) mails.get(mail));
     }
 
-    public Socio[] getSocios() {
+    /*public Socio[] getSocios() {
         if (nicknames.isEmpty())
             return null;
         else {
@@ -54,7 +54,7 @@ public class ManejadorSocios {
 
             return socios;
         }
-    }
+    }*/
 
 	public Integer getIdentificadorRegistro() {
 		return identificadorRegistro;

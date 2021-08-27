@@ -13,11 +13,11 @@ public class InstitucionDeportiva {
 	private Map<String, ActividadDeportiva> actividades;
 
 	public InstitucionDeportiva(String n, String des, String url){
-		this.nombre = n;
-		this.descripcion = des;
-		this.URL = url;
-		this.profesores = new HashMap<String, Profesor>();
-		this.actividades = new HashMap<String, ActividadDeportiva>();
+		this.setNombre(n);
+		this.setDescripcion(des);
+		this.setURL(url);
+		this.setProfesores(new HashMap<String, Profesor>());
+		this.setActividades(new HashMap<String, ActividadDeportiva>());
 	}
 
 	public String getNombre() {

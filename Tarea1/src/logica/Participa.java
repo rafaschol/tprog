@@ -5,8 +5,8 @@ public class Participa {
 	private ActividadDeCuponera actividades;
 	
 	public Participa(Integer clRestantes, ActividadDeCuponera act) {
-		this.clasesRestantes = clRestantes;
-		this.actividades = act;
+		this.setClasesRestantes(clRestantes);
+		this.setActividades(act);
 	}
 
 	public Integer getClasesRestantes() {

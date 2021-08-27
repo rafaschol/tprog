@@ -39,7 +39,7 @@ public class ManejadorProfesores {
         return ((Profesor) mails.get(mail));
     }
 
-    public Profesor[] getProfesoers() {
+ /*   public Profesor[] getProfesoers() {
         if (nicknames.isEmpty())
             return null;
         else {
@@ -52,6 +52,6 @@ public class ManejadorProfesores {
 
             return profesores;
         }
-    }
+    }*/
 
 }

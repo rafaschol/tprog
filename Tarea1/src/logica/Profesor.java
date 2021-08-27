@@ -13,16 +13,16 @@ public class Profesor extends Usuario {
 
 	public Profesor(String nick, String n, String ap, String email, Date fecha, 
 					String des, InstitucionDeportiva i,  String biografia, String sitioWeb){
-		this.nickname = nick;
-		this.nombre = n;
-		this.apellido = ap;
-		this.email = email;
-		this.fechaNacimiento = fecha;
-		this.descripcion = des;
-		this.institucion = i;
-		this.clases = new HashMap<String, Clase>();
-		this.biografia = biografia;
-		this.sitioWeb = sitioWeb;
+		this.setNickname(nick);
+		this.setNombre(n);
+		this.setApellido(ap);
+		this.setEmail(email);
+		this.setFechaNacimiento(fecha);
+		this.setDescripcion(des);
+		this.setInstitucion(i);
+		this.setClases(new HashMap<String, Clase>());
+		this.setBiografia(biografia);
+		this.setSitioWeb(sitioWeb);
 
 	}
 

@@ -12,13 +12,13 @@ public class Cuponera {
 	private HashSet<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
 	
 	public Cuponera(String n, String d, Date fIni, Date fFin, Float des, Date fAlta) {
-		this.nombre = n;
-		this.descripcion = d;
-		this.fechaIni = fIni;
-		this.fechaFin = fFin;
-		this.descuento = des;
-		this.fechaAlta = fAlta;
-		this.actividadCuponera = new HashSet<ActividadDeCuponera>();
+		this.setNombre(n);
+		this.setDescripcion(d);
+		this.setFechaIni(fIni);
+		this.setFechaFin(fFin);
+		this.setDescuento(des);
+		this.setFechaAlta(fAlta);
+		this.setActividadCuponera(new HashSet<ActividadDeCuponera>());
 	}
 
 	public String getNombre() {
