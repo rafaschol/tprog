@@ -101,7 +101,7 @@ public class ActividadDeportiva {
 		DataClase[] res = new DataClase[clases.size()];
 		int i = 0;
 		for (Entry<String, Clase> iter : clases.entrySet()) {
-			DataClase c = new DataClase(iter.getValue());
+			DataClase c = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
 			res[i] = c;
 			i++;	
 		}

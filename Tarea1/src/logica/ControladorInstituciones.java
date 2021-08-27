@@ -76,6 +76,19 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	
     }
     
+    //DEVUELVE UN DATACLASE DADO EL NOMBRE DE LA CLASE
+    public DataClase obtenerDataClase(String nombreClase) {
+    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	DataClase data = null;
+    	for (Entry<String, ActividadDeportiva> iter : ma.getActividades().entrySet()) {
+    		for (Entry<String, Clase> iter2 : iter.getValue().getClases().entrySet()) 
+    			if(iter.getValue().getNombre() == nombreClase) data = new DataClase(iter2.getValue(), iter.getValue().getNombre(),
+    					iter.getValue().getInstitucion().getNombre()); 	
+    	}
+    	return data;
+    }
+    
+    
     public DataActividad listarDataActividad(String nombre) {
     	ManejadorActividad ma = ManejadorActividad.getinstance();
     	ActividadDeportiva ad = ma.obtenerActividad(nombre);

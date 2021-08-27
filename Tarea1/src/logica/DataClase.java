@@ -10,9 +10,11 @@ public class DataClase {
 	private String URL;
 	private Date fechaAlta;	
 	private String profesor;
+	private String actividad;
+	private String institucion;
 	
 	
-	public DataClase(Clase clase){
+	public DataClase(Clase clase, String actividad, String institucion){
 		this.setNombre(clase.getNombre());
 		this.setFecha(clase.getFecha());
 		this.setMinPersonas(clase.getMinPersonas());
@@ -20,6 +22,8 @@ public class DataClase {
 		this.setURL(clase.getURL());
 		this.setFechaAlta(clase.getFechaAlta());
 		this.setProfesor(clase.getProfesor().getNickname());	
+		this.setActividad(actividad);
+		this.setInstitucion(institucion);
 	}
 	
 	public String getNombre() {
@@ -76,6 +80,22 @@ public class DataClase {
 
 	private void setProfesor(String profesor) {
 		this.profesor = profesor;
+	}
+
+	public String getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(String institucion) {
+		this.institucion = institucion;
+	}
+
+	public String getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(String actividad) {
+		this.actividad = actividad;
 	}
 	
 
