@@ -27,8 +27,7 @@ public interface IControladorUsuario {
     
     public abstract void modificarDatosSocio(String nickname, String nombre,String apellido, Date fechaNacimiento); 
     
-    public abstract void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento,
-    		String institucion, String descripcion, String biografia, 
+    public abstract void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento, String descripcion, String biografia, 
 	    	String sitioWeb);
     
     //Funcion para carga de datos

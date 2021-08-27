@@ -171,8 +171,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	 	
     }
     
-    public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento,
-    		String institucion, String descripcion, String biografia, 
+    public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento, String descripcion, String biografia, 
 	    	String sitioWeb) {
     	ManejadorProfesores mp = ManejadorProfesores.getinstance();
     	Profesor p = mp.obtenerProfesor(nickname);
