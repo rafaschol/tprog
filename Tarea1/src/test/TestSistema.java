@@ -74,10 +74,11 @@ class TestSistema {
 		ctrlI.altaActividadDeportiva("IN", "Futbol",descAct, 110, 800, new Date(2021, 5, 30));
 		
 		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica");
-		
+	
 		ctrlU.registrarSocio("m1k4", "Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
 		
 		ctrlC.altaCuponera("Musculos", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1));
+		
 		
 		ctrlC.agregarActividadACuponera("Musculos","Aerobica", 6);
 		
@@ -340,16 +341,18 @@ class TestSistema {
 		//altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,int duracion, float costo, Date fecha) throws ActividadRepetidaException; //Falta agregar excepcion
 		try {
 			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
-			DataActividad data = ctrlI.listarDataActividad("Handball");
-			System.out.print(data);
-			assertEquals(data.getNombre(), "IN");
-			assertEquals(data.getDescripcion(), "Solo femenino");
-			assertEquals(data.getCosto(), 1500);
-			assertEquals(data.getDuracion(), 200);
-			assertEquals(data.getFecha(), new Date(2021, 6, 22));
+			DataActividad dataA = ctrlI.listarDataActividad("Handball");
+			System.out.print(dataA.getNombre());
+			assertEquals(dataA.getNombre(), "Handball");
+			assertEquals(dataA.getDescripcion(), "Solo femenino");
+			assertEquals(dataA.getCosto(), 1500);
+			assertEquals(dataA.getDuracion(), 200);
+			assertEquals(dataA.getFecha(), new Date(2021, 6, 22));
+			//ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
 			//assertEquals(data.getCuponeras(), );
 		} catch (ActividadRepetidaException e) {
 			// TODO Auto-generated catch block
+			//fail(e.getMessage());
 			e.printStackTrace();
 		}
 	};
@@ -394,7 +397,7 @@ class TestSistema {
 		//altaClase(String nombre, Date fecha, Integer minimo,Integer maximo, String url, Date fechaAlta, String profesor, String actividad) throws ClaseRepetidaException;
 		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol");
 		DataClase data = ctrlI.obtenerDataClase("Futbol Sala");
-		System.out.print(data);
+		
 		assertEquals(data.getNombre(), "Futbol Sala");
 		assertEquals(data.getFecha(), new Date(2021, 7, 30));
 		assertEquals(data.getMinPersonas(), 4);
@@ -404,6 +407,7 @@ class TestSistema {
 		assertEquals(data.getFechaAlta(), new Date(2021, 6, 30));
 		assertEquals(data.getActividad(), "Futbol");
 		assertEquals(data.getInstitucion(), "IN");	
+		assertThrows(ClaseRepetidaException.class, () -> {ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol");});
 		
 	};
 		
