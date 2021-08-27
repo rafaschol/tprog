@@ -15,7 +15,7 @@ public class ActividadDeportiva {
 	private Float costo;
 	private Map<String, Clase> clases;
 	private HashSet<ActividadDeCuponera> actividadesCuponera;
-	private InstitucionDeportiva institucion; //Sacar despues
+	private InstitucionDeportiva institucion; 
 	
 	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
 		this.setNombre(nombre);

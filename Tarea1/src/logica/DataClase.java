@@ -98,6 +98,10 @@ public class DataClase {
 		this.actividad = actividad;
 	}
 	
+	public String toString() {
+		
+		return this.nombre;	
+	}
 
 
 }

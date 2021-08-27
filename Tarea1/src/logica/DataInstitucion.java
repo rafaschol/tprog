@@ -36,6 +36,12 @@ public class DataInstitucion {
 	    private void setActividades(String[] actividades) {
 	        this.actividades = actividades;
 	    }
+	    
+	    public String toString() {
+			
+			return this.nombre;	
+		}
+
 
 	}
 

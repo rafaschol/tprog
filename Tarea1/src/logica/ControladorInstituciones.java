@@ -82,8 +82,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	DataClase data = null;
     	for (Entry<String, ActividadDeportiva> iter : ma.getActividades().entrySet()) {
     		for (Entry<String, Clase> iter2 : iter.getValue().getClases().entrySet()) 
-    			if(iter.getValue().getNombre() == nombreClase) data = new DataClase(iter2.getValue(), iter.getValue().getNombre(),
-    					iter.getValue().getInstitucion().getNombre()); 	
+    			if(iter2.getValue().getNombre() == nombreClase) data = new DataClase(iter2.getValue(), iter.getValue().getNombre(),iter.getValue().getInstitucion().getNombre()); 	
     	}
     	return data;
     }

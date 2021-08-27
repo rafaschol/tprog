@@ -334,9 +334,24 @@ class TestSistema {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void testAltaActividadDeportiva() {
 		//altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,int duracion, float costo, Date fecha) throws ActividadRepetidaException; //Falta agregar excepcion
+		try {
+			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
+			DataActividad data = ctrlI.listarDataActividad("Handball");
+			System.out.print(data);
+			assertEquals(data.getNombre(), "IN");
+			assertEquals(data.getDescripcion(), "Solo femenino");
+			assertEquals(data.getCosto(), 1500);
+			assertEquals(data.getDuracion(), 200);
+			assertEquals(data.getFecha(), new Date(2021, 6, 22));
+			//assertEquals(data.getCuponeras(), );
+		} catch (ActividadRepetidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	};
 	
 	@Test
@@ -373,9 +388,23 @@ class TestSistema {
 		
 	};
 		
+	@SuppressWarnings("deprecation")
 	@Test
-	void testAltaClase() {
+	void testAltaClase() throws ClaseRepetidaException {
 		//altaClase(String nombre, Date fecha, Integer minimo,Integer maximo, String url, Date fechaAlta, String profesor, String actividad) throws ClaseRepetidaException;
+		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol");
+		DataClase data = ctrlI.obtenerDataClase("Futbol Sala");
+		System.out.print(data);
+		assertEquals(data.getNombre(), "Futbol Sala");
+		assertEquals(data.getFecha(), new Date(2021, 7, 30));
+		assertEquals(data.getMinPersonas(), 4);
+		assertEquals(data.getMaxPersonas(),34);
+		assertEquals(data.getProfesor(), "TheBoss");
+		assertEquals(data.getURL(), "https://www.inatural.com/aeroam");
+		assertEquals(data.getFechaAlta(), new Date(2021, 6, 30));
+		assertEquals(data.getActividad(), "Futbol");
+		assertEquals(data.getInstitucion(), "IN");	
+		
 	};
 		
 	@SuppressWarnings("deprecation")
