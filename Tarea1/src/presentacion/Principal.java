@@ -4,7 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
+import excepciones.InstitucionRepetidaException;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -18,6 +20,7 @@ class Principal {
 	private IControladorUsuario icu;
 	private IControladorInstituciones ici;
 	private IControladorCuponera icc;
+	private boolean datosPruebaCargados;
     private JFrame mainFrame;
     private CrearUsuario crearUsuarioIF;
     private CrearActividadDeportiva crearActividadDeportivaIF;
@@ -31,6 +34,7 @@ class Principal {
     private ModificarUsuario modificarUsuarioIF;
     private RegistrarSocio registrarSocioIF;
     private AgregarActividadCuponera agregarActividadCuponeraIF;
+    private CargarDatosPrueba datosPrueba;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
@@ -53,6 +57,7 @@ class Principal {
         ici = fabrica.getIControladorInstitucion();
         icc = fabrica.getIControladorCuponera();
 
+        datosPruebaCargados = false;
         crearUsuarioIF = new CrearUsuario(icu, ici);
         crearActividadDeportivaIF = new CrearActividadDeportiva(ici);
         crearClaseIF = new CrearClase(ici);
@@ -65,6 +70,7 @@ class Principal {
         modificarUsuarioIF = new ModificarUsuario(icu);
         registrarSocioIF = new RegistrarSocio(icu, ici);
         agregarActividadCuponeraIF = new AgregarActividadCuponera(ici, icc);
+        datosPrueba = new CargarDatosPrueba(icu, ici, icc);
         crearUsuarioIF.setVisible(false);
         crearActividadDeportivaIF.setVisible(false);
         crearClaseIF.setVisible(false);
@@ -123,6 +129,7 @@ class Principal {
         JMenuItem modificarUsuarioMI = new JMenuItem("Modificar usuario");
         JMenuItem registrarSocioMI = new JMenuItem("Registrar socio a una clase");
         JMenuItem agregarActividadCuponeraMI = new JMenuItem("Agregar actividad deportiva a cuponera");
+        JMenuItem cargarDatosPruebaMI = new JMenuItem("Cargar datos de prueba");
 
         crearUsuarioMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -195,6 +202,22 @@ class Principal {
                 agregarActividadCuponeraIF.setVisible(true);
             }
         });
+        cargarDatosPruebaMI.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (!datosPruebaCargados) {
+        			datosPrueba.cargarInstituciones();
+        			datosPrueba.cargarActividadesDeportivas();
+        			datosPrueba.cargarSocios();
+        			datosPrueba.cargarProfesores();
+        			datosPrueba.cargarClases();
+        			datosPrueba.cargarRegistrosClases();
+        			datosPruebaCargados = true;
+    				JOptionPane.showMessageDialog(mainFrame, "Se cargaron los datos de prueba correctamente.");
+        		} else {
+        			JOptionPane.showMessageDialog(mainFrame, "Ya se cargaron los datos de prueba anteriormente.", null, JOptionPane.ERROR_MESSAGE);
+        		}
+        	}
+        });
 
         menuCrear.add(crearUsuarioMI);
         menuCrear.add(crearActividadDeportivaMI);
@@ -208,5 +231,6 @@ class Principal {
         menuOtros.add(modificarUsuarioMI);
         menuOtros.add(registrarSocioMI);
         menuOtros.add(agregarActividadCuponeraMI);
+        menuOtros.add(cargarDatosPruebaMI);
     }
 }
