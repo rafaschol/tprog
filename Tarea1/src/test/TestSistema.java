@@ -16,6 +16,7 @@ import excepciones.ClasesRestantesException;
 import excepciones.CuponeraRepetidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.InstitucionRepetidaException;
+import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
 import logica.IControladorUsuario;
@@ -239,6 +240,28 @@ class TestSistema {
 		assertEquals(registro.getFecha(),new Date(2021, 8, 31));
 		assertEquals(registro.getId(),2);
 		assertEquals(registro.isConCuponera(),false);
+		//Con Cuponera
+		try {
+			ctrlU.altaSocio("Agustin","Andres","Roman", "Juan@gmail.org.uy", new Date(1976, 4, 17));
+		} catch (UsuarioRepetidoException | MailRepetidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ctrlU.compraCuponera("Agustin", "Musculos", new Date(2021, 5, 31));
+		ctrlU.registrarSocio("Agustin","Aerobico adulto mayor", "Aerobica", true, "Musculos", new Date(2021, 8, 31));
+		soc = mS.obtenerSocio("Agustin");
+		map = soc.getRegistros();
+		registro = map.get(3);
+		System.out.print(registro.getCosto());
+		assertEquals(registro.getCosto(),720.0);
+		assertEquals(registro.getFecha(),new Date(2021, 8, 31));
+		assertEquals(registro.getId(),3);
+		assertEquals(registro.isConCuponera(),true);
+		
+		//Faltaria ver que al participa se le resto 1 
+		
+		
+		
 	};
 	
 	@Test
@@ -343,7 +366,7 @@ class TestSistema {
 		try {
 			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
 			DataActividad dataA = ctrlI.listarDataActividad("Handball");
-			System.out.print(dataA.getNombre());
+		
 			assertEquals(dataA.getNombre(), "Handball");
 			assertEquals(dataA.getDescripcion(), "Solo femenino");
 			assertEquals(dataA.getCosto(), 1500);

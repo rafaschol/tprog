@@ -164,7 +164,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		
     	}
-    	r = new Registro(id,fecha,costo,false,clase);	
+    	r = new Registro(id,fecha,costo,conCuponera,clase);	
     	clase.addRegistro(r);
     	socio.addRegistro(r);
     	r.setClase(clase);
