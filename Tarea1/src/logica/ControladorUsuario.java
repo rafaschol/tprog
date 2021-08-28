@@ -5,6 +5,7 @@ import java.util.Map;
 //import java.util.Arrays;
 
 import excepciones.ClasesRestantesException;
+import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
@@ -113,7 +114,7 @@ public class ControladorUsuario implements IControladorUsuario {
     //hacer funcion mostrar cuponeras de un usuario;
     
     public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera, 
-    		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException{
+    		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException, CuponeraVencidaException{
     	ManejadorSocios ms = ManejadorSocios.getinstance();
     	Socio socio = ms.obtenerSocio(nickname);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
@@ -145,6 +146,12 @@ public class ControladorUsuario implements IControladorUsuario {
     	else {
     		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     		Cuponera cuponera = mc.obtenerCuponera(nombreCuponera);
+    		//Si la fecha de la cuponera ya expiro
+    		if(cuponera.getFechaFin().after(fecha)) 
+    			throw new CuponeraVencidaException("La fecha de vigencia de la cuponera expiró");	
+    	
+    			
+    		
     		HashSet<Participa> participaciones = socio.getParticipa();
         	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
         	for (int j = 0; j < arrPart.length; j++) {

@@ -7,6 +7,7 @@ import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraRepetidaException;
+import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.InstitucionRepetidaException;
 import excepciones.MailRepetidoException;
@@ -203,7 +204,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.registrarSocio("andy", "Basquet II", "Basquetbol", false, null, new Date(121, 8, 16));
 			controladorUsuario.registrarSocio("tonyp", "Basquet II", "Basquetbol", false, null, new Date(121, 8, 20));
 			controladorUsuario.registrarSocio("caro", "Basquet II", "Basquetbol", false, null, new Date(121, 9, 2));
-		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException e) {
+		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException e) {
 			e.printStackTrace();
 		}
 

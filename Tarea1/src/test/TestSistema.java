@@ -14,6 +14,7 @@ import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraRepetidaException;
+import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.InstitucionRepetidaException;
 import excepciones.MailRepetidoException;
@@ -231,7 +232,13 @@ class TestSistema {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testRegistrarSocios() throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException {
-		ctrlU.registrarSocio("andy","Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
+		try {
+			ctrlU.registrarSocio("andy","Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
+		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException
+				| CuponeraVencidaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Socio soc = mS.obtenerSocio("andy");
 		Map<Integer, Registro> map = soc.getRegistros();
 		assertEquals(map.get(2).getClase().getNombre(), "Aerobico adulto mayor");
@@ -248,11 +255,17 @@ class TestSistema {
 			e.printStackTrace();
 		}
 		ctrlU.compraCuponera("Agustin", "Musculos", new Date(2021, 5, 31));
-		ctrlU.registrarSocio("Agustin","Aerobico adulto mayor", "Aerobica", true, "Musculos", new Date(2021, 8, 31));
+		try {
+			ctrlU.registrarSocio("Agustin","Aerobico adulto mayor", "Aerobica", true, "Musculos", new Date(2021, 8, 31));
+		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException
+				| CuponeraVencidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		soc = mS.obtenerSocio("Agustin");
 		map = soc.getRegistros();
 		registro = map.get(3);
-		System.out.print(registro.getCosto());
+		//System.out.print(registro.getCosto());
 		assertEquals(registro.getCosto(),720.0);
 		assertEquals(registro.getFecha(),new Date(2021, 8, 31));
 		assertEquals(registro.getId(),3);
