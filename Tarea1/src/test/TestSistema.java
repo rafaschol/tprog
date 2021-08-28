@@ -139,6 +139,20 @@ class TestSistema {
 	
 	@SuppressWarnings("deprecation")
 	@Test
+	@DisplayName("TEST testAltaSocioRepetido")
+	void testAltaSocioRepetidoMail() throws ParseException, Throwable {
+		try {
+			ctrlU.altaSocio("diegol","Diego","Alpha", "caro@gmail.com ", new Date(1983, 11, 15));
+		} catch (MailRepetidoException e) {
+			// TODO Auto-generated catch block
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+		assertThrows(MailRepetidoException.class, () -> {ctrlU.altaSocio("diegol","Diego","Alpha", "caro@gmail.com ", new Date(1983, 11, 15));});
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
 	@DisplayName("TEST testAltaProfesorOk")
 	void testAltaProfesorOk() throws Throwable {
 		try {
@@ -392,6 +406,24 @@ class TestSistema {
 			//fail(e.getMessage());
 			e.printStackTrace();
 		}
+		
+		try {
+			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
+			DataActividad dataA = ctrlI.listarDataActividad("Handball");
+		
+			assertEquals(dataA.getNombre(), "Handball");
+			assertEquals(dataA.getDescripcion(), "Solo femenino");
+			assertEquals(dataA.getCosto(), 1500);
+			assertEquals(dataA.getDuracion(), 200);
+			assertEquals(dataA.getFecha(), new Date(2021, 6, 22));
+			//ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
+			//assertEquals(data.getCuponeras(), );
+		} catch (ActividadRepetidaException e) {
+			// TODO Auto-generated catch block
+			//fail(e.getMessage());
+			e.printStackTrace();
+		}
+		
 	};
 	
 	@Test
