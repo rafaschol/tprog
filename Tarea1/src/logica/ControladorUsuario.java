@@ -1,4 +1,5 @@
 package logica;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class ControladorUsuario implements IControladorUsuario {
 		// concatenar arrays resSoc + resProf
 		System.arraycopy(resSoc, 0, res, 0, resSoc.length);
 		System.arraycopy(resProf, 0, res, resSoc.length, resProf.length);
-		
+	    Arrays.sort(res); //Orden afabetico.
 		return res;
     }
     
@@ -107,6 +108,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public String[] listarSocios() {
     	ManejadorSocios ms = ManejadorSocios.getinstance();
     	String[] res = ms.getNicknames().keySet().toArray(new String[0]);
+    	Arrays.sort(res);//Orden alfabetico.
     	return res;	
     }
     

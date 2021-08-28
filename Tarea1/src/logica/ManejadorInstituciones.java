@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,7 +35,9 @@ public class ManejadorInstituciones {
 		for (Entry<String, InstitucionDeportiva> iter : instituciones.entrySet()) {
 			String inst = iter.getKey();
 			String[] p = iter.getValue().listarProfesores();
+			Arrays.sort(p);
 			String[] a = iter.getValue().listarActividades();
+			Arrays.sort(a);
 			DataInstitucion di = new DataInstitucion(inst, p, a);
 			res[i] = di;
 			i++;
