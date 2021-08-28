@@ -68,12 +68,14 @@ class Principal {
         consultarClaseIF = new ConsultarClase(ici);
         consultarCuponeraIF = new ConsultarCuponera(icc);
         modificarUsuarioIF = new ModificarUsuario(icu);
-        registrarSocioIF = new RegistrarSocio(icu, ici);
+        registrarSocioIF = new RegistrarSocio(icu, ici, icc);
         agregarActividadCuponeraIF = new AgregarActividadCuponera(ici, icc);
         
         consultarUsuarioIF.setConsultarClaseIF(consultarClaseIF);
         consultarUsuarioIF.setConsultarActividadDeportivaIF(consultarActividadDeportivaIF);
         consultarActividadDeportivaIF.setConsultarClaseIF(consultarClaseIF);
+        consultarActividadDeportivaIF.setConsultarCuponeraIF(consultarCuponeraIF);
+        consultarCuponeraIF.setConsultarActividadDeportivaIF(consultarActividadDeportivaIF);
         
         datosPrueba = new CargarDatosPrueba(icu, ici, icc);
         crearUsuarioIF.setVisible(false);
@@ -107,7 +109,7 @@ class Principal {
     private void initialize() {
         mainFrame = new JFrame();
         mainFrame.setTitle("Administraci\u00F3n | entrenamos.uy");
-        mainFrame.setSize(400,600);
+        mainFrame.setSize(480,720);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -216,6 +218,8 @@ class Principal {
         			datosPrueba.cargarProfesores();
         			datosPrueba.cargarClases();
         			datosPrueba.cargarRegistrosClases();
+        			datosPrueba.cargarCuponeras();
+        			datosPrueba.cargarActividadesCuponeras();
         			datosPruebaCargados = true;
     				JOptionPane.showMessageDialog(mainFrame, "Se cargaron los datos de prueba correctamente.");
         		} else {

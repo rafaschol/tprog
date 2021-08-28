@@ -443,6 +443,7 @@ public class CrearUsuario extends JInternalFrame {
     	descripcionTextArea.setText("");
     	biografiaTextArea.setText("");
     	sitioWebTextField.setText("");
+    	// faltan los setEnabled(false) (y fijarse también en los demás casos de uso)
     	
     	setVisible(false);
     }

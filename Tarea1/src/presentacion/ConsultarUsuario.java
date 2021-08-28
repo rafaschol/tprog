@@ -4,6 +4,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
@@ -22,6 +23,7 @@ import com.toedter.calendar.JDateChooser;
 
 import logica.DataClase;
 import logica.DataInstitucion;
+import logica.DataProfesor;
 import logica.DataUsuario;
 import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
@@ -47,6 +49,10 @@ public class ConsultarUsuario extends JInternalFrame {
 	private JButton datosClaseButton;
 	private JButton datosActividadButton;
 	private JComboBox usuarioComboBox;
+	private JTextField institucionTextField;
+	private JTextArea descripcionTextArea;
+	private JTextArea biografiaTextArea;
+	private JTextField sitioWebTextField;
 	
 	public ConsultarUsuario(IControladorUsuario icu, IControladorInstituciones ici) {
 		addInternalFrameListener(new InternalFrameAdapter() {
@@ -231,6 +237,94 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_nacimientoDateChooser.gridy = 5;
         datosUsuarioPanel.add(nacimientoDateChooser, gbc_nacimientoDateChooser);
         
+        JPanel datosProfesorPanel = new JPanel();
+        datosProfesorPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos del profesor"),
+            BorderFactory.createEmptyBorder(5,10,5,10)));
+        GridBagLayout gbl_datosProfesorPanel = new GridBagLayout();
+        gbl_datosProfesorPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0};
+        gbl_datosProfesorPanel.columnWeights = new double[]{1.0, 1.0};
+        datosProfesorPanel.setLayout(gbl_datosProfesorPanel);
+        GridBagConstraints gbc_datosProfesorPanel = new GridBagConstraints();
+        gbc_datosProfesorPanel.gridwidth = 2;
+        gbc_datosProfesorPanel.insets = new Insets(0, 0, 5, 0);
+        gbc_datosProfesorPanel.fill = GridBagConstraints.BOTH;
+        gbc_datosProfesorPanel.gridx = 0;
+        gbc_datosProfesorPanel.gridy = 2;
+        contentPane.add(datosProfesorPanel, gbc_datosProfesorPanel);
+        
+        JLabel institucionLabel = new JLabel("Instituci\u00F3n");
+        GridBagConstraints gbc_institucionLabel = new GridBagConstraints();
+        gbc_institucionLabel.anchor = GridBagConstraints.EAST;
+        gbc_institucionLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_institucionLabel.gridx = 0;
+        gbc_institucionLabel.gridy = 0;
+        datosProfesorPanel.add(institucionLabel, gbc_institucionLabel);
+        
+        institucionTextField = new JTextField();
+        institucionTextField.setEnabled(false);
+        GridBagConstraints gbc_institucionTextField = new GridBagConstraints();
+        gbc_institucionTextField.insets = new Insets(0, 0, 5, 0);
+        gbc_institucionTextField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_institucionTextField.gridx = 1;
+        gbc_institucionTextField.gridy = 0;
+        datosProfesorPanel.add(institucionTextField, gbc_institucionTextField);
+        institucionTextField.setColumns(10);
+        
+        JLabel descripcionLabel = new JLabel("Descripci\u00F3n");
+        GridBagConstraints gbc_descripcionLabel = new GridBagConstraints();
+        gbc_descripcionLabel.anchor = GridBagConstraints.EAST;
+        gbc_descripcionLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_descripcionLabel.gridx = 0;
+        gbc_descripcionLabel.gridy = 1;
+        datosProfesorPanel.add(descripcionLabel, gbc_descripcionLabel);
+        
+        descripcionTextArea = new JTextArea();
+        descripcionTextArea.setEnabled(false);
+        descripcionTextArea.setRows(2);
+        descripcionTextArea.setLineWrap(true);
+        GridBagConstraints gbc_descripcionTextArea = new GridBagConstraints();
+        gbc_descripcionTextArea.insets = new Insets(0, 0, 5, 0);
+        gbc_descripcionTextArea.fill = GridBagConstraints.BOTH;
+        gbc_descripcionTextArea.gridx = 1;
+        gbc_descripcionTextArea.gridy = 1;
+        datosProfesorPanel.add(descripcionTextArea, gbc_descripcionTextArea);
+        
+        JLabel biografiaLabel = new JLabel("Biograf\u00EDa");
+        GridBagConstraints gbc_biografiaLabel = new GridBagConstraints();
+        gbc_biografiaLabel.anchor = GridBagConstraints.EAST;
+        gbc_biografiaLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_biografiaLabel.gridx = 0;
+        gbc_biografiaLabel.gridy = 2;
+        datosProfesorPanel.add(biografiaLabel, gbc_biografiaLabel);
+        
+        biografiaTextArea = new JTextArea();
+        biografiaTextArea.setEnabled(false);
+        biografiaTextArea.setRows(2);
+        biografiaTextArea.setLineWrap(true);
+        GridBagConstraints gbc_biografiaTextArea = new GridBagConstraints();
+        gbc_biografiaTextArea.insets = new Insets(0, 0, 5, 0);
+        gbc_biografiaTextArea.fill = GridBagConstraints.BOTH;
+        gbc_biografiaTextArea.gridx = 1;
+        gbc_biografiaTextArea.gridy = 2;
+        datosProfesorPanel.add(biografiaTextArea, gbc_biografiaTextArea);
+        
+        JLabel sitioWebLabel = new JLabel("Sitio web");
+        GridBagConstraints gbc_sitioWebLabel = new GridBagConstraints();
+        gbc_sitioWebLabel.anchor = GridBagConstraints.EAST;
+        gbc_sitioWebLabel.insets = new Insets(0, 0, 0, 5);
+        gbc_sitioWebLabel.gridx = 0;
+        gbc_sitioWebLabel.gridy = 3;
+        datosProfesorPanel.add(sitioWebLabel, gbc_sitioWebLabel);
+        
+        sitioWebTextField = new JTextField();
+        sitioWebTextField.setEnabled(false);
+        GridBagConstraints gbc_sitioWebTextField = new GridBagConstraints();
+        gbc_sitioWebTextField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_sitioWebTextField.gridx = 1;
+        gbc_sitioWebTextField.gridy = 3;
+        datosProfesorPanel.add(sitioWebTextField, gbc_sitioWebTextField);
+        
         JPanel datosClasesPanel = new JPanel();
         datosClasesPanel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Clases asociadas"),
@@ -243,7 +337,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_datosClasesPanel.fill = GridBagConstraints.BOTH;
         gbc_datosClasesPanel.insets = new Insets(0, 0, 5, 0);
         gbc_datosClasesPanel.gridx = 0;
-        gbc_datosClasesPanel.gridy = 2;
+        gbc_datosClasesPanel.gridy = 3;
         contentPane.add(datosClasesPanel, gbc_datosClasesPanel);
         
         claseComboBox = new JComboBox();
@@ -307,7 +401,7 @@ public class ConsultarUsuario extends JInternalFrame {
         gbc_cerrarButton.gridwidth = 2;
         gbc_cerrarButton.insets = new Insets(0, 0, 0, 5);
         gbc_cerrarButton.gridx = 0;
-        gbc_cerrarButton.gridy = 3;
+        gbc_cerrarButton.gridy = 4;
         contentPane.add(cerrarButton, gbc_cerrarButton);
         
         pack();
@@ -331,6 +425,19 @@ public class ConsultarUsuario extends JInternalFrame {
 		correoTextField.setText(usuarioSeleccionado.getEmail());
 		nacimientoDateChooser.setDate(usuarioSeleccionado.getFechaNacimiento());
 		
+		if (usuarioSeleccionado.getTipoUsuario() == "Profesor") {
+			DataProfesor profesorSeleccionado = (DataProfesor) usuarioSeleccionado;
+			institucionTextField.setText(((DataProfesor) usuarioSeleccionado).getInstitucion());
+			descripcionTextArea.setText(profesorSeleccionado.getDescripcion());
+			biografiaTextArea.setText(profesorSeleccionado.getBiografia());
+			sitioWebTextField.setText(profesorSeleccionado.getSitioWeb());
+		} else {
+			institucionTextField.setText("");
+			descripcionTextArea.setText("");
+			biografiaTextArea.setText("");
+			sitioWebTextField.setText("");
+		}
+		
 		claseComboBox.setModel(new DefaultComboBoxModel<String>(usuarioSeleccionado.getClases()));
 		claseComboBox.setEnabled(true);
 		claseComboBox.setSelectedIndex(-1);
@@ -352,6 +459,10 @@ public class ConsultarUsuario extends JInternalFrame {
 		apellidoTextField.setText("");
 		correoTextField.setText("");
 		nacimientoDateChooser.setDate(null);
+		institucionTextField.setText("");
+		descripcionTextArea.setText("");
+		biografiaTextArea.setText("");
+		sitioWebTextField.setText("");
 		claseComboBox.setModel(new DefaultComboBoxModel());
 		claseComboBox.setEnabled(false);
 		datosClaseButton.setEnabled(false);

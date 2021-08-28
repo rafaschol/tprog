@@ -2,12 +2,15 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import logica.DataInstitucion;
+import logica.DataProfesor;
 import logica.DataUsuario;
 import logica.IControladorUsuario;
 
@@ -310,7 +313,9 @@ public class ModificarUsuario extends JInternalFrame {
         JButton aceptarButton = new JButton("Aceptar");
         aceptarButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		modificarUsuarioActionPerformed(e);
+        		if (usuarioComboBox.getSelectedIndex() != -1) {        			
+        			modificarUsuarioActionPerformed(e);
+        		}
         	}
         });
         GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
@@ -335,7 +340,25 @@ public class ModificarUsuario extends JInternalFrame {
     }
     
     private void modificarUsuarioActionPerformed(ActionEvent e) {
+    	String nickname = nicknameTextField.getText();
+    	String nombre = nombreTextField.getText();
+    	String tipoUsuario = tipoUsuarioTextField.getText();
+    	boolean esProfesor = tipoUsuario.equals("Profesor");
+    	String apellido = apellidoTextField.getText();
+    	Date fechaNacimiento = nacimientoDateChooser.getDate();
+    	String descripcion = descripcionTextArea.getText();
+    	String biografia = biografiaTextArea.getText();
+    	String sitioWeb = sitioWebTextField.getText();
     	
+    	if (esValido()) {
+    		if (esProfesor) {
+    			controladorUsuario.modificarDatosProfesor(nickname, nombre, apellido, fechaNacimiento, descripcion, biografia, sitioWeb);
+    		} else {
+    			controladorUsuario.modificarDatosSocio(nickname, nombre, apellido, fechaNacimiento);
+    		}
+			JOptionPane.showMessageDialog(this, "Se modificaron los datos del usuario correctamente.");
+			cerrarFormulario();
+    	}
     }
     
     public void cargarUsuarios() {
@@ -354,9 +377,71 @@ public class ModificarUsuario extends JInternalFrame {
 		apellidoTextField.setText(usuarioSeleccionado.getApellido());
 		correoTextField.setText(usuarioSeleccionado.getEmail());
 		nacimientoDateChooser.setDate(usuarioSeleccionado.getFechaNacimiento());
+		
+		nombreTextField.setEnabled(true);
+		apellidoTextField.setEnabled(true);
+		nacimientoDateChooser.setEnabled(true);
+		
+		if (usuarioSeleccionado.getTipoUsuario() == "Profesor") {
+			DataProfesor profesorSeleccionado = (DataProfesor) usuarioSeleccionado;
+			institucionTextField.setText(((DataProfesor) usuarioSeleccionado).getInstitucion());
+			descripcionTextArea.setText(profesorSeleccionado.getDescripcion());
+			biografiaTextArea.setText(profesorSeleccionado.getBiografia());
+			sitioWebTextField.setText(profesorSeleccionado.getSitioWeb());
+			
+			descripcionTextArea.setEnabled(true);
+			biografiaTextArea.setEnabled(true);
+			sitioWebTextField.setEnabled(true);
+		} else {
+			institucionTextField.setText("");
+			descripcionTextArea.setText("");
+			biografiaTextArea.setText("");
+			sitioWebTextField.setText("");
+			
+			descripcionTextArea.setEnabled(false);
+			biografiaTextArea.setEnabled(false);
+			sitioWebTextField.setEnabled(false);
+		}
+    }
+    
+    private boolean esValido() {
+    	String tipoUsuario = tipoUsuarioTextField.getText();
+    	boolean esProfesor = tipoUsuario.equals("Profesor");
+    	String nombre = nombreTextField.getText();
+    	String apellido = apellidoTextField.getText();
+    	String correo = correoTextField.getText();
+    	Date fechaNacimiento = nacimientoDateChooser.getDate();
+    	String descripcion = descripcionTextArea.getText();
+    	
+    	if (nombre.isEmpty() || apellido.isEmpty()) {
+    		JOptionPane.showMessageDialog(this, "No puede haber datos del usuario vac\u00EDos.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (fechaNacimiento == null || fechaNacimiento.after(new Date())) {
+    		JOptionPane.showMessageDialog(this, "La fecha de nacimiento ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (esProfesor && descripcion.isEmpty()) {
+    		JOptionPane.showMessageDialog(this, "La descripci\u00F3n del profesor no puede estar vac\u00EDa.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else {
+    		return true;
+    	}
     }
     
     private void cerrarFormulario() {
-    	
+		nicknameTextField.setText("");
+		tipoUsuarioTextField.setText("");
+		nombreTextField.setText("");
+		apellidoTextField.setText("");
+		correoTextField.setText("");
+		nacimientoDateChooser.setDate(null);
+		institucionTextField.setText("");
+		descripcionTextArea.setText("");
+		biografiaTextArea.setText("");
+		sitioWebTextField.setText("");
+		
+		setVisible(false);
     }
 }

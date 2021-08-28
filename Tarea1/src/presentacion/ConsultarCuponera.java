@@ -4,6 +4,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import logica.DataActividadCuponera;
+import logica.DataClase;
+import logica.DataCuponera;
 import logica.IControladorCuponera;
 
 import java.awt.GridBagConstraints;
@@ -28,6 +31,7 @@ import javax.swing.JFormattedTextField;
 public class ConsultarCuponera extends JInternalFrame {
 
 	IControladorCuponera controladorCuponera;
+	private ConsultarActividadDeportiva consultarActividadDeportivaIF;
 	
 	private JComboBox cuponeraComboBox;
 	private JTextField nombreTextField;
@@ -36,6 +40,8 @@ public class ConsultarCuponera extends JInternalFrame {
 	private JDateChooser fechaFinDateChooser;
 	private JFormattedTextField descuentoTextField;
 	private JDateChooser fechaAltaDateChooser;
+	private JComboBox actividadComboBox;
+	private JButton verActividadButton;
 	
     public ConsultarCuponera(IControladorCuponera icc) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -79,6 +85,9 @@ public class ConsultarCuponera extends JInternalFrame {
         JButton seleccionarCuponeraButton = new JButton("Seleccionar");
         seleccionarCuponeraButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		if (cuponeraComboBox.getSelectedIndex() != -1) {
+        			cargarDatosCuponera();
+        		}
         	}
         });
         
@@ -228,7 +237,7 @@ public class ConsultarCuponera extends JInternalFrame {
         gbc_actividadesPanel.gridy = 2;
         contentPane.add(actividadesPanel, gbc_actividadesPanel);
         
-        JComboBox actividadComboBox = new JComboBox();
+        actividadComboBox = new JComboBox();
         actividadComboBox.setEnabled(false);
         GridBagConstraints gbc_actividadComboBox = new GridBagConstraints();
         gbc_actividadComboBox.insets = new Insets(0, 0, 5, 0);
@@ -237,7 +246,19 @@ public class ConsultarCuponera extends JInternalFrame {
         gbc_actividadComboBox.gridy = 0;
         actividadesPanel.add(actividadComboBox, gbc_actividadComboBox);
         
-        JButton verActividadButton = new JButton("Detalles de la actividad deportiva");
+        verActividadButton = new JButton("Detalles de la actividad deportiva");
+        verActividadButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (actividadComboBox.getSelectedIndex() != -1) {
+					DataActividadCuponera actividad = (DataActividadCuponera) actividadComboBox.getSelectedItem();
+					String nombreActividad = actividad.getActividad();
+					cerrarFormulario();
+					consultarActividadDeportivaIF.cargarInstituciones();
+					consultarActividadDeportivaIF.initialize(nombreActividad);
+					consultarActividadDeportivaIF.setVisible(true);
+        		}
+        	}
+        });
         verActividadButton.setEnabled(false);
         GridBagConstraints gbc_verActividadButton = new GridBagConstraints();
         gbc_verActividadButton.fill = GridBagConstraints.HORIZONTAL;
@@ -259,6 +280,32 @@ public class ConsultarCuponera extends JInternalFrame {
         pack();
     }
     
+	public void setConsultarActividadDeportivaIF(ConsultarActividadDeportiva cadIF) {
+		this.consultarActividadDeportivaIF = cadIF;
+	}
+	
+	public void initialize(String nombreCuponera) {
+		cuponeraComboBox.setSelectedItem(nombreCuponera);
+		cargarDatosCuponera();
+	}
+    
+    private void cargarDatosCuponera() {
+    	String nombreCuponera = (String) cuponeraComboBox.getSelectedItem();
+    	DataCuponera cuponera = controladorCuponera.consultaCuponera(nombreCuponera);
+    	
+    	nombreTextField.setText(cuponera.getNombre());
+    	descripcionTextArea.setText(cuponera.getDescripcion());
+    	fechaInicioDateChooser.setDate(cuponera.getFechaIni());
+    	fechaFinDateChooser.setDate(cuponera.getFechaFin());
+    	descuentoTextField.setValue(cuponera.getDescuento());
+    	fechaAltaDateChooser.setDate(cuponera.getFechaAlta());
+    	
+    	actividadComboBox.setModel(new DefaultComboBoxModel<DataActividadCuponera>(cuponera.getActividadesCuponera()));
+    	actividadComboBox.setEnabled(true);
+    	actividadComboBox.setSelectedIndex(-1);
+    	verActividadButton.setEnabled(true);
+    }
+    
     public void cargarCuponeras() {
     	DefaultComboBoxModel<String> model;
     	model = new DefaultComboBoxModel<String>(controladorCuponera.listarCuponeras());
@@ -267,6 +314,16 @@ public class ConsultarCuponera extends JInternalFrame {
     }
     
     private void cerrarFormulario() {
+    	nombreTextField.setText("");
+    	descripcionTextArea.setText("");
+    	fechaInicioDateChooser.setDate(null);
+    	fechaFinDateChooser.setDate(null);
+    	descuentoTextField.setText("");
+    	fechaAltaDateChooser.setDate(null);
+    	actividadComboBox.setModel(new DefaultComboBoxModel());
+    	actividadComboBox.setEnabled(false);
+    	verActividadButton.setEnabled(false);
     	
+    	setVisible(false);
     }
 }

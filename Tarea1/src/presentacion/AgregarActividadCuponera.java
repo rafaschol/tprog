@@ -84,7 +84,7 @@ public class AgregarActividadCuponera extends JInternalFrame {
         seleccionarCuponeraButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (cuponeraComboBox.getSelectedIndex() != -1) {        			
-        			cargarInstitucionesDisponibles();
+        			cargarInstituciones();
         	    	institucionComboBox.setEnabled(true);
         	    	actividadComboBox.setEnabled(true);
         	    	cantidadClasesSpinner.setEnabled(true);
@@ -138,7 +138,7 @@ public class AgregarActividadCuponera extends JInternalFrame {
         institucionComboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (institucionComboBox.getSelectedIndex() != -1) {
-        			cargarActividadesDisponibles();
+        			cargarActividades();
         		}
         	}
         });
@@ -221,9 +221,10 @@ public class AgregarActividadCuponera extends JInternalFrame {
     	if (esValido()) {
     		try {
 				controladorCuponera.agregarActividadACuponera(nombreCuponera, nombreActividad, cantidadClases);
-			} catch (ActividadDeCuponeraRepetidaException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Se agreg\u00F3 la actividad deportiva a la cuponera correctamente.");
+				cerrarFormulario();
+			} catch (ActividadDeCuponeraRepetidaException ex) {
+				JOptionPane.showMessageDialog(this, "La actividad deportiva seleccionada ya est\u00E1 en la cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
 			}
     	}
     }
@@ -235,16 +236,16 @@ public class AgregarActividadCuponera extends JInternalFrame {
     	cuponeraComboBox.setSelectedIndex(-1);
     }
     
-    private void cargarInstitucionesDisponibles() {
+    private void cargarInstituciones() {
     	DefaultComboBoxModel<DataInstitucion> model;
-		//model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
-		//institucionComboBox.setModel(model);
+		model = new DefaultComboBoxModel<DataInstitucion>(controladorInstitucion.listarDataInstituciones());
+		institucionComboBox.setModel(model);
 		institucionComboBox.setSelectedIndex(-1);
     }
     
-    private void cargarActividadesDisponibles() {
+    private void cargarActividades() {
     	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
-		//actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
+		actividadComboBox.setModel(new DefaultComboBoxModel<String>(institucion.getActividades()));
 		actividadComboBox.setSelectedIndex(-1);
     }
     

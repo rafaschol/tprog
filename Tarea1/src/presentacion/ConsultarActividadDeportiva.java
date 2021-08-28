@@ -31,6 +31,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
 	
 	private IControladorInstituciones controladorInstitucion;
 	private ConsultarClase consultarClaseIF;
+	private ConsultarCuponera consultarCuponeraIF;
 	
 	private JTextField nombreTextField;
 	private JTextField duracionTextField;
@@ -313,6 +314,17 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         datosCuponerasPanel.add(cuponeraComboBox, gbc_cuponeraComboBox);
         
         datosCuponeraButton = new JButton("Detalles de la cuponera");
+        datosCuponeraButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (cuponeraComboBox.getSelectedIndex() != -1) {
+        			String nombreCuponera = (String) cuponeraComboBox.getSelectedItem();
+        			cerrarFormulario();
+        			consultarCuponeraIF.cargarCuponeras();
+        			consultarCuponeraIF.initialize(nombreCuponera);
+        			consultarCuponeraIF.setVisible(true);
+        		}
+        	}
+        });
         datosCuponeraButton.setEnabled(false);
         GridBagConstraints gbc_datosCuponeraButton = new GridBagConstraints();
         gbc_datosCuponeraButton.fill = GridBagConstraints.HORIZONTAL;
@@ -345,6 +357,10 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     
 	public void setConsultarClaseIF(ConsultarClase ccIF) {
 		this.consultarClaseIF = ccIF;
+	}
+	
+	public void setConsultarCuponeraIF(ConsultarCuponera ccIF) {
+		this.consultarCuponeraIF = ccIF;
 	}
     
     private void cargarDatosActividad() {
