@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -165,6 +167,8 @@ public class ConsultarClase extends JInternalFrame {
         	public void actionPerformed(ActionEvent e) {
         		if (claseComboBox.getSelectedIndex() != -1) {
         			cargarDatosClase();
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna clase seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -363,6 +367,10 @@ public class ConsultarClase extends JInternalFrame {
 			}
 		}
 		cargarDatosClase();
+	}
+	
+	private JInternalFrame getFrame() {
+		return this;
 	}
     
     private void cargarDatosClase() {

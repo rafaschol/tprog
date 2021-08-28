@@ -132,6 +132,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
         datosActividadPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(2);
         GridBagConstraints gbc_descripcionTextArea = new GridBagConstraints();
@@ -220,7 +221,8 @@ public class CrearActividadDeportiva extends JInternalFrame {
     }
     
     private void altaActividadActionPerformed(ActionEvent e) {
-    	String institucion = ((DataInstitucion) institucionComboBox.getSelectedItem()).toString();
+    	DataInstitucion institucion = (DataInstitucion) institucionComboBox.getSelectedItem();
+    	String nombreInstitucion = institucion != null ? institucion.toString() : null;
     	String nombre = nombreTextField.getText();
     	String descripcion = descripcionTextArea.getText();
     	int duracion = ((Number) duracionSpinner.getValue()).intValue();
@@ -229,8 +231,8 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	
     	if (esValido()) {
     		try {
-    			controladorInstitucion.altaActividadDeportiva(institucion, nombre, descripcion, duracion, costo, fechaAlta);
-    			JOptionPane.showMessageDialog(this, "Se creó la actividad deportiva correctamente.");
+    			controladorInstitucion.altaActividadDeportiva(nombreInstitucion, nombre, descripcion, duracion, costo, fechaAlta);
+    			JOptionPane.showMessageDialog(this, "Se cre\u00F3 la actividad deportiva correctamente.");
     			cerrarFormulario();
     		} catch (ActividadRepetidaException ex) {
     			JOptionPane.showMessageDialog(this, "Ya existe una actividad deportiva con ese nombre.", null, JOptionPane.ERROR_MESSAGE);
@@ -259,7 +261,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else {

@@ -2,6 +2,7 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import logica.DataActividadCuponera;
@@ -82,11 +83,13 @@ public class ConsultarCuponera extends JInternalFrame {
         gbc_seleccionarCuponeraPanel.gridy = 0;
         contentPane.add(seleccionarCuponeraPanel, gbc_seleccionarCuponeraPanel);
         
-        JButton seleccionarCuponeraButton = new JButton("Seleccionar");
+        JButton seleccionarCuponeraButton = new JButton("Ver datos");
         seleccionarCuponeraButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (cuponeraComboBox.getSelectedIndex() != -1) {
         			cargarDatosCuponera();
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -145,6 +148,7 @@ public class ConsultarCuponera extends JInternalFrame {
         datosCuponeraPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setEnabled(false);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(2);
@@ -256,6 +260,8 @@ public class ConsultarCuponera extends JInternalFrame {
 					consultarActividadDeportivaIF.cargarInstituciones();
 					consultarActividadDeportivaIF.initialize(nombreActividad);
 					consultarActividadDeportivaIF.setVisible(true);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna actividad deportiva seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -278,6 +284,10 @@ public class ConsultarCuponera extends JInternalFrame {
         contentPane.add(cerrarButton, gbc_cerrarButton);
         
         pack();
+    }
+    
+    private JInternalFrame getFrame() {
+    	return this;
     }
     
 	public void setConsultarActividadDeportivaIF(ConsultarActividadDeportiva cadIF) {

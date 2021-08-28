@@ -35,6 +35,7 @@ import javax.swing.JFormattedTextField;
 public class CrearCuponera extends JInternalFrame {
 
 	private IControladorCuponera controladorCuponera;
+	
 	private JTextField nombreTextField;
 	private JTextArea descripcionTextArea;
 	private JDateChooser fechaInicioDateChooser;
@@ -109,6 +110,7 @@ public class CrearCuponera extends JInternalFrame {
         datosCuponeraPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(2);
         GridBagConstraints gbc_descripcionTextArea = new GridBagConstraints();
@@ -240,7 +242,7 @@ public class CrearCuponera extends JInternalFrame {
     	if (esValido()) {
     		try {
     			controladorCuponera.altaCuponera(nombre, descripcion, fechaInicio, fechaFin, descuento, fechaAlta);
-				JOptionPane.showMessageDialog(this, "Se creó la cuponera correctamente.");
+				JOptionPane.showMessageDialog(this, "Se cre\u00F3 la cuponera correctamente.");
 				cerrarFormulario();
 			} catch (CuponeraRepetidaException ex) {
 				int res = JOptionPane.showOptionDialog(this,
@@ -272,11 +274,11 @@ public class CrearCuponera extends JInternalFrame {
     		return false;
     	}
     	else if (fechaInicio == null) {
-    		JOptionPane.showMessageDialog(this, "La fecha de inicio ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de inicio ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (fechaFin == null) {
-    		JOptionPane.showMessageDialog(this, "La fecha de vencimiento ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de vencimiento ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (fechaInicio.after(fechaFin)) {
@@ -284,7 +286,7 @@ public class CrearCuponera extends JInternalFrame {
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else {

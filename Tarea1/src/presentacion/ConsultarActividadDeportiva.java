@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -132,6 +133,12 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         	public void actionPerformed(ActionEvent e) {
         		if (actividadComboBox.getSelectedIndex() != -1) {        			
         			cargarDatosActividad();
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna actividad deportiva seleccionada.", null, JOptionPane.ERROR_MESSAGE);
+        			claseComboBox.setEnabled(false);
+        			datosClaseButton.setEnabled(false);
+        			cuponeraComboBox.setEnabled(false);
+        			datosCuponeraButton.setEnabled(false);
         		}
         	}
         });
@@ -185,6 +192,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         datosActividadPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setEnabled(false);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(2);
@@ -279,6 +287,8 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
                 	consultarClaseIF.cargarInstituciones();
                 	consultarClaseIF.initialize(nombreClase);
                     consultarClaseIF.setVisible(true);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna clase seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -322,6 +332,8 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         			consultarCuponeraIF.cargarCuponeras();
         			consultarCuponeraIF.initialize(nombreCuponera);
         			consultarCuponeraIF.setVisible(true);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -333,6 +345,11 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         datosCuponerasPanel.add(datosCuponeraButton, gbc_datosCuponeraButton);
         
         JButton cerrarButton = new JButton("Cerrar");
+        cerrarButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cerrarFormulario();
+        	}
+        });
         GridBagConstraints gbc_cerrarButton = new GridBagConstraints();
         gbc_cerrarButton.gridwidth = 2;
         gbc_cerrarButton.gridx = 0;
@@ -353,6 +370,10 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     	}
     	actividadComboBox.setSelectedItem(nombreActividad);
     	cargarDatosActividad();
+    }
+    
+    private JInternalFrame getFrame() {
+    	return this;
     }
     
 	public void setConsultarClaseIF(ConsultarClase ccIF) {
@@ -409,7 +430,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
 		claseComboBox.setEnabled(false);
 		datosClaseButton.setEnabled(false);
 		cuponeraComboBox.setModel(new DefaultComboBoxModel());
-		cuponeraComboBox.setEnabled(true);
+		cuponeraComboBox.setEnabled(false);
 		datosCuponeraButton.setEnabled(false);
     	
     	setVisible(false);

@@ -89,11 +89,7 @@ public class AgregarActividadCuponera extends JInternalFrame {
         	    	actividadComboBox.setEnabled(true);
         	    	cantidadClasesSpinner.setEnabled(true);
         		} else {
-        	    	institucionComboBox.setModel(new DefaultComboBoxModel());
-        	    	actividadComboBox.setModel(new DefaultComboBoxModel());
-        	    	institucionComboBox.setEnabled(false);
-        	    	actividadComboBox.setEnabled(false);
-        	    	cantidadClasesSpinner.setEnabled(false);
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -211,6 +207,10 @@ public class AgregarActividadCuponera extends JInternalFrame {
         contentPane.add(cancelarButton, gbc_cancelarButton);
         
         pack();
+    }
+    
+    private JInternalFrame getFrame() {
+    	return this;
     }
     
     private void agregarActividadActionPerformed(ActionEvent e) {

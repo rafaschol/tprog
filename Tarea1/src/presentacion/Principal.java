@@ -113,7 +113,6 @@ class Principal {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Menu Bar
         JMenuBar menuBar = new JMenuBar();
         mainFrame.setJMenuBar(menuBar);
 

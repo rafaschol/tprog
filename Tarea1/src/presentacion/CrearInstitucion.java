@@ -99,8 +99,9 @@ public class CrearInstitucion extends JInternalFrame {
         datosInstitucionPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
-        descripcionTextArea.setRows(2);
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setLineWrap(true);
+        descripcionTextArea.setRows(2);
         GridBagConstraints gbc_descripcionTextArea = new GridBagConstraints();
         gbc_descripcionTextArea.insets = new Insets(0, 0, 5, 0);
         gbc_descripcionTextArea.fill = GridBagConstraints.BOTH;
@@ -161,7 +162,7 @@ public class CrearInstitucion extends JInternalFrame {
     	if (esValido()) {
     		try {
     			controladorInstitucion.altaInstitucionDeportiva(nombre, descripcion, url);
-    			JOptionPane.showMessageDialog(this, "Se creó la institución deportiva correctamente.");
+    			JOptionPane.showMessageDialog(this, "Se cre\u00F3 la instituci\u00F3n deportiva correctamente.");
     			cerrarFormulario();
     		}
     		catch (InstitucionRepetidaException ex) {

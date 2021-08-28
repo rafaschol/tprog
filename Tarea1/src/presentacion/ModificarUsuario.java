@@ -26,6 +26,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ModificarUsuario extends JInternalFrame {
 	
@@ -44,6 +46,12 @@ public class ModificarUsuario extends JInternalFrame {
 	private JTextField institucionTextField;
 
     public ModificarUsuario(IControladorUsuario icu) {
+    	addInternalFrameListener(new InternalFrameAdapter() {
+    		@Override
+    		public void internalFrameClosing(InternalFrameEvent e) {
+    			cerrarFormulario();
+    		}
+    	});
     	
     	controladorUsuario = icu;
     	
@@ -87,11 +95,13 @@ public class ModificarUsuario extends JInternalFrame {
         gbc_usuarioComboBox.gridy = 0;
         seleccionarUsuarioPanel.add(usuarioComboBox, gbc_usuarioComboBox);
         
-        JButton verDatosButton = new JButton("Ver datos");
+        JButton verDatosButton = new JButton("Seleccionar");
         verDatosButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (usuarioComboBox.getSelectedIndex() != -1) {
         			cargarDatosUsuario();
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ning\u00FAn usuario seleccionado.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -265,6 +275,7 @@ public class ModificarUsuario extends JInternalFrame {
         datosProfesorPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setEnabled(false);
         descripcionTextArea.setRows(2);
         descripcionTextArea.setLineWrap(true);
@@ -284,6 +295,7 @@ public class ModificarUsuario extends JInternalFrame {
         datosProfesorPanel.add(biografiaLabel, gbc_biografiaLabel);
         
         biografiaTextArea = new JTextArea();
+        biografiaTextArea.setWrapStyleWord(true);
         biografiaTextArea.setEnabled(false);
         biografiaTextArea.setRows(2);
         biografiaTextArea.setLineWrap(true);
@@ -315,6 +327,8 @@ public class ModificarUsuario extends JInternalFrame {
         	public void actionPerformed(ActionEvent e) {
         		if (usuarioComboBox.getSelectedIndex() != -1) {        			
         			modificarUsuarioActionPerformed(e);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ning\u00FAn usuario seleccionado.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -337,6 +351,10 @@ public class ModificarUsuario extends JInternalFrame {
         gbc_cancelarButton.gridx = 1;
         gbc_cancelarButton.gridy = 3;
         contentPane.add(cancelarButton, gbc_cancelarButton);
+    }
+    
+    private JInternalFrame getFrame() {
+    	return this;
     }
     
     private void modificarUsuarioActionPerformed(ActionEvent e) {
@@ -418,7 +436,7 @@ public class ModificarUsuario extends JInternalFrame {
     		return false;
     	}
     	else if (fechaNacimiento == null || fechaNacimiento.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de nacimiento ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de nacimiento ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (esProfesor && descripcion.isEmpty()) {
@@ -441,6 +459,12 @@ public class ModificarUsuario extends JInternalFrame {
 		descripcionTextArea.setText("");
 		biografiaTextArea.setText("");
 		sitioWebTextField.setText("");
+		nombreTextField.setEnabled(false);
+		apellidoTextField.setEnabled(false);
+		nacimientoDateChooser.setEnabled(false);
+		descripcionTextArea.setEnabled(false);
+		biografiaTextArea.setEnabled(false);
+		sitioWebTextField.setEnabled(false);
 		
 		setVisible(false);
     }

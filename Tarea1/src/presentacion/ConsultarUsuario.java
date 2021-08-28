@@ -2,6 +2,7 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
@@ -108,6 +109,8 @@ public class ConsultarUsuario extends JInternalFrame {
         	public void actionPerformed(ActionEvent e) {
         		if (usuarioComboBox.getSelectedIndex() != -1) {
         			cargarDatosUsuario();
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ning\u00FAn usuario seleccionado.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -280,6 +283,7 @@ public class ConsultarUsuario extends JInternalFrame {
         datosProfesorPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setEnabled(false);
         descripcionTextArea.setRows(2);
         descripcionTextArea.setLineWrap(true);
@@ -299,6 +303,7 @@ public class ConsultarUsuario extends JInternalFrame {
         datosProfesorPanel.add(biografiaLabel, gbc_biografiaLabel);
         
         biografiaTextArea = new JTextArea();
+        biografiaTextArea.setWrapStyleWord(true);
         biografiaTextArea.setEnabled(false);
         biografiaTextArea.setRows(2);
         biografiaTextArea.setLineWrap(true);
@@ -358,6 +363,8 @@ public class ConsultarUsuario extends JInternalFrame {
                 	consultarClaseIF.cargarInstituciones();
                 	consultarClaseIF.initialize(nombreClase);
                     consultarClaseIF.setVisible(true);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna clase seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -380,6 +387,8 @@ public class ConsultarUsuario extends JInternalFrame {
 					consultarActividadDeportivaIF.cargarInstituciones();
 					consultarActividadDeportivaIF.initialize(nombreActividad);
 					consultarActividadDeportivaIF.setVisible(true);
+        		} else {
+        			JOptionPane.showMessageDialog(getFrame(), "No hay ninguna actividad deportiva seleccionada.", null, JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -406,6 +415,10 @@ public class ConsultarUsuario extends JInternalFrame {
         
         pack();
     }
+	
+	private JInternalFrame getFrame() {
+		return this;
+	}
 	
 	public void setConsultarClaseIF(ConsultarClase ccIF) {
 		this.consultarClaseIF = ccIF;

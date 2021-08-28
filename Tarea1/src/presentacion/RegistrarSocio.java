@@ -300,6 +300,7 @@ public class RegistrarSocio extends JInternalFrame {
         datosRegistroPanel.add(fechaRegistroLabel, gbc_fechaRegistroLabel);
         
         fechaRegistroDateChooser = new JDateChooser(new Date());
+        fechaRegistroDateChooser.setMaxSelectableDate(new Date());
         GridBagConstraints gbc_fechaRegistroDateChooser = new GridBagConstraints();
         gbc_fechaRegistroDateChooser.insets = new Insets(0, 0, 5, 0);
         gbc_fechaRegistroDateChooser.fill = GridBagConstraints.BOTH;
@@ -337,6 +338,11 @@ public class RegistrarSocio extends JInternalFrame {
         contentPane.add(aceptarButton, gbc_aceptarButton);
         
         JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cerrarFormulario();
+        	}
+        });
         GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
         gbc_cancelarButton.anchor = GridBagConstraints.WEST;
         gbc_cancelarButton.gridx = 1;
@@ -348,7 +354,8 @@ public class RegistrarSocio extends JInternalFrame {
     
     private void altaRegistroActionPerformed(ActionEvent e) {
     	String socio = (String) socioComboBox.getSelectedItem();
-    	String clase = ((DataClase) claseComboBox.getSelectedItem()).getNombre();
+    	DataClase clase = (DataClase) claseComboBox.getSelectedItem();
+    	String nombreClase = clase != null ? clase.getNombre() : null;
     	String actividad = (String) actividadComboBox.getSelectedItem();
     	boolean conCuponera = registroCuponeraRadioButton.isSelected();
     	String cuponera = (String) cuponeraComboBox.getSelectedItem();
@@ -356,7 +363,7 @@ public class RegistrarSocio extends JInternalFrame {
     	
     	if (esValido()) {
     		try {
-    			controladorUsuario.registrarSocio(socio, clase, actividad, conCuponera, cuponera, fechaRegistro);
+    			controladorUsuario.registrarSocio(socio, nombreClase, actividad, conCuponera, cuponera, fechaRegistro);
     			JOptionPane.showMessageDialog(this, "Se registr\u00F3 al socio en la clase correctamente.");
     			cerrarFormulario();
     		} catch (SocioRegistradoException ex) {
@@ -364,9 +371,9 @@ public class RegistrarSocio extends JInternalFrame {
     		} catch (CuposAgotadosException ex) {
     			JOptionPane.showMessageDialog(this, "La clase seleccionada ya no tiene cupos disponibles.", null, JOptionPane.ERROR_MESSAGE);
     		} catch (ClasesRestantesException ex) {
-    			JOptionPane.showMessageDialog(this, "La cuponera seleccionada ya no tiene cupos restantes para la actividad deportiva.", null, JOptionPane.ERROR_MESSAGE);
+    			JOptionPane.showMessageDialog(this, "La cuponera seleccionada ya no tiene clases restantes para la actividad deportiva.", null, JOptionPane.ERROR_MESSAGE);
     		} catch (CuponeraVencidaException e1) {
-    			JOptionPane.showMessageDialog(this, "La cuponera seleccionada está vencida.", null, JOptionPane.ERROR_MESSAGE);
+    			JOptionPane.showMessageDialog(this, "La cuponera seleccionada est\u00E1 vencida.", null, JOptionPane.ERROR_MESSAGE);
 			}
     	}
     }
@@ -401,7 +408,9 @@ public class RegistrarSocio extends JInternalFrame {
     private void cargarCuponeras() {
     	String nickname = (String) socioComboBox.getSelectedItem();
     	String nombreActividad = (String) actividadComboBox.getSelectedItem();
-    	//controladorCuponera.listarCuponerasConActividad(nickname, nombreActividad);
+    	String[] cuponeras = controladorUsuario.listarCuponerasActividad(nickname, nombreActividad);
+    	cuponeraComboBox.setModel(new DefaultComboBoxModel<String>(cuponeras));
+    	cuponeraComboBox.setSelectedIndex(-1);
     }
     
     private void cargarCosto() {
@@ -415,7 +424,6 @@ public class RegistrarSocio extends JInternalFrame {
     }
     
     private boolean esValido() {
-    	String socio = (String) socioComboBox.getSelectedItem();
     	boolean registroConCuponera = registroCuponeraRadioButton.isSelected();
     	Date fechaRegistro = fechaRegistroDateChooser.getDate();
     	
@@ -431,8 +439,8 @@ public class RegistrarSocio extends JInternalFrame {
     		JOptionPane.showMessageDialog(this, "Debe haber una cuponera seleccionada.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
-    	else if (fechaRegistro == null) {
-    		JOptionPane.showMessageDialog(this, "La fecha de registro ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    	else if (fechaRegistro == null || fechaRegistro.after(new Date())) {
+    		JOptionPane.showMessageDialog(this, "La fecha de registro ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else {

@@ -261,6 +261,7 @@ public class CrearUsuario extends JInternalFrame {
         datosProfesorPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
+        descripcionTextArea.setWrapStyleWord(true);
         descripcionTextArea.setRows(2);
         descripcionTextArea.setLineWrap(true);
         GridBagConstraints gbc_descripcionTextArea = new GridBagConstraints();
@@ -279,6 +280,7 @@ public class CrearUsuario extends JInternalFrame {
         datosProfesorPanel.add(biografiaLabel, gbc_biografiaLabel);
         
         biografiaTextArea = new JTextArea();
+        biografiaTextArea.setWrapStyleWord(true);
         biografiaTextArea.setRows(2);
         biografiaTextArea.setLineWrap(true);
         GridBagConstraints gbc_biografiaTextArea = new GridBagConstraints();
@@ -354,6 +356,7 @@ public class CrearUsuario extends JInternalFrame {
     	Date fechaNacimiento = nacimientoDateChooser.getDate();
     	boolean esProfesor = profesorRadioButton.isSelected();
     	DataInstitucion institucion = ((DataInstitucion) institucionComboBox.getSelectedItem());
+    	String nombreInstitucion = institucion != null ? institucion.getNombre() : null;
     	String descripcion = descripcionTextArea.getText();
     	String biografia = biografiaTextArea.getText();
     	String sitioWeb = sitioWebTextField.getText();
@@ -361,12 +364,12 @@ public class CrearUsuario extends JInternalFrame {
 		if (esValido()) {
 			try {
 				if (esProfesor) {
-					controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, institucion.getNombre(), descripcion, biografia, sitioWeb);
+					controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, nombreInstitucion, descripcion, biografia, sitioWeb);
 				}
 				else {
 					controladorUsuario.altaSocio(nickname, nombre, apellido, correo, fechaNacimiento);
 				}
-				JOptionPane.showMessageDialog(this, "Se creó el usuario correctamente.");
+				JOptionPane.showMessageDialog(this, "Se cre\u00F3 el usuario correctamente.");
 				cerrarFormulario();
 			} catch (UsuarioRepetidoException ex) {
 				int res = JOptionPane.showOptionDialog(this,
@@ -416,7 +419,7 @@ public class CrearUsuario extends JInternalFrame {
     		return false;
     	}
     	else if (fechaNacimiento == null || fechaNacimiento.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de nacimiento ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha de nacimiento ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (esProfesor && institucionComboBox.getSelectedIndex() == -1) {
@@ -443,7 +446,10 @@ public class CrearUsuario extends JInternalFrame {
     	descripcionTextArea.setText("");
     	biografiaTextArea.setText("");
     	sitioWebTextField.setText("");
-    	// faltan los setEnabled(false) (y fijarse también en los demás casos de uso)
+    	institucionComboBox.setEnabled(false);
+    	descripcionTextArea.setEnabled(false);
+    	biografiaTextArea.setEnabled(false);
+    	sitioWebTextField.setEnabled(false);
     	
     	setVisible(false);
     }

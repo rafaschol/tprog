@@ -40,6 +40,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
@@ -47,7 +48,6 @@ import javax.swing.event.InternalFrameEvent;
 public class CrearClase extends JInternalFrame {
 	
 	private IControladorInstituciones controladorInstitucion;
-	private DataInstitucion[] dataInstituciones;
 	
 	private JComboBox institucionComboBox;
 	private JComboBox actividadDeportivaComboBox;
@@ -59,6 +59,7 @@ public class CrearClase extends JInternalFrame {
 	private JSpinner minSociosSpinner;
 	private JSpinner maxSociosSpinner;
 	private JDateChooser fechaAltaDateChooser;
+	private DataInstitucion[] dataInstituciones;
 	
     public CrearClase(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -249,7 +250,7 @@ public class CrearClase extends JInternalFrame {
         datosClasePanel.add(maxSociosLabel, gbc_maxSociosLabel);
         
         maxSociosSpinner = new JSpinner();
-        maxSociosSpinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+        maxSociosSpinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
         GridBagConstraints gbc_maxSociosSpinner = new GridBagConstraints();
         gbc_maxSociosSpinner.insets = new Insets(0, 0, 5, 0);
         gbc_maxSociosSpinner.fill = GridBagConstraints.HORIZONTAL;
@@ -378,7 +379,7 @@ public class CrearClase extends JInternalFrame {
     		return false;
     	}
     	else if (fechaClase == null) {
-    		JOptionPane.showMessageDialog(this, "La fecha ingresada para la clase no es válida.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La fecha ingresada para la clase no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (profesorComboBox.getSelectedIndex() == -1) {
@@ -386,11 +387,11 @@ public class CrearClase extends JInternalFrame {
     		return false;
     	}
     	else if (minSocios > maxSocios) {
-    		JOptionPane.showMessageDialog(this, "La cantidad mínima de socios no puede ser mayor que la cantidad máxima de socios.", null, JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "La cantidad m\u00EDnima de socios no puede ser mayor que la cantidad m\u00E1xima de socios.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
-    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es válida.", null, JOptionPane.ERROR_MESSAGE);    		
+    		JOptionPane.showMessageDialog(this, "La fecha de alta ingresada no es v\u00E1lida.", null, JOptionPane.ERROR_MESSAGE);    		
     		return false;
     	}
     	else {
@@ -406,7 +407,7 @@ public class CrearClase extends JInternalFrame {
     	horaInicioSpinner.setValue(new Date(1609470000055L));
     	profesorComboBox.setModel(new DefaultComboBoxModel());
     	minSociosSpinner.setValue(new Integer(0));
-    	maxSociosSpinner.setValue(new Integer(0));
+    	maxSociosSpinner.setValue(new Integer(1));
     	urlTextField.setText("");
     	fechaAltaDateChooser.setDate(new Date());
     	
