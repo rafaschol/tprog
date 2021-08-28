@@ -73,8 +73,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++)
     		if(arrActCup[j].getActividad().getNombre() == nombreActividad) 
-    			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva con nombre '" + nombreActividad + 
-    					 "' en la cuponera '" + nombreCuponera);
+    			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva  en la cuponera" );
     	
     	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
     	c.addActividadDeCuponera(adc);

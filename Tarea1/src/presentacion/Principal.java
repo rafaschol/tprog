@@ -219,6 +219,7 @@ class Principal {
         			datosPrueba.cargarRegistrosClases();
         			datosPrueba.cargarCuponeras();
         			datosPrueba.cargarActividadesCuponeras();
+        			datosPrueba.cargarCompraCuponera();
         			datosPruebaCargados = true;
     				JOptionPane.showMessageDialog(mainFrame, "Se cargaron los datos de prueba correctamente.");
         		} else {

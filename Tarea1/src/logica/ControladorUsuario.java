@@ -149,7 +149,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     		Cuponera cuponera = mc.obtenerCuponera(nombreCuponera);
     		//Si la fecha de la cuponera ya expiro
-    		if(cuponera.getFechaFin().after(fecha)) 
+    		if(cuponera.getFechaFin().before(fecha)) 
     			throw new CuponeraVencidaException("La fecha de vigencia de la cuponera expiró");	
     	
     			
@@ -235,7 +235,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		if(acd.getActividad().getNombre() == nombreActividad) 
     			cuponeras.add(acd.getCuponera().getNombre());	
     	}
-    	
+    	System.out.print(cuponeras.size());
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	
     } 
