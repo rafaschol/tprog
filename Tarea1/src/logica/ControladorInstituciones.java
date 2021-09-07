@@ -1,11 +1,16 @@
 package logica;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import excepciones.ActividadRepetidaException;
+import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.InstitucionRepetidaException;
+import excepciones.UsuarioRepetidoException;
+
 
 public class ControladorInstituciones implements IControladorInstituciones {
 
@@ -98,6 +103,48 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	return dataActividad;
     	
     }
-    
+
+	public void altaCategoria(String nombreCategoria) throws CategoriaRepetidaException
+	{
+		ManejadorCategoria mc = ManejadorCategoria.getinstance();
+		Categoria c = mc.obtenerCategoria(nombreCategoria);
+		
+		// Validar categoria
+		if (c != null)
+            throw new CategoriaRepetidaException("La categoria " + nombreCategoria + " ya existe.");
+		
+		c = new Categoria(nombreCategoria);
+		mc.addCategoria(c);
+	}
+
+	public String[] listarActividadesIngresadas() 
+	{
+		Set<String> set = new HashSet<String>();
+		ManejadorActividad ma = ManejadorActividad.getinstance();		
+		
+		// Iterar sobre las actividades
+		for (Entry<String, ActividadDeportiva> iter : ma.getActividades().entrySet()) {
+			if (iter.getValue().getEstado() == Estado.Aceptada) {
+				set.add(iter.getKey());
+			}
+		}
+		
+		// Convertir a String[]
+		String[] res = set.toArray(new String[set.size()]);
+		return res;
+	}
+
+	public void aceptarRechazarActividad(String nombreActividad, Boolean aceptar) 
+	{
+		ManejadorActividad ma = ManejadorActividad.getinstance();
+		ActividadDeportiva a = ma.obtenerActividad(nombreActividad);
+		
+		if (aceptar) {
+			a.setEstado(Estado.Aceptada);
+		}
+		else {
+			a.setEstado(Estado.Rechazada);
+		}
+	}
     
 }

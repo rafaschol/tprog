@@ -218,7 +218,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		Participa p = new Participa(adc.getCantidadDeClases(),adc);
     		s.addParticipa(p);		
     	}
-    	
+    	c.setComprada(true);
     	
     }
     

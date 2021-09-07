@@ -3,6 +3,7 @@ import java.sql.Time;
 import java.util.Date;
 
 import excepciones.ActividadRepetidaException;
+import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.InstitucionRepetidaException;
 
@@ -29,4 +30,10 @@ public interface IControladorInstituciones {
 	public abstract DataActividad listarDataActividad(String nombre);
 	
 	public abstract DataClase obtenerDataClase(String nombreClase); 
+	
+	public abstract void altaCategoria(String nombreCategoria) throws CategoriaRepetidaException;
+	
+	public abstract String[] listarActividadesIngresadas();
+	
+	public abstract void aceptarRechazarActividad(String nombreActividad, Boolean estado);
 }

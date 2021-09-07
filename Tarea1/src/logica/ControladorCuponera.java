@@ -34,6 +34,23 @@ public class ControladorCuponera implements IControladorCuponera {
     	return cuponeras;   	
     }
     
+    public String[] listarCuponerasNoCompradas() 
+    {
+    	Set<String> set = new HashSet<String>();
+		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();		
+		
+		// Iterar sobre las cuponeras
+		for (Entry<String, Cuponera> iter : mc.getCuponeras().entrySet()) {
+			if (! iter.getValue().getComprada()) {
+				set.add(iter.getKey());
+			}
+		}
+		
+		// Convertir a String[]
+		String[] res = set.toArray(new String[set.size()]);
+		return res;
+    }
+    
     public String[] listarActividadesNoEnCuponera(String cuponera , String institucion) {
     	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     	Cuponera c = mc.obtenerCuponera(cuponera);
@@ -73,7 +90,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++)
     		if(arrActCup[j].getActividad().getNombre() == nombreActividad) 
-    			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva  en la cuponera" );
+    			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva en la cuponera" );
     	
     	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
     	c.addActividadDeCuponera(adc);
@@ -94,8 +111,6 @@ public class ControladorCuponera implements IControladorCuponera {
     	return dc;
     	
     }
-    
-    
     
   }
     	

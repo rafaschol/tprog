@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
+
 
 public class ActividadDeportiva {
 	private Date fecha;
@@ -15,7 +17,9 @@ public class ActividadDeportiva {
 	private Float costo;
 	private Map<String, Clase> clases;
 	private HashSet<ActividadDeCuponera> actividadesCuponera;
-	private InstitucionDeportiva institucion; 
+	private InstitucionDeportiva institucion;
+	private Map<String, Categoria> categorias; 
+	private Estado estado;
 	
 	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
 		this.setNombre(nombre);
@@ -26,8 +30,10 @@ public class ActividadDeportiva {
 		this.setClases(new HashMap<String, Clase>());
 		this.setActividadesCuponera(new HashSet<ActividadDeCuponera>());
 		this.setInstitucion(institucion);
-
+		this.categorias = new HashMap<String, Categoria>();
+		this.estado = Estado.Ingresada;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -130,6 +136,12 @@ public class ActividadDeportiva {
 	
 	public void addActividadDeCuponera(ActividadDeCuponera adc) {
 		this.actividadesCuponera.add(adc);
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 	
 	
