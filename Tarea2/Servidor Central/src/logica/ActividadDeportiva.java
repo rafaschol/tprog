@@ -160,4 +160,9 @@ public class ActividadDeportiva {
 	public Categoria obtenerCategoria(String nombreCategoria){
 		return (categorias.get(nombreCategoria));
 	}
+	
+	public String[] listarCategorias(){
+		String[] res = categorias.keySet().toArray(new String[0]);
+		return res;
+	}
 }

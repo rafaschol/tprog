@@ -112,21 +112,33 @@ public class CargarDatosPrueba {
 			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
 					90, (float) 550.0, new Date(121, 2, 31));
+			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
+			
 			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Voleibol",
 					"Voleibol en todas sus formas",
 					120, (float) 750.0, new Date(121, 3, 20));
+			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
+			
 			controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
 					"Para cuidar el aparato cardiovascular",
 					110, (float) 800.0, new Date(121, 4, 30));
+			controladorInstitucion.aceptarRechazarActividad("Aer\u00F3bica", true);
+			
 			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Kickboxing",
 					"En busca del nuevo campe\u00F3n de boxeo.",
 					100, (float) 980.0, new Date(121, 5, 7));
+			controladorInstitucion.aceptarRechazarActividad("Kickboxing", true);
+			
 			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
 					150, (float) 500.0, new Date(121, 6, 8));
+			controladorInstitucion.aceptarRechazarActividad("Atletismo", true);
+			
 			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Basquetbol",
 					"Espect\u00E1culo conmemorando los 30 a\u00F1os de Violeta.",
 					80, (float) 450.0, new Date(121, 6, 31));
+			controladorInstitucion.aceptarRechazarActividad("Basquetbol", true);
+			
 		} catch (ActividadRepetidaException e) {
 			e.printStackTrace();
 		}
