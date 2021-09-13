@@ -168,14 +168,14 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		a.addCategoria(c);
 	}
 
-	//Para Profesor
+	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public String[] listarIntitucionesProfesor(String profesor) {
 		ManejadorProfesores mp = ManejadorProfesores.getinstance();
 		Profesor p =  mp.obtenerProfesor(profesor);
 		return p.listarInstituciones();
 	}
 	
-	//Para Profesor
+	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public void altaActividadDeportivaProfesor(String nombreInstitucion, String nombre, String descripcion,
 		    int duracion, float costo, Date fecha, String profesor) throws ActividadRepetidaException{
 		ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
