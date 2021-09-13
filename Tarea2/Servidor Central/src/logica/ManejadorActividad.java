@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManejadorActividad {
-	private Map<String, ActividadDeportiva> actividades;
-	private Map<String, ActividadDeportiva> actividadesAceptadas;
+	private Map<String, ActividadDeportiva> actividades; // Todas las Actividades Depotivas
+	private Map<String, ActividadDeportiva> actividadesAceptadas; // Solo las Actividades Depotivas aceptadas por Admin
     private static ManejadorActividad instancia = null;
 
     private ManejadorActividad() {

@@ -16,6 +16,8 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
     public ControladorInstituciones() {	
     	}
+    
+    //Para Administrador
     public void altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,
     	int duracion, float costo, Date fecha) throws ActividadRepetidaException{
     	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
@@ -146,7 +148,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		}
 		else {
 			a.setEstado(Estado.Rechazada);
-			//Elimina la actividad de la coleccion del manejador
+			//Elimina la actividad de la coleccion del manejador para dejar el nombre disponible 
 			ma.removeActividad(a);
 		}
 	}
@@ -166,7 +168,14 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		a.addCategoria(c);
 	}
 
+	//Para Profesor
+	public String[] listarIntitucionesProfesor(String profesor) {
+		ManejadorProfesores mp = ManejadorProfesores.getinstance();
+		Profesor p =  mp.obtenerProfesor(profesor);
+		return p.listarInstituciones();
+	}
 	
+	//Para Profesor
 	public void altaActividadDeportivaProfesor(String nombreInstitucion, String nombre, String descripcion,
 		    int duracion, float costo, Date fecha, String profesor) throws ActividadRepetidaException{
 		ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
