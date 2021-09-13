@@ -5,7 +5,7 @@ public class DataProfesor extends DataUsuario {
 	private String descripcion;
 	private String biografia;
 	private String sitioWeb;
-	private String institucion;
+	private String[] instituciones;
 
 	public DataProfesor(Usuario u, String[] cla) {
 		super(u, cla);
@@ -13,14 +13,14 @@ public class DataProfesor extends DataUsuario {
 		this.setDescripcion(Profesor.class.cast(u).getDescripcion());
 		this.setBiografia(Profesor.class.cast(u).getBiografia());
 		this.setSitioWeb(Profesor.class.cast(u).getSitioWeb());
-		this.setInstitucion(Profesor.class.cast(u).getInstitucion().getNombre());
+		this.setInstituciones(Profesor.class.cast(u).listarInstituciones());
 		}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
+	private void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
@@ -40,12 +40,20 @@ public class DataProfesor extends DataUsuario {
 		this.sitioWeb = sitioWeb;
 	}
 
-	public String getInstitucion() {
-		return institucion;
+	public String[] getInstituciones() {
+		return instituciones;
 	}
 
-	private void setInstitucion(String string) {
-		this.institucion = string;
+	private void setInstituciones(String[] instituciones) {
+		this.instituciones = instituciones;
 	}
+
+	/*public String getInstitucion() {
+		return institucion;
+	}*/
+
+	/*private void setInstitucion(String string) {
+		this.institucion = string;
+	}*/
 	
 }

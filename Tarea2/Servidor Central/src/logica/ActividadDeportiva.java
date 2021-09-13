@@ -143,6 +143,21 @@ public class ActividadDeportiva {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
+	public Map<String, Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Map<String, Categoria> categorias) {
+		this.categorias = categorias;
+	}
 	
+	public void addCategoria(Categoria categoria) {
+		String nombreCategoria = categoria.getNombre();
+		this.categorias.put(nombreCategoria, categoria);
+	}
 	
+	public Categoria obtenerCategoria(String nombreCategoria){
+		return (categorias.get(nombreCategoria));
+	}
 }

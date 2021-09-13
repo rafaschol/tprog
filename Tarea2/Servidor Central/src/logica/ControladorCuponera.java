@@ -86,7 +86,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
     	Cuponera c = mc.obtenerCuponera(nombreCuponera);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva ad = ma.obtenerActividad(nombreActividad);
+    	ActividadDeportiva ad = ma.obtenerActividadAceptada(nombreActividad);
     	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++)
     		if(arrActCup[j].getActividad().getNombre() == nombreActividad) 

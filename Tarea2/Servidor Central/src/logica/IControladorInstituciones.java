@@ -36,4 +36,10 @@ public interface IControladorInstituciones {
 	public abstract String[] listarActividadesIngresadas();
 	
 	public abstract void aceptarRechazarActividad(String nombreActividad, Boolean estado);
+	
+	public abstract void agregarCategoriaAActividad(String actividad, String categoria) throws CategoriaRepetidaException;
+	
+	//Para el caso de uso crear Actividad Deportiva por Profesor
+	public abstract void altaActividadDeportivaProfesor(String nombreInstitucion, String nombre, String descripcion,
+		    int duracion, float costo, Date fecha, String profesor) throws ActividadRepetidaException;
 }

@@ -120,7 +120,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	ManejadorSocios ms = ManejadorSocios.getinstance();
     	Socio socio = ms.obtenerSocio(nickname);
     	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva actividad =  ma.obtenerActividad(nombreActividad);
+    	ActividadDeportiva actividad =  ma.obtenerActividadAceptada(nombreActividad);
     	Clase clase = actividad.obtenerClase(nombreClase);
     	int cantRegistros = clase.cantRegistros();
     	int maxCupos = clase.getMaxPersonas();
