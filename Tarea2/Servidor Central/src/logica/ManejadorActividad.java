@@ -37,6 +37,11 @@ public class ManejadorActividad {
         actividadesAceptadas.put(nombre, actividad);
     }
     
+    public void removeActividad(ActividadDeportiva actividad) {
+    	String nombre = actividad.getNombre();
+        actividades.remove(nombre, actividad);
+    }
+    
     public Map<String, ActividadDeportiva> getActividades(){
     	return this.actividades;
     }

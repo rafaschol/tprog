@@ -146,6 +146,8 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		}
 		else {
 			a.setEstado(Estado.Rechazada);
+			//Elimina la actividad de la coleccion del manejador
+			ma.removeActividad(a);
 		}
 	}
 	
