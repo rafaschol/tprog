@@ -10,7 +10,7 @@ public class Socio extends Usuario {
 	private HashSet<Compra> compras; // Coleccion de compras de cuponera.
 	private HashSet<Participa> participa; // Coleccion de paricipa a actividad de cuponera.
 	
-	public Socio(String nick, String n, String ap, String email, Date fecha){
+	public Socio(String nick, String n, String ap, String email, Date fecha, String contrasena){
 		this.nickname = nick;
 		this.nombre = n;
 		this.apellido = ap;
@@ -19,6 +19,9 @@ public class Socio extends Usuario {
 		this.registros = new HashMap<Integer, Registro>();
 		this.compras = new HashSet<Compra>();
 		this.participa = new HashSet<Participa>();
+		this.contrasena = contrasena;
+		this.seguidos = new HashMap<String, Usuario>();
+		this.seguidores = new HashMap<String, Usuario>();
 	}
 
 	public Map<Integer, Registro> getRegistros() {
@@ -55,5 +58,5 @@ public class Socio extends Usuario {
 	public void addParticipa(Participa participa) {
 		this.participa.add(participa);
 	}
-
+	
 }

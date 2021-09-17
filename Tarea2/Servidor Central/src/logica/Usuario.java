@@ -1,5 +1,6 @@
 package logica;
 import java.util.Date;
+import java.util.Map;
 
 public abstract class Usuario {
 	
@@ -8,6 +9,10 @@ public abstract class Usuario {
 	protected String apellido;
 	protected String email;
 	protected Date fechaNacimiento;
+	protected String contrasena;
+	protected Map<String, Usuario> seguidos;
+	protected Map<String, Usuario> seguidores;
+	
 	
 	public String getNickname() {
 		return nickname;
@@ -47,6 +52,30 @@ public abstract class Usuario {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;	
+	}
+	
+	public String getContrasena() {
+		return this.contrasena;
+	}
+	
+	// Red Socioal
+	public Map<String, Usuario> getSeguidos(){
+		return this.seguidos;
+	}
+	
+	public Map<String, Usuario> getSeguidores(){
+		return this.seguidores;
+	}
+	public void addSeguido(Usuario usuario) {
+		this.seguidos.put(usuario.getNickname(), usuario);
+	}
+	
+	public void removeSeguido(Usuario usuario) {
+		this.seguidos.remove(usuario.getNickname());
 	}
 	
 }

@@ -17,7 +17,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public ControladorUsuario() {
     }
     public void altaSocio(String nickname, String nombre,String apellido, String email,
-    	Date fechaNacimiento) throws UsuarioRepetidoException, MailRepetidoException {
+    	Date fechaNacimiento, String contrasena) throws UsuarioRepetidoException, MailRepetidoException {
         ManejadorSocios ms = ManejadorSocios.getinstance();
         ManejadorProfesores mp = ManejadorProfesores.getinstance();
         Socio s = ms.obtenerSocio(nickname); 
@@ -29,13 +29,13 @@ public class ControladorUsuario implements IControladorUsuario {
         if ((s != null) | (p != null)) // Valida mail
             throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
 
-        s = new Socio(nickname, nombre, apellido, email, fechaNacimiento);
+        s = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena);
         ms.addSocio(s);
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
 	    	Date fechaNacimiento, String institucion, String descripcion, String biografia, 
-	    	String sitioWeb) throws UsuarioRepetidoException, MailRepetidoException {
+	    	String sitioWeb, String contrasena) throws UsuarioRepetidoException, MailRepetidoException {
     		ManejadorSocios ms = ManejadorSocios.getinstance();
     		ManejadorProfesores mp = ManejadorProfesores.getinstance();
     		Socio s = ms.obtenerSocio(nickname); 
@@ -48,7 +48,7 @@ public class ControladorUsuario implements IControladorUsuario {
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
             ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
             InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
-            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb);
+            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena);
             mp.addProfesor(p);
             ins.addProfesor(p);
         }

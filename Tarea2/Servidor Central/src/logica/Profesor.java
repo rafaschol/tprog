@@ -14,7 +14,7 @@ public class Profesor extends Usuario {
 	private Map<String, ActividadDeportiva> actividades;
 
 	public Profesor(String nick, String n, String ap, String email, Date fecha, 
-					String des, InstitucionDeportiva i,  String biografia, String sitioWeb){
+					String des, InstitucionDeportiva i,  String biografia, String sitioWeb, String contrasena){
 		this.setNickname(nick);
 		this.setNombre(n);
 		this.setApellido(ap);
@@ -26,7 +26,9 @@ public class Profesor extends Usuario {
 		this.setClases(new HashMap<String, Clase>());
 		this.setBiografia(biografia);
 		this.setSitioWeb(sitioWeb);
-
+		this.contrasena = contrasena;
+		this.seguidos = new HashMap<String, Usuario>();
+		this.seguidores = new HashMap<String, Usuario>();
 	}
 
 	public String getDescripcion() {

@@ -186,7 +186,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 	
 	//Para el caso de uso crear Actividad Deportiva por Profesor
-	public void altaActividadDeportivaProfesor(String nombreInstitucion, String nombre, String descripcion,
+	public void altaActividadDeportivaWeb(String nombreInstitucion, String nombre, String descripcion,
 		    int duracion, float costo, Date fecha, String profesor, String[] categorias) throws ActividadRepetidaException{
 		ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
         InstitucionDeportiva i = mi.obtenerInstitucion(nombreInstitucion);

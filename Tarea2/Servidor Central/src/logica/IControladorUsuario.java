@@ -11,11 +11,11 @@ import excepciones.UsuarioRepetidoException;
 public interface IControladorUsuario {
 	
 	public abstract void altaSocio(String nickname, String nombre,String apellido, String email,
-	    Date fechaNacimiento) throws UsuarioRepetidoException, MailRepetidoException;
+	    Date fechaNacimiento, String contrasena) throws UsuarioRepetidoException, MailRepetidoException;
 	
 	public abstract void altaProfesor(String nickname, String nombre,String apellido, String email,
 	    Date fechaNacimiento, String institucion, String descripcion, 
-	    String biografia, String sitioWeb) throws UsuarioRepetidoException,MailRepetidoException;
+	    String biografia, String sitioWeb, String contrasena) throws UsuarioRepetidoException,MailRepetidoException;
 
 	public abstract String[] listarUsuarios();
     
