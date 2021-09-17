@@ -16,6 +16,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     public ControladorUsuario() {
     }
+    
     public void altaSocio(String nickname, String nombre,String apellido, String email,
     	Date fechaNacimiento, String contrasena) throws UsuarioRepetidoException, MailRepetidoException {
         ManejadorSocios ms = ManejadorSocios.getinstance();
@@ -238,7 +239,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	System.out.print(cuponeras.size());
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	
-    } 
+    }
       
 }
 	

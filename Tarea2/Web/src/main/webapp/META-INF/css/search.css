@@ -1,0 +1,10 @@
+.filter-tags .tag {
+  display: inline-block;
+  padding: 0.25rem;
+  padding-right: 3rem;
+}
+
+.filter-tags .tag button{
+  padding: 0.625rem 0.25rem;
+  font-size: 0.75rem;
+}

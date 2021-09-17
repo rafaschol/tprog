@@ -35,9 +35,5 @@ public interface IControladorUsuario {
     public abstract void compraCuponera(String nickname, String nombreCuponera, Date fecha);
     
     public abstract String[]  listarCuponerasActividad(String nickname, String nombreActividad);
-    	
     
-    
-
-
 }

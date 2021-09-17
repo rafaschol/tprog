@@ -1,0 +1,34 @@
+.form-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.form-page#login-page form {
+  width: 350px;
+}
+
+.form-page#register-page form {
+  width: 450px;
+  position: relative;
+}
+
+.form-page .form-tab {
+  display: none;
+}
+
+.form-page .form-tab.active {
+  display: initial;
+}
+
+.form-page #prev-button, .form-page #register-button {
+  display: none;
+}
+
+.form-page #prev-button {
+  position: absolute;
+  top: 3rem;
+  left: 1.5rem;
+}
