@@ -68,13 +68,13 @@ class TestSistema {
 		ctrlU.altaProfesor("TheBoss", "Bruno", "Sosa", "TheBoss@gmail.com",new Date(1949, 9, 23),"IN", descripcion, bio, "www.bruce.net");
 		
 		String descAct = "Para cuidar el aparato cardiovascular";
-		ctrlI.altaActividadDeportiva("IN", "Aerobica",descAct, 110, 800, new Date(2021, 5, 30));
+		ctrlI.altaActividadDeportiva("IN", "Aerobica",descAct, 110, 800, new Date(2021, 5, 30), null);
 		
-		ctrlI.altaActividadDeportiva("IN", "GYM",descAct, 110, 800, new Date(2021, 5, 30));
+		ctrlI.altaActividadDeportiva("IN", "GYM",descAct, 110, 800, new Date(2021, 5, 30), null);
 		
-		ctrlI.altaActividadDeportiva("IN", "Tenis",descAct, 110, 800, new Date(2021, 5, 30));
+		ctrlI.altaActividadDeportiva("IN", "Tenis",descAct, 110, 800, new Date(2021, 5, 30), null);
 		
-		ctrlI.altaActividadDeportiva("IN", "Futbol",descAct, 110, 800, new Date(2021, 5, 30));
+		ctrlI.altaActividadDeportiva("IN", "Futbol",descAct, 110, 800, new Date(2021, 5, 30), null);
 		
 		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica");
 	
@@ -391,7 +391,7 @@ class TestSistema {
 	void testAltaActividadDeportiva() {
 		//altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,int duracion, float costo, Date fecha) throws ActividadRepetidaException; //Falta agregar excepcion
 		try {
-			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22));
+			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22), null);
 			DataActividad dataA = ctrlI.listarDataActividad("Handball");
 		
 			assertEquals(dataA.getNombre(), "Handball");
