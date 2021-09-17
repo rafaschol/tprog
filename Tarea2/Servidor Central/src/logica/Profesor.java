@@ -8,7 +8,6 @@ public class Profesor extends Usuario {
 	private String descripcion;
 	private String biografia;
 	private String sitioWeb;
-	//private InstitucionDeportiva institucion;
 	private InstitucionDeportiva institucion;
 	private Map<String, Clase> clases;
 	private Map<String, ActividadDeportiva> actividades;
@@ -21,7 +20,6 @@ public class Profesor extends Usuario {
 		this.setEmail(email);
 		this.setFechaNacimiento(fecha);
 		this.setDescripcion(des);
-		//this.setInstitucion(i);
 		this.institucion = i;
 		this.setClases(new HashMap<String, Clase>());
 		this.setBiografia(biografia);

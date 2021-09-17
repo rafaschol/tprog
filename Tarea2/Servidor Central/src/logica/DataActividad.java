@@ -11,9 +11,11 @@ public class DataActividad {
 	private String institucion;
 	private String[] clases;
 	private String[] cuponeras;
+	private String[] categorias;
 	
 	
-	public DataActividad(ActividadDeportiva ad, String[] cla, String[] cup){
+	
+	public DataActividad(ActividadDeportiva ad, String[] cla, String[] cup, String[] cat){
 		this.setNombre(ad.getNombre());
 		this.setFecha(ad.getFecha());
 		this.setDescripcion(ad.getDescripcion());
@@ -22,6 +24,7 @@ public class DataActividad {
 		this.setClases(cla);
 		this.setCuponeras(cup);
 		this.setInstitucion(ad.getInstitucion().getNombre());
+		this.setCategorias(cat);
 	
 	}
 	
@@ -93,6 +96,18 @@ public class DataActividad {
 
 	private void setInstitucion(String institucion) {
 		this.institucion = institucion;
+	}
+
+
+
+	public String[] getCategorias() {
+		return categorias;
+	}
+
+
+
+	private void setCategorias(String[] categorias) {
+		this.categorias = categorias;
 	}
 		
 	

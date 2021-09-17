@@ -108,10 +108,13 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	//Conseguir strings para crear Data Actividad
     	String[] clases = ad.listarClases();
     	String[] cuponeras = ad.listarCuponeras();
-    	DataActividad dataActividad = new DataActividad(ad,clases,cuponeras);
-    	return dataActividad;
-    	
+    	String[] categorias = ad.listarCategorias();
+    	DataActividad dataActividad = new DataActividad(ad,clases,cuponeras,categorias);
+    	return dataActividad;   	
     }
+    
+    
+    
 
 	public void altaCategoria(String nombreCategoria) throws CategoriaRepetidaException
 	{
