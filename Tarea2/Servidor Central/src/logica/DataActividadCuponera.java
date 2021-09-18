@@ -24,8 +24,8 @@ public class DataActividadCuponera {
 	private void setActividad(String actividad) {
 		this.actividad = actividad;
 	}
-	
+
 	public String toString() {
-		return this.actividad;
+		return this.actividad + " (" + this.cantidadDeClases + " clases)";
 	}
 }

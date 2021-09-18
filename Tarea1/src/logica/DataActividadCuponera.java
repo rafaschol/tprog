@@ -26,6 +26,6 @@ public class DataActividadCuponera {
 	}
 	
 	public String toString() {
-		return this.actividad;
+		return this.actividad + " (" + this.cantidadDeClases + " clases)";
 	}
 }

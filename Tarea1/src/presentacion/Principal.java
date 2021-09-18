@@ -27,6 +27,7 @@ class Principal {
     private CrearClase crearClaseIF;
     private CrearCuponera crearCuponeraIF;
     private CrearInstitucion crearInstitucionIF;
+    private CrearCategoria crearCategoriaIF;
     private ConsultarUsuario consultarUsuarioIF;
     private ConsultarActividadDeportiva consultarActividadDeportivaIF;
     private ConsultarClase consultarClaseIF;
@@ -63,6 +64,7 @@ class Principal {
         crearClaseIF = new CrearClase(ici);
         crearCuponeraIF = new CrearCuponera(icc);
         crearInstitucionIF = new CrearInstitucion(ici);
+        crearCategoriaIF = new CrearCategoria(ici);
         consultarUsuarioIF = new ConsultarUsuario(icu, ici);
         consultarActividadDeportivaIF = new ConsultarActividadDeportiva(ici);
         consultarClaseIF = new ConsultarClase(ici);
@@ -83,6 +85,7 @@ class Principal {
         crearClaseIF.setVisible(false);
         crearCuponeraIF.setVisible(false);
         crearInstitucionIF.setVisible(false);
+        crearCategoriaIF.setVisible(false);
         consultarUsuarioIF.setVisible(false);
         consultarActividadDeportivaIF.setVisible(false);
         consultarClaseIF.setVisible(false);
@@ -97,6 +100,7 @@ class Principal {
         mainFrame.getContentPane().add(crearClaseIF);
         mainFrame.getContentPane().add(crearCuponeraIF);
         mainFrame.getContentPane().add(crearInstitucionIF);
+        mainFrame.getContentPane().add(crearCategoriaIF);
         mainFrame.getContentPane().add(consultarUsuarioIF);
         mainFrame.getContentPane().add(consultarActividadDeportivaIF);
         mainFrame.getContentPane().add(consultarClaseIF);
@@ -128,6 +132,7 @@ class Principal {
         JMenuItem crearClaseMI = new JMenuItem("Crear clase");
         JMenuItem crearCuponeraMI = new JMenuItem("Crear cuponera");
         JMenuItem crearInstitucionMI = new JMenuItem("Crear instituci\u00F3n deportiva");
+        JMenuItem crearCategoriaMI = new JMenuItem("Crear categor\u00EDa");
         JMenuItem consultarUsuarioMI = new JMenuItem("Consultar usuario");
         JMenuItem consultarActividadDeportivaMI = new JMenuItem("Consultar actividad deportiva");
         JMenuItem consultarClaseMI = new JMenuItem("Consultar clase");
@@ -164,6 +169,11 @@ class Principal {
             public void actionPerformed(ActionEvent e) {
                 crearInstitucionIF.setVisible(true);
             }
+        });
+        crearCategoriaMI.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		crearCategoriaIF.setVisible(true);
+        	}
         });
         consultarUsuarioMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -233,6 +243,7 @@ class Principal {
         menuCrear.add(crearClaseMI);
         menuCrear.add(crearCuponeraMI);
         menuCrear.add(crearInstitucionMI);
+        menuCrear.add(crearCategoriaMI);
         menuConsultar.add(consultarUsuarioMI);
         menuConsultar.add(consultarActividadDeportivaMI);
         menuConsultar.add(consultarClaseMI);
