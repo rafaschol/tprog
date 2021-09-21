@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,18 +18,13 @@ public class LoginServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sesion = request.getSession();
-		sesion.setAttribute("user", "juanito");
-		response.getWriter().println("Iniciaste sesión");
-		
-		
-		// GET: me piden el formulario de login
-		// Analizar qué mostrar cuando se pide esta página pero ya hay un usuario logueado
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// POST: me envían datos para loguearse
+		// POST: me envï¿½an datos para loguearse
 		
 		// 1) Obtengo los datos que me mandan en la request:
 		// usuario = request.getParameter("usuario")
@@ -37,12 +34,26 @@ public class LoginServlet extends HttpServlet {
 		// usuario = login(usuario, contrasena)
 		
 		// if (usuario != NULL)
-		//     3a) Si existe el usuario, lo guardo en la sesión y retorno un redireccionamiento
+		//     3a) Si existe el usuario, lo guardo en la sesiï¿½n y retorno un redireccionamiento
 		//     session.setAttribute("usuario", usuario)
-		//     redireccionar al usuario a donde corresponda (a la página que estaba anteriormente o al inicio)
+		//     redireccionar al usuario a donde corresponda (a la pï¿½gina que estaba anteriormente o al inicio)
 		// else
 		//     3b) Si no existe el usuario, retornar a login.jsp con mensaje de error
-		//         (Analizar cómo hacerlo. Idea: redirección a login.jsp con un atributo "login_error = true")
+		//         (Analizar cï¿½mo hacerlo. Idea: redirecciï¿½n a login.jsp con un atributo "login_error = true")
+		
+		HttpSession sesion = request.getSession();
+		
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		if (email.equals("rafa@mail.com") && password.equals("1234")) {
+			sesion.setAttribute("loggedUser", "rafa@mail.com");
+			response.sendRedirect("inicio");
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+			request.setAttribute("loginError", true);
+			dispatcher.forward(request, response);
+		}
 	}
 
 }
