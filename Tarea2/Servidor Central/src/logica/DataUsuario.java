@@ -10,6 +10,8 @@ public class DataUsuario
 	private String apellido;
 	private String email;
 	private Date fechaNacimiento;
+	private String foto;
+	private String contrasena;
 	private String[] clases;
 	
 	public DataUsuario(Usuario u, String[] cla)
@@ -21,6 +23,8 @@ public class DataUsuario
 		this.setEmail(u.getEmail());
 		this.setFechaNacimiento(u.getFechaNacimiento());
 		this.setClases(cla);
+		this.setFoto(u.getFoto());
+		this.setContrasena(u.getContrasena());
 	}
 	
 	public String getNickname() {
@@ -77,5 +81,21 @@ public class DataUsuario
 
 	private void setClases(String[] clases) {
 		this.clases = clases;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	private void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	private void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 }

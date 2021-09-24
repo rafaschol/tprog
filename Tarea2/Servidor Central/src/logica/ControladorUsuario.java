@@ -8,6 +8,7 @@ import java.util.Map;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
+import excepciones.DatosLoginIncorrectosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
@@ -18,7 +19,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
     
     public void altaSocio(String nickname, String nombre,String apellido, String email,
-    	Date fechaNacimiento, String contrasena) throws UsuarioRepetidoException, MailRepetidoException {
+    	Date fechaNacimiento, String contrasena,String foto) throws UsuarioRepetidoException, MailRepetidoException {
         ManejadorSocios ms = ManejadorSocios.getinstance();
         ManejadorProfesores mp = ManejadorProfesores.getinstance();
         Socio s = ms.obtenerSocio(nickname); 
@@ -30,13 +31,13 @@ public class ControladorUsuario implements IControladorUsuario {
         if ((s != null) | (p != null)) // Valida mail
             throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
 
-        s = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena);
+        s = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena, foto);
         ms.addSocio(s);
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
 	    	Date fechaNacimiento, String institucion, String descripcion, String biografia, 
-	    	String sitioWeb, String contrasena) throws UsuarioRepetidoException, MailRepetidoException {
+	    	String sitioWeb, String contrasena,String foto) throws UsuarioRepetidoException, MailRepetidoException {
     		ManejadorSocios ms = ManejadorSocios.getinstance();
     		ManejadorProfesores mp = ManejadorProfesores.getinstance();
     		Socio s = ms.obtenerSocio(nickname); 
@@ -49,7 +50,7 @@ public class ControladorUsuario implements IControladorUsuario {
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
             ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
             InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
-            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena);
+            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena,foto);
             mp.addProfesor(p);
             ins.addProfesor(p);
         }
@@ -83,9 +84,10 @@ public class ControladorUsuario implements IControladorUsuario {
     	if (socio == null) {
     		// usuario es un profesor
     		Profesor profesor = mp.obtenerProfesor(nickname);
-    		
     		String[] clases = profesor.getClases().keySet().toArray(new String[0]);
-    		res = new DataProfesor(profesor, clases);
+    		String[] actividades = profesor.getActividades().keySet().toArray(new String[0]);	
+    		
+    		res = new DataProfesor(profesor, clases, actividades);
     	}
     	else {
     		// usuario es un socio
@@ -239,6 +241,48 @@ public class ControladorUsuario implements IControladorUsuario {
     	System.out.print(cuponeras.size());
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	
+    }
+    
+    public DataUsuario login(String mail,String contrasena) throws DatosLoginIncorrectosException  {
+    	ManejadorSocios ms = ManejadorSocios.getinstance();
+    	Socio socio = ms.obtenerMail(mail);
+    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	Profesor profesor = mp.obtenerMail(mail);
+    	DataUsuario res;
+    	
+    	if(socio != null) {
+    		if(socio.getContrasena() == contrasena) {
+    			Map<Integer, Registro> regs = socio.getRegistros();
+        		
+        		String[] clases = new String[regs.size()];
+        		
+        		int i = 0;
+        		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
+        			clases[i] = iter.getValue().getClase().getNombre();
+        			i++;
+        		}
+        		
+        		res = new DataUsuario(socio, clases);
+        		return res;
+    		}
+    		else 
+    			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
+    			
+    	}
+    	else if(profesor != null) {
+    		if(profesor.getContrasena() == contrasena) {
+    			String[] clases = profesor.getClases().keySet().toArray(new String[0]);
+        		String[] actividades = profesor.getActividades().keySet().toArray(new String[0]);	
+        		
+        		res = new DataProfesor(profesor, clases, actividades);
+        		return res;
+    		}else
+    			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
+    		
+    	}
+    	else
+    		throw new DatosLoginIncorrectosException("Los datos son incorrectos");
+    	
     }
       
 }

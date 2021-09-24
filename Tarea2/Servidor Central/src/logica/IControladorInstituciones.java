@@ -12,7 +12,7 @@ import excepciones.InstitucionRepetidaException;
 public interface IControladorInstituciones {
 	
 	public abstract void altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,
-	    int duracion, float costo, Date fecha, String[] categorias) throws ActividadRepetidaException; //Falta agregar excepcion
+	    int duracion, float costo, Date fecha, String[] categorias, String foto) throws ActividadRepetidaException; //Falta agregar excepcion
 			
 	public abstract void altaInstitucionDeportiva(String nombreInstitucion, String descripcion, String url)
 		throws InstitucionRepetidaException; 
@@ -26,6 +26,8 @@ public interface IControladorInstituciones {
 	
 	//Para el caso de uso consultar clase
 	public abstract DataClase[] listarDataClases(String actividad);
+	
+	public abstract DataClase[] listarDataClasesVigentes(String actividad);
 	
 	public abstract DataActividad listarDataActividad(String nombre);
 	
@@ -43,5 +45,5 @@ public interface IControladorInstituciones {
 	
 	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public abstract void altaActividadDeportivaWeb(String nombreInstitucion, String nombre, String descripcion,
-		    int duracion, float costo, Date fecha, String profesor, String[] categorias) throws ActividadRepetidaException;
+		    int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto) throws ActividadRepetidaException;
 }

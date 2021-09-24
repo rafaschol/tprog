@@ -10,12 +10,13 @@ public class Socio extends Usuario {
 	private HashSet<Compra> compras; // Coleccion de compras de cuponera.
 	private HashSet<Participa> participa; // Coleccion de paricipa a actividad de cuponera.
 	
-	public Socio(String nick, String n, String ap, String email, Date fecha, String contrasena){
+	public Socio(String nick, String n, String ap, String email, Date fecha, String contrasena, String foto){
 		this.nickname = nick;
 		this.nombre = n;
 		this.apellido = ap;
 		this.email = email;
 		this.fechaNacimiento = fecha;
+		this.foto = foto;
 		this.registros = new HashMap<Integer, Registro>();
 		this.compras = new HashSet<Compra>();
 		this.participa = new HashSet<Participa>();

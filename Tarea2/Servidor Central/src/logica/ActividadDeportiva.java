@@ -1,5 +1,6 @@
 package logica;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,13 +16,14 @@ public class ActividadDeportiva {
 	private String descripcion;
 	private Integer duracion;
 	private Float costo;
+	private String foto;
 	private Map<String, Clase> clases;
 	private HashSet<ActividadDeCuponera> actividadesCuponera;
 	private InstitucionDeportiva institucion;
 	private Map<String, Categoria> categorias; 
 	private Estado estado;
 	
-	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion){
+	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion, String foto){
 		this.setNombre(nombre);
 		this.setFecha(fecha);
 		this.setDescripcion(descripcion);
@@ -32,6 +34,7 @@ public class ActividadDeportiva {
 		this.setInstitucion(institucion);
 		this.categorias = new HashMap<String, Categoria>();
 		this.estado = Estado.Ingresada;
+		this.foto = foto;
 	}
 	
 	public String getNombre() {
@@ -114,6 +117,26 @@ public class ActividadDeportiva {
 		return res;
 	}
 	
+	public DataClase[] getDataClasesVigentes() {
+		DataClase[] res = new DataClase[clases.size()];
+		int i = 0;
+		//Constructor Fecha Actual
+		Date fechaActual = new Date();
+	
+		
+		for (Entry<String, Clase> iter : clases.entrySet()) {
+			
+			if(iter.getValue().getFecha().after(fechaActual)) {
+			DataClase c = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
+			res[i] = c;
+			i++;
+			}
+		}
+		return res;
+		
+	}
+	
+	
 	public Clase obtenerClase(String nombre) {
 		return (clases.get(nombre));
 	}
@@ -164,5 +187,13 @@ public class ActividadDeportiva {
 	public String[] listarCategorias(){
 		String[] res = categorias.keySet().toArray(new String[0]);
 		return res;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 }

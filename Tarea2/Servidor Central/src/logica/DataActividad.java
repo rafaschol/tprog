@@ -12,6 +12,7 @@ public class DataActividad {
 	private String[] clases;
 	private String[] cuponeras;
 	private String[] categorias;
+	private String foto;
 	
 	
 	
@@ -25,6 +26,7 @@ public class DataActividad {
 		this.setCuponeras(cup);
 		this.setInstitucion(ad.getInstitucion().getNombre());
 		this.setCategorias(cat);
+		this.setFoto(ad.getFoto());
 	
 	}
 	
@@ -108,6 +110,18 @@ public class DataActividad {
 
 	private void setCategorias(String[] categorias) {
 		this.categorias = categorias;
+	}
+
+
+
+	public String getFoto() {
+		return foto;
+	}
+
+
+
+	private void setFoto(String foto) {
+		this.foto = foto;
 	}
 		
 	

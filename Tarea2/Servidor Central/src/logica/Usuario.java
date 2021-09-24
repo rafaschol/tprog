@@ -10,6 +10,7 @@ public abstract class Usuario {
 	protected String email;
 	protected Date fechaNacimiento;
 	protected String contrasena;
+	protected String foto;
 	protected Map<String, Usuario> seguidos;
 	protected Map<String, Usuario> seguidores;
 	
@@ -60,6 +61,14 @@ public abstract class Usuario {
 	
 	public String getContrasena() {
 		return this.contrasena;
+	}
+	
+	public void setFoto(String foto) {
+		this.foto = foto;	
+	}
+	
+	public String getFoto(){
+		return this.foto;
 	}
 	
 	// Red Socioal
