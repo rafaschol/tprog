@@ -12,11 +12,15 @@ public class DataActividad {
 	private String[] clases;
 	private String[] cuponeras;
 	private String[] categorias;
+	private String[] actividadesAceptadas;
+	private String[] actividadesRechazadas;
+	private String[] actividadesIngresadas;
+	
 	private String foto;
 	
 	
 	
-	public DataActividad(ActividadDeportiva ad, String[] cla, String[] cup, String[] cat){
+	public DataActividad(ActividadDeportiva ad, String[] cla, String[] cup, String[] cat,  String[] actividadesAceptadas, String[] actividadesRechazadas, String[] actividadesIngresadas) {
 		this.setNombre(ad.getNombre());
 		this.setFecha(ad.getFecha());
 		this.setDescripcion(ad.getDescripcion());
@@ -27,7 +31,9 @@ public class DataActividad {
 		this.setInstitucion(ad.getInstitucion().getNombre());
 		this.setCategorias(cat);
 		this.setFoto(ad.getFoto());
-	
+		this.setActividadesRechazadas(actividadesRechazadas);
+		this.setActividadesAceptadas(actividadesAceptadas);
+		this.setActividadesIngresadas(actividadesIngresadas);
 	}
 	
 	
@@ -123,7 +129,48 @@ public class DataActividad {
 	private void setFoto(String foto) {
 		this.foto = foto;
 	}
-		
+
+
+
+	public String[] getActividadesAceptadas() {
+		return actividadesAceptadas;
+	}
+
+
+
+	private void setActividadesAceptadas(String[] actividadesAceptadas) {
+		this.actividadesAceptadas = actividadesAceptadas;
+	}
+
+
+
+	public String[] getActividadesRechazadas() {
+		return actividadesRechazadas;
+	}
+
+
+
+	private void setActividadesRechazadas(String[] actividadesRechazadas) {
+		this.actividadesRechazadas = actividadesRechazadas;
+	}
+
+
+
+	public String[] getActividadesIngresadas() {
+		return actividadesIngresadas;
+	}
+
+
+
+	private void setActividadesIngresadas(String[] actividadesIngresadas) {
+		this.actividadesIngresadas = actividadesIngresadas;
+	}
+
+
+
+
+
+	
 	
 	
 
