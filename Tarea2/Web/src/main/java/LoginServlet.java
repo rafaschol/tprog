@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		
-		/*try {
+		try {
 			DataUsuario usuario = controladorUsuario.login(email, password);
 			sesion.setAttribute("loggedUser", usuario);
 			response.sendRedirect("inicio");
@@ -50,8 +50,8 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("loginError", true);
 			dispatcher.forward(request, response);
 		}
-		
-		/*if (email.equals("rafa@mail.com") && password.equals("1234")) {
+		/*
+		if (email.equals("rafa@mail.com") && password.equals("1234")) {
 			
 			sesion.setAttribute("loggedUser", "rafa@mail.com");
 			response.sendRedirect("inicio");

@@ -8,6 +8,7 @@ import excepciones.DatosLoginIncorrectosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
+import excepciones.UsuarioYaSigueAUsuarioException;
 
 public interface IControladorUsuario {
 	
@@ -37,5 +38,13 @@ public interface IControladorUsuario {
     
     public abstract String[]  listarCuponerasActividad(String nickname, String nombreActividad);
     public abstract DataUsuario login(String mail,String contrasena) throws DatosLoginIncorrectosException; 
+    
+    /*	Devuelve true si nickSeguido está en el Map "seguidos" del usuario nickSeguidor. 
+  	Si nickSeguidor == nickSeguido, devuelve false. */
+	public abstract Boolean yaSigueAUsuario(String nickSeguidor, String nickSeguido);
+	
+	public abstract void seguirUsuario(String nickSeguidor, String nickSeguido) throws 	/*UsuarioSigueASiMismoException,*/
+																						UsuarioYaSigueAUsuarioException;
+
     
 }

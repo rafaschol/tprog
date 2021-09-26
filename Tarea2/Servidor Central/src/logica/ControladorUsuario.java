@@ -12,6 +12,7 @@ import excepciones.DatosLoginIncorrectosException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
+import excepciones.UsuarioYaSigueAUsuarioException;
 
 public class ControladorUsuario implements IControladorUsuario {
 
@@ -325,6 +326,62 @@ public class ControladorUsuario implements IControladorUsuario {
     		throw new DatosLoginIncorrectosException("Los datos son incorrectos");
     	
     }
+    
+    /* 	FUNCIÓN AUXILIAR para yaSigueAUsuario() y seguirUsuario().
+	Devuelve el usuario con el nickname "nick". Si el usuario no existe devuleve null. */
+	public Usuario obtenerUsuarioPorNick(String nick) 
+	{
+		ManejadorSocios ms = ManejadorSocios.getinstance();
+		ManejadorProfesores mp = ManejadorProfesores.getinstance();
+		
+		// ------------------------------------------------------------------
+		
+		Socio usuarioSocio = ms.obtenerSocio(nick);
+		Profesor usuarioProfe = mp.obtenerProfesor(nick);
+		
+		Usuario usuario;
+		if (usuarioSocio == null) { 
+			usuario = usuarioProfe; 
+		}
+		else {
+			usuario = usuarioSocio;
+		}
+		
+		return usuario;
+	}
+
+	public Boolean yaSigueAUsuario(String nickSeguidor, String nickSeguido)
+	{
+		Boolean res;
+		
+	    if (nickSeguidor.equals(nickSeguido)) {
+	    	res = false;
+		}
+	    else {
+	    	Usuario seguidor 	= obtenerUsuarioPorNick(nickSeguidor);
+	    	
+	    	res = seguidor.seguidos.containsKey(nickSeguido);
+	    }
+	    
+	    return res;
+	}
+	
+	public void seguirUsuario(String nickSeguidor, String nickSeguido) 	throws 	/*UsuarioSigueASiMismoException,*/ // <-- excepcion no necesaria. La dejo comentada.
+																				UsuarioYaSigueAUsuarioException
+	{
+	/*	if (nickSeguidor.equals(nickSeguido)) {
+			throw new UsuarioSigueASiMismoException("No puede seguirse a sí mismo.");
+		}
+		else*/ if (yaSigueAUsuario(nickSeguidor, nickSeguido)) {
+			throw new UsuarioYaSigueAUsuarioException("Ya sigue a este usuario.");
+		}
+		else {
+			Usuario seguidor 	= obtenerUsuarioPorNick(nickSeguidor);
+			Usuario seguido 	= obtenerUsuarioPorNick(nickSeguido);
+			
+			seguidor.addSeguido(seguido);
+		}
+	}
       
 }
 	

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
+import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraRepetidaException;
@@ -13,6 +14,7 @@ import excepciones.InstitucionRepetidaException;
 import excepciones.MailRepetidoException;
 import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
+import excepciones.UsuarioYaSigueAUsuarioException;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
@@ -29,65 +31,162 @@ public class CargarDatosPrueba {
 		controladorCuponera = icc;
 	}
 	
+// ================================================================================
+
 	public void cargarSocios() {
 		try {
-			controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31));
-			controladorUsuario.altaSocio("caro", "Carolina", "Omega", "caro@gmail.com", new Date(83, 10, 15));
-			controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15));
-			controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15));
-			controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28));
-			controladorUsuario.altaSocio("andy", "Andr\u00E9s", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17));
-			controladorUsuario.altaSocio("tonyp", "Antonio", "Paz", "eltony@gmail.org.uy", new Date(55, 1, 14));
-			controladorUsuario.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(87, 1, 23));
-			controladorUsuario.altaSocio("charly", "Carlos", "Boston", "charly@gmail.com.uy", new Date(37, 4, 8));
+							// altaSocio(nickname , nombre, apellido, email, fechaNacimiento, contraseña, foto
+	/* EL */controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31), "asdfg456", "/img/Emi71.jpg");
+	/* CO */controladorUsuario.altaSocio("caro", "Carolina", "Omega", "caro@gmail.com", new Date(83, 10, 15), "123rtgfdv", "/img/caro.jpg");
+	/* EW */controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15), "poiuy086", "/img/euge.jpg");
+	/* GH */controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15), "GTO468", "/img/guille.jpg");
+	/* SP */controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28), "HGF135", "/img/sergiop.jpg");
+	/* AR */controladorUsuario.altaSocio("andy", "Andr\u00E9s", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17), "lkj65D", "/img/andy.jpg");
+	/* AP */controladorUsuario.altaSocio("tonyp", "Antonio", "Paz", "eltony@gmail.org.uy", new Date(55, 1, 14), "jhvf395", "/img/tonyp.jpg");
+	/* ML */controladorUsuario.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(87, 1, 23), "ijngr024", "/img/m1k4.jpg");
+	/* CB */controladorUsuario.altaSocio("charly", "Carlos", "Boston", "charly@gmail.com.uy", new Date(37, 4, 8), "987mnbgh", "/img/charly.jpg");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			e.printStackTrace();
 		}
 	}
 	
+// ================================================================================
+
 	public void cargarProfesores() {
 		try {
-			controladorUsuario.altaProfesor("viktor", "Victor", "Perez", "vperez@fuerza.com", new Date(77, 0, 1), "Fuerza Bruta",
+							// altaProfesor(usuario , nombre, apellido, email, fechaNacimiento, institucion, descripción, biografía, sitioWeb, contraseña, foto
+	/* VP */controladorUsuario.altaProfesor("viktor", "Victor", "Perez", "vperez@fuerza.com", new Date(77, 0, 1), "Fuerza Bruta",
 					"Victor es un apasionado de los m\u00FAculos. Sus clases son organizadas en funci\u00F3n de distintos aparatos y pesas con el objetivo de desarrollar m\u00FAsculos",
 					"Victor naci\u00F3 en Moscow en 1977. En el a\u00F1o 2005 emigr\u00F3 a Uruguay luego de quedar encantado con el pa\u00EDs en un viaje tur\u00EDstico.",
-					"www.vikgym.com");
-			controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Tel\u00F3n",
+					"www.vikgym.com", "lkj34df", "https://bit.ly/3zetdMl");
+	/* DM */controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Tel\u00F3n",
 					"A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball",
 					"Denis fue un jugador de voleibol profesional.",
-					"www.depecho.co");
-			controladorUsuario.altaProfesor("clazar", "Carlos", "Lazaro", "claz4r0@hotmail.com", new Date(53, 5, 22), "Instituto Natural",
+					"www.depecho.co", "poke579", "https://bit.ly/3lKq8Px");
+	/* CL */controladorUsuario.altaProfesor("clazar", "Carlos", "Lazaro", "claz4r0@hotmail.com", new Date(53, 5, 22), "Instituto Natural",
 					"Carlos es un profesor muy divertido cuyas clases de aer\u00F3bica est\u00E1n cargadas de energ\u00EDa.",
 					"El inter\u00E9s por la actividad f\u00EDsica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.",
-					"www.enforma.co");
-			controladorUsuario.altaProfesor("TheBoss", "Bruno", "Sosa", "bruceTheBoss@gmail.com", new Date(49, 8, 23), "Fuerza Bruta",
+					"www.enforma.co", "mkji648", "https://bit.ly/2VJvT6S");
+	/* BS */controladorUsuario.altaProfesor("TheBoss", "Bruno", "Sosa", "bruceTheBoss@gmail.com", new Date(49, 8, 23), "Fuerza Bruta",
 					"Bruno es un ex-boxeardor que busca entrenar a futuros campeones.",
 					"Bruno, mejor conocido como Bruce en el ring, compiti\u00F3 como boxeador entre los a\u00F1os 60s y 70s.",
-					"www.bruce.net");
-			controladorUsuario.altaProfesor("Nelson", "Luis", "Nelson", "nelson@hotmail.com", new Date(98, 0, 1), "Tel\u00F3n",
+					"www.bruce.net", "fcku0123", "https://bit.ly/3kdT9TV");
+	/* TN */controladorUsuario.altaProfesor("Nelson", "Luis", "Nelson", "nelson@hotmail.com", new Date(98, 0, 1), "Tel\u00F3n",
 					"Profesor de nataci\u00F3n. Especializado en braza y mariposa.",
 					"",
-					"www.nelson.uy");
-			controladorUsuario.altaProfesor("lale", "Laura", "Leyes", "la_le@outlook.com", new Date(87, 1, 14), "Tel\u00F3n",
+					"www.nelson.uy", "vbmn4r", "https://bit.ly/3lxsDo7");
+	/* LL */controladorUsuario.altaProfesor("lale", "Laura", "Leyes", "la_le@outlook.com", new Date(87, 1, 14), "Tel\u00F3n",
 					"Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a ense\u00F1ar t\u00E1cticas de futbol",
 					"Jugadora profesional de futbol desde 2010 a 2020.",
-					"www.laley.com");
-			controladorUsuario.altaProfesor("prisc", "Priscila", "Pappo", "pripa@gmail.com", new Date(81, 7, 13), "Olympic",
+					"www.laley.com", "ncnl123", "https://bit.ly/3EmlY8F");
+	/* PI */controladorUsuario.altaProfesor("prisc", "Priscila", "Pappo", "pripa@gmail.com", new Date(81, 7, 13), "Olympic",
 					"Laura tiene un gran inter\u00E9s por los deportes ol\u00EDmpicos.",
 					"",
-					"www.pi314.net");
-			controladorUsuario.altaProfesor("dagost", "Daiana", "Agostini", "d_1940_ago@gmail.com", new Date(40, 2, 5), "Olympic",
+					"www.pi314.net", "mny101", "");
+	/* DY */controladorUsuario.altaProfesor("dagost", "Daiana", "Agostini", "d_1940_ago@gmail.com", new Date(40, 2, 5), "Olympic",
 					"Profesora dedicada y exigente. No acepta un \u201Cno puedo\u201D como respuesta.",
 					"",
-					"www.dygym.com");
-			controladorUsuario.altaProfesor("aldo", "Aldo", "Vivaldi", "aldo@outlook.com", new Date(52, 6, 17), "Tel\u00F3n",
+					"www.dygym.com", "1o1vbm", "https://bit.ly/3hB3zvo");
+	/* AL */controladorUsuario.altaProfesor("aldo", "Aldo", "Vivaldi", "aldo@outlook.com", new Date(52, 6, 17), "Tel\u00F3n",
 					"Dada su gran estatura Aldo siempre jug\u00F3 al basquetbol, hoy se dedica a ense\u00F1arlo.",
 					"",
-					"www.sportsaldo.net");
+					"www.sportsaldo.net", "ultraton01", "https://bit.ly/2VLnzUj");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			e.printStackTrace();
 		}
 	}
 	
+// ================================================================================
+	
+	public void cargarSeguidores() {
+		try { 
+	/* EL */controladorUsuario.seguirUsuario("Emi71", "guille");
+			
+	/* CO */controladorUsuario.seguirUsuario("caro", "euge");
+			controladorUsuario.seguirUsuario("caro", "guille");
+			
+	/* EW */controladorUsuario.seguirUsuario("euge", "Emi71");
+			controladorUsuario.seguirUsuario("euge", "caro");
+			controladorUsuario.seguirUsuario("euge", "m1k4");
+			
+	/* GH */controladorUsuario.seguirUsuario("guille", "Emi71");
+			controladorUsuario.seguirUsuario("guille", "caro");
+			controladorUsuario.seguirUsuario("guille", "euge");
+			controladorUsuario.seguirUsuario("guille", "TheBoss");
+			
+	/* SP */controladorUsuario.seguirUsuario("sergiop", "euge");
+			controladorUsuario.seguirUsuario("sergiop", "andy");
+			controladorUsuario.seguirUsuario("sergiop", "clazar");
+			
+	/* AR */controladorUsuario.seguirUsuario("andy", "caro");
+			controladorUsuario.seguirUsuario("andy", "tonyp");
+			controladorUsuario.seguirUsuario("andy", "clazar");
+			
+	/* AP */controladorUsuario.seguirUsuario("tonyp", "caro");
+			controladorUsuario.seguirUsuario("tonyp", "m1k4");
+			controladorUsuario.seguirUsuario("tonyp", "charly"); 
+			
+	/* ML */controladorUsuario.seguirUsuario("m1k4", "sergiop");
+			controladorUsuario.seguirUsuario("m1k4", "tonyp");
+			
+	/* CB */controladorUsuario.seguirUsuario("charly", "tonyp");
+			controladorUsuario.seguirUsuario("charly", "Nelson");
+			
+	/* VP */controladorUsuario.seguirUsuario("viktor", "tonyp");
+			controladorUsuario.seguirUsuario("viktor", "m1k4");
+			controladorUsuario.seguirUsuario("viktor", "clazar");
+			controladorUsuario.seguirUsuario("viktor", "lale");
+			controladorUsuario.seguirUsuario("viktor", "prisc");
+			
+	/* DM */controladorUsuario.seguirUsuario("denis", "Emi71");
+			controladorUsuario.seguirUsuario("denis", "caro");
+			controladorUsuario.seguirUsuario("denis", "euge");
+			controladorUsuario.seguirUsuario("denis", "guille");
+			controladorUsuario.seguirUsuario("denis", "sergiop");
+			controladorUsuario.seguirUsuario("denis", "andy");
+			controladorUsuario.seguirUsuario("denis", "tonyp");
+			controladorUsuario.seguirUsuario("denis", "m1k4");
+			controladorUsuario.seguirUsuario("denis", "charly");
+			
+	/* CL */controladorUsuario.seguirUsuario("clazar", "caro");
+			controladorUsuario.seguirUsuario("clazar", "euge");
+			controladorUsuario.seguirUsuario("clazar", "guille");
+			controladorUsuario.seguirUsuario("clazar", "TheBoss");
+			
+	/* BS */controladorUsuario.seguirUsuario("TheBoss", "guille");
+			controladorUsuario.seguirUsuario("TheBoss", "andy");
+			controladorUsuario.seguirUsuario("TheBoss", "m1k4");
+			
+	/* TN */controladorUsuario.seguirUsuario("Nelson", "Emi71");
+			controladorUsuario.seguirUsuario("Nelson", "andy");
+			controladorUsuario.seguirUsuario("Nelson", "tonyp");
+			controladorUsuario.seguirUsuario("Nelson", "lale");
+			controladorUsuario.seguirUsuario("Nelson", "prisc");
+			controladorUsuario.seguirUsuario("Nelson", "dagost");
+			
+	/* LL */controladorUsuario.seguirUsuario("lale", "charly");
+			controladorUsuario.seguirUsuario("lale", "Nelson");
+			
+	/* PI */controladorUsuario.seguirUsuario("prisc", "charly");
+			controladorUsuario.seguirUsuario("prisc", "Nelson");
+			
+	/* DY */controladorUsuario.seguirUsuario("dagost", "tonyp");
+			controladorUsuario.seguirUsuario("dagost", "charly");
+			
+	/* AL */controladorUsuario.seguirUsuario("aldo", "andy");
+			controladorUsuario.seguirUsuario("aldo", "tonyp");
+			controladorUsuario.seguirUsuario("aldo", "charly");
+			controladorUsuario.seguirUsuario("aldo", "lale");
+			controladorUsuario.seguirUsuario("aldo", "prisc");
+			controladorUsuario.seguirUsuario("aldo", "dagost");
+			
+		} catch (/*UsuarioSigueASiMismoException |*/ UsuarioYaSigueAUsuarioException e) {
+			e.printStackTrace();
+		}
+	}
+	
+// ================================================================================	
+
 	public void cargarInstituciones() {
 		try {
 			controladorInstitucion.altaInstitucionDeportiva("Instituto Natural",
@@ -107,43 +206,94 @@ public class CargarDatosPrueba {
 		}
 	}
 	
+// ================================================================================
+	
+	String[] arrayVacio = new String[0];
+	
 	public void cargarActividadesDeportivas() {
 		try {
-			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos y pesas",
-					"Clases de aparatos, pesas y calistenia.",
-					90, (float) 550.0, new Date(121, 2, 31));
-			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
 			
-			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Voleibol",
+		// Dada de alta por admin: altaActividadDeportiva	(nombreInstitucion, nombre, descripcion, duracion, costo, fecha, categorias, foto)
+		// Dada de alta por profe: altaActividadDeportivaWeb(nombreInstitucion, nombre, descripcion, duracion, costo, fecha, profesor, categorias, foto)
+	/* A1 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Aparatos y pesas",
+					"Clases de aparatos, pesas y calistenia.",
+					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
+			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
+	
+			
+	/* A2 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol",
 					"Voleibol en todas sus formas",
-					120, (float) 750.0, new Date(121, 3, 20));
+					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
 			
-			controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
-					"Para cuidar el aparato cardiovascular",
-					110, (float) 800.0, new Date(121, 4, 30));
-			controladorInstitucion.aceptarRechazarActividad("Aer\u00F3bica", true);
 			
-			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Kickboxing",
+	/* A3 */controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
+					"Para cuidar el aparato cardiovascular",
+					110, (float) 800.0, new Date(121, 4, 30), arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Aer\\u00F3bica", "Gimnasia");
+			controladorInstitucion.agregarCategoriaAActividad("Aer\\u00F3bica", "Al aire libre");
+			controladorInstitucion.aceptarRechazarActividad("Aer\\u00F3bica", true);
+			
+			
+	/* A4 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Kickboxing",
 					"En busca del nuevo campe\u00F3n de boxeo.",
-					100, (float) 980.0, new Date(121, 5, 7));
+					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Kickboxing", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Kickboxing", true);
 			
-			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Atletismo",
+			
+	/* A5 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
-					150, (float) 500.0, new Date(121, 6, 8));
+					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Atletismo", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Atletismo", true);
 			
-			controladorInstitucion.altaActividadDeportiva("Tel\u00F3n", "Basquetbol",
-					"Espect\u00E1culo conmemorando los 30 a\u00F1os de Violeta.",
-					80, (float) 450.0, new Date(121, 6, 31));
+			
+	/* A6 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol",
+					"Basquetbol para todos.",
+					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Basquetbol", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Basquetbol", true);
 			
-		} catch (ActividadRepetidaException e) {
+			
+	/* A7 */controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos II",
+					"Clases de aparatos avanzadas.",
+					60, (float) 1500.0, new Date(121, 7, 15), arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Aparatos II", "Fitness");
+			controladorInstitucion.aceptarRechazarActividad("Aparatos II", false);
+			
+			
+	/* A8 */controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
+					"El Método Pilates combina diferentes capacidades físicas.",
+					45, (float) 600.0, new Date(121, 7, 30), "clazar",arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
+					// INGRESADA
+	
+			
+	/* A9 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol II",
+					"Voleibol avanzado.",
+					120, (float) 1000.0, new Date(121, 8, 1),"denis", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Deportes");
+			controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Al aire libre");
+			controladorInstitucion.aceptarRechazarActividad("Voleibol II", false);
+			
+			
+	/* A10*/controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol II",
+					"Basequetbol avanzado.",
+					80, (float) 600.0, new Date(121, 8, 7), "denis", arrayVacio, "");
+			controladorInstitucion.agregarCategoriaAActividad("Basquetbol II", "Gimnasia");
+					// INGRESADA
+	
+			
+		} catch (ActividadRepetidaException | CategoriaRepetidaException e) {
 			e.printStackTrace();
 		}
 	}
 	
+// ================================================================================	
+
 	public void cargarClases() {
 		try {
 			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas");
@@ -168,74 +318,85 @@ public class CargarDatosPrueba {
 		}
 	}
 	
+// ================================================================================
+	
 	public void cargarRegistrosClases() {
 		try {
-			controladorUsuario.registrarSocio("caro", "Calistenia", "Aparatos y pesas", false, null, new Date(121, 3, 9));
+							// registrarSocio(nickname, nombreClase, nombreActividad, conCuponera, nombreCuponera, fecha)
+	/* R01*/controladorUsuario.registrarSocio("caro", "Calistenia", "Aparatos y pesas", false, null, new Date(121, 3, 9));
 			controladorUsuario.registrarSocio("sergiop", "Calistenia", "Aparatos y pesas", false, null, new Date(121, 3, 10));
 			controladorUsuario.registrarSocio("andy", "Calistenia", "Aparatos y pesas", false, null, new Date(121, 3, 12));
 			controladorUsuario.registrarSocio("andy", "Peso libre", "Aparatos y pesas", false, null, new Date(121, 3, 15));
-			controladorUsuario.registrarSocio("tonyp", "Peso libre", "Aparatos y pesas", false, null, new Date(121, 3, 20));
+	/* R05*/controladorUsuario.registrarSocio("tonyp", "Peso libre", "Aparatos y pesas", false, null, new Date(121, 3, 20));
 			controladorUsuario.registrarSocio("caro", "Peso libre", "Aparatos y pesas", false, null, new Date(121, 3, 25));
 			controladorUsuario.registrarSocio("m1k4", "Peso libre", "Aparatos y pesas", false, null, new Date(121, 3, 28));
 			controladorUsuario.registrarSocio("charly", "Aparatos", "Aparatos y pesas", false, null, new Date(121, 3, 16));
 			controladorUsuario.registrarSocio("caro", "Aparatos", "Aparatos y pesas", false, null, new Date(121, 4, 15));
-			controladorUsuario.registrarSocio("m1k4", "Aparatos", "Aparatos y pesas", false, null, new Date(121, 4, 20));
+	/* R10*/controladorUsuario.registrarSocio("m1k4", "Aparatos", "Aparatos y pesas", false, null, new Date(121, 4, 20));
 			controladorUsuario.registrarSocio("Emi71", "Voleibol", "Voleibol", false, null, new Date(121, 4, 5));
 			controladorUsuario.registrarSocio("euge", "Voleibol", "Voleibol", false, null, new Date(121, 4, 10));
 			controladorUsuario.registrarSocio("sergiop", "Voleibol", "Voleibol", false, null, new Date(121, 4, 15));
 			controladorUsuario.registrarSocio("tonyp", "Voleibol", "Voleibol", false, null, new Date(121, 4, 20));
-			controladorUsuario.registrarSocio("guille", "Braza", "Voleibol", false, null, new Date(121, 5, 8));
+	/* R15*/controladorUsuario.registrarSocio("guille", "Braza", "Voleibol", false, null, new Date(121, 5, 8));
 			controladorUsuario.registrarSocio("euge", "Braza", "Voleibol", false, null, new Date(121, 5, 13));
 			controladorUsuario.registrarSocio("m1k4", "Braza", "Voleibol", false, null, new Date(121, 5, 25));
 			controladorUsuario.registrarSocio("charly", "Mariposa", "Voleibol", false, null, new Date(121, 6, 5));
 			controladorUsuario.registrarSocio("sergiop", "Mariposa", "Voleibol", false, null, new Date(121, 6, 11));
-			controladorUsuario.registrarSocio("andy", "Mariposa", "Voleibol", false, null, new Date(121, 6, 18));
-			controladorUsuario.registrarSocio("m1k4", "Aer\u00F3bica ni\u00F1os", "Aer\u00F3bica", false, null, new Date(121, 6, 19));
+	/* R20*/controladorUsuario.registrarSocio("andy", "Mariposa", "Voleibol", false, null, new Date(121, 6, 18));
+			controladorUsuario.registrarSocio("m1k4", "Aer\u00F3bica ni\u00F1os", "Aer\u00F3bica", true, "Gimnasia", new Date(121, 6, 19));
 			controladorUsuario.registrarSocio("Emi71", "Aer\u00F3bico adulto mayor", "Aer\u00F3bica", false, null, new Date(121, 7, 17));
 			controladorUsuario.registrarSocio("guille", "Aer\u00F3bico adulto mayor", "Aer\u00F3bica", false, null, new Date(121, 7, 20));
 			controladorUsuario.registrarSocio("andy", "Aer\u00F3bico adulto mayor", "Aer\u00F3bica", false, null, new Date(121, 7, 23));
-			controladorUsuario.registrarSocio("caro", "Aer\u00F3bica", "Aer\u00F3bica", false, null, new Date(121, 7, 15));
+	/* R25*/controladorUsuario.registrarSocio("caro", "Aer\u00F3bica", "Aer\u00F3bica", true, "Gimnasia", new Date(121, 7, 15));
 			controladorUsuario.registrarSocio("euge", "Aer\u00F3bica", "Aer\u00F3bica", false, null, new Date(121, 7, 26));
-			controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", false, null, new Date(121, 6, 19));
+			controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", true, "M\u00FAsculos", new Date(121, 6, 19));
 			controladorUsuario.registrarSocio("tonyp", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("m1k4", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 24));
-			controladorUsuario.registrarSocio("sergiop", "Boxeo II", "Kickboxing", false, null, new Date(121, 7, 1));
+	/* R30*/controladorUsuario.registrarSocio("sergiop", "Boxeo II", "Kickboxing", true, "M\u00FAsculos", new Date(121, 7, 1));
 			controladorUsuario.registrarSocio("guille", "Boxeo II", "Kickboxing", false, null, new Date(121, 7, 30));
 			controladorUsuario.registrarSocio("Emi71", "M\u00FAsculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("caro", "M\u00FAsculos para boxeo", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("euge", "M\u00FAsculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 1));
-			controladorUsuario.registrarSocio("sergiop", "M\u00FAsculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 5));
+	/* R35*/controladorUsuario.registrarSocio("sergiop", "M\u00FAsculos para boxeo", "Kickboxing", false, null, new Date(121, 8, 5));
 			controladorUsuario.registrarSocio("guille", "100 M", "Atletismo", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("charly", "100 M", "Atletismo", false, null, new Date(121, 8, 3));
 			controladorUsuario.registrarSocio("Emi71", "200 M", "Atletismo", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("charly", "200 M", "Atletismo", false, null, new Date(121, 8, 6));
-			controladorUsuario.registrarSocio("caro", "Posta", "Atletismo", false, null, new Date(121, 8, 1));
+	/* R40*/controladorUsuario.registrarSocio("caro", "Posta", "Atletismo", false, null, new Date(121, 8, 1));
 			controladorUsuario.registrarSocio("sergiop", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 16));
 			controladorUsuario.registrarSocio("Emi71", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 20));
 			controladorUsuario.registrarSocio("tonyp", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 31));
 			controladorUsuario.registrarSocio("andy", "Basquet II", "Basquetbol", false, null, new Date(121, 8, 16));
-			controladorUsuario.registrarSocio("tonyp", "Basquet II", "Basquetbol", false, null, new Date(121, 8, 20));
+	/* R45*/controladorUsuario.registrarSocio("tonyp", "Basquet II", "Basquetbol", false, null, new Date(121, 8, 20));
 			controladorUsuario.registrarSocio("caro", "Basquet II", "Basquetbol", false, null, new Date(121, 9, 2));
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException e) {
 			e.printStackTrace();
 		}
 	}
+
+// ================================================================================
 	
 	public void cargarCuponeras() {
 		try {
+							 // altaCuponera(nombre, descripcion, inicio, fin, descuento, fechaAlta, foto)
 			controladorCuponera.altaCuponera("Pelota",
 					"Deportes con pelota.",
-					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30));
+					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30),
+					"/img/cuponera_pelota.jpg");
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
-					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15));
+					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15),
+					"/img/cuponera_gimnasia.jpg");
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
-					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1));
+					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
+					"/img/cuponera_musculos.jpg");
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}
 	}
+
+// ================================================================================
 	
 	public void cargarActividadesCuponeras() {
 		
@@ -251,21 +412,16 @@ public class CargarDatosPrueba {
 		}
 		
 	}
-	
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
-		//////////////////////////////////////CARGA DATOS ESPECIALES //////////////////////////////////////////
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// ================================================================================
 	
 	public void cargarCompraCuponera() {
+		controladorUsuario.compraCuponera("guille", "Pelota", new Date(121, 5, 31));
+		controladorUsuario.compraCuponera("m1k4", "Gimnasia", new Date(121, 5, 31));
+		controladorUsuario.compraCuponera("caro", "Gimnasia", new Date(121, 5, 31));
+		controladorUsuario.compraCuponera("sergiop", "M\u00FAsculos", new Date(121, 5, 31));
+		controladorUsuario.compraCuponera("andy", "M\u00FAsculos", new Date(121, 5, 31));
 		controladorUsuario.compraCuponera("Emi71", "Pelota", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("Emi71", "Gimnasia", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("Emi71", "M\u00FAsculos", new Date(121, 5, 31));
-		
-		
-		
-		
 	}
 	
 

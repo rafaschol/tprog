@@ -44,7 +44,7 @@ public class IndexServlet extends HttpServlet {
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			
 		}
-		
+	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Index.jsp");
 		dispatcher.forward(request, response);
 	}
