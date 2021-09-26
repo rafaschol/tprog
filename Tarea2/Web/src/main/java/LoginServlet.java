@@ -1,5 +1,5 @@
 
-
+/*
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
 			request.setAttribute("loginError", true);
 			dispatcher.forward(request, response);
-		}*/
+		}
 	}
 
-}
+}*/

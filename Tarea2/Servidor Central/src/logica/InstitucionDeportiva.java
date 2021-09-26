@@ -11,6 +11,7 @@ public class InstitucionDeportiva {
 	//colecciones para visibilidad
 	private Map<String, Profesor> profesores;
 	private Map<String, ActividadDeportiva> actividades;
+	private Map<String, ActividadDeportiva> actividadesAceptadas;
 
 	public InstitucionDeportiva(String n, String des, String url){
 		this.setNombre(n);
@@ -18,6 +19,7 @@ public class InstitucionDeportiva {
 		this.setURL(url);
 		this.setProfesores(new HashMap<String, Profesor>());
 		this.setActividades(new HashMap<String, ActividadDeportiva>());
+		this.setActividadesAceptadas(new HashMap<String, ActividadDeportiva>());
 	}
 
 	public String getNombre() {
@@ -64,17 +66,36 @@ public class InstitucionDeportiva {
 		String[] res = profesores.keySet().toArray(new String[0]);
 		return res;
 	}
+	public String[] listarActividadesAceptadas() {
+		String[] res = actividadesAceptadas.keySet().toArray(new String[0]);
+		return res;	
+	}
+	
 	public String[] listarActividades() {
 		String[] res = actividades.keySet().toArray(new String[0]);
-		return res;
-		
+		return res;	
 	}
+	
+	
+	
 	public void addActividad(ActividadDeportiva actividad) {
 		String nombre = actividad.getNombre();
 		this.actividades.put(nombre, actividad);
 	}
+	public void addActividadAceptada(ActividadDeportiva actividad) {
+		String nombre = actividad.getNombre();
+		this.actividadesAceptadas.put(nombre, actividad);
+	}
 	public void addProfesor(Profesor profesor) {
 		String nickname = profesor.getNickname();
 		this.profesores.put(nickname, profesor);
+	}
+
+	public Map<String, ActividadDeportiva> getActividadesAceptadas() {
+		return actividadesAceptadas;
+	}
+
+	public void setActividadesAceptadas(Map<String, ActividadDeportiva> actividadesAcptadas) {
+		this.actividadesAceptadas = actividadesAcptadas;
 	}
 }

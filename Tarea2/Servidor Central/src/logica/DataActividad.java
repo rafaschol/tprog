@@ -9,6 +9,7 @@ public class DataActividad {
 	private Integer duracion;
 	private Float costo;
 	private String institucion;
+	private String estado;
 	private String[] clases;
 	private String[] cuponeras;
 	private String[] categorias;
@@ -29,7 +30,7 @@ public class DataActividad {
 		this.setInstitucion(ad.getInstitucion().getNombre());
 		this.setCategorias(cat);
 		this.setFoto(ad.getFoto());
-
+		this.setEstado(ad.getEstado().toString());
 	}
 	
 	
@@ -124,6 +125,18 @@ public class DataActividad {
 
 	private void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	private void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 
