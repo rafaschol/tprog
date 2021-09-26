@@ -149,8 +149,8 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		ManejadorActividad ma = ManejadorActividad.getinstance();		
 		
 		// Iterar sobre las actividades
-		for (Entry<String, ActividadDeportiva> iter : ma.getActividadesAceptadas().entrySet()) {
-			if (iter.getValue().getEstado() == Estado.Aceptada) {
+		for (Entry<String, ActividadDeportiva> iter : ma.getActividades().entrySet()) {
+			if (iter.getValue().getEstado() == Estado.Ingresada) {
 				set.add(iter.getKey());
 			}
 		}

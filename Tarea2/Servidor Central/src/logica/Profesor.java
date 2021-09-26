@@ -28,6 +28,7 @@ public class Profesor extends Usuario {
 		this.foto = foto;
 		this.seguidos = new HashMap<String, Usuario>();
 		this.seguidores = new HashMap<String, Usuario>();
+		this.actividades = new HashMap<String, ActividadDeportiva>();
 	}
 
 	public String getDescripcion() {
