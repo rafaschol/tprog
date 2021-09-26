@@ -6,13 +6,13 @@
   background-color: #f0f0f0;
 }
 
-.form-page#login-page form {
+.form-page form {
   width: 350px;
 }
 
-.form-page#register-page form {
-  width: 450px;
+.form-page.tab-page form {
   position: relative;
+  width: 450px;
 }
 
 .form-page .form-tab {
@@ -23,7 +23,11 @@
   display: initial !important;
 }
 
-.form-page #prev-button, .form-page #next-button, .form-page #register-button {
+.form-page #prev-button, .form-page #submit-button, .form-page #register-button {
+  display: none;
+}
+
+.form-page#register-page #next-button {
   display: none;
 }
 
