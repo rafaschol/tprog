@@ -7,6 +7,9 @@ public class DataProfesor extends DataUsuario {
 	private String sitioWeb;
 	private String institucion;
 	private String[] actividades;
+	private String[] actividadesAceptadas; 
+	private String[] actividadesRechazadas;
+	private String[] actividadesIngresadas;
 
 	public DataProfesor(Usuario u, String[] cla, String[] actividades) {
 		super(u, cla);
@@ -16,6 +19,9 @@ public class DataProfesor extends DataUsuario {
 		this.setSitioWeb(Profesor.class.cast(u).getSitioWeb());
 		this.setInstitucion(Profesor.class.cast(u).getInstitucion().getNombre());
 		this.setActividades(actividades);
+		this.setActividadesRechazadas(Profesor.class.cast(u).getActividadesRechazadas());
+		this.setActividadesAceptadas(Profesor.class.cast(u).getActividadesAceptadas());
+		this.setActividadesIngresadas(Profesor.class.cast(u).getActividadesIngresadas());
 		}
 
 	public String getDescripcion() {
@@ -58,5 +64,37 @@ public class DataProfesor extends DataUsuario {
 	private void setActividades(String[] actividades) {
 		this.actividades = actividades;
 	}
-	
+	public String[] getActividadesAceptadas() {
+		return actividadesAceptadas;
+	}
+
+
+
+	private void setActividadesAceptadas(String[] actividadesAceptadas) {
+		this.actividadesAceptadas = actividadesAceptadas;
+	}
+
+
+
+	public String[] getActividadesRechazadas() {
+		return actividadesRechazadas;
+	}
+
+
+
+	private void setActividadesRechazadas(String[] actividadesRechazadas) {
+		this.actividadesRechazadas = actividadesRechazadas;
+	}
+
+
+
+	public String[] getActividadesIngresadas() {
+		return actividadesIngresadas;
+	}
+
+
+
+	private void setActividadesIngresadas(String[] actividadesIngresadas) {
+		this.actividadesIngresadas = actividadesIngresadas;
+	}
 }

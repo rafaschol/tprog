@@ -116,7 +116,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	//Conseguir strings para crear Data Actividad
     	String[] clases = ad.listarClases();
     	String[] cuponeras = ad.listarCuponeras();
-    	String[] categorias = ad.listarCategorias();
+    	String[] categorias = ad.listarCategorias();	
     	DataActividad dataActividad = new DataActividad(ad,clases,cuponeras,categorias);
     	return dataActividad;   	
     }

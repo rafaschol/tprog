@@ -123,13 +123,17 @@
   border: 0;
 }
 
-.sidebar-submenu-button::before {
+.sidebar-submenu-button:not(#personas)::before {
   width: 1.25em;
   line-height: 0;
   font-family: FontAwesome;
   content: "\f054";
   transition: transform .35s ease;
   transform-origin: .5em 50%;
+}
+
+.sidebar-submenu-button#personas {
+  margin-left: 1.25em;
 }
 
 .sidebar-submenu-button[aria-expanded="true"]::before {
@@ -142,4 +146,8 @@
   margin-top: .125rem;
   margin-left: 1.25rem;
   text-decoration: none;
+}
+
+.list-group .list-group-item img {
+  width: 50px;
 }

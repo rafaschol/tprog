@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Stylesheets -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/detail-page.css">
+  
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
+  
+  <title>denis | Entrenemos.uy</title>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="btn btn-primary rounded-circle me-3 sidebar-toggler">
+        <i class="fas fa-caret-right sidebar-toggler-show" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
+        <i class="fas fa-caret-left sidebar-toggler-hide" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
+      </button>
+      <a class="navbar-brand" href="index.html">Entrenemos<span class="fw-bold">.uy</span></a>
+
+      <!-- Profile (logged-in) -->
+      <div class="navbar-profile me-3 me-lg-0">
+        <a href="usuario_profesor_detail.html">
+          <img class="rounded-circle" src="img/denis.jpg" alt="foto de perfil">
+        </a>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>      
+      <div class="collapse navbar-collapse pt-3 pt-lg-0 text-center" id="navbarNav">
+        <form action="#" method="GET" class="ms-auto me-lg-3 mb-2 mb-lg-0">
+          <div class="input-group">
+            <input class="form-control form-control-dark" type="search" placeholder="Buscar">
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </form>        
+      </div>
+    </div>
+  </nav>
+    
+  <div class="d-flex container-fluid page-wrapper px-0">
+
+    <!-- Sidebar -->
+    <aside class="sidebar border-end bg-white p-3">
+      <ul class="list-unstyled mt-3 ps-0">
+        <li class="mb-1">
+          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#instituciones-submenu" aria-expanded="true">Instituciones</button>
+          <div class="collapse show" id="instituciones-submenu">
+            <ul class="list-unstyled pb-1 small sidebar-submenu">
+              <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Telón</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">Categorías</button>
+          <div class="collapse show" id="categorias-submenu">
+            <ul class="list-unstyled pb-1 small sidebar-submenu">
+              <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Deportes</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Fitness</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">Gimnasia</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <a href="usuario_list.html" class="btn sidebar-submenu-button align-items-center rounded" id="personas">Personas</a>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#cuenta-submenu" aria-expanded="true">Cuenta</button>
+          <div class="collapse show" id="cuenta-submenu">
+            <ul class="list-unstyled pb-1 small sidebar-submenu">
+              <li><a href="usuario_profesor_detail.html" class="link-dark rounded">Mi perfil</a></li>
+              <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
+              <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
+              <li><a href="index.html" class="link-dark rounded">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Page content -->
+    <main class="main-content bg-white" id="user-page">
+
+      <section class="details p-3">
+
+        <div class="details-main mb-4">
+          <img src="img/denis.jpg" alt="foto de perfil" class="img-fluid rounded">
+          <div class="p-3">
+            <h1>Denis Miguel <span class="text-muted fw-light">(denis)</span></h1>
+            <p class="lead text-muted">
+              den80@fuerza.com &#8212;
+              <a href="#" class="text-decoration-none text-reset me-1"><span class="fw-bold">9</span> seguidos</a>
+              <a href="#" class="text-decoration-none text-reset"><span class="fw-bold">0</span> seguidores</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="user-tabs border rounded p-3">
+
+          <nav>
+            <div class="nav nav-pills mb-3" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-perfil-tab" data-bs-toggle="tab" data-bs-target="#nav-perfil" type="button" role="tab" aria-controls="nav-perfil" aria-selected="true">Perfil</button>
+              <button class="nav-link" id="nav-clases-tab" data-bs-toggle="tab" data-bs-target="#nav-clases" type="button" role="tab" aria-controls="nav-clases" aria-selected="false">Clases</button>
+              <button class="nav-link" id="nav-actividades-aceptadas-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades-aceptadas" type="button" role="tab" aria-controls="nav-actividades-aceptadas" aria-selected="false">Actividades deportivas</button>
+              <button class="nav-link" id="nav-actividades-sin-aceptar-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades-sin-aceptar" type="button" role="tab" aria-controls="nav-actividades-sin-aceptar" aria-selected="false">Actividades deportivas (sin aceptar)</button>
+              <button class="nav-link" id="nav-seguidos-tab" data-bs-toggle="tab" data-bs-target="#nav-seguidos" type="button" role="tab" aria-controls="nav-seguidos" aria-selected="false">Seguidos</button>
+              <button class="nav-link" id="nav-seguidores-tab" data-bs-toggle="tab" data-bs-target="#nav-seguidores" type="button" role="tab" aria-controls="nav-seguidores" aria-selected="false">Seguidores</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+
+            <!-- Tab de perfil -->
+            <div class="tab-pane fade show active py-2 px-3" id="nav-perfil" role="tabpanel" aria-labelledby="nav-home-tab">
+              <form>
+                <div class="row mb-1 perfil-group">
+                  <label for="nombreUsuarioInput" class="col-sm-3 col-form-label">Nombre de usuario</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" name="nombreUsuario" id="nombreUsuarioInput" value="denis">
+                  </div>
+                </div>
+                <div class="row mb-1 perfil-group" id="nombreGroup">
+                  <label for="nombreInput" class="col-sm-3 col-form-label">Nombre</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" name="nombre" id="nombreInput" value="Denis">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="row mb-1 perfil-group" id="apellidoGroup">
+                  <label for="apellidoInput" class="col-sm-3 col-form-label">Apellido</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" name="apellido" id="apellidoInput" value="Miguel">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="row mb-1 perfil-group">
+                  <label for="correoInput" class="col-sm-3 col-form-label">Correo electrónico</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="email" readonly class="form-control-plaintext" name="correo" id="correoInput" value="den80@fuerza.com">
+                  </div>
+                </div>
+                <div class="row mb-1 perfil-group" id="nacimientoGroup">
+                  <label for="nacimientoInput" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="date" readonly class="form-control-plaintext" name="nacimiento" id="nacimientoInput" value="1980-06-14">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="row mb-1 perfil-group">
+                  <label for="institucionInput" class="col-sm-3 col-form-label">Institución</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" name="institucion" id="institucionInput" value="Telón">
+                  </div>
+                </div>
+
+                <div class="row mb-1 perfil-group" id="descripcionGroup">
+                  <label for="descripcionInput" class="col-sm-3 col-form-label">Descripción</label>
+                  <div class="col-10 col-sm-7">
+                    <textarea readonly class="form-control-plaintext" name="descripcion" id="descripcionInput">A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball</textarea>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row mb-1 perfil-group" id="biografiaGroup">
+                  <label for="biografiaInput" class="col-sm-3 col-form-label">Biografía</label>
+                  <div class="col-10 col-sm-7">
+                    <textarea readonly class="form-control-plaintext" name="biografia" id="biografiaInput">Denis fue un jugador de voleibol profesional.</textarea>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row mb-1 perfil-group" id="sitioWebGroup">
+                  <label for="sitioWebInput" class="col-sm-3 col-form-label">Sitio web</label>
+                  <div class="col-10 col-sm-7">
+                    <input type="url" readonly class="form-control-plaintext" name="sitioWeb" id="sitioWebInput" value="www.denis.com">
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+
+            <!-- Tab de clases -->
+            <div class="tab-pane fade" id="nav-clases" role="tabpanel" aria-labelledby="nav-clases-tab">
+              <div class="list-group list-group-flush">
+                <a href="clase_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/voleibol_clase.jpg" alt="clase">
+                  Voleibol
+                </a>
+              </div>
+            </div>
+
+            <!-- Tabs de actividades deportivas -->
+            <div class="tab-pane fade" id="nav-actividades-aceptadas" role="tabpanel" aria-labelledby="nav-actividades-aceptadas-tab">
+              <div class="list-group list-group-flush">
+                <a href="actividad_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/voleibol.jpg" alt="cuponera">
+                  Voleibol
+                </a>
+                <a href="actividad_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/atletismo.jpg" alt="cuponera">
+                  Atletismo
+                </a>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-actividades-sin-aceptar" role="tabpanel" aria-labelledby="nav-actividades-sin-aceptar-tab">
+              <div class="list-group list-group-flush">
+                <a href="actividad_detail.html" class="list-group-item d-flex align-items-center">
+                  <img class="rounded-circle me-2" src="img/voleibol_ii.jpg" alt="cuponera">
+                  Voleibol II
+                  <span class="badge bg-danger ms-auto p-2">Rechazada</span>
+                </a>
+                <a href="actividad_detail.html" class="list-group-item d-flex align-items-center">
+                  <img class="rounded-circle me-2" src="img/basquetbol_ii.jpg" alt="cuponera">
+                  Basquetbol II
+                  <span class="badge bg-info ms-auto p-2">Ingresada</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Tabs de seguidos y seguidores -->
+            <div class="tab-pane fade" id="nav-seguidos" role="tabpanel" aria-labelledby="nav-seguidos-tab">
+              <div class="list-group list-group-flush">
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/Emi71.jpg" alt="usuario">
+                  Emi71
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/caro.jpg" alt="usuario">
+                  caro
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/euge.jpg" alt="usuario">
+                  euge
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/guille.jpg" alt="usuario">
+                  guille
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/sergiop.jpg" alt="usuario">
+                  sergiop
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/andy.jpg" alt="usuario">
+                  andy
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/tonyp.jpg" alt="usuario">
+                  tonyp
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/m1k4.jpg" alt="usuario">
+                  m1k4
+                </a>
+                <a href="usuario_detail.html" class="list-group-item">
+                  <img class="rounded-circle me-2" src="img/charly.jpg" alt="usuario">
+                  charly
+                </a>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-seguidores" role="tabpanel" aria-labelledby="nav-seguidores-tab">
+              <div class="list-group list-group-flush">
+              </div>
+            </div>
+
+          </div>
+        </div>          
+      </section>
+
+    </main>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/edit-perfil.js"></script>
+  
+</body>
+</html>

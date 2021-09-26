@@ -1,0 +1,44 @@
+.main-content .details-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content .details-main img {
+  width: 100%;
+}
+
+.main-content .details .table i {
+  background-color: #f0f0f0;
+}
+
+@media screen and (min-width: 576px) {
+  .main-content .details-main {
+    flex-direction: row;
+  }
+
+  .main-content .details-main img {
+    width: 50% !important;
+  }
+
+  .main-content#user-page .details-main img, .main-content#clase-page .details-main img {
+    width: 20% !important;
+  }
+}
+
+#user-page .user-tabs .nav-pills .nav-link {
+  border-radius: 0 !important;
+  color: #222;
+}
+
+#user-page .user-tabs .nav-pills .nav-link.active {
+  color: #0d6efd;
+  background-color: initial !important;
+  border-bottom: 4px solid #0d6efd;
+  margin-bottom: -4px;
+}
+
+#user-page .perfil-group i.fa-save {
+  padding: 0 2px;
+  display: none;
+}

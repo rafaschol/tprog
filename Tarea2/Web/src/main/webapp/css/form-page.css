@@ -20,10 +20,14 @@
 }
 
 .form-page .form-tab.active {
-  display: initial;
+  display: initial !important;
 }
 
-.form-page #prev-button, .form-page #register-button {
+.form-page #prev-button, .form-page #next-button, .form-page #register-button {
+  display: none;
+}
+
+.form-page #profesor-tab {
   display: none;
 }
 

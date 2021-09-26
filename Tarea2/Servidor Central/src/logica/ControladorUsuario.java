@@ -86,6 +86,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		Profesor profesor = mp.obtenerProfesor(nickname);
     		String[] clases = profesor.getClases().keySet().toArray(new String[0]);
     		String[] actividades = profesor.getActividades().keySet().toArray(new String[0]);	
+    		 
     		
     		res = new DataProfesor(profesor, clases, actividades);
     	}
@@ -243,16 +244,18 @@ public class ControladorUsuario implements IControladorUsuario {
     	return arrCupo;  	
     }
     
-    public DataUsuario login(String mail,String contrasena) throws DatosLoginIncorrectosException  {
+    public DataUsuario login(String dato,String contrasena) throws DatosLoginIncorrectosException  {
     	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio socio = ms.obtenerMail(mail);
+    	Socio socioMail = ms.obtenerMail(dato);
+    	Socio socioNick = ms.obtenerSocio(dato);
     	ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    	Profesor profesor = mp.obtenerMail(mail);
+    	Profesor profesorMail = mp.obtenerMail(dato);
+    	Profesor profesorNick = mp.obtenerProfesor(dato);
     	DataUsuario res;
     	
-    	if(socio != null) {
-    		if(socio.getContrasena() == contrasena) {
-    			Map<Integer, Registro> regs = socio.getRegistros();
+    	if(socioMail != null) {
+    		if(socioMail.getContrasena() == contrasena) {
+    			Map<Integer, Registro> regs = socioMail.getRegistros();
         		
         		String[] clases = new String[regs.size()];
         		
@@ -262,24 +265,62 @@ public class ControladorUsuario implements IControladorUsuario {
         			i++;
         		}
         		
-        		res = new DataUsuario(socio, clases);
+        		res = new DataUsuario(socioMail, clases);
         		return res;
     		}
     		else 
     			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
     			
     	}
-    	else if(profesor != null) {
-    		if(profesor.getContrasena() == contrasena) {
-    			String[] clases = profesor.getClases().keySet().toArray(new String[0]);
-        		String[] actividades = profesor.getActividades().keySet().toArray(new String[0]);	
+    	
+    	
+    	else if(socioNick != null) {
+    		if(socioNick.getContrasena() == contrasena) {
+    			Map<Integer, Registro> regs = socioNick.getRegistros();
         		
-        		res = new DataProfesor(profesor, clases, actividades);
+        		String[] clases = new String[regs.size()];
+        		
+        		int i = 0;
+        		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
+        			clases[i] = iter.getValue().getClase().getNombre();
+        			i++;
+        		}
+        		
+        		res = new DataUsuario(socioNick, clases);
+        		return res;
+    		}
+    		else 
+    			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
+    			
+    	}
+    	
+    	
+    	else if(profesorMail != null) {
+    		if(profesorMail.getContrasena() == contrasena) {
+    			String[] clases = profesorMail.getClases().keySet().toArray(new String[0]);
+        		String[] actividades = profesorMail.getActividades().keySet().toArray(new String[0]);	
+        		
+        		res = new DataProfesor(profesorMail, clases, actividades);
         		return res;
     		}else
     			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
     		
     	}
+    	
+    	
+    	else if(profesorNick != null) {
+    		if(profesorNick.getContrasena() == contrasena) {
+    			String[] clases = profesorNick.getClases().keySet().toArray(new String[0]);
+        		String[] actividades = profesorNick.getActividades().keySet().toArray(new String[0]);	
+        		
+        		res = new DataProfesor(profesorNick, clases, actividades);
+        		return res;
+    		}else
+    			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
+    		
+    	}
+    	
+    	
     	else
     		throw new DatosLoginIncorrectosException("Los datos son incorrectos");
     	
