@@ -1,5 +1,4 @@
 
-/*
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,13 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import excepciones.DatosLoginIncorrectosException;
 import logica.DataUsuario;
+import logica.Fabrica;
+import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
 
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	private IControladorUsuario controladorUsuario;
-	
 	
 	private static final long serialVersionUID = 1L;
 
@@ -33,33 +32,34 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Fabrica fabrica = Fabrica.getInstance();
+		IControladorUsuario controladorUsuario = fabrica.getIControladorUsuario();
 		
 		HttpSession sesion = request.getSession();
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		
-		try {
+		try {			
 			DataUsuario usuario = controladorUsuario.login(email, password);
-			sesion.setAttribute("loggedUser", usuario);
+			sesion.setAttribute("usuarioLogueado", usuario);
 			response.sendRedirect("inicio");
 		} 
-		catch(DatosLoginIncorrectosException ex){
+		catch (DatosLoginIncorrectosException ex){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
 			request.setAttribute("loginError", true);
 			dispatcher.forward(request, response);
+			System.out.println("datos de inicio incorrectos.");
 		}
-		/*
-		if (email.equals("rafa@mail.com") && password.equals("1234")) {
-			
+		
+		/*if (email.equals("rafa@mail.com") && password.equals("1234")) {
 			sesion.setAttribute("loggedUser", "rafa@mail.com");
 			response.sendRedirect("inicio");
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
 			request.setAttribute("loginError", true);
 			dispatcher.forward(request, response);
-		}
+		}*/
 	}
 
-}*/
+}

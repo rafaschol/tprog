@@ -255,7 +255,9 @@ public class ControladorUsuario implements IControladorUsuario {
     	DataUsuario res;
     	
     	if(socioMail != null) {
-    		if(socioMail.getContrasena() == contrasena) {
+    		
+    		if(socioMail.getContrasena().equals(contrasena)) {
+        		
     			Map<Integer, Registro> regs = socioMail.getRegistros();
         		
         		String[] clases = new String[regs.size()];
@@ -267,6 +269,7 @@ public class ControladorUsuario implements IControladorUsuario {
         		}
         		
         		res = new DataUsuario(socioMail, clases);
+       
         		return res;
     		}
     		else 
@@ -276,7 +279,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	
     	else if(socioNick != null) {
-    		if(socioNick.getContrasena() == contrasena) {
+    		if(socioNick.getContrasena().equals(contrasena)) {
     			Map<Integer, Registro> regs = socioNick.getRegistros();
         		
         		String[] clases = new String[regs.size()];
@@ -297,7 +300,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	
     	else if(profesorMail != null) {
-    		if(profesorMail.getContrasena() == contrasena) {
+    		if(profesorMail.getContrasena().equals(contrasena)) {
     			String[] clases = profesorMail.getClases().keySet().toArray(new String[0]);
         		String[] actividades = profesorMail.getActividades().keySet().toArray(new String[0]);	
         		
@@ -310,7 +313,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	
     	else if(profesorNick != null) {
-    		if(profesorNick.getContrasena() == contrasena) {
+    		if(profesorNick.getContrasena().equals(contrasena)) {
     			String[] clases = profesorNick.getClases().keySet().toArray(new String[0]);
         		String[] actividades = profesorNick.getActividades().keySet().toArray(new String[0]);	
         		
