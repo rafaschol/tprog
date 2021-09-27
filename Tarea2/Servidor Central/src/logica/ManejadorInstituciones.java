@@ -37,10 +37,8 @@ public class ManejadorInstituciones {
 			String[] p = iter.getValue().listarProfesores();
 			Arrays.sort(p);
 			String[] a = iter.getValue().listarActividades();
-			String[] aa = iter.getValue().listarActividadesAceptadas();
 			Arrays.sort(a);
-			Arrays.sort(aa);
-			DataInstitucion di = new DataInstitucion(inst, p, a, aa);
+			DataInstitucion di = new DataInstitucion(inst, p, a);
 			res[i] = di;
 			i++;
 		}		

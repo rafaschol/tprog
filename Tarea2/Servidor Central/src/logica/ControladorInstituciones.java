@@ -36,7 +36,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
         }
         
         ma.addActividad(a);
-    	i.addActividad(a);
+    	//i.addActividad(a);
     	
     }
     
@@ -170,7 +170,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 			//Agreaga la actividad a la coleccion de Actividades Aceptadas y a la Institucion Deportiva correspondiente
 			ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
 			InstitucionDeportiva i = mi.obtenerInstitucion(a.getInstitucion().getNombre());
-			i.addActividadAceptada(a);
+			i.addActividad(a);
 			ma.addActividadAceptada(a);
 		}
 		else {

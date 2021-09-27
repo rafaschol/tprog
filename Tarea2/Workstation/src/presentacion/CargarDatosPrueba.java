@@ -218,72 +218,76 @@ public class CargarDatosPrueba {
 	/* A1 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
 					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
 			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
+			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
 	
 			
 	/* A2 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol",
 					"Voleibol en todas sus formas",
 					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
+			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
 			
 			
 	/* A3 */controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
 					"Para cuidar el aparato cardiovascular",
 					110, (float) 800.0, new Date(121, 4, 30), arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Aer\\u00F3bica", "Gimnasia");
-			controladorInstitucion.agregarCategoriaAActividad("Aer\\u00F3bica", "Al aire libre");
-			controladorInstitucion.aceptarRechazarActividad("Aer\\u00F3bica", true);
+			controladorInstitucion.aceptarRechazarActividad("Aer\u00F3bica", true);
+			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Gimnasia");
+			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Al aire libre");
 			
 			
 	/* A4 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Kickboxing",
 					"En busca del nuevo campe\u00F3n de boxeo.",
 					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Kickboxing", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Kickboxing", true);
+			controladorInstitucion.agregarCategoriaAActividad("Kickboxing", "Deportes");
 			
 			
 	/* A5 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
 					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Atletismo", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Atletismo", true);
+			controladorInstitucion.agregarCategoriaAActividad("Atletismo", "Deportes");
 			
 			
 	/* A6 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol",
 					"Basquetbol para todos.",
 					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Basquetbol", "Deportes");
 			controladorInstitucion.aceptarRechazarActividad("Basquetbol", true);
+			controladorInstitucion.agregarCategoriaAActividad("Basquetbol", "Deportes");
 			
 			
-	/* A7 */controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos II",
+	/* A7 */String[] categoriasA7 = new String[1];
+			categoriasA7[0] = "Fitness";
+			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos II",
 					"Clases de aparatos avanzadas.",
-					60, (float) 1500.0, new Date(121, 7, 15), arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Aparatos II", "Fitness");
+					60, (float) 1500.0, new Date(121, 7, 15), categoriasA7, "");
 			controladorInstitucion.aceptarRechazarActividad("Aparatos II", false);
 			
 			
-	/* A8 */controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
+	/* A8 */String[] categoriasA8 = {"Gimnasia"};
+			controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
 					"El Método Pilates combina diferentes capacidades físicas.",
-					45, (float) 600.0, new Date(121, 7, 30), "clazar",arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
+					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8, "");
+			//controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
 					// INGRESADA
 	
 			
-	/* A9 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol II",
+	/* A9 */String[] categoriasA9 = {"Deportes", "Al aire libre"};
+			controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol II",
 					"Voleibol avanzado.",
-					120, (float) 1000.0, new Date(121, 8, 1),"denis", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Deportes");
-			controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Al aire libre");
+					120, (float) 1000.0, new Date(121, 8, 1),"denis", categoriasA9, "");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol II", false);
+			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Deportes");
+			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Al aire libre");
 			
 			
-	/* A10*/controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol II",
+	/* A10*/String[] categoriasA10 = {"Gimnasia"};
+			controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol II",
 					"Basequetbol avanzado.",
-					80, (float) 600.0, new Date(121, 8, 7), "denis", arrayVacio, "");
-			controladorInstitucion.agregarCategoriaAActividad("Basquetbol II", "Gimnasia");
+					80, (float) 600.0, new Date(121, 8, 7), "denis", categoriasA10, "");
+			//controladorInstitucion.agregarCategoriaAActividad("Basquetbol II", "Gimnasia");
 					// INGRESADA
 	
 			
@@ -349,7 +353,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.registrarSocio("andy", "Aer\u00F3bico adulto mayor", "Aer\u00F3bica", false, null, new Date(121, 7, 23));
 	/* R25*/controladorUsuario.registrarSocio("caro", "Aer\u00F3bica", "Aer\u00F3bica", true, "Gimnasia", new Date(121, 7, 15));
 			controladorUsuario.registrarSocio("euge", "Aer\u00F3bica", "Aer\u00F3bica", false, null, new Date(121, 7, 26));
-			controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", true, "M\u00FAsculos", new Date(121, 6, 19));
+			//controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", true, "M\u00FAsculos", new Date(121, 6, 19));
 			controladorUsuario.registrarSocio("tonyp", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("m1k4", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 24));
 	/* R30*/controladorUsuario.registrarSocio("sergiop", "Boxeo II", "Kickboxing", true, "M\u00FAsculos", new Date(121, 7, 1));
@@ -422,6 +426,20 @@ public class CargarDatosPrueba {
 		controladorUsuario.compraCuponera("sergiop", "M\u00FAsculos", new Date(121, 5, 31));
 		controladorUsuario.compraCuponera("andy", "M\u00FAsculos", new Date(121, 5, 31));
 		controladorUsuario.compraCuponera("Emi71", "Pelota", new Date(121, 5, 31));
+	}
+	
+// ================================================================================
+	
+	public void cargarCategorias() {
+		try {
+			controladorInstitucion.altaCategoria("Al aire libre");
+			controladorInstitucion.altaCategoria("Deportes");
+			controladorInstitucion.altaCategoria("Fitness");
+			controladorInstitucion.altaCategoria("Gimnasia");
+		} catch (CategoriaRepetidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

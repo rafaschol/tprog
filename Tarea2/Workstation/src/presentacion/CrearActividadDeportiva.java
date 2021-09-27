@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,8 +35,10 @@ import logica.DataInstitucion;
 import logica.IControladorInstituciones;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.JList;
 
 public class CrearActividadDeportiva extends JInternalFrame {
 	
@@ -47,6 +50,8 @@ public class CrearActividadDeportiva extends JInternalFrame {
 	private JSpinner duracionSpinner;
 	private JFormattedTextField costoTextField;
 	private JDateChooser fechaAltaDateChooser;
+
+	private JList categoriasList;
 
     public CrearActividadDeportiva(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -78,7 +83,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos de la actividad deportiva"),
             BorderFactory.createEmptyBorder(5,10,5,10)));
         GridBagLayout gbl_datosActividadPanel = new GridBagLayout();
-        gbl_datosActividadPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        gbl_datosActividadPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
         gbl_datosActividadPanel.columnWeights = new double[]{1.0, 1.0};
         datosActividadPanel.setLayout(gbl_datosActividadPanel);
         GridBagConstraints gbc_datosActividadPanel = new GridBagConstraints();
@@ -176,12 +181,27 @@ public class CrearActividadDeportiva extends JInternalFrame {
         gbc_costoTextField.gridy = 4;
         datosActividadPanel.add(costoTextField, gbc_costoTextField);
         
+        JLabel categoriasLabel = new JLabel("Categor\u00EDas");
+        GridBagConstraints gbc_categoriasLabel = new GridBagConstraints();
+        gbc_categoriasLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_categoriasLabel.gridx = 0;
+        gbc_categoriasLabel.gridy = 5;
+        datosActividadPanel.add(categoriasLabel, gbc_categoriasLabel);
+        
+        categoriasList = new JList<String>();
+        GridBagConstraints gbc_categoriasList = new GridBagConstraints();
+        gbc_categoriasList.insets = new Insets(0, 0, 5, 0);
+        gbc_categoriasList.fill = GridBagConstraints.BOTH;
+        gbc_categoriasList.gridx = 1;
+        gbc_categoriasList.gridy = 5;
+        datosActividadPanel.add(categoriasList, gbc_categoriasList);
+        
         JLabel fechaAltaLabel = new JLabel("Fecha de alta");
         GridBagConstraints gbc_fechaAltaLabel = new GridBagConstraints();
         gbc_fechaAltaLabel.anchor = GridBagConstraints.EAST;
         gbc_fechaAltaLabel.insets = new Insets(0, 0, 0, 5);
         gbc_fechaAltaLabel.gridx = 0;
-        gbc_fechaAltaLabel.gridy = 5;
+        gbc_fechaAltaLabel.gridy = 6;
         datosActividadPanel.add(fechaAltaLabel, gbc_fechaAltaLabel);
         
         fechaAltaDateChooser = new JDateChooser(new Date());
@@ -189,7 +209,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
         GridBagConstraints gbc_fechaAltaDateChooser = new GridBagConstraints();
         gbc_fechaAltaDateChooser.fill = GridBagConstraints.BOTH;
         gbc_fechaAltaDateChooser.gridx = 1;
-        gbc_fechaAltaDateChooser.gridy = 5;
+        gbc_fechaAltaDateChooser.gridy = 6;
         datosActividadPanel.add(fechaAltaDateChooser, gbc_fechaAltaDateChooser);
         
         JButton aceptarButton = new JButton("Aceptar");
@@ -226,12 +246,14 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	String nombre = nombreTextField.getText();
     	String descripcion = descripcionTextArea.getText();
     	int duracion = ((Number) duracionSpinner.getValue()).intValue();
+    	String[] categorias = Arrays.copyOf(categoriasList.getSelectedValues(), categoriasList.getSelectedValues().length, String[].class);
     	float costo = ((Number) costoTextField.getValue()).floatValue();
+    	
     	Date fechaAlta = fechaAltaDateChooser.getDate();
     	
     	if (esValido()) {
     		try {
-    			controladorInstitucion.altaActividadDeportiva(nombreInstitucion, nombre, descripcion, duracion, costo, fechaAlta);
+    			controladorInstitucion.altaActividadDeportiva(nombreInstitucion, nombre, descripcion, duracion, costo, fechaAlta, categorias, null);
     			JOptionPane.showMessageDialog(this, "Se cre\u00F3 la actividad deportiva correctamente.");
     			cerrarFormulario();
     		} catch (ActividadRepetidaException ex) {
@@ -247,6 +269,15 @@ public class CrearActividadDeportiva extends JInternalFrame {
 		institucionComboBox.setSelectedIndex(-1);
     }
     
+    public void cargarCategorias() {
+    	DefaultListModel<String> categoriasListModel = new DefaultListModel<String>();
+    	String[] categorias = controladorInstitucion.listarCategorias();
+    	for (String categoria : categorias) {
+    		categoriasListModel.addElement(categoria);
+    	}
+    	categoriasList.setModel(categoriasListModel);
+    }
+    
     private boolean esValido() {
     	String nombre = nombreTextField.getText();
     	String descripcion = descripcionTextArea.getText();
@@ -258,6 +289,10 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	}
     	else if (nombre.isEmpty() || descripcion.isEmpty()) {
     		JOptionPane.showMessageDialog(this, "No puede haber campos vac\u00EDos.", null, JOptionPane.ERROR_MESSAGE);
+    		return false;
+    	}
+    	else if (categoriasList.getSelectedIndices().length < 1) {
+    		JOptionPane.showMessageDialog(this, "Debe haber al menos una categor\u00EDa seleccionada.", null, JOptionPane.ERROR_MESSAGE);
     		return false;
     	}
     	else if (fechaAlta == null || fechaAlta.after(new Date())) {
@@ -275,6 +310,7 @@ public class CrearActividadDeportiva extends JInternalFrame {
     	descripcionTextArea.setText("");
     	duracionSpinner.setValue(new Integer(60));
     	costoTextField.setValue(new Double(0));
+    	categoriasList.setModel(new DefaultListModel());
     	fechaAltaDateChooser.setDate(new Date());
     	
     	setVisible(false);

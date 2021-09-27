@@ -35,6 +35,7 @@ class Principal {
     private ModificarUsuario modificarUsuarioIF;
     private RegistrarSocio registrarSocioIF;
     private AgregarActividadCuponera agregarActividadCuponeraIF;
+    private AceptarRechazarActividad aceptarRechazarActividadIF;
     private CargarDatosPrueba datosPrueba;
 
     public static void main(String[] args) {
@@ -72,6 +73,7 @@ class Principal {
         modificarUsuarioIF = new ModificarUsuario(icu);
         registrarSocioIF = new RegistrarSocio(icu, ici, icc);
         agregarActividadCuponeraIF = new AgregarActividadCuponera(ici, icc);
+        aceptarRechazarActividadIF = new AceptarRechazarActividad(ici);
         
         consultarUsuarioIF.setConsultarClaseIF(consultarClaseIF);
         consultarUsuarioIF.setConsultarActividadDeportivaIF(consultarActividadDeportivaIF);
@@ -93,6 +95,7 @@ class Principal {
         modificarUsuarioIF.setVisible(false);
         registrarSocioIF.setVisible(false);
         agregarActividadCuponeraIF.setVisible(false);
+        aceptarRechazarActividadIF.setVisible(false);
 
         mainFrame.getContentPane().setLayout(null);
         mainFrame.getContentPane().add(crearUsuarioIF);
@@ -108,6 +111,7 @@ class Principal {
         mainFrame.getContentPane().add(modificarUsuarioIF);
         mainFrame.getContentPane().add(registrarSocioIF);
         mainFrame.getContentPane().add(agregarActividadCuponeraIF);
+        mainFrame.getContentPane().add(aceptarRechazarActividadIF);
     }
 
     private void initialize() {
@@ -140,6 +144,7 @@ class Principal {
         JMenuItem modificarUsuarioMI = new JMenuItem("Modificar usuario");
         JMenuItem registrarSocioMI = new JMenuItem("Registrar socio a una clase");
         JMenuItem agregarActividadCuponeraMI = new JMenuItem("Agregar actividad deportiva a cuponera");
+        JMenuItem aceptarRechazarActividadMI = new JMenuItem("Aceptar/rechazar actividad deportiva");
         JMenuItem cargarDatosPruebaMI = new JMenuItem("Cargar datos de prueba");
 
         crearUsuarioMI.addActionListener(new ActionListener() {
@@ -151,6 +156,7 @@ class Principal {
         crearActividadDeportivaMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	crearActividadDeportivaIF.cargarInstituciones();
+            	crearActividadDeportivaIF.cargarCategorias();
                 crearActividadDeportivaIF.setVisible(true);
             }
         });
@@ -218,16 +224,23 @@ class Principal {
                 agregarActividadCuponeraIF.setVisible(true);
             }
         });
+        aceptarRechazarActividadMI.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		aceptarRechazarActividadIF.cargarActividades();
+        		aceptarRechazarActividadIF.setVisible(true);
+        	}
+        });
         cargarDatosPruebaMI.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (!datosPruebaCargados) {
         			datosPrueba.cargarInstituciones();
-        			datosPrueba.cargarActividadesDeportivas();
+        			datosPrueba.cargarCategorias();
         			datosPrueba.cargarSocios();
         			datosPrueba.cargarProfesores();
+        			datosPrueba.cargarActividadesDeportivas();
         			datosPrueba.cargarClases();
-        			datosPrueba.cargarRegistrosClases();
         			datosPrueba.cargarCuponeras();
+        			datosPrueba.cargarRegistrosClases();
         			datosPrueba.cargarActividadesCuponeras();
         			datosPrueba.cargarCompraCuponera();
         			datosPruebaCargados = true;
@@ -251,6 +264,7 @@ class Principal {
         menuOtros.add(modificarUsuarioMI);
         menuOtros.add(registrarSocioMI);
         menuOtros.add(agregarActividadCuponeraMI);
+        menuOtros.add(aceptarRechazarActividadMI);
         menuOtros.add(cargarDatosPruebaMI);
     }
 }

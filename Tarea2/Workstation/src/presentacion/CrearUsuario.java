@@ -364,10 +364,10 @@ public class CrearUsuario extends JInternalFrame {
 		if (esValido()) {
 			try {
 				if (esProfesor) {
-					controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, nombreInstitucion, descripcion, biografia, sitioWeb);
+					controladorUsuario.altaProfesor(nickname, nombre, apellido, correo, fechaNacimiento, nombreInstitucion, descripcion, biografia, sitioWeb, "Entrenemos.UY", null);
 				}
 				else {
-					controladorUsuario.altaSocio(nickname, nombre, apellido, correo, fechaNacimiento);
+					controladorUsuario.altaSocio(nickname, nombre, apellido, correo, fechaNacimiento, "Entrenemos.UY", null);
 				}
 				JOptionPane.showMessageDialog(this, "Se cre\u00F3 el usuario correctamente.");
 				cerrarFormulario();

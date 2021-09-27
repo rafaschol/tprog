@@ -8,6 +8,7 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
@@ -27,6 +28,8 @@ import javax.swing.event.InternalFrameEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class ConsultarActividadDeportiva extends JInternalFrame {
 	
@@ -46,6 +49,8 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
 	private JButton datosCuponeraButton;
 	private JButton datosClaseButton;
 	private DataInstitucion[] instituciones;
+	private JTextField estadoTextField;
+	private JList categoriasList;
 
     public ConsultarActividadDeportiva(IControladorInstituciones ici) {
     	addInternalFrameListener(new InternalFrameAdapter() {
@@ -154,7 +159,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Datos de la actividad deportiva"),
             BorderFactory.createEmptyBorder(5,10,5,10)));
         GridBagLayout gbl_datosActividadPanel = new GridBagLayout();
-        gbl_datosActividadPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
+        gbl_datosActividadPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
         gbl_datosActividadPanel.columnWeights = new double[]{1.0, 1.0};
         datosActividadPanel.setLayout(gbl_datosActividadPanel);
         GridBagConstraints gbc_datosActividadPanel = new GridBagConstraints();
@@ -183,12 +188,30 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         datosActividadPanel.add(nombreTextField, gbc_nombreTextField);
         nombreTextField.setColumns(10);
         
+        JLabel estadoLabel = new JLabel("Estado");
+        GridBagConstraints gbc_estadoLabel = new GridBagConstraints();
+        gbc_estadoLabel.anchor = GridBagConstraints.EAST;
+        gbc_estadoLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_estadoLabel.gridx = 0;
+        gbc_estadoLabel.gridy = 1;
+        datosActividadPanel.add(estadoLabel, gbc_estadoLabel);
+        
+        estadoTextField = new JTextField();
+        estadoTextField.setEnabled(false);
+        GridBagConstraints gbc_estadoTextField = new GridBagConstraints();
+        gbc_estadoTextField.insets = new Insets(0, 0, 5, 0);
+        gbc_estadoTextField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_estadoTextField.gridx = 1;
+        gbc_estadoTextField.gridy = 1;
+        datosActividadPanel.add(estadoTextField, gbc_estadoTextField);
+        estadoTextField.setColumns(10);
+        
         JLabel descripcionLabel = new JLabel("Descripci\u00F3n");
         GridBagConstraints gbc_descripcionLabel = new GridBagConstraints();
         gbc_descripcionLabel.anchor = GridBagConstraints.EAST;
         gbc_descripcionLabel.insets = new Insets(0, 0, 5, 5);
         gbc_descripcionLabel.gridx = 0;
-        gbc_descripcionLabel.gridy = 1;
+        gbc_descripcionLabel.gridy = 2;
         datosActividadPanel.add(descripcionLabel, gbc_descripcionLabel);
         
         descripcionTextArea = new JTextArea();
@@ -200,7 +223,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_descripcionTextArea.insets = new Insets(0, 0, 5, 0);
         gbc_descripcionTextArea.fill = GridBagConstraints.BOTH;
         gbc_descripcionTextArea.gridx = 1;
-        gbc_descripcionTextArea.gridy = 1;
+        gbc_descripcionTextArea.gridy = 2;
         datosActividadPanel.add(descripcionTextArea, gbc_descripcionTextArea);
         
         JLabel duracionLabel = new JLabel("Duraci\u00F3n (minutos)");
@@ -208,7 +231,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_duracionLabel.anchor = GridBagConstraints.EAST;
         gbc_duracionLabel.insets = new Insets(0, 0, 5, 5);
         gbc_duracionLabel.gridx = 0;
-        gbc_duracionLabel.gridy = 2;
+        gbc_duracionLabel.gridy = 3;
         datosActividadPanel.add(duracionLabel, gbc_duracionLabel);
         
         duracionTextField = new JTextField();
@@ -217,7 +240,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_duracionTextField.insets = new Insets(0, 0, 5, 0);
         gbc_duracionTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_duracionTextField.gridx = 1;
-        gbc_duracionTextField.gridy = 2;
+        gbc_duracionTextField.gridy = 3;
         datosActividadPanel.add(duracionTextField, gbc_duracionTextField);
         duracionTextField.setColumns(10);
         
@@ -226,7 +249,7 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_costoLabel.anchor = GridBagConstraints.EAST;
         gbc_costoLabel.insets = new Insets(0, 0, 5, 5);
         gbc_costoLabel.gridx = 0;
-        gbc_costoLabel.gridy = 3;
+        gbc_costoLabel.gridy = 4;
         datosActividadPanel.add(costoLabel, gbc_costoLabel);
         
         costoTextField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
@@ -235,24 +258,41 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
         gbc_costoTextField.insets = new Insets(0, 0, 5, 0);
         gbc_costoTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_costoTextField.gridx = 1;
-        gbc_costoTextField.gridy = 3;
+        gbc_costoTextField.gridy = 4;
         datosActividadPanel.add(costoTextField, gbc_costoTextField);
         
         JLabel fechaAltaLabel = new JLabel("Fecha de alta");
         GridBagConstraints gbc_fechaAltaLabel = new GridBagConstraints();
         gbc_fechaAltaLabel.anchor = GridBagConstraints.EAST;
-        gbc_fechaAltaLabel.insets = new Insets(0, 0, 0, 5);
+        gbc_fechaAltaLabel.insets = new Insets(0, 0, 5, 5);
         gbc_fechaAltaLabel.gridx = 0;
-        gbc_fechaAltaLabel.gridy = 4;
+        gbc_fechaAltaLabel.gridy = 5;
         datosActividadPanel.add(fechaAltaLabel, gbc_fechaAltaLabel);
         
         fechaAltaDateChooser = new JDateChooser();
         fechaAltaDateChooser.setEnabled(false);
         GridBagConstraints gbc_fechaAltaDateChooser = new GridBagConstraints();
+        gbc_fechaAltaDateChooser.insets = new Insets(0, 0, 5, 0);
         gbc_fechaAltaDateChooser.fill = GridBagConstraints.BOTH;
         gbc_fechaAltaDateChooser.gridx = 1;
-        gbc_fechaAltaDateChooser.gridy = 4;
+        gbc_fechaAltaDateChooser.gridy = 5;
         datosActividadPanel.add(fechaAltaDateChooser, gbc_fechaAltaDateChooser);
+        
+        JLabel categoriasLabel = new JLabel("Categor\u00EDas");
+        GridBagConstraints gbc_categoriasLabel = new GridBagConstraints();
+        gbc_categoriasLabel.insets = new Insets(0, 0, 0, 5);
+        gbc_categoriasLabel.gridx = 0;
+        gbc_categoriasLabel.gridy = 6;
+        datosActividadPanel.add(categoriasLabel, gbc_categoriasLabel);
+        
+        categoriasList = new JList();
+        categoriasList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        categoriasList.setEnabled(false);
+        GridBagConstraints gbc_categoriasList = new GridBagConstraints();
+        gbc_categoriasList.fill = GridBagConstraints.BOTH;
+        gbc_categoriasList.gridx = 1;
+        gbc_categoriasList.gridy = 6;
+        datosActividadPanel.add(categoriasList, gbc_categoriasList);
         
         JPanel datosClasesPanel = new JPanel();
         datosClasesPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -389,10 +429,17 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
     	DataActividad actividad = controladorInstitucion.listarDataActividad(nombreActividad);
     	
     	nombreTextField.setText(actividad.getNombre());
+    	estadoTextField.setText(actividad.getEstado());
     	descripcionTextArea.setText(actividad.getDescripcion());
     	duracionTextField.setText(actividad.getDuracion().toString());
     	costoTextField.setValue(actividad.getCosto());
     	fechaAltaDateChooser.setDate(actividad.getFecha());
+    	DefaultListModel categoriasListModel = new DefaultListModel<String>();
+    	String[] categorias = actividad.getCategorias();
+    	for (String categoria : categorias) {
+    		categoriasListModel.addElement(categoria);
+    	}
+    	categoriasList.setModel(categoriasListModel);
     	
 		claseComboBox.setModel(new DefaultComboBoxModel<String>(actividad.getClases()));
 		claseComboBox.setEnabled(true);
@@ -432,6 +479,8 @@ public class ConsultarActividadDeportiva extends JInternalFrame {
 		cuponeraComboBox.setModel(new DefaultComboBoxModel());
 		cuponeraComboBox.setEnabled(false);
 		datosCuponeraButton.setEnabled(false);
+		
+		// agregar nuevas cosas a limpiar
     	
     	setVisible(false);
     }

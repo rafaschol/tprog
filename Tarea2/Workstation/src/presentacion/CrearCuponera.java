@@ -241,7 +241,7 @@ public class CrearCuponera extends JInternalFrame {
     	
     	if (esValido()) {
     		try {
-    			controladorCuponera.altaCuponera(nombre, descripcion, fechaInicio, fechaFin, descuento, fechaAlta);
+    			controladorCuponera.altaCuponera(nombre, descripcion, fechaInicio, fechaFin, descuento, fechaAlta, null);
 				JOptionPane.showMessageDialog(this, "Se cre\u00F3 la cuponera correctamente.");
 				cerrarFormulario();
 			} catch (CuponeraRepetidaException ex) {
