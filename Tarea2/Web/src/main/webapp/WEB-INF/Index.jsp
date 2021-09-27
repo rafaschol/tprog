@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
+<%@ page import="logica.DataUsuario" %>
 <html>
 <head>
   <!-- Meta tags -->
@@ -29,7 +30,7 @@
       <a class="navbar-brand" href="inicio">Entrenemos<span class="fw-bold">.uy</span></a>
 
       <!-- Profile (logged-in) -->
-      <% if (request.getSession().getAttribute("usuarioLogueado") != null) { %>
+      <% if (session.getAttribute("usuarioLogueado") != null) { %>
       <div class="navbar-profile me-3 me-lg-0">
         <a href="usuario_socio_detail.html">
           <img class="rounded-circle" src="${ usuarioLogueado.getFoto() }" alt="foto de perfil">
@@ -49,7 +50,7 @@
         </form>
 
         <!-- Logged-out buttons -->
-        <% if (request.getSession().getAttribute("usuarioLogueado") == null) { %>
+        <% if (session.getAttribute("usuarioLogueado") == null) { %>
         <div class="navbar-buttons">
           <a href="register.html" class="btn btn-outline-light me-2">Registrarme</a>
           <a href="login" class="btn btn-primary">Iniciar sesión</a>
@@ -93,7 +94,7 @@
         </li>
         
         
-        <% if (request.getSession().getAttribute("usuarioLogueado") != null) { %>
+        <% if (session.getAttribute("usuarioLogueado") != null) { %>
         <li class="border-top my-3"></li>
         <li class="mb-1">
           <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#cuenta-submenu" aria-expanded="true">Cuenta</button>
@@ -101,11 +102,12 @@
             <ul class="list-unstyled pb-1 small sidebar-submenu">
               <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
               
-              <% if (true /* si es un socio */) { %>
+              <% DataUsuario usr = (DataUsuario)session.getAttribute("usuarioLogueado"); %>
+              <% if (usr.getTipoUsuario().equals("Socio")) { %>
               <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
               <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
               
-              <% else /* si es un profesor */ { %>
+              <% } else { %>
               <li><a href="actividad_create.html" class="link-dark rounded">Crear una actividad deportiva</a></li>
               <li><a href="clase_create.html" class="link-dark rounded">Crear una clase</a></li>
               <% } %>

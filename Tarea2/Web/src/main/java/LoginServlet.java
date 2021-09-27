@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		try {			
+		try {
 			DataUsuario usuario = controladorUsuario.login(email, password);
 			sesion.setAttribute("usuarioLogueado", usuario);
 			response.sendRedirect("inicio");

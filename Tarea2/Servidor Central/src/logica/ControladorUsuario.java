@@ -240,7 +240,6 @@ public class ControladorUsuario implements IControladorUsuario {
     		if(acd.getActividad().getNombre() == nombreActividad) 
     			cuponeras.add(acd.getCuponera().getNombre());	
     	}
-    	System.out.print(cuponeras.size());
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	
     }
@@ -276,7 +275,6 @@ public class ControladorUsuario implements IControladorUsuario {
     			throw new DatosLoginIncorrectosException("Los datos son incorrectos");
     			
     	}
-    	
     	
     	else if(socioNick != null) {
     		if(socioNick.getContrasena().equals(contrasena)) {
