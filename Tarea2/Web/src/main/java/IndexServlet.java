@@ -35,7 +35,7 @@ public class IndexServlet extends HttpServlet {
 		IControladorInstituciones controladorInstitucion = fabrica.getIControladorInstitucion();
 		
 		try {
-			controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31),"asdfg456", "/img/Emi71.jpg");
+			controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31),"asdfg456", "img/Emi71.jpg");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) { }
 		try {
 			controladorInstitucion.altaInstitucionDeportiva("Tel\u00F3n", "Actividades deportivas para todas las edades.", 
@@ -43,7 +43,7 @@ public class IndexServlet extends HttpServlet {
 			controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Tel\u00F3n",
 						"A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball",
 						"Denis fue un jugador de voleibol profesional.",
-						"www.depecho.co","poke579", "/img/denis.jpg");
+						"www.depecho.co","poke579", "img/denis.jpg");
 		} catch (UsuarioRepetidoException | MailRepetidoException | InstitucionRepetidaException e) { }
 	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Index.jsp");

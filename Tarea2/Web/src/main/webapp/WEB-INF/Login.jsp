@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +15,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>Iniciar sesión | Entrenemos.uy</title>
+  <title>Iniciar sesiÃ³n | Entrenemos.uy</title>
 </head>
 <body>
 
@@ -25,28 +24,28 @@
 
     <form method="post" class="text-center py-5 px-4 m-3 bg-white shadow rounded">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
-      <h5 class="fw-light">Iniciar sesión</h5>
+      <h5 class="fw-light">Iniciar sesiÃ³n</h5>
       <div class="border-top my-4"></div>
       <div class="form-floating mb-3">
-        <input type="email" class="form-control${ loginError != null ? ' is-invalid' : '' }" id="emailInput" name="email" placeholder="Correo electrónico" aria-describedly="invalidUsername">
-        <label for="emailInput">Correo electrónico</label>
+        <input type="text" class="form-control${ loginError != null ? ' is-invalid' : '' }" id="emailInput" name="email" placeholder="Correo electrÃ³nico" aria-describedly="invalidUsername">
+        <label for="emailInput">Nickname o correo electrÃ³nico</label>
         <% if (request.getAttribute("loginError") != null) { %>
        	<div id="invalidUsername" class="invalid-feedback">
-	      El nombre de usuario o la contraseña son incorrectos.
+	      El nombre de usuario o la contraseÃ±a son incorrectos.
 	    </div>
 	    <% } %>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" class="form-control${ loginError ? ' is-invalid' : '' }" id="passwordInput" name="password" placeholder="Contraseña" aria-describedby="invalidPassword">
-        <label for="passwordInput">Contraseña</label>
+        <input type="password" class="form-control${ loginError ? ' is-invalid' : '' }" id="passwordInput" name="password" placeholder="ContraseÃ±a" aria-describedby="invalidPassword">
+        <label for="passwordInput">ContraseÃ±a</label>
         <% if (request.getAttribute("loginError") != null) { %>
        	<div id="invalidPassword" class="invalid-feedback">
-	      El nombre de usuario o la contraseña son incorrectos.
+	      El nombre de usuario o la contraseÃ±a son incorrectos.
 	    </div>
 	    <% } %>
       </div>
-      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">Iniciar sesión</button>
-      <p class="mt-3">¿No tienes una cuenta? <a href="register.html" class="text-decoration-none">Regístrate</a></p>
+      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">Iniciar sesiÃ³n</button>
+      <p class="mt-3">Â¿No tienes una cuenta? <a href="register.html" class="text-decoration-none">RegÃ­strate</a></p>
     </form>
 
   </main>

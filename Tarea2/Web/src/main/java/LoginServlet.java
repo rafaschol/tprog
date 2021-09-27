@@ -49,17 +49,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
 			request.setAttribute("loginError", true);
 			dispatcher.forward(request, response);
-			System.out.println("datos de inicio incorrectos.");
 		}
-		
-		/*if (email.equals("rafa@mail.com") && password.equals("1234")) {
-			sesion.setAttribute("loggedUser", "rafa@mail.com");
-			response.sendRedirect("inicio");
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
-			request.setAttribute("loginError", true);
-			dispatcher.forward(request, response);
-		}*/
 	}
 
 }
