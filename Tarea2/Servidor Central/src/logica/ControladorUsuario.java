@@ -164,7 +164,7 @@ public class ControladorUsuario implements IControladorUsuario {
         	for (int j = 0; j < arrPart.length; j++) {
         		Participa participa = arrPart[j];
         		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
-        		if((acd.getCuponera().getNombre() == nombreCuponera) &&  (acd.getActividad().getNombre() == nombreActividad)) {
+        		if(((acd.getCuponera().getNombre()).equals(nombreCuponera)) &&  (acd.getActividad().getNombre() == nombreActividad)) {
         			if(participa.getClasesRestantes() == 0)	
         	    		throw new ClasesRestantesException("El socio ya agotó las clases disponibles para esta actividad con esta cuponera");
         			
@@ -237,7 +237,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	for (int j = 0; j < arrPart.length; j++) {
     		Participa participa = arrPart[j];
     		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
-    		if(acd.getActividad().getNombre() == nombreActividad) 
+    		if((acd.getActividad().getNombre()).equals(nombreActividad)) 
     			cuponeras.add(acd.getCuponera().getNombre());	
     	}
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);

@@ -108,7 +108,7 @@ class TestSistema {
 	@DisplayName("TEST testAltaSocioOk")
 	void testAltaSocioOk() throws ParseException, Exception {
 		try {
-			ctrlU.altaSocio("Emi71","Emiliano","Lucas", "emi71@gmail.com", new Date(1971, 11, 31), "asdfg456", "https://bit.ly/3lxoBvz");
+			ctrlU.altaSocio("andy","Andres","Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
 			DataUsuario du = ctrlU.mostrarDataUsuario("Emi71");
 			assertEquals(du.getNickname(), "Emi71");
 			assertEquals(du.getNombre(), "Emiliano");

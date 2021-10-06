@@ -71,7 +71,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	for (Entry<String, ActividadDeportiva> iter : actividadesInstitucion.entrySet()) {
     		String actDepInstitucion = iter.getKey();
     		for (int j = 0; j < arrActCup.length; j++) {
-    			if(arrActCup[j].getActividad().getNombre() == actDepInstitucion) {
+    			if((arrActCup[j].getActividad().getNombre()).equals(actDepInstitucion)) {
     				MapAux.remove(actDepInstitucion);
     			}
     				
@@ -89,7 +89,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	ActividadDeportiva ad = ma.obtenerActividadAceptada(nombreActividad);
     	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++)
-    		if(arrActCup[j].getActividad().getNombre() == nombreActividad) 
+    		if((arrActCup[j].getActividad().getNombre()).equals(nombreActividad)) 
     			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva en la cuponera" );
     	
     	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
