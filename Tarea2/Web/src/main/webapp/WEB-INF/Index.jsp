@@ -52,7 +52,7 @@
         <!-- Logged-out buttons -->
         <% if (session.getAttribute("usuarioLogueado") == null) { %>
         <div class="navbar-buttons">
-          <a href="register.html" class="btn btn-outline-light me-2">Registrarme</a>
+          <a href="register" class="btn btn-outline-light me-2">Registrarme</a>
           <a href="login" class="btn btn-primary">Iniciar sesión</a>
         </div>
         <% } %>
