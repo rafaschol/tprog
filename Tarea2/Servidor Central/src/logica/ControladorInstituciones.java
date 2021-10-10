@@ -20,42 +20,42 @@ public class ControladorInstituciones implements IControladorInstituciones {
     //Para Administrador
     public void altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,
     	int duracion, float costo, Date fecha, String[] categorias,String foto) throws ActividadRepetidaException{
-    	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-        InstitucionDeportiva i = mi.obtenerInstitucion(nombreInstitucion);
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-        ActividadDeportiva a = ma.obtenerActividad(nombre);  
-        ManejadorCategoria mc = ManejadorCategoria.getinstance();
+    	ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+        InstitucionDeportiva institucion = mInst.obtenerInstitucion(nombreInstitucion);
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+        ActividadDeportiva actividad = mActividad.obtenerActividad(nombre);  
+        ManejadorCategoria mCat = ManejadorCategoria.getinstance();
         
-        if (a != null)
+        if (actividad != null)
             throw new ActividadRepetidaException("Ya existe una actividad deportiva con nombre '" + nombre + "' en el sistema");
         
-        a = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, i,foto);
+        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion,foto);
         
         for(int j = 0; j < categorias.length; j++) {
-        	a.addCategoria(mc.obtenerCategoria(categorias[j]));
+        	actividad.addCategoria(mCat.obtenerCategoria(categorias[j]));
         }
         
-        ma.addActividad(a);
+        mActividad.addActividad(actividad);
     	//i.addActividad(a);
     	
     }
     
     public void altaInstitucionDeportiva(String nombreInstitucion, String descripcion, String url)
     	throws InstitucionRepetidaException{
-    	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-        InstitucionDeportiva i = mi.obtenerInstitucion(nombreInstitucion);
+    	ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+        InstitucionDeportiva institucion =  mInst.obtenerInstitucion(nombreInstitucion);
     	  
-        if (i != null)
+        if (institucion != null)
             throw new InstitucionRepetidaException("Ya existe una Institucion deportiva con nombre '" + nombreInstitucion + "' en el sistema");
         
-        i = new InstitucionDeportiva(nombreInstitucion, descripcion, url);
-        mi.addInstitucion(i);  	
+        institucion = new InstitucionDeportiva(nombreInstitucion, descripcion, url);
+        mInst.addInstitucion(institucion);  	
     	
     }
     
     public  DataInstitucion[] listarDataInstituciones() {
-    	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-        DataInstitucion[] lista = mi.getInstituciones();  
+    	ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+        DataInstitucion[] lista = mInst.getInstituciones();  
         return lista;
     }
     
@@ -63,36 +63,36 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		Integer maximo, String url, Date fechaAlta, String profesor, String actividad)
     	throws ClaseRepetidaException {
     	 
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	Clase c = null;
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	Clase clase = null;
     	//mas eficiente con while
-    	for (Entry<String, ActividadDeportiva> iter : ma.getActividadesAceptadas().entrySet()) {
-    		if(c == null) c = iter.getValue().obtenerClase(nombre); 	
+    	for (Entry<String, ActividadDeportiva> iter : mActividad.getActividadesAceptadas().entrySet()) {
+    		if(clase == null) clase = iter.getValue().obtenerClase(nombre); 	
     	}
-    	if (c != null)
+    	if (clase != null)
             throw new ClaseRepetidaException("Ya existe una Clase con nombre '" + nombre + "' en el sistema");
     	
     	
-    	c = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta);
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    	c.setProfesor(mp.obtenerProfesor(profesor));
-    	mp.obtenerProfesor(profesor).addClase(c);
-    	c.setActividad(ma.obtenerActividadAceptada(actividad));
-    	ma.obtenerActividadAceptada(actividad).addClase(c);
+    	clase = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta);
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	clase.setProfesor(mProf.obtenerProfesor(profesor));
+    	mProf.obtenerProfesor(profesor).addClase(clase);
+    	clase.setActividad(mActividad.obtenerActividadAceptada(actividad));
+    	mActividad.obtenerActividadAceptada(actividad).addClase(clase);
       	
     }
     
-    public DataClase[] listarDataClases(String actividad) {
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva ad = ma.obtenerActividadAceptada(actividad);
-    	DataClase[] clases = ad.getDataClases();
+    public DataClase[] listarDataClases(String nombreActividad) {
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
+    	DataClase[] clases = actividad.getDataClases();
     	return clases;
     	
     }
-    public DataClase[] listarDataClasesVigentes(String actividad){
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva ad = ma.obtenerActividadAceptada(actividad);
-    	DataClase[] clases = ad.getDataClasesVigentes();
+    public DataClase[] listarDataClasesVigentes(String nombreActividad){
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
+    	DataClase[] clases = actividad.getDataClasesVigentes();
     	return clases;
     }
     
@@ -100,9 +100,9 @@ public class ControladorInstituciones implements IControladorInstituciones {
     
     //DEVUELVE UN DATACLASE DADO EL NOMBRE DE LA CLASE
     public DataClase obtenerDataClase(String nombreClase) {
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
     	DataClase data = null;
-    	for (Entry<String, ActividadDeportiva> iter : ma.getActividadesAceptadas().entrySet()) {
+    	for (Entry<String, ActividadDeportiva> iter : mActividad.getActividadesAceptadas().entrySet()) {
     		for (Entry<String, Clase> iter2 : iter.getValue().getClases().entrySet()) 
     			if((iter2.getValue().getNombre()).equals(nombreClase)) data = new DataClase(iter2.getValue(), iter.getValue().getNombre(),iter.getValue().getInstitucion().getNombre()); 	
     	}
@@ -111,13 +111,13 @@ public class ControladorInstituciones implements IControladorInstituciones {
     
     
     public DataActividad listarDataActividad(String nombre) {
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva ad = ma.obtenerActividadAceptada(nombre);
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombre);
     	//Conseguir strings para crear Data Actividad
-    	String[] clases = ad.listarClases();
-    	String[] cuponeras = ad.listarCuponeras();
-    	String[] categorias = ad.listarCategorias();	
-    	DataActividad dataActividad = new DataActividad(ad,clases,cuponeras,categorias);
+    	String[] clases = actividad.listarClases();
+    	String[] cuponeras = actividad.listarCuponeras();
+    	String[] categorias = actividad.listarCategorias();	
+    	DataActividad dataActividad = new DataActividad(actividad,clases,cuponeras,categorias);
     	return dataActividad;   	
     }
     
@@ -126,30 +126,30 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 	public void altaCategoria(String nombreCategoria) throws CategoriaRepetidaException
 	{
-		ManejadorCategoria mc = ManejadorCategoria.getinstance();
-		Categoria c = mc.obtenerCategoria(nombreCategoria);
+		ManejadorCategoria mCat = ManejadorCategoria.getinstance();
+		Categoria categoria = mCat.obtenerCategoria(nombreCategoria);
 		
 		// Validar categoria
-		if (c != null)
+		if (categoria != null)
             throw new CategoriaRepetidaException("La categoria " + nombreCategoria + " ya existe.");
 		
-		c = new Categoria(nombreCategoria);
-		mc.addCategoria(c);
+		categoria = new Categoria(nombreCategoria);
+		mCat.addCategoria(categoria);
 	}
 
 	public String[] listarCategorias() {
-		ManejadorCategoria mc = ManejadorCategoria.getinstance();
-    	String [] categorias = mc.getCategorias().keySet().toArray(new String[0]);
+		ManejadorCategoria mCat = ManejadorCategoria.getinstance();
+    	String [] categorias = mCat.getCategorias().keySet().toArray(new String[0]);
     	return categorias;
 	}
 	
 	public String[] listarActividadesIngresadas() 
 	{
 		Set<String> set = new HashSet<String>();
-		ManejadorActividad ma = ManejadorActividad.getinstance();		
+		ManejadorActividad mActividad = ManejadorActividad.getinstance();		
 		
 		// Iterar sobre las actividades
-		for (Entry<String, ActividadDeportiva> iter : ma.getActividades().entrySet()) {
+		for (Entry<String, ActividadDeportiva> iter : mActividad.getActividades().entrySet()) {
 			if (iter.getValue().getEstado() == Estado.Ingresada) {
 				set.add(iter.getKey());
 			}
@@ -162,65 +162,65 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 	public void aceptarRechazarActividad(String nombreActividad, Boolean aceptar) 
 	{
-		ManejadorActividad ma = ManejadorActividad.getinstance();
-		ActividadDeportiva a = ma.obtenerActividad(nombreActividad);
+		ManejadorActividad mActividad = ManejadorActividad.getinstance();
+		ActividadDeportiva actividad = mActividad.obtenerActividad(nombreActividad);
 		
 		if (aceptar) {
-			a.setEstado(Estado.Aceptada);
+			actividad.setEstado(Estado.Aceptada);
 			//Agreaga la actividad a la coleccion de Actividades Aceptadas y a la Institucion Deportiva correspondiente
-			ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-			InstitucionDeportiva i = mi.obtenerInstitucion(a.getInstitucion().getNombre());
-			i.addActividad(a);
-			ma.addActividadAceptada(a);
+			ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+			InstitucionDeportiva institucion = mInst.obtenerInstitucion(actividad.getInstitucion().getNombre());
+			institucion.addActividad(actividad);
+			mActividad.addActividadAceptada(actividad);
 		}
 		else {
-			a.setEstado(Estado.Rechazada);
+			actividad.setEstado(Estado.Rechazada);
 			//Elimina la actividad de la coleccion del manejador para dejar el nombre disponible 
-			ma.removeActividad(a);
+			mActividad.removeActividad(actividad);
 		}
 	}
 	
-	public void agregarCategoriaAActividad(String nombreActividad, String categoria) throws CategoriaRepetidaException{
-		ManejadorActividad ma = ManejadorActividad.getinstance();
-		ActividadDeportiva a = ma.obtenerActividadAceptada(nombreActividad);
+	public void agregarCategoriaAActividad(String nombreActividad, String nombreCategoria) throws CategoriaRepetidaException{
+		ManejadorActividad mActividad = ManejadorActividad.getinstance();
+		ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
 		
 		//Valida que la categoria no este en la coleccion de categorias de la actividad
-		Categoria c = a.obtenerCategoria(categoria);
-		if (c != null)
+		Categoria categoria = actividad.obtenerCategoria(nombreCategoria);
+		if (categoria != null)
             throw new CategoriaRepetidaException("La categoria " + categoria + " ya fue agregada.");
 		
-		ManejadorCategoria mc = ManejadorCategoria.getinstance();
-		c = mc.obtenerCategoria(categoria);
+		ManejadorCategoria mCat = ManejadorCategoria.getinstance();
+		categoria = mCat.obtenerCategoria(nombreCategoria);
 		
-		a.addCategoria(c);
+		actividad.addCategoria(categoria);
 	}
 
 	
 	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public void altaActividadDeportivaWeb(String nombreInstitucion, String nombre, String descripcion,
-		    int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto) throws ActividadRepetidaException{
-		ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-        InstitucionDeportiva i = mi.obtenerInstitucion(nombreInstitucion);
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-        ActividadDeportiva a = ma.obtenerActividad(nombre);  
-        ManejadorCategoria mc = ManejadorCategoria.getinstance();
+		    int duracion, float costo, Date fecha, String nombreProfesor, String[] categorias,String foto) throws ActividadRepetidaException{
+		ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+        InstitucionDeportiva institucion = mInst.obtenerInstitucion(nombreInstitucion);
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+        ActividadDeportiva actividad = mActividad.obtenerActividad(nombre);  
+        ManejadorCategoria mCat = ManejadorCategoria.getinstance();
         
-        if (a != null)
+        if (actividad != null)
             throw new ActividadRepetidaException("Ya existe una actividad deportiva con nombre '" + nombre + "' en el sistema");
         
-        a = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, i,foto);
+        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion,foto);
         
         for(int j = 0; j < categorias.length; j++) {
-        	a.addCategoria(mc.obtenerCategoria(categorias[j]));
+        	actividad.addCategoria(mCat.obtenerCategoria(categorias[j]));
         }
         
-        ma.addActividad(a);
+        mActividad.addActividad(actividad);
     	//i.addActividad(a);
     	
     	//Agraga la activida a la coleccion de actividades del profesor
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    	Profesor p = mp.obtenerProfesor(profesor);
-    	p.addActividad(a);
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	Profesor profesor = mProf.obtenerProfesor(nombreProfesor);
+    	profesor.addActividad(actividad);
     }
     
 }

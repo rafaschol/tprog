@@ -11,17 +11,17 @@ public class DataProfesor extends DataUsuario {
 	private String[] actividadesRechazadas;
 	private String[] actividadesIngresadas;
 
-	public DataProfesor(Usuario u, String[] cla, String[] actividades) {
-		super(u, cla);
+	public DataProfesor(Usuario usuario, String[] clases, String[] actividades) {
+		super(usuario, clases);
     	// Dynamic Cast a Profesor.
-		this.setDescripcion(Profesor.class.cast(u).getDescripcion());
-		this.setBiografia(Profesor.class.cast(u).getBiografia());
-		this.setSitioWeb(Profesor.class.cast(u).getSitioWeb());
-		this.setInstitucion(Profesor.class.cast(u).getInstitucion().getNombre());
+		this.setDescripcion(Profesor.class.cast(usuario).getDescripcion());
+		this.setBiografia(Profesor.class.cast(usuario).getBiografia());
+		this.setSitioWeb(Profesor.class.cast(usuario).getSitioWeb());
+		this.setInstitucion(Profesor.class.cast(usuario).getInstitucion().getNombre());
 		this.setActividades(actividades);
-		this.setActividadesRechazadas(Profesor.class.cast(u).getActividadesRechazadas());
-		this.setActividadesAceptadas(Profesor.class.cast(u).getActividadesAceptadas());
-		this.setActividadesIngresadas(Profesor.class.cast(u).getActividadesIngresadas());
+		this.setActividadesRechazadas(Profesor.class.cast(usuario).getActividadesRechazadas());
+		this.setActividadesAceptadas(Profesor.class.cast(usuario).getActividadesAceptadas());
+		this.setActividadesIngresadas(Profesor.class.cast(usuario).getActividadesIngresadas());
 		}
 
 	public String getDescripcion() {

@@ -30,19 +30,19 @@ public class ManejadorInstituciones {
     
     //lista todas las instituciones del sistema
     public DataInstitucion[] getInstituciones() {
-        DataInstitucion[] res = new DataInstitucion[instituciones.size()];
-        int i = 0;
+        DataInstitucion[] result = new DataInstitucion[instituciones.size()];
+        int iterador = 0;
 		for (Entry<String, InstitucionDeportiva> iter : instituciones.entrySet()) {
 			String inst = iter.getKey();
-			String[] p = iter.getValue().listarProfesores();
-			Arrays.sort(p);
-			String[] a = iter.getValue().listarActividades();
-			Arrays.sort(a);
-			DataInstitucion di = new DataInstitucion(inst, p, a);
-			res[i] = di;
-			i++;
+			String[] profesores = iter.getValue().listarProfesores();
+			Arrays.sort(profesores);
+			String[] actividades = iter.getValue().listarActividades();
+			Arrays.sort(actividades);
+			DataInstitucion dataInstitucion = new DataInstitucion(inst, profesores, actividades);
+			result[iterador] = dataInstitucion;
+			iterador++;
 		}		
-        return res;
+        return result;
     }
   }
 

@@ -12,15 +12,15 @@ public class DataCuponera {
 	private String foto;
 	private DataActividadCuponera[] actividadesCuponera;
 	
-	public DataCuponera(Cuponera c, DataActividadCuponera[] dac){
-		this.setNombre(c.getNombre());
-		this.setDescripcion(c.getDescripcion());
-		this.setFechaIni(c.getFechaIni());
-		this.setFechaFin(c.getFechaFin());
-		this.setDescuento(c.getDescuento());
-		this.setFechaAlta(c.getFechaAlta());
-		this.setActividadesCuponera(dac);
-		this.setFoto(c.getFoto());
+	public DataCuponera(Cuponera cuponera, DataActividadCuponera[] dataActividad){
+		this.setNombre(cuponera.getNombre());
+		this.setDescripcion(cuponera.getDescripcion());
+		this.setFechaIni(cuponera.getFechaIni());
+		this.setFechaFin(cuponera.getFechaFin());
+		this.setDescuento(cuponera.getDescuento());
+		this.setFechaAlta(cuponera.getFechaAlta());
+		this.setActividadesCuponera(dataActividad);
+		this.setFoto(cuponera.getFoto());
 	}
 	
 	public String getNombre() {

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -47,9 +48,9 @@ class TestSistema {
 	private static IControladorUsuario ctrlU;
 	private static IControladorInstituciones ctrlI;
 	private static IControladorCuponera ctrlC;
-	private static ManejadorCuponeras mC = ManejadorCuponeras.getinstance();
-	private static ManejadorSocios mS = ManejadorSocios.getinstance();
-	private static ManejadorInstituciones mI = ManejadorInstituciones.getinstance();
+	private static ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+	private static ManejadorSocios mSocios = ManejadorSocios.getinstance();
+	private static ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
 	
 	@SuppressWarnings("deprecation")
 	@BeforeAll
@@ -59,7 +60,7 @@ class TestSistema {
 		ctrlI = fabrica.getIControladorInstitucion();
 		ctrlC = fabrica.getIControladorCuponera();
 		
-		mS.setIdentificadorRegistro(0);
+		mSocios.setIdentificadorRegistro(0);
 		
 		ctrlU.altaSocio("m1k4","Micaela","Lopez", "mika@gmail.com.ar", new Date(1987, 2, 23), "ijngr024", "https://bit.ly/3zglsWf");
 		ctrlU.altaSocio("andy","Andres","Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
@@ -109,14 +110,14 @@ class TestSistema {
 	void testAltaSocioOk() throws ParseException, Exception {
 		try {
 			ctrlU.altaSocio("andy","Andres","Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
-			DataUsuario du = ctrlU.mostrarDataUsuario("Emi71");
-			assertEquals(du.getNickname(), "Emi71");
-			assertEquals(du.getNombre(), "Emiliano");
-			assertEquals(du.getApellido(), "Lucas");
-			assertEquals(du.getEmail(), "emi71@gmail.com");
-			assertEquals(du.getContrasena(), "asdfg456");
-			assertEquals(du.getFoto(), "https://bit.ly/3lxoBvz");
-			assertEquals(du.getFechaNacimiento(), new Date(1971, 11, 31));		
+			DataUsuario dusuario = ctrlU.mostrarDataUsuario("Emi71");
+			assertEquals(dusuario.getNickname(), "Emi71");
+			assertEquals(dusuario.getNombre(), "Emiliano");
+			assertEquals(dusuario.getApellido(), "Lucas");
+			assertEquals(dusuario.getEmail(), "emi71@gmail.com");
+			assertEquals(dusuario.getContrasena(), "asdfg456");
+			assertEquals(dusuario.getFoto(), "https://bit.ly/3lxoBvz");
+			assertEquals(dusuario.getFechaNacimiento(), new Date(1971, 11, 31));		
 		} catch (UsuarioRepetidoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
@@ -131,8 +132,8 @@ class TestSistema {
 		//System.out.print("1");
 		try {
 			ctrlU.altaSocio("guille","Guillermo","Hector", "ghector@gmail.org.uy", new Date(1959, 5, 15), "GTO468", "https://bit.ly/SXkrKH9");
-			DataUsuario du = ctrlU.mostrarDataUsuario("guille");
-			assertEquals(du.getNickname(), "guille");
+			DataUsuario dusuario = ctrlU.mostrarDataUsuario("guille");
+			assertEquals(dusuario.getNickname(), "guille");
 		} catch (UsuarioRepetidoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
@@ -167,11 +168,11 @@ class TestSistema {
 			String descripcion = "Victor es un apasionado de los músculos";
 			String bio = "Victor nació en Moscow en 1977.";
 			ctrlU.altaProfesor("viktor", "Victor", "Perez", "verez@fuerza.com",new Date(1977, 1, 1), "IN", descripcion, bio, "www.vikym.com", "1234", "png");
-			DataUsuario du = ctrlU.mostrarDataUsuario("viktor");
-			assertEquals(du.getNickname(), "viktor");
-			assertEquals(du.getNombre(), "Victor");
-			assertEquals(du.getApellido(), "Perez");
-			assertEquals(du.getEmail(), "verez@fuerza.com");
+			DataUsuario dusuario = ctrlU.mostrarDataUsuario("viktor");
+			assertEquals(dusuario.getNickname(), "viktor");
+			assertEquals(dusuario.getNombre(), "Victor");
+			assertEquals(dusuario.getApellido(), "Perez");
+			assertEquals(dusuario.getEmail(), "verez@fuerza.com");
 		} catch (UsuarioRepetidoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
@@ -273,7 +274,7 @@ class TestSistema {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Socio soc = mS.obtenerSocio("andy");
+		Socio soc = mSocios.obtenerSocio("andy");
 		Map<Integer, Registro> map = soc.getRegistros();
 		//assertEquals(map.get(2).getClase().getNombre(), "Aerobico adulto mayor");
 		Registro registro = map.get(2);
@@ -298,7 +299,7 @@ class TestSistema {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		soc = mS.obtenerSocio("agustin34");
+		soc = mSocios.obtenerSocio("agustin34");
 		map = soc.getRegistros();
 		registro = map.get(3);
 		//System.out.print(registro.getCosto());
@@ -314,8 +315,8 @@ class TestSistema {
 	void testCompraCuponera() {
 		//(String nickname, String nombreActividad)
 		ctrlU.compraCuponera("andy", "Musculos", new Date(2021, 8, 31));
-		Socio socio = mS.obtenerSocio("andy");
-		HashSet<Compra> comp = socio.getCompras();
+		Socio socio = mSocios.obtenerSocio("andy");
+		Set<Compra> comp = socio.getCompras();
 	
 	};
 
@@ -351,7 +352,7 @@ class TestSistema {
 		ctrlC.altaCuponera("Fuerza", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3");	
 		ctrlI.aceptarRechazarActividad("Tenis", true);//agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
 		ctrlC.agregarActividadACuponera("Fuerza", "Tenis", 2);
-		Cuponera cup = mC.obtenerCuponera("Fuerza");
+		Cuponera cup = mCup.obtenerCuponera("Fuerza");
 		ctrlI.listarCategorias();
 	};
 	
@@ -403,7 +404,7 @@ class TestSistema {
 		//altaInstitucionDeportiva(String nombreInstitucion, String descripcion, String url) throws InstitucionRepetidaException;
 		try {
 		ctrlI.altaInstitucionDeportiva("IF", "Clases de gimnasia, aeróbica, spinning y yoga", "https://www.inatural.com");
-		InstitucionDeportiva ins = mI.obtenerInstitucion("IF");
+		InstitucionDeportiva ins = mInst.obtenerInstitucion("IF");
 		assertEquals(ins.getNombre(), "IF");
 		assertEquals(ins.getDescripcion(), "Clases de gimnasia, aeróbica, spinning y yoga");
 		assertEquals(ins.getURL(), "https://www.inatural.com");

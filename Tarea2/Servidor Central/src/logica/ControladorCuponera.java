@@ -19,28 +19,28 @@ public class ControladorCuponera implements IControladorCuponera {
     
     public void altaCuponera(String nombre, String descripcion, Date inicio, Date fin, 
     	Float descuento, Date fechaAlta,String foto) throws CuponeraRepetidaException{
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	Cuponera c = mc.obtenerCuponera(nombre);
-    	if(c != null) 
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombre);
+    	if(cuponera != null) 
     		throw new CuponeraRepetidaException("Ya existe una Cuponera con nombre '" 
     		+ nombre + "' en el sistema");
-    	c = new Cuponera(nombre,descripcion,inicio,fin,descuento,fechaAlta,foto);
-    	mc.addCuponera(c); 	
+    	cuponera = new Cuponera(nombre,descripcion,inicio,fin,descuento,fechaAlta,foto);
+    	mCup.addCuponera(cuponera); 	
     }
     
     public String[] listarCuponeras() {
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	String [] cuponeras = mc.getCuponeras().keySet().toArray(new String[0]);
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	String [] cuponeras = mCup.getCuponeras().keySet().toArray(new String[0]);
     	return cuponeras;   	
     }
     
     public String[] listarCuponerasNoCompradas() 
     {
     	Set<String> set = new HashSet<String>();
-		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();		
+		ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();		
 		
 		// Iterar sobre las cuponeras
-		for (Entry<String, Cuponera> iter : mc.getCuponeras().entrySet()) {
+		for (Entry<String, Cuponera> iter : mCup.getCuponeras().entrySet()) {
 			if (! iter.getValue().getComprada()) {
 				set.add(iter.getKey());
 			}
@@ -51,21 +51,21 @@ public class ControladorCuponera implements IControladorCuponera {
 		return res;
     }
     
-    public String[] listarActividadesNoEnCuponera(String cuponera , String institucion) {
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	Cuponera c = mc.obtenerCuponera(cuponera);
+    public String[] listarActividadesNoEnCuponera(String nombre , String nombreInstitucion) {
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombre);
     	//Obtengo las Actividades asocioadas a la cuponera.
-    	HashSet<ActividadDeCuponera> actividadesCuponera = c.getActividadCuponera();
+    	Set<ActividadDeCuponera> actividadesCuponera = cuponera.getActividadCuponera();
     	//Convierto Set a Array
     	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
     	
-    	ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-    	InstitucionDeportiva i = mi.obtenerInstitucion(institucion);
-    	Map<String, ActividadDeportiva> actividadesInstitucion = i.getActividades();
+    	ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+    	InstitucionDeportiva institucion = mInst.obtenerInstitucion(nombreInstitucion);
+    	Map<String, ActividadDeportiva> actividadesInstitucion = institucion.getActividades();
     	
     	//Copio la coleccion de Actividades de la Institucion para eliminar las que esta en la cuponera y devolver.
     	Map<String, ActividadDeportiva> MapAux = new HashMap<String, ActividadDeportiva>();
-    	MapAux.putAll(i.getActividades());
+    	MapAux.putAll(institucion.getActividades());
     	
     	//Itera en todas las actividades de la institucion y compara con las de la cuponera.
     	for (Entry<String, ActividadDeportiva> iter : actividadesInstitucion.entrySet()) {
@@ -83,32 +83,32 @@ public class ControladorCuponera implements IControladorCuponera {
     }
     
     public void agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases) throws ActividadDeCuponeraRepetidaException {
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva ad = ma.obtenerActividadAceptada(nombreActividad);
-    	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
+    	ActividadDeCuponera[] arrActCup = cuponera.getActividadCuponera().toArray(new ActividadDeCuponera[cuponera.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++)
     		if((arrActCup[j].getActividad().getNombre()).equals(nombreActividad)) 
     			 throw new ActividadDeCuponeraRepetidaException("Ya existe una actividad deportiva en la cuponera" );
     	
     	ActividadDeCuponera adc = new ActividadDeCuponera(cantClases);
-    	c.addActividadDeCuponera(adc);
-    	adc.setCuponera(c);
-    	adc.setActividad(ad);
-    	ad.addActividadDeCuponera(adc);
+    	cuponera.addActividadDeCuponera(adc);
+    	adc.setCuponera(cuponera);
+    	adc.setActividad(actividad);
+    	actividad.addActividadDeCuponera(adc);
    	
     }
     
     public DataCuponera consultaCuponera(String nombreCuponera) {
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
-    	DataActividadCuponera[] dac = new DataActividadCuponera[c.getActividadCuponera().size()];
-    	ActividadDeCuponera[] arrActCup = c.getActividadCuponera().toArray(new ActividadDeCuponera[c.getActividadCuponera().size()]);
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
+    	DataActividadCuponera[] dac = new DataActividadCuponera[cuponera.getActividadCuponera().size()];
+    	ActividadDeCuponera[] arrActCup = cuponera.getActividadCuponera().toArray(new ActividadDeCuponera[cuponera.getActividadCuponera().size()]);
     	for (int j = 0; j < arrActCup.length; j++) 
     		dac[j] = new DataActividadCuponera(arrActCup[j]);		
-    	DataCuponera dc = new DataCuponera(c,dac);
-    	return dc;
+    	DataCuponera dataCuponera = new DataCuponera(cuponera,dac);
+    	return dataCuponera;
     	
     }
     

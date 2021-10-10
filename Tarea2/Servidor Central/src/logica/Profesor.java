@@ -12,15 +12,16 @@ public class Profesor extends Usuario {
 	private Map<String, Clase> clases;
 	private Map<String, ActividadDeportiva> actividades;
 
-	public Profesor(String nick, String n, String ap, String email, Date fecha, 
-					String des, InstitucionDeportiva i,  String biografia, String sitioWeb, String contrasena, String foto){
+	public Profesor(String nick, String nombre, String apellido, String email, Date fecha, 
+					String descripcion, InstitucionDeportiva inst,  String biografia, String sitioWeb, String contrasena, String foto) {
+		super();
 		this.setNickname(nick);
-		this.setNombre(n);
-		this.setApellido(ap);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
 		this.setEmail(email);
 		this.setFechaNacimiento(fecha);
-		this.setDescripcion(des);
-		this.institucion = i;
+		this.setDescripcion(descripcion);
+		this.institucion = inst;
 		this.setClases(new HashMap<String, Clase>());
 		this.setBiografia(biografia);
 		this.setSitioWeb(sitioWeb);
@@ -122,6 +123,12 @@ public class Profesor extends Usuario {
 		}
 		String[] res = ingresadas.keySet().toArray(new String[0]);
 		return res;
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return this.nombre;
 	}
 
 }

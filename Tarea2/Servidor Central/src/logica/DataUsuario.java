@@ -14,17 +14,17 @@ public class DataUsuario
 	private String contrasena;
 	private String[] clases;
 	
-	public DataUsuario(Usuario u, String[] cla)
+	public DataUsuario(Usuario usuario, String[] clases)
 	{
-		this.setNickname(u.getNickname());
-		this.setTipoUsuario(u.getClass() == Socio.class ? "Socio" : "Profesor");
-		this.setNombre(u.getNombre());
-		this.setApellido(u.getApellido());
-		this.setEmail(u.getEmail());
-		this.setFechaNacimiento(u.getFechaNacimiento());
-		this.setClases(cla);
-		this.setFoto(u.getFoto());
-		this.setContrasena(u.getContrasena());
+		this.setNickname(usuario.getNickname());
+		this.setTipoUsuario(usuario.getClass() == Socio.class ? "Socio" : "Profesor");
+		this.setNombre(usuario.getNombre());
+		this.setApellido(usuario.getApellido());
+		this.setEmail(usuario.getEmail());
+		this.setFechaNacimiento(usuario.getFechaNacimiento());
+		this.setClases(clases);
+		this.setFoto(usuario.getFoto());
+		this.setContrasena(usuario.getContrasena());
 	}
 	
 	public String getNickname() {

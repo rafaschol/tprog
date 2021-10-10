@@ -3,14 +3,14 @@ import java.util.Date;
 
 public class Registro {
 	
-	private Integer id;
+	private Integer identificador;
 	private Date fecha;
 	private Float costo;
 	private Boolean conCuponera;
 	private Clase clase; // Clase a la cual corresponde el registro.
 	
-	public Registro(Integer id, Date fecha, Float costo, Boolean cuponera, Clase clase){
-		this.setId(id);
+	public Registro(Integer identificador, Date fecha, Float costo, Boolean cuponera, Clase clase){
+		this.setId(identificador);
 		this.setFecha(fecha);
 		this.setCosto(costo);
 		this.setConCuponera(cuponera);
@@ -18,11 +18,11 @@ public class Registro {
 	}
 	
 	public int getId() {
-		return id;
+		return identificador;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer identificador) {
+		this.identificador = identificador;
 	}
 
 	public Date getFecha() {

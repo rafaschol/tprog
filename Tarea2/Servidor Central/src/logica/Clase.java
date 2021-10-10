@@ -14,12 +14,12 @@ public class Clase {
 	private ActividadDeportiva actividad;
 	private Map<Integer, Registro> registros;
 	
-	public Clase(String n, Date f, Integer min, Integer max, String url, Date alta){
-		this.setNombre(n);
-		this.setFecha(f);
-		this.setMinPersonas(min);
-		this.setMaxPersonas(max);
-		this.setURL(url);
+	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta){
+		this.setNombre(nombre);
+		this.setFecha(fecha);
+		this.setMinPersonas(minimo);
+		this.setMaxPersonas(maximo);
+		this.setURL(urlClase);
 		this.setFechaAlta(alta);
 		this.setRegistros(new HashMap<Integer,Registro>());
 	}
@@ -101,7 +101,7 @@ public class Clase {
 	}
 	
 	public void addRegistro(Registro registro) {
-		Integer id = registro.getId();
-		this.registros.put(id, registro);
+		Integer identificador = registro.getId();
+		this.registros.put(identificador, registro);
 	}
 }
