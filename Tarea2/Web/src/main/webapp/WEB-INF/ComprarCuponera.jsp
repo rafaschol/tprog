@@ -28,14 +28,18 @@
   <!-- Form page -->
   <main class="form-page tab-page" id="login-page">
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Comprar cuponera</h5>
       <div class="border-top my-4"></div>
       <div class="form-floating mb-3">
         <select class="form-select" name="cuponera" id="cuponeraSelect">
-          <option selected disabled hidden>Selecciona una cuponera</option>
-          <option value="Pelota">Pelota ($10.680)</option>
+        <option selected disabled hidden>Selecciona una cuponera</option>
+          <c:forEach items="${cuponeras}" var="cuponera">
+          	<option value="${cuponera}">${cuponera}</option>
+          </c:forEach>
+          
+          
         </select>
         <label for="cuponeraSelect">Cuponera</label>
       </div>

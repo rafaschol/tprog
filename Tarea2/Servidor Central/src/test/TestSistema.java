@@ -15,6 +15,7 @@ import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
+import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraRepetidaException;
 import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
@@ -298,6 +299,9 @@ class TestSistema {
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException | ClaseRepetidaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (CuponeraCompradaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		soc = mSocios.obtenerSocio("agustin34");
 		map = soc.getRegistros();
@@ -314,7 +318,12 @@ class TestSistema {
 	@Test
 	void testCompraCuponera() {
 		//(String nickname, String nombreActividad)
-		ctrlU.compraCuponera("andy", "Musculos", new Date(2021, 8, 31));
+		try {
+			ctrlU.compraCuponera("andy", "Musculos", new Date(2021, 8, 31));
+		} catch (CuponeraCompradaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Socio socio = mSocios.obtenerSocio("andy");
 		Set<Compra> comp = socio.getCompras();
 	

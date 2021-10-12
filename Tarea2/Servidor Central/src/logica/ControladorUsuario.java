@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import excepciones.ClasesRestantesException;
+import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.DatosLoginIncorrectosException;
@@ -209,10 +210,21 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     }
     
-    public void compraCuponera(String nickname, String nombreCuponera, Date fecha) {
+    public void compraCuponera(String nickname, String nombreCuponera, Date fecha) throws CuponeraCompradaException {
     	//No hago validaciones porque es para carga de datos nada mas
     	ManejadorSocios mSocios = ManejadorSocios.getinstance();
     	Socio socio = mSocios.obtenerSocio(nickname);
+    	
+    	//validar que el socio no compro la cuponera
+		Set<Compra> compras = socio.getCompras();
+    	Compra[] arrCompras = compras.toArray(new Compra[compras.size()]);
+    	for (int j = 0; j < arrCompras.length; j++) {
+    		Compra compra = arrCompras[j];
+    		if (compra.getCuponera().getNombre().equals(nombreCuponera))
+    			throw new CuponeraCompradaException("El socio ya compro esta cuponera");	
+    	}
+    	
+    	
     	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
     	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
     	Compra compra = new Compra(fecha,cuponera);

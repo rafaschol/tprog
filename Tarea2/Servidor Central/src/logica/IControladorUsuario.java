@@ -2,6 +2,7 @@ package logica;
 import java.util.Date;
 
 import excepciones.ClasesRestantesException;
+import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
 import excepciones.DatosLoginIncorrectosException;
@@ -34,7 +35,7 @@ public interface IControladorUsuario {
 	    	String sitioWeb);
     
     //Funcion para carga de datos
-    public abstract void compraCuponera(String nickname, String nombreCuponera, Date fecha);
+    public abstract void compraCuponera(String nickname, String nombreCuponera, Date fecha)throws CuponeraCompradaException;
     
     public abstract String[]  listarCuponerasActividad(String nickname, String nombreActividad);
     public abstract DataUsuario login(String mail,String contrasena) throws DatosLoginIncorrectosException; 

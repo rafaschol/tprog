@@ -4,6 +4,7 @@ import excepciones.ActividadRepetidaException;
 import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
 import excepciones.ClasesRestantesException;
+import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraRepetidaException;
 import excepciones.CuponeraVencidaException;
 import excepciones.CuposAgotadosException;
@@ -418,12 +419,18 @@ public class CargarDatosPrueba {
 // ================================================================================
 	
 	public void cargarCompraCuponera() {
-		controladorUsuario.compraCuponera("guille", "Pelota", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("m1k4", "Gimnasia", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("caro", "Gimnasia", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("sergiop", "M\u00FAsculos", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("andy", "M\u00FAsculos", new Date(121, 5, 31));
-		controladorUsuario.compraCuponera("Emi71", "Pelota", new Date(121, 5, 31));
+		try {
+			controladorUsuario.compraCuponera("guille", "Pelota", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("m1k4", "Gimnasia", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("caro", "Gimnasia", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("sergiop", "M\u00FAsculos", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("andy", "M\u00FAsculos", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("Emi71", "Pelota", new Date(121, 5, 31));
+		} catch (CuponeraCompradaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 // ================================================================================
