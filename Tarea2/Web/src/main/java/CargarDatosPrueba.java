@@ -222,7 +222,7 @@ public class CargarDatosPrueba {
 			
 	/* A2 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol",
 					"Voleibol en todas sus formas",
-					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "");
+					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "img/voleibol.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
 			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
 			
@@ -244,14 +244,14 @@ public class CargarDatosPrueba {
 			
 	/* A5 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
-					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "");
+					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "img/atletismo.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Atletismo", true);
 			controladorInstitucion.agregarCategoriaAActividad("Atletismo", "Deportes");
 			
 			
 	/* A6 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol",
 					"Basquetbol para todos.",
-					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "");
+					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "img/basquetbol.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Basquetbol", true);
 			controladorInstitucion.agregarCategoriaAActividad("Basquetbol", "Deportes");
 			
@@ -275,7 +275,7 @@ public class CargarDatosPrueba {
 	/* A9 */String[] categoriasA9 = {"Deportes", "Al aire libre"};
 			controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol II",
 					"Voleibol avanzado.",
-					120, (float) 1000.0, new Date(121, 8, 1),"denis", categoriasA9, "");
+					120, (float) 1000.0, new Date(121, 8, 1),"denis", categoriasA9, "img/voleibol_ii.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol II", false);
 			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Deportes");
 			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Al aire libre");

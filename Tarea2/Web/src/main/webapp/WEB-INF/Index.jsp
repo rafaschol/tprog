@@ -42,7 +42,7 @@
             <div class="card-body">
               <h5 class="card-title">Voleibol</h5>
               <p class="card-text">Voleibol en todas sus formas</p>
-              <a href="actividades/voleibol" class="btn btn-primary">Ver más</a>
+              <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <div class="card-body">
               <h5 class="card-title">Atletismo</h5>
               <p class="card-text">100m , 200m, postas y carreras con obstaculos.</p>
-              <a href="actividades/atletismo" class="btn btn-primary">Ver más</a>
+              <a href="actividades/Atletismo" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="card-body">
               <h5 class="card-title">Basquetbol</h5>
               <p class="card-text">Basquetbol para todos.</p>
-              <a href="actividades/basquetbol" class="btn btn-primary">Ver más</a>
+              <a href="actividades/Basquetbol" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
             <div class="card-body">
               <h5 class="card-title">Pelota</h5>
               <p class="card-text">Deportes con pelota.</p>
-              <a href="cuponeras/pelota" class="btn btn-primary">Ver más</a>
+              <a href="cuponeras/Pelota" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>

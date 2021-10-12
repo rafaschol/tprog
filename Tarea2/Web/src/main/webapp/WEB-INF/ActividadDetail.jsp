@@ -37,27 +37,24 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="img/voleibol.jpg" alt="actividad deportiva" class="img-fluid rounded">
+              <img src="${!actividad.getFoto().equals('') ? actividad.getFoto() : ''}" alt="actividad deportiva" class="img-fluid rounded">
               <div class="p-3">
-                <h1 class="mb-3">Voleibol</h1>
-                <p>Voleibol en todas sus formas</p>
+                <h1 class="mb-3">${actividad.getNombre()}</h1>
+                <p>${actividad.getDescripcion()}</p>
               </div>
           </div>
           <div class="border-top my-4"></div>
           <h4 class="fw-light">Detalles</h4>
           <table class="table table-borderless">
             <tr>
-              <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>DuraciÃ³n: <span class="fw-bold ms-1">120 minutos</span></td>
+              <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Duración: <span class="fw-bold ms-1">${actividad.getDuracion()} minutos</span></td>
             </tr>
             <tr>
-              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$750</span></td>
-            </tr>
-            <tr>
-              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">20/04/2021</span></td>
+              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$${String.format("%.0f", actividad.getCosto())}</span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>
-          <p><span class="fw-bold">CategorÃ­as: </span>
+          <p><span class="fw-bold">Categorías: </span>
             <a href="actividad_list.html" class="text-decoration-none">Deportes</a>
           </p>
           <div class="border-top my-4 d-lg-none"></div>
