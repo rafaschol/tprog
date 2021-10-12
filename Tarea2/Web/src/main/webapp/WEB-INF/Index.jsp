@@ -26,109 +26,11 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <div class="container-fluid">
-      <button class="btn btn-primary rounded-circle me-3 sidebar-toggler">
-        <i class="fas fa-caret-right sidebar-toggler-show" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
-        <i class="fas fa-caret-left sidebar-toggler-hide" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
-      </button>
-      <a class="navbar-brand" href="inicio">Entrenemos<span class="fw-bold">.uy</span></a>
-
-      <!-- Profile (logged-in) -->
-      <% if (session.getAttribute("usuarioLogueado") != null) { %>
-      <div class="navbar-profile me-3 me-lg-0">
-        <a href="usuario_socio_detail.html">
-          <img class="rounded-circle" src="${ usuarioLogueado.getFoto() }" alt="foto de perfil">
-        </a>
-      </div>
-      <% } %>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse pt-3 pt-lg-0 text-center" id="navbarNav">
-        <form action="#" method="GET" class="ms-auto me-lg-3 mb-2 mb-lg-0">
-          <div class="input-group">
-            <input class="form-control form-control-dark" type="search" placeholder="Buscar">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-          </div>
-        </form>
-
-        <!-- Logged-out buttons -->
-        <% if (session.getAttribute("usuarioLogueado") == null) { %>
-        <div class="navbar-buttons">
-          <a href="register" class="btn btn-outline-light me-2">Registrarme</a>
-          <a href="login" class="btn btn-primary">Iniciar sesión</a>
-        </div>
-        <% } %>
-        
-      </div>
-
-    </div>
-  </nav>
+  <jsp:include page="Navbar.jsp" />
     
   <div class="d-flex container-fluid page-wrapper px-0">
 
-    <!-- Sidebar -->
-    <aside class="sidebar border-end bg-white p-3">
-      <ul class="list-unstyled mt-3 ps-0">
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#instituciones-submenu" aria-expanded="true">Instituciones</button>
-          <div class="collapse show" id="instituciones-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Telón</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">Categorías</button>
-          <div class="collapse show" id="categorias-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Deportes</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Fitness</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Gimnasia</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="mb-1">
-          <a href="usuario_list.html" class="btn sidebar-submenu-button align-items-center rounded" id="personas">Personas</a>
-        </li>
-        
-        
-        <% if (session.getAttribute("usuarioLogueado") != null) { %>
-        <li class="border-top my-3"></li>
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#cuenta-submenu" aria-expanded="true">Cuenta</button>
-          <div class="collapse show" id="cuenta-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
-              
-              <% DataUsuario usr = (DataUsuario)session.getAttribute("usuarioLogueado"); %>
-              <% if (usr.getTipoUsuario().equals("Socio")) { %>
-              <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
-              <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
-              
-              <% } else { %>
-              <li><a href="actividad_create.html" class="link-dark rounded">Crear una actividad deportiva</a></li>
-              <li><a href="clase_create.html" class="link-dark rounded">Crear una clase</a></li>
-              <% } %>
-              
-              
-              <li><a href="logout" class="link-dark rounded">Cerrar sesión</a></li>
-            </ul>
-          </div>
-        </li>
-        <% } %>
-        
-        
-        
-      </ul>
-    </aside>
+	<jsp:include page="Sidebar.jsp" />
 
     <!-- Page content -->
     <main class="main-content">
@@ -140,7 +42,7 @@
             <div class="card-body">
               <h5 class="card-title">Voleibol</h5>
               <p class="card-text">Voleibol en todas sus formas</p>
-              <a href="actividad_detail.html" class="btn btn-primary">Ver más</a>
+              <a href="actividades/voleibol" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -151,7 +53,7 @@
             <div class="card-body">
               <h5 class="card-title">Atletismo</h5>
               <p class="card-text">100m , 200m, postas y carreras con obstaculos.</p>
-              <a href="actividad_detail.html" class="btn btn-primary">Ver más</a>
+              <a href="actividades/atletismo" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -162,7 +64,7 @@
             <div class="card-body">
               <h5 class="card-title">Basquetbol</h5>
               <p class="card-text">Basquetbol para todos.</p>
-              <a href="actividad_detail.html" class="btn btn-primary">Ver más</a>
+              <a href="actividades/basquetbol" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>
@@ -173,7 +75,7 @@
             <div class="card-body">
               <h5 class="card-title">Pelota</h5>
               <p class="card-text">Deportes con pelota.</p>
-              <a href="cuponera_detail.html" class="btn btn-primary">Ver más</a>
+              <a href="cuponeras/pelota" class="btn btn-primary">Ver más</a>
             </div>
           </div>
         </div>

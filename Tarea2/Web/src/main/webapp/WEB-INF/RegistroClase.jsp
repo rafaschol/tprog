@@ -5,7 +5,7 @@
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
   <!-- Meta tags -->
   <meta charset="UTF-8">

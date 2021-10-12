@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		sesion.setAttribute("usuarioLogueado", null);
-		response.sendRedirect("inicio");
+		response.sendRedirect(request.getContextPath() + "/");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

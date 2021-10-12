@@ -71,7 +71,7 @@ public class RegistroServlet extends HttpServlet {
 			else {
 				controladorUsuario.altaSocio(nombreUsuario, nombre, apellido, correo, nacimiento, contrasena, null);
 			}
-			response.sendRedirect("inicio");
+			response.sendRedirect(request.getContextPath() + "/");
 		} catch (UsuarioRepetidoException ex) {
 			
 		} catch (MailRepetidoException ex) {

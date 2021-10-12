@@ -5,7 +5,7 @@
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
   <!-- Meta tags -->
   <meta charset="UTF-8">
@@ -95,7 +95,7 @@
       </button>
       <button class="btn btn-lg btn-primary w-100 mt-2" id="next-button">Siguiente</button>
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2" id="register-button">Registrarme</button>
-      <p class="mt-3" id="registered-text">¿Ya estás registrado? <a href="login.html" class="text-decoration-none">Entrar</a></p>
+      <p class="mt-3" id="registered-text">¿Ya estás registrado? <a href="ingresar" class="text-decoration-none">Entrar</a></p>
     </form>
 
   </main>

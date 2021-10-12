@@ -5,7 +5,7 @@
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
   <!-- Meta tags -->
   <meta charset="UTF-8">
@@ -26,80 +26,11 @@
 </head>
 <body>
   
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <div class="container-fluid">
-      <button class="btn btn-primary rounded-circle me-3 sidebar-toggler">
-        <i class="fas fa-caret-right sidebar-toggler-show" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
-        <i class="fas fa-caret-left sidebar-toggler-hide" style="font-size: 1.2rem; padding: 0 2.4px;"></i>
-      </button>
-      <a class="navbar-brand" href="inicio">Entrenemos<span class="fw-bold">.uy</span></a>
-
-      <!-- Profile (logged-in) -->
-      <div class="navbar-profile me-3 me-lg-0">
-        <a href="usuario_socio_detail.html">
-          <img class="rounded-circle" src="img/Emi71.jpg" alt="foto de perfil">
-        </a>
-      </div>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>      
-      <div class="collapse navbar-collapse pt-3 pt-lg-0 text-center" id="navbarNav">
-        <form action="#" method="GET" class="ms-auto me-lg-3 mb-2 mb-lg-0">
-          <div class="input-group">
-            <input class="form-control form-control-dark" type="search" placeholder="Buscar">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-          </div>
-        </form>        
-      </div>
-    </div>
-  </nav>
+  <jsp:include page="Navbar.jsp" />
     
   <div class="d-flex container-fluid page-wrapper px-0">
 
-    <!-- Sidebar -->
-    <aside class="sidebar border-end bg-white p-3">
-      <ul class="list-unstyled mt-3 ps-0">
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#instituciones-submenu" aria-expanded="true">Instituciones</button>
-          <div class="collapse show" id="instituciones-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">TelÃ³n</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">CategorÃ­as</button>
-          <div class="collapse show" id="categorias-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Deportes</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Fitness</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Gimnasia</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="mb-1">
-          <a href="usuario_list.html" class="btn sidebar-submenu-button align-items-center rounded" id="personas">Personas</a>
-        </li>
-        <li class="border-top my-3"></li>
-        <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#cuenta-submenu" aria-expanded="true">Cuenta</button>
-          <div class="collapse show" id="cuenta-submenu">
-            <ul class="list-unstyled pb-1 small sidebar-submenu">
-              <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
-              <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
-              <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
-              <li><a href="inicio" class="link-dark rounded">Cerrar sesiÃ³n</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </aside>
+    <jsp:include page="Sidebar.jsp" />
 
     <!-- Page content -->
     <main class="main-content">
@@ -109,19 +40,19 @@
         <div class="border-top my-4"></div>
 
         <div class="list-group list-group-flush">
-          <a href="usuario_detail.html" class="list-group-item">
+          <a href="usuarios/euge" class="list-group-item">
             <img class="rounded-circle me-2" src="img/euge.jpg" alt="usuario">
             euge
           </a>
-          <a href="usuario_detail.html" class="list-group-item">
+          <a href="usuarios/guille" class="list-group-item">
             <img class="rounded-circle me-2" src="img/guille.jpg" alt="usuario">
             guille
           </a>
-          <a href="usuario_detail.html" class="list-group-item">
+          <a href="usuarios/denis" class="list-group-item">
             <img class="rounded-circle me-2" src="img/denis.jpg" alt="usuario">
             denis
           </a>
-          <a href="usuario_detail.html" class="list-group-item">
+          <a href="usuarios/nelson" class="list-group-item">
             <img class="rounded-circle me-2" src="img/Nelson.jpg" alt="usuario">
             Nelson
           </a>

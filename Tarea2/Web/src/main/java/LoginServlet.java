@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			DataUsuario usuario = controladorUsuario.login(email, password);
 			sesion.setAttribute("usuarioLogueado", usuario);
-			response.sendRedirect("inicio");
+			response.sendRedirect(request.getContextPath() + "/");
 		} 
 		catch (DatosLoginIncorrectosException ex){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
