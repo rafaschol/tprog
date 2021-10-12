@@ -19,7 +19,7 @@ import logica.IControladorUsuario;
 import logica.ManejadorSocios;
 import logica.Socio;
 
-@WebServlet("/inicio")
+@WebServlet("")
 public class IndexServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

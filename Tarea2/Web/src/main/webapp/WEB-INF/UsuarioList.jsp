@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,11 +11,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="list-page.css">
+  <link rel="stylesheet" href="css/list-page.css">
   <link rel="stylesheet" href="css/search.css">
   
   <!-- Icons -->
@@ -60,13 +67,13 @@
             <ul class="list-unstyled pb-1 small sidebar-submenu">
               <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
               <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Telón</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">TelÃ³n</a></li>
               <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
             </ul>
           </div>
         </li>
         <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">Categorías</button>
+          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">CategorÃ­as</button>
           <div class="collapse show" id="categorias-submenu">
             <ul class="list-unstyled pb-1 small sidebar-submenu">
               <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
@@ -87,7 +94,7 @@
               <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
               <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
               <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
-              <li><a href="inicio" class="link-dark rounded">Cerrar sesión</a></li>
+              <li><a href="inicio" class="link-dark rounded">Cerrar sesiÃ³n</a></li>
             </ul>
           </div>
         </li>

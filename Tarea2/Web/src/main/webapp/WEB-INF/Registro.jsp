@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -33,16 +38,16 @@
       </div>
       <div class="form-tab">
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" name="correo" id="emailInput" placeholder="Correo electr髇ico" required>
-          <label for="emailInput">Correo electr髇ico</label>
+          <input type="email" class="form-control" name="correo" id="emailInput" placeholder="Correo electr贸nico" required>
+          <label for="emailInput">Correo electr贸nico</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" name="contrasena" id="passwordInput" placeholder="Contrase馻">
-          <label for="passwordInput">Contrase馻</label>
+          <input type="password" class="form-control" name="contrasena" id="passwordInput" placeholder="Contrase帽a">
+          <label for="passwordInput">Contrase帽a</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="passwordConfirmInput" placeholder="Confirmaci髇 de la contrase馻">
-          <label for="passwordConfirmInput">Confirmaci髇 de la contrase馻</label>
+          <input type="password" class="form-control" id="passwordConfirmInput" placeholder="Confirmaci贸n de la contrase帽a">
+          <label for="passwordConfirmInput">Confirmaci贸n de la contrase帽a</label>
         </div>
       </div>
       <div class="form-tab">
@@ -66,19 +71,19 @@
       <div id="profesor-tab">
         <div class="form-floating mb-3">
           <select class="form-select" name="institucion" id="institucionSelect">
-            <option selected disabled hidden>Selecciona una instituci髇</option>
+            <option selected disabled hidden>Selecciona una instituci贸n</option>
             <option value="Fuerza Bruta">Fuerza Bruta</option>
-            <option value="Tel髇">Tel髇</option>
+            <option value="Tel贸n">Tel贸n</option>
           </select>
-          <label for="institucionSelect">Instituci髇</label>
+          <label for="institucionSelect">Instituci贸n</label>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="Descripci髇"></textarea>
-          <label for="descripcionTextArea">Descripci髇</label>
+          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="Descripci贸n"></textarea>
+          <label for="descripcionTextArea">Descripci贸n</label>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" name="biografia" id="biografiaTextArea" placeholder="Biograf韆"></textarea>
-          <label for="biografiaTextArea">Biograf韆</label>
+          <textarea class="form-control" name="biografia" id="biografiaTextArea" placeholder="Biograf铆a"></textarea>
+          <label for="biografiaTextArea">Biograf铆a</label>
         </div>
         <div class="form-floating mb-3">
           <input type="url" class="form-control" name="sitioWeb" id="sitioWebInput" placeholder="Sitio web">
@@ -90,7 +95,7 @@
       </button>
       <button class="btn btn-lg btn-primary w-100 mt-2" id="next-button">Siguiente</button>
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2" id="register-button">Registrarme</button>
-      <p class="mt-3" id="registered-text">縔a est醩 registrado? <a href="login.html" class="text-decoration-none">Entrar</a></p>
+      <p class="mt-3" id="registered-text">驴Ya est谩s registrado? <a href="login.html" class="text-decoration-none">Entrar</a></p>
     </form>
 
   </main>

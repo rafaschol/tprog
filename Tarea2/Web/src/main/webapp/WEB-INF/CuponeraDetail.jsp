@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -14,7 +21,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>Voleibol | Entrenemos.uy</title>
+  <title>Pelota | Entrenemos.uy</title>
 </head>
 <body>
   
@@ -59,13 +66,13 @@
             <ul class="list-unstyled pb-1 small sidebar-submenu">
               <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
               <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
-              <li><a href="actividad_list.html" class="link-dark rounded">Telón</a></li>
+              <li><a href="actividad_list.html" class="link-dark rounded">TelÃ³n</a></li>
               <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
             </ul>
           </div>
         </li>
         <li class="mb-1">
-          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">Categorías</button>
+          <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">CategorÃ­as</button>
           <div class="collapse show" id="categorias-submenu">
             <ul class="list-unstyled pb-1 small sidebar-submenu">
               <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
@@ -86,7 +93,7 @@
               <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
               <li><a href="registro_clase.html" class="link-dark rounded">Registrarme a clase</a></li>
               <li><a href="comprar_cuponera.html" class="link-dark rounded">Comprar una cuponera</a></li>
-              <li><a href="inicio" class="link-dark rounded">Cerrar sesión</a></li>
+              <li><a href="inicio" class="link-dark rounded">Cerrar sesiÃ³n</a></li>
             </ul>
           </div>
         </li>
@@ -99,60 +106,48 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="img/voleibol.jpg" alt="actividad deportiva" class="img-fluid rounded">
+              <img src="img/pelota.jpg" alt="cuponera" class="img-fluid rounded">
               <div class="p-3">
-                <h1 class="mb-3">Voleibol</h1>
-                <p>Voleibol en todas sus formas</p>
+                <h1 class="mb-3">Pelota</h1>
+                <p>Deportes con pelota.</p>
               </div>
           </div>
           <div class="border-top my-4"></div>
           <h4 class="fw-light">Detalles</h4>
           <table class="table table-borderless">
             <tr>
-              <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Duración: <span class="fw-bold ms-1">120 minutos</span></td>
+              <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">20%</span></td>
             </tr>
             <tr>
-              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$750</span></td>
+              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>PerÃ­odo: <span class="fw-bold ms-1">01/05/2021 - 31/07/2021</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">20/04/2021</span></td>
+              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$10.680</span></td>
+            </tr>
+            <tr>
+              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">30/04/2021</span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>
-          <p><span class="fw-bold">Categorías: </span>
+          <p><span class="fw-bold">CategorÃ­as: </span>
             <a href="actividad_list.html" class="text-decoration-none">Deportes</a>
           </p>
           <div class="border-top my-4 d-lg-none"></div>
         </section>
         
         <aside class="detail-sidebar col-lg-4 px-3 pb-3 py-lg-3">
-          <div class="card mb-3">
-            <div class="card-header">
-              Clases
-            </div>
-            <div class="list-group list-group-flush">
-              <a href="clase_detail.html" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/voleibol_clase.jpg" alt="clase">
-                Voleibol
-              </a>
-              <a href="clase_detail.html" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/braza.jpg" alt="clase">
-                Braza
-              </a>
-              <a href="clase_detail.html" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/mariposa.jpg" alt="clase">
-                Mariposa
-              </a>
-            </div>
-          </div>
           <div class="card">
             <div class="card-header">
-              Cuponeras
+              Actividades deportivas
             </div>
             <div class="list-group list-group-flush">
-              <a href="cuponera_detail.html" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/pelota.jpg" alt="cuponera">
-                Pelota
+              <a href="actividad_detail.html" class="list-group-item">
+                <img class="rounded-circle me-2" src="img/voleibol.jpg" alt="actividad deportiva">
+                Voleibol
+              </a>
+              <a href="actividad_detail.html" class="list-group-item">
+                <img class="rounded-circle me-2" src="img/basquetbol.jpg" alt="actividad deportiva">
+                Basquetbol
               </a>
             </div>
           </div>

@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -31,12 +38,12 @@
           <label for="nombreInput">Nombre</label>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="Descripción"></textarea>
-          <label for="descripcionTextArea">Descripción</label>
+          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="DescripciÃ³n"></textarea>
+          <label for="descripcionTextArea">DescripciÃ³n</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="Duración (minutos)" value="60" min="1">
-          <label for="duracionInput">Duración (minutos)</label>
+          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="DuraciÃ³n (minutos)" value="60" min="1">
+          <label for="duracionInput">DuraciÃ³n (minutos)</label>
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" name="costo" id="costoInput" placeholder="Costo ($)">
@@ -44,13 +51,13 @@
         </div>
       </div>
       <div class="form-tab">
-        <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o más categorías</label>
+        <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o mÃ¡s categorÃ­as</label>
         <select class="form-select mb-3" multiple name="categorias" id="categoriasSelect">
-          <option selected disabled hidden>Selecciona una o más categorías</option>
+          <option selected disabled hidden>Selecciona una o mÃ¡s categorÃ­as</option>
           <option value="Fuerza Bruta">Al aire libre</option>
-          <option value="Telón">Deportes</option>
-          <option value="Telón">Fitness</option>
-          <option value="Telón">Gimnasia</option>
+          <option value="TelÃ³n">Deportes</option>
+          <option value="TelÃ³n">Fitness</option>
+          <option value="TelÃ³n">Gimnasia</option>
         </select>
       </div>
       <button class="btn btn-secondary rounded-circle" id="prev-button">

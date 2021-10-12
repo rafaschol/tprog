@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
   <!-- Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -43,12 +50,12 @@
         <label for="fechaHoraInput">Fecha y hora</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="number" class="form-control" name="minSocios" id="minSociosInput" placeholder="Mínimo de socios" value="0" min="0">
-        <label for="minSociosInput">Mínimo de socios</label>
+        <input type="number" class="form-control" name="minSocios" id="minSociosInput" placeholder="MÃ­nimo de socios" value="0" min="0">
+        <label for="minSociosInput">MÃ­nimo de socios</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="number" class="form-control" name="maxSocios" id="maxSociosInput" placeholder="Máximo de socios" value="1" min="1">
-        <label for="maxSociosInput">Máximo de socios</label>
+        <input type="number" class="form-control" name="maxSocios" id="maxSociosInput" placeholder="MÃ¡ximo de socios" value="1" min="1">
+        <label for="maxSociosInput">MÃ¡ximo de socios</label>
       </div>
       <div class="form-floating mb-3">
         <input type="url" class="form-control" name="url" id="urlInput" placeholder="Link de la clase">
