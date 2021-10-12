@@ -3,17 +3,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Socio extends Usuario {
 	
 	private Map<Integer, Registro> registros; //Coleccion de registros.
-	private HashSet<Compra> compras; // Coleccion de compras de cuponera.
-	private HashSet<Participa> participa; // Coleccion de paricipa a actividad de cuponera.
+	private Set<Compra> compras; // Coleccion de compras de cuponera.
+	private Set<Participa> participa; // Coleccion de paricipa a actividad de cuponera.
 	
-	public Socio(String nick, String n, String ap, String email, Date fecha, String contrasena, String foto){
+	public Socio(String nick, String nombre, String apellido, String email, Date fecha, String contrasena, String foto){
 		this.nickname = nick;
-		this.nombre = n;
-		this.apellido = ap;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.email = email;
 		this.fechaNacimiento = fecha;
 		this.foto = foto;
@@ -33,31 +34,37 @@ public class Socio extends Usuario {
 		this.registros = registros;
 	}
 
-	public HashSet<Compra> getCompras() {
+	public Set<Compra> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(HashSet<Compra> compras) {
+	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
 	}
 
-	public HashSet<Participa> getParticipa() {
+	public Set<Participa> getParticipa() {
 		return participa;
 	}
 
-	public void setParticipa(HashSet<Participa> participa) {
+	public void setParticipa(Set<Participa> participa) {
 		this.participa = participa;
 	}
 	
 	public void addRegistro(Registro registro) {
-		Integer id = registro.getId();
-		this.registros.put(id, registro);
+		Integer identificador = registro.getId();
+		this.registros.put(identificador, registro);
 	}
 	public void addCompra(Compra compra) {
 		this.compras.add(compra);
 	}
 	public void addParticipa(Participa participa) {
 		this.participa.add(participa);
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return this.nombre;
 	}
 	
 }

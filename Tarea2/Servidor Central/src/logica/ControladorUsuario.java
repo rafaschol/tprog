@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 //import java.util.Arrays;
+import java.util.Set;
 
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraVencidaException;
@@ -21,49 +22,49 @@ public class ControladorUsuario implements IControladorUsuario {
     
     public void altaSocio(String nickname, String nombre,String apellido, String email,
     	Date fechaNacimiento, String contrasena,String foto) throws UsuarioRepetidoException, MailRepetidoException {
-        ManejadorSocios ms = ManejadorSocios.getinstance();
-        ManejadorProfesores mp = ManejadorProfesores.getinstance();
-        Socio s = ms.obtenerSocio(nickname); 
-        Profesor p =  mp.obtenerProfesor(nickname);
-        if ((s != null) | (p != null)) // Valida nickname
+        ManejadorSocios mSocios = ManejadorSocios.getinstance();
+        ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+        Socio socio = mSocios.obtenerSocio(nickname); 
+        Profesor profesor =  mProf.obtenerProfesor(nickname);
+        if ((socio != null) | (profesor != null)) // Valida nickname
             throw new UsuarioRepetidoException("El nickname " + nickname + " ya esta registrado");
-        s = ms.obtenerMail(email); 
-        p = mp.obtenerMail(email);
-        if ((s != null) | (p != null)) // Valida mail
+        socio = mSocios.obtenerMail(email); 
+        profesor = mProf.obtenerMail(email);
+        if ((socio != null) | (profesor != null)) // Valida mail
             throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
 
-        s = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena, foto);
-        ms.addSocio(s);
+        socio = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena, foto);
+        mSocios.addSocio(socio);
     	}
 
     public void altaProfesor(String nickname, String nombre,String apellido, String email,
 	    	Date fechaNacimiento, String institucion, String descripcion, String biografia, 
 	    	String sitioWeb, String contrasena,String foto) throws UsuarioRepetidoException, MailRepetidoException {
-    		ManejadorSocios ms = ManejadorSocios.getinstance();
-    		ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    		Socio s = ms.obtenerSocio(nickname); 
-    		Profesor p =  mp.obtenerProfesor(nickname);
-    		if ((s != null) | (p != null)) // Valida nickname
+    		ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    		ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    		Socio socio = mSocios.obtenerSocio(nickname); 
+    		Profesor profesor =  mProf.obtenerProfesor(nickname);
+    		if ((socio != null) | (profesor != null)) // Valida nickname
                 throw new UsuarioRepetidoException("El nickname " + nickname + " ya esta registrado");
-    		s = ms.obtenerMail(email); 
-            p = mp.obtenerMail(email);
-            if ((s != null) | (p != null)) // Valida mail
+    		socio = mSocios.obtenerMail(email); 
+    		profesor = mProf.obtenerMail(email);
+            if ((socio != null) | (profesor != null)) // Valida mail
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado");
-            ManejadorInstituciones mi = ManejadorInstituciones.getinstance();
-            InstitucionDeportiva ins = mi.obtenerInstitucion(institucion);
-            p = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena,foto);
-            mp.addProfesor(p);
-            ins.addProfesor(p);
+            ManejadorInstituciones mInst = ManejadorInstituciones.getinstance();
+            InstitucionDeportiva ins = mInst.obtenerInstitucion(institucion);
+            profesor = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena,foto);
+            mProf.addProfesor(profesor);
+            ins.addProfesor(profesor);
         }
     
     // devuelve la lista de string de los usuarios en el sistema.
     public String[] listarUsuarios()
     {
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
     	
-		String[] resSoc = ms.getNicknames().keySet().toArray(new String[0]);
-		String[] resProf = mp.getNicknames().keySet().toArray(new String[0]);
+		String[] resSoc = mSocios.getNicknames().keySet().toArray(new String[0]);
+		String[] resProf = mProf.getNicknames().keySet().toArray(new String[0]);
 		String[] res = new String[resSoc.length + resProf.length];
 		
 		// concatenar arrays resSoc + resProf
@@ -78,13 +79,13 @@ public class ControladorUsuario implements IControladorUsuario {
     {
     	DataUsuario res;
     	
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
     	
-    	Socio socio = ms.obtenerSocio(nickname);
+    	Socio socio = mSocios.obtenerSocio(nickname);
     	if (socio == null) {
     		// usuario es un profesor
-    		Profesor profesor = mp.obtenerProfesor(nickname);
+    		Profesor profesor = mProf.obtenerProfesor(nickname);
     		String[] clases = profesor.getClases().keySet().toArray(new String[0]);
     		String[] actividades = profesor.getActividades().keySet().toArray(new String[0]);	
     		 
@@ -97,10 +98,10 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		String[] clases = new String[regs.size()];
     		
-    		int i = 0;
+    		int iterador = 0;
     		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
-    			clases[i] = iter.getValue().getClase().getNombre();
-    			i++;
+    			clases[iterador] = iter.getValue().getClase().getNombre();
+    			iterador++;
     		}
     		
     		res = new DataUsuario(socio, clases);
@@ -111,8 +112,8 @@ public class ControladorUsuario implements IControladorUsuario {
     
     //Lista de socios para caso de uso Registro Dictado a Clase
     public String[] listarSocios() {
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	String[] res = ms.getNicknames().keySet().toArray(new String[0]);
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	String[] res = mSocios.getNicknames().keySet().toArray(new String[0]);
     	Arrays.sort(res);//Orden alfabetico.
     	return res;	
     }
@@ -122,28 +123,28 @@ public class ControladorUsuario implements IControladorUsuario {
     
     public void registrarSocio(String nickname, String nombreClase, String nombreActividad, Boolean conCuponera, 
     		String nombreCuponera, Date fecha	) throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException, CuponeraVencidaException{
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio socio = ms.obtenerSocio(nickname);
-    	ManejadorActividad ma = ManejadorActividad.getinstance();
-    	ActividadDeportiva actividad =  ma.obtenerActividadAceptada(nombreActividad);
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socio = mSocios.obtenerSocio(nickname);
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad =  mActividad.obtenerActividadAceptada(nombreActividad);
     	Clase clase = actividad.obtenerClase(nombreClase);
     	int cantRegistros = clase.cantRegistros();
     	int maxCupos = clase.getMaxPersonas();
-    	Registro r;
-    	Clase c = null;
+    	Registro registro;
+    	Clase clase2 = null;
     	
     	for (Map.Entry<Integer, Registro> iter : socio.getRegistros().entrySet()) {
-    		if (c == null && iter.getValue().getClase() == clase)  
-    			c = iter.getValue().getClase();
+    		if (clase2 == null && iter.getValue().getClase() == clase)  
+    			clase2 = iter.getValue().getClase();
     		
-    	if(c != null)	
+    	if(clase2 != null)	
     		throw new SocioRegistradoException("El socio ya esta registrado a esta clase");
     	}
     	if(cantRegistros >= maxCupos) 
     		throw new CuposAgotadosException("No hay cupos disponibles");
     	
-    	ms.setIdentificadorRegistro(ms.getIdentificadorRegistro() + 1);
-    	Integer id = ms.getIdentificadorRegistro();
+    	mSocios.setIdentificadorRegistro(mSocios.getIdentificadorRegistro() + 1);
+    	Integer identificador = mSocios.getIdentificadorRegistro();
     	
     	float costo = 0;
     	if (!conCuponera) {
@@ -151,15 +152,15 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	}
     	else {
-    		ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    		Cuponera cuponera = mc.obtenerCuponera(nombreCuponera);
+    		ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    		Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
     		//Si la fecha de la cuponera ya expiro
     		if(cuponera.getFechaFin().before(fecha)) 
     			throw new CuponeraVencidaException("La fecha de vigencia de la cuponera expiró");	
     	
     			
     		
-    		HashSet<Participa> participaciones = socio.getParticipa();
+    		Set<Participa> participaciones = socio.getParticipa();
         	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
         	for (int j = 0; j < arrPart.length; j++) {
         		Participa participa = arrPart[j];
@@ -178,61 +179,61 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		
     	}
-    	r = new Registro(id,fecha,costo,conCuponera,clase);	
-    	clase.addRegistro(r);
-    	socio.addRegistro(r);
-    	r.setClase(clase);
+    	registro = new Registro(identificador,fecha,costo,conCuponera,clase);	
+    	clase.addRegistro(registro);
+    	socio.addRegistro(registro);
+    	registro.setClase(clase);
     	 	
     }
     
     public void modificarDatosProfesor(String nickname, String nombre,String apellido, Date fechaNacimiento, String descripcion, String biografia, 
 	    	String sitioWeb) {
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    	Profesor p = mp.obtenerProfesor(nickname);
-    	p.setNombre(nombre);
-    	p.setApellido(apellido);
-    	p.setFechaNacimiento(fechaNacimiento);
-    	p.setBiografia(biografia);
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	Profesor profesor = mProf.obtenerProfesor(nickname);
+    	profesor.setNombre(nombre);
+    	profesor.setApellido(apellido);
+    	profesor.setFechaNacimiento(fechaNacimiento);
+    	profesor.setBiografia(biografia);
     	//Preguntar si se puede cambiar la institucion, y que pasaria con las clases
-    	p.setDescripcion(descripcion);
-    	p.setBiografia(biografia);	
+    	profesor.setDescripcion(descripcion);
+    	profesor.setBiografia(biografia);	
     	
     }
     
     public void modificarDatosSocio(String nickname, String nombre,String apellido, Date fechaNacimiento) {
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio s = ms.obtenerSocio(nickname);
-    	s.setNombre(nombre);
-    	s.setApellido(apellido);
-    	s.setFechaNacimiento(fechaNacimiento); 	
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socio = mSocios.obtenerSocio(nickname);
+    	socio.setNombre(nombre);
+    	socio.setApellido(apellido);
+    	socio.setFechaNacimiento(fechaNacimiento); 	
     	
     }
     
     public void compraCuponera(String nickname, String nombreCuponera, Date fecha) {
     	//No hago validaciones porque es para carga de datos nada mas
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio s = ms.obtenerSocio(nickname);
-    	ManejadorCuponeras mc = ManejadorCuponeras.getinstance();
-    	Cuponera c = mc.obtenerCuponera(nombreCuponera);
-    	Compra compra = new Compra(fecha,c);
-    	s.addCompra(compra);
-    	HashSet<ActividadDeCuponera> actividadesCuponera = c.getActividadCuponera();
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socio = mSocios.obtenerSocio(nickname);
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
+    	Compra compra = new Compra(fecha,cuponera);
+    	socio.addCompra(compra);
+    	Set<ActividadDeCuponera> actividadesCuponera = cuponera.getActividadCuponera();
     	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
     	for (int j = 0; j < arrActCup.length; j++) {
     		ActividadDeCuponera adc = arrActCup[j];
-    		Participa p = new Participa(adc.getCantidadDeClases(),adc);
-    		s.addParticipa(p);		
+    		Participa participa = new Participa(adc.getCantidadDeClases(),adc);
+    		socio.addParticipa(participa);		
     	}
-    	c.setComprada(true);
+    	cuponera.setComprada(true);
     	
     }
     
     //Dada una actividad y un socio, lista todas las cuponeras del socio que contienen a esa actividad
     public String[]  listarCuponerasActividad(String nickname, String nombreActividad){
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio socio = ms.obtenerSocio(nickname);
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socio = mSocios.obtenerSocio(nickname);
     	HashSet<String> cuponeras = new HashSet<String>();
-    	HashSet<Participa> participaciones = socio.getParticipa();
+    	Set<Participa> participaciones = socio.getParticipa();
     	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
     	for (int j = 0; j < arrPart.length; j++) {
     		Participa participa = arrPart[j];
@@ -245,12 +246,12 @@ public class ControladorUsuario implements IControladorUsuario {
     }
     
     public DataUsuario login(String dato,String contrasena) throws DatosLoginIncorrectosException  {
-    	ManejadorSocios ms = ManejadorSocios.getinstance();
-    	Socio socioMail = ms.obtenerMail(dato);
-    	Socio socioNick = ms.obtenerSocio(dato);
-    	ManejadorProfesores mp = ManejadorProfesores.getinstance();
-    	Profesor profesorMail = mp.obtenerMail(dato);
-    	Profesor profesorNick = mp.obtenerProfesor(dato);
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socioMail = mSocios.obtenerMail(dato);
+    	Socio socioNick = mSocios.obtenerSocio(dato);
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	Profesor profesorMail = mProf.obtenerMail(dato);
+    	Profesor profesorNick = mProf.obtenerProfesor(dato);
     	DataUsuario res;
     	
     	if(socioMail != null) {
@@ -261,10 +262,10 @@ public class ControladorUsuario implements IControladorUsuario {
         		
         		String[] clases = new String[regs.size()];
         		
-        		int i = 0;
+        		int iterador = 0;
         		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
-        			clases[i] = iter.getValue().getClase().getNombre();
-        			i++;
+        			clases[iterador] = iter.getValue().getClase().getNombre();
+        			iterador++;
         		}
         		
         		res = new DataUsuario(socioMail, clases);
@@ -282,10 +283,10 @@ public class ControladorUsuario implements IControladorUsuario {
         		
         		String[] clases = new String[regs.size()];
         		
-        		int i = 0;
+        		int iterador = 0;
         		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
-        			clases[i] = iter.getValue().getClase().getNombre();
-        			i++;
+        			clases[iterador] = iter.getValue().getClase().getNombre();
+        			iterador++;
         		}
         		
         		res = new DataUsuario(socioNick, clases);
@@ -332,13 +333,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	Devuelve el usuario con el nickname "nick". Si el usuario no existe devuleve null. */
 	public Usuario obtenerUsuarioPorNick(String nick) 
 	{
-		ManejadorSocios ms = ManejadorSocios.getinstance();
-		ManejadorProfesores mp = ManejadorProfesores.getinstance();
+		ManejadorSocios mSocios = ManejadorSocios.getinstance();
+		ManejadorProfesores mProf= ManejadorProfesores.getinstance();
 		
 		// ------------------------------------------------------------------
 		
-		Socio usuarioSocio = ms.obtenerSocio(nick);
-		Profesor usuarioProfe = mp.obtenerProfesor(nick);
+		Socio usuarioSocio = mSocios.obtenerSocio(nick);
+		Profesor usuarioProfe = mProf.obtenerProfesor(nick);
 		
 		Usuario usuario;
 		if (usuarioSocio == null) { 

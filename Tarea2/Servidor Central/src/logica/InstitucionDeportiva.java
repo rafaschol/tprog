@@ -12,10 +12,10 @@ public class InstitucionDeportiva {
 	private Map<String, Profesor> profesores;
 	private Map<String, ActividadDeportiva> actividades;
 
-	public InstitucionDeportiva(String n, String des, String url){
-		this.setNombre(n);
-		this.setDescripcion(des);
-		this.setURL(url);
+	public InstitucionDeportiva(String nombre, String descripcion, String urlInst){
+		this.setNombre(nombre);
+		this.setDescripcion(descripcion);
+		this.setURL(urlInst);
 		this.setProfesores(new HashMap<String, Profesor>());
 		this.setActividades(new HashMap<String, ActividadDeportiva>());
 	}

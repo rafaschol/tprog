@@ -7,8 +7,8 @@ public class Categoria {
 	private String nombre;
 	private Map<String,ActividadDeportiva> actividades;
 	
-	public Categoria(String n) {
-		this.nombre = n;
+	public Categoria(String nombre) {
+		this.nombre = nombre;
 		this.actividades = new HashMap<String,ActividadDeportiva>();
 	}
 

@@ -14,6 +14,7 @@ public abstract class Usuario {
 	protected Map<String, Usuario> seguidos;
 	protected Map<String, Usuario> seguidores;
 	
+	//Hay que ver el tema del pmd para este caso
 	
 	public String getNickname() {
 		return nickname;
@@ -23,15 +24,13 @@ public abstract class Usuario {
 		this.nickname = nickname;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
+	public abstract String getNombre();
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
+	public  String getApellido() {
 		return apellido;
 	}
 
@@ -87,4 +86,7 @@ public abstract class Usuario {
 		this.seguidos.remove(usuario.getNickname());
 	}
 	
+	
 }
+
+

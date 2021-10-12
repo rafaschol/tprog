@@ -19,18 +19,18 @@ public class DataActividad {
 	
 	
 	
-	public DataActividad(ActividadDeportiva ad, String[] cla, String[] cup, String[] cat) {
-		this.setNombre(ad.getNombre());
-		this.setFecha(ad.getFecha());
-		this.setDescripcion(ad.getDescripcion());
-		this.setDuracion(ad.getDuracion());
-		this.setCosto(ad.getCosto());
-		this.setClases(cla);
-		this.setCuponeras(cup);
-		this.setInstitucion(ad.getInstitucion().getNombre());
-		this.setCategorias(cat);
-		this.setFoto(ad.getFoto());
-		this.setEstado(ad.getEstado().toString());
+	public DataActividad(ActividadDeportiva actividad, String[] clases, String[] cuponeras, String[] categorias) {
+		this.setNombre(actividad.getNombre());
+		this.setFecha(actividad.getFecha());
+		this.setDescripcion(actividad.getDescripcion());
+		this.setDuracion(actividad.getDuracion());
+		this.setCosto(actividad.getCosto());
+		this.setClases(clases);
+		this.setCuponeras(cuponeras);
+		this.setInstitucion(actividad.getInstitucion().getNombre());
+		this.setCategorias(categorias);
+		this.setFoto(actividad.getFoto());
+		this.setEstado(actividad.getEstado().toString());
 	}
 	
 	

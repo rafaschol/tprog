@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
@@ -18,7 +19,7 @@ public class ActividadDeportiva {
 	private Float costo;
 	private String foto;
 	private Map<String, Clase> clases;
-	private HashSet<ActividadDeCuponera> actividadesCuponera;
+	private Set<ActividadDeCuponera> actividadesCuponera;
 	private InstitucionDeportiva institucion;
 	private Map<String, Categoria> categorias; 
 	private Estado estado;
@@ -93,11 +94,11 @@ public class ActividadDeportiva {
 		this.institucion = institucion;
 	}
 	
-	public HashSet<ActividadDeCuponera> getActividadesCuponera() {
+	public Set<ActividadDeCuponera> getActividadesCuponera() {
 		return actividadesCuponera;
 	}
 	
-	public void setActividadesCuponera(HashSet<ActividadDeCuponera> actividadesCuponera) {
+	public void setActividadesCuponera(Set<ActividadDeCuponera> actividadesCuponera) {
 		this.actividadesCuponera = actividadesCuponera;
 	}
 	
@@ -107,19 +108,19 @@ public class ActividadDeportiva {
 	}
 
 	public DataClase[] getDataClases() {
-		DataClase[] res = new DataClase[clases.size()];
-		int i = 0;
+		DataClase[] result = new DataClase[clases.size()];
+		int iterador = 0;
 		for (Entry<String, Clase> iter : clases.entrySet()) {
-			DataClase c = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
-			res[i] = c;
-			i++;	
+			DataClase clase = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
+			result[iterador] = clase;
+			iterador++;	
 		}
-		return res;
+		return result;
 	}
 	
 	public DataClase[] getDataClasesVigentes() {
 		DataClase[] res = new DataClase[clases.size()];
-		int i = 0;
+		int iterador = 0;
 		//Constructor Fecha Actual
 		Date fechaActual = new Date();
 	
@@ -127,9 +128,9 @@ public class ActividadDeportiva {
 		for (Entry<String, Clase> iter : clases.entrySet()) {
 			
 			if(iter.getValue().getFecha().after(fechaActual)) {
-			DataClase c = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
-			res[i] = c;
-			i++;
+			DataClase clase = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
+			res[iterador] = clase;
+			iterador++;
 			}
 		}
 		return res;
@@ -148,10 +149,10 @@ public class ActividadDeportiva {
 	}
 	public String[] listarCuponeras() {
 		String[] res = new String[actividadesCuponera.size()];
-		int i = 0;
+		int iter = 0;
 		for(ActividadDeCuponera ac : actividadesCuponera) {
-			res[i] = ac.getCuponera().getNombre();
-			i++;		
+			res[iter] = ac.getCuponera().getNombre();
+			iter++;		
 		}
 		return res;
 		

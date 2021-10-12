@@ -1,6 +1,7 @@
 package logica;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Cuponera {
 	private String nombre;
@@ -10,15 +11,15 @@ public class Cuponera {
 	private Float descuento;
 	private Date fechaAlta;
 	private String foto;
-	private HashSet<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
+	private Set<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
 	private Boolean comprada;
 	
-	public Cuponera(String n, String d, Date fIni, Date fFin, Float des, Date fAlta,String foto) {
-		this.setNombre(n);
-		this.setDescripcion(d);
+	public Cuponera(String nombre, String descripcion, Date fIni, Date fFin, Float descuento, Date fAlta,String foto) {
+		this.setNombre(nombre);
+		this.setDescripcion(descripcion);
 		this.setFechaIni(fIni);
 		this.setFechaFin(fFin);
-		this.setDescuento(des);
+		this.setDescuento(descuento);
 		this.setFechaAlta(fAlta);
 		this.setFoto(foto);
 		this.setActividadCuponera(new HashSet<ActividadDeCuponera>());
@@ -73,16 +74,16 @@ public class Cuponera {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public HashSet<ActividadDeCuponera> getActividadCuponera() {
+	public Set<ActividadDeCuponera> getActividadCuponera() {
 		return actividadCuponera;
 	}
 
-	public void setActividadCuponera(HashSet<ActividadDeCuponera> actividadCuponera) {
+	public void setActividadCuponera(Set<ActividadDeCuponera> actividadCuponera) {
 		this.actividadCuponera = actividadCuponera;
 	}
 	
-	public void addActividadDeCuponera(ActividadDeCuponera ac) {
-    	actividadCuponera.add(ac);
+	public void addActividadDeCuponera(ActividadDeCuponera actividadCupoonera) {
+    	actividadCuponera.add(actividadCupoonera);
 	}
 
 	public Boolean getComprada() {
