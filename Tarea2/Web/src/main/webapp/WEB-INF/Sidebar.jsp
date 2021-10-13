@@ -1,14 +1,14 @@
 <%@ page import="logica.DataUsuario" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <aside class="sidebar border-end bg-white p-3">
   <ul class="list-unstyled mt-3 ps-0">
     <li class="mb-1">
       <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#instituciones-submenu" aria-expanded="true">Instituciones</button>
       <div class="collapse show" id="instituciones-submenu">
         <ul class="list-unstyled pb-1 small sidebar-submenu">
-          <li><a href="actividad_list.html" class="link-dark rounded">Instituto Natural</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Fuerza Bruta</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Telón</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Olympic</a></li>
+          <c:forEach items="${instituciones}" var="institucion">
+            <li><a href="buscar?ins=${institucion}" class="link-dark rounded">${institucion}</a></li>
+          </c:forEach>
         </ul>
       </div>
     </li>
@@ -16,10 +16,9 @@
       <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#categorias-submenu" aria-expanded="true">Categorías</button>
       <div class="collapse show" id="categorias-submenu">
         <ul class="list-unstyled pb-1 small sidebar-submenu">
-          <li><a href="actividad_list.html" class="link-dark rounded">Al aire libre</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Deportes</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Fitness</a></li>
-          <li><a href="actividad_list.html" class="link-dark rounded">Gimnasia</a></li>
+          <c:forEach items="${categorias}" var="categoria">
+            <li><a href="buscar?cat=${categoria}" class="link-dark rounded">${categoria}</a></li>
+          </c:forEach>
         </ul>
       </div>
     </li>

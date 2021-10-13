@@ -1,9 +1,12 @@
 
 
+import java.util.Arrays;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import logica.DataInstitucion;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -36,6 +39,13 @@ public class InicioListener implements ServletContextListener {
 		datosPrueba.cargarRegistrosClases();
 		datosPrueba.cargarActividadesCuponeras();
 		datosPrueba.cargarCompraCuponera();
+		
+		String[] instituciones = Arrays.stream(controladorInstitucion.listarDataInstituciones())
+				.map(institucion -> institucion.getNombre()).toArray(String[]::new);
+		sce.getServletContext().setAttribute("instituciones", instituciones);
+		
+		String[] categorias = controladorInstitucion.listarCategorias();
+		sce.getServletContext().setAttribute("categorias", categorias);
     }
 	
 }

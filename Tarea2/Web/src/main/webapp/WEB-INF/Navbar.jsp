@@ -19,9 +19,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse pt-3 pt-lg-0 text-center" id="navbarNav">
-      <form action="#" method="GET" class="ms-auto me-lg-3 mb-2 mb-lg-0">
+      <form action="buscar" method="GET" class="ms-auto me-lg-3 mb-2 mb-lg-0">
         <div class="input-group">
-          <input class="form-control form-control-dark" type="search" placeholder="Buscar">
+          <input class="form-control form-control-dark" type="search" placeholder="Buscar" name="q">
           <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
         </div>
       </form>

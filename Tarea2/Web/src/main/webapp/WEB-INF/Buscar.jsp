@@ -17,6 +17,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/list-page.css">
+    <link rel="stylesheet" href="css/search.css">
   
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
@@ -34,33 +35,40 @@
     <!-- Page content -->
     <main class="main-content">
       <div id="index-page" class="container-fluid p-4 results-page">
-      
-      
-        <c:forEach items="${actividades}" var="actividad">
-	        <div class="card shadow mb-3">
-	          <div class="card-content-wrapper">
-	            <img src="img/${actividad.getFoto()}" alt="sin foto Actividad" class="img-fluid rounded-start">
-	            <div class="card-body">
-	              <h5 class="card-title">${actividad.getNombre()}</h5>
-	              <p class="card-text">${actividad.getDescripcion()}</p>
-	              <a href="actividades/${actividad.getNombre()}" class="btn btn-primary">Ver más</a>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
         
-        <c:forEach items="${cuponeras}" var="cuponera">
-	        <div class="card shadow mb-3">
-	          <div class="card-content-wrapper">
-	            <img src="img/${cuponera.getFoto()}" alt="sin foto Cuponera" class="img-fluid rounded-start">
-	            <div class="card-body">
-	              <h5 class="card-title">${cuponera.getNombre()}</h5>
-	              <p class="card-text">${cuponera.getDescripcion()}</p>
-	              <a href="cuponeras/${cuponera.getNombre()}" class="btn btn-primary">Ver más</a>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
+        <c:if test="${busqueda != null}">
+          <h2 class="display-6 mb-3">Resultados de "${busqueda}"</h2>
+        </c:if>
+        
+        <div class="filter-tags">
+          <c:if test="${institucion != null}">
+            <div class="alert tag alert-primary alert-dismissible small mb-0" role="alert">
+              ${institucion}
+              <button type="button" class="btn-close"></button>
+            </div>
+          </c:if>
+          <c:if test="${categoria != null}">
+            <div class="alert tag alert-primary alert-dismissible small mb-0" role="alert">
+              ${categoria}
+              <button type="button" class="btn-close"></button>
+            </div>
+          </c:if>
+        </div>
+        
+        <c:if test="${busqueda != null || institucion != null || categoria != null}">
+          <div class="border-top my-4"></div>
+        </c:if>
+        
+        <div class="card shadow mb-3">
+          <div class="card-content-wrapper">
+            <img src="img/voleibol.jpg" alt="actividad deportiva" class="img-fluid rounded-start">
+            <div class="card-body">
+              <h5 class="card-title">Voleibol</h5>
+              <p class="card-text">Voleibol en todas sus formas</p>
+              <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
+            </div>
+          </div>
+        </div>
 
       </div>
     </main>

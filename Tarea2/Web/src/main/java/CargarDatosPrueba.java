@@ -216,7 +216,7 @@ public class CargarDatosPrueba {
 		// Dada de alta por profe: altaActividadDeportivaWeb(nombreInstitucion, nombre, descripcion, duracion, costo, fecha, profesor, categorias, foto)
 	/* A1 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
-					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio, "");
+					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio, null);
 			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
 			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
 	
@@ -230,7 +230,7 @@ public class CargarDatosPrueba {
 			
 	/* A3 */controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
 					"Para cuidar el aparato cardiovascular",
-					110, (float) 800.0, new Date(121, 4, 30), arrayVacio, "");
+					110, (float) 800.0, new Date(121, 4, 30), arrayVacio, null);
 			controladorInstitucion.aceptarRechazarActividad("Aer\u00F3bica", true);
 			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Gimnasia");
 			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Al aire libre");
@@ -238,7 +238,7 @@ public class CargarDatosPrueba {
 			
 	/* A4 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Kickboxing",
 					"En busca del nuevo campe\u00F3n de boxeo.",
-					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, "");
+					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, null);
 			controladorInstitucion.aceptarRechazarActividad("Kickboxing", true);
 			controladorInstitucion.agregarCategoriaAActividad("Kickboxing", "Deportes");
 			
@@ -261,14 +261,14 @@ public class CargarDatosPrueba {
 			categoriasA7[0] = "Fitness";
 			controladorInstitucion.altaActividadDeportiva("Fuerza Bruta", "Aparatos II",
 					"Clases de aparatos avanzadas.",
-					60, (float) 1500.0, new Date(121, 7, 15), categoriasA7, "");
+					60, (float) 1500.0, new Date(121, 7, 15), categoriasA7, null);
 			controladorInstitucion.aceptarRechazarActividad("Aparatos II", false);
 			
 			
 	/* A8 */String[] categoriasA8 = {"Gimnasia"};
 			controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
 					"El Método Pilates combina diferentes capacidades físicas.",
-					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8, "");
+					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8, null);
 			//controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
 					// INGRESADA
 	
@@ -285,7 +285,7 @@ public class CargarDatosPrueba {
 	/* A10*/String[] categoriasA10 = {"Gimnasia"};
 			controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol II",
 					"Basequetbol avanzado.",
-					80, (float) 600.0, new Date(121, 8, 7), "denis", categoriasA10, "");
+					80, (float) 600.0, new Date(121, 8, 7), "denis", categoriasA10, null);
 			//controladorInstitucion.agregarCategoriaAActividad("Basquetbol II", "Gimnasia");
 					// INGRESADA
 	
