@@ -396,6 +396,32 @@ public class ControladorUsuario implements IControladorUsuario {
 			seguidor.addSeguido(seguido);
 		}
 	}
+	
+	public DataUsuario[] listarUsuariosWeb()
+    {
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	
+		String[] resSoc = mSocios.getNicknames().keySet().toArray(new String[0]);
+		String[] resProf = mProf.getNicknames().keySet().toArray(new String[0]);
+		DataUsuario[] result = new DataUsuario[resSoc.length + resProf.length];
+		
+		int iterador = 0;
+		for (int j = 0; j < resSoc.length; j++) {
+			result[iterador] = new DataUsuario(mSocios.obtenerSocio(resSoc[j]),null);
+			iterador++;
+		}
+		for (int j = 0; j < resProf.length; j++) {
+			result[iterador] = new DataUsuario(mProf.obtenerProfesor(resProf[j]),null);
+			iterador++;
+		}
+		
+		
+
+		return result;
+    }
+	
+
       
 }
 	

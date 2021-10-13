@@ -8,7 +8,7 @@ import excepciones.CuponeraRepetidaException;
 public interface IControladorCuponera {
 	
 	public abstract void altaCuponera(String nombre, String descripcion, Date inicio, Date fin, 
-	    Float descuento, Date fechaAlta,String foto,Integer costo) throws CuponeraRepetidaException;
+	    Float descuento, Date fechaAlta,String foto,Float costo) throws CuponeraRepetidaException;
 	
 	public abstract String[] listarCuponeras();
 	
@@ -20,4 +20,7 @@ public interface IControladorCuponera {
 		throws ActividadDeCuponeraRepetidaException;
 
 	public abstract DataCuponera consultaCuponera(String nombreCuponera);
+	public abstract String[] getCategorasCuponera(String nombreCuponera);
+	public abstract DataActividad[] listarDataActividades(String nombreCuponera);
+	
 }

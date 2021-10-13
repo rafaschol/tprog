@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
@@ -36,26 +37,27 @@
 
       <section class="details p-3">
         <div class="details-main mb-3">
-          <img src="${clase.getImagen()}" alt="clase" class="img-fluid rounded">
+          <img src="${clase.getImagen() != null ? clase.getImagen()  :  'img/default.jpg'}" alt="clase" class="img-fluid rounded">
           <div class="p-3">
             <h1 class="mb-3">${clase.getNombre()}</h1>
             <p class="lead mb-1">Clase de 
               <a href="actividades/${clase.getActividad()}" class="text-decoration-none">${clase.getActividad()}</a>
             </p>
             <p class="lead mb-1">Dictada por  
-              <a href="usuario_detail.html" class="text-decoration-none">${clase.getProfesor()}</a>
+              <a href="profesores/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
-            <a href="clases/registro?id=Voleibol" class="btn btn-primary mt-3">Registrarme a la clase</a>
+            <a href="clases/registro?id=${clase.getNombre()}" class="btn btn-primary mt-3">Registrarme a la clase</a>
           </div>
         </div>
         <div class="border-top my-4"></div>
         <h4 class="fw-light">Detalles</h4>
+        <jsp:useBean id="date" class="java.util.Date"/>
         <table class="table table-borderless">
           <tr>
-            <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1">${clase.getFecha()}</span></td>
+            <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
           </tr>
           <tr>
-            <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1">${clase.getProfesor()}</span></td>
+            <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="time"  dateStyle = "short" timeStyle = "short" /></span></td>
           </tr>
         </table>
       </section>

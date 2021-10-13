@@ -236,5 +236,16 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		return actividades;
 
 	}
+	public DataCuponera[] listarDataCuponera(String nombreActividad) {
+    	ManejadorActividad mActividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
+    	DataCuponera[] result = new DataCuponera[actividad.getActividadesCuponera().size()];
+		int iter = 0;
+		for(ActividadDeCuponera ac : actividad.getActividadesCuponera()) {
+			result[iter] =  new DataCuponera(ac.getCuponera(),null);
+			iter++;		
+		}
+    	return result;
+    }
     
 }

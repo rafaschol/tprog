@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logica.DataActividad;
+import logica.DataClase;
+import logica.DataCuponera;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -34,7 +36,11 @@ public class ActividadDetailServlet extends HttpServlet {
 		
 		DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividad(nombreActividad);
 		request.setAttribute("actividad", actividad);
-		
+		DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+		request.setAttribute("clases", clases);
+		DataCuponera[] cuponeras = controladorInstitucion.listarDataCuponera(nombreActividad);
+		request.setAttribute("cuponeras", cuponeras);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
 		dispatcher.forward(request, response);
 	}

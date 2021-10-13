@@ -18,7 +18,7 @@ public class ControladorCuponera implements IControladorCuponera {
     }
     
     public void altaCuponera(String nombre, String descripcion, Date inicio, Date fin, 
-    	Float descuento, Date fechaAlta,String foto,Integer costo) throws CuponeraRepetidaException{
+    	Float descuento, Date fechaAlta,String foto,Float costo) throws CuponeraRepetidaException{
     	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
     	Cuponera cuponera = mCup.obtenerCuponera(nombre);
     	if(cuponera != null) 
@@ -111,6 +111,36 @@ public class ControladorCuponera implements IControladorCuponera {
     	return dataCuponera;
     	
     }
+    
+    public String[] getCategorasCuponera(String nombreCuponera) {
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);
+    	Set<String> resultado = new HashSet<String>();
+    	Set<ActividadDeCuponera> actividadesCuponera = cuponera.getActividadCuponera();
+    	
+    	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
+    	for (int j = 0; j < arrActCup.length; j++) {
+    		
+    		for (Entry<String, Categoria> iter:  arrActCup[j].getActividad().getCategorias().entrySet())
+    			resultado.add(iter.getKey());
+    	}
+    	String[] categorias = resultado.toArray(new String[resultado.size()]);
+    	return categorias;
+    }
+    
+    public DataActividad[] listarDataActividades(String nombreCuponera) {
+    	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+    	Cuponera cuponera = mCup.obtenerCuponera(nombreCuponera);	
+    	Set<ActividadDeCuponera> actividadesCuponera = cuponera.getActividadCuponera();
+    	DataActividad[] result = new DataActividad[actividadesCuponera.size()];
+    	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
+    	for (int j = 0; j < arrActCup.length; j++) {
+    		result[j] = new DataActividad(arrActCup[j].getActividad(),null,null,null);
+    	}
+    	return result;
+    }
+    
+    
     
   }
     	

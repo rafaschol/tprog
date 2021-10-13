@@ -93,7 +93,7 @@ class TestSistema {
 	
 		ctrlU.registrarSocio("m1k4", "Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
 		
-		ctrlC.altaCuponera("Musculos", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",0);	
+		ctrlC.altaCuponera("Musculos", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",(float) 0);	
 		
 		ctrlC.agregarActividadACuponera("Musculos","Aerobica", 6);
 		ctrlC.agregarActividadACuponera("Musculos","Futbol", 6);
@@ -336,7 +336,7 @@ class TestSistema {
 	@Test
 	void testAltaCuponera() throws CuponeraRepetidaException {
 			//altaCuponera(String nombre, String descripcion, Date inicio, Date fin, Float descuento, Date fechaAlta) throws CuponeraRepetidaException;
-			ctrlC.altaCuponera("Pelota", "Deportes con pelota", new Date(2021, 5, 1), new Date(2021, 7, 31), (float) 20, new Date(2021, 4, 30), "png",0);
+			ctrlC.altaCuponera("Pelota", "Deportes con pelota", new Date(2021, 5, 1), new Date(2021, 7, 31), (float) 20, new Date(2021, 4, 30), "png",(float) 0);
 			String[] cuponeras = ctrlC.listarCuponeras();
 			System.out.print(cuponeras[0]);
 			assertEquals(cuponeras[0], "Pelota");
@@ -358,7 +358,7 @@ class TestSistema {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testAgregarActividadACuponera() throws ActividadDeCuponeraRepetidaException, CuponeraRepetidaException {
-		ctrlC.altaCuponera("Fuerza", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",0);	
+		ctrlC.altaCuponera("Fuerza", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",(float) 0);	
 		ctrlI.aceptarRechazarActividad("Tenis", true);//agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
 		ctrlC.agregarActividadACuponera("Fuerza", "Tenis", 2);
 		Cuponera cup = mCup.obtenerCuponera("Fuerza");
@@ -369,7 +369,7 @@ class TestSistema {
 	@Test
 	void testConsultaCuponera() throws CuponeraRepetidaException, ActividadDeCuponeraRepetidaException {
 		//DataCuponera consultaCuponera(String nombreCuponera);
-		ctrlC.altaCuponera("Gymnacia", "asd", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "png",0);
+		ctrlC.altaCuponera("Gymnacia", "asd", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "png",(float) 0);
 		ctrlC.agregarActividadACuponera("Gymnacia","Tenis", 4);
 		DataCuponera data = ctrlC.consultaCuponera("Gymnacia");
 		assertEquals(data.getNombre(), "Gymnacia");

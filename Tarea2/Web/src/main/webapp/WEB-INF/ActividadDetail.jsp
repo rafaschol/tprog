@@ -37,7 +37,7 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="${!actividad.getFoto().equals('') ? actividad.getFoto() : ''}" alt="actividad deportiva" class="img-fluid rounded">
+              <img src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded">
               <div class="p-3">
                 <h1 class="mb-3">${actividad.getNombre()}</h1>
                 <p>${actividad.getDescripcion()}</p>
@@ -60,10 +60,11 @@
           <p><span class="fw-bold">Categorías: </span>
             
              <c:forEach items="${actividad.getCategorias()}" var="categoria">
-            	 <a href="actividad_list.html" class="text-decoration-none">
+            	 <a href="buscar?cat=${categoria}" class="text-decoration-none">
              		${categoria} ,
              	</a>
              </c:forEach>
+              
            
             
           </p>
@@ -75,11 +76,11 @@
             <div class="card-header">
               Clases
             </div>
-	            <c:forEach items="${actividad.getClases()}" var="clase">
+	            <c:forEach items="${clases}" var="clase">
 		            <div class="list-group list-group-flush">
-		              <a href="clases/Voleibol" class="list-group-item">
-		                <img class="rounded-circle me-2" src="img/voleibol_clase.jpg" alt="clase">
-		                ${clase}
+		              <a href="clases/${clase.getNombre()}" class="list-group-item">
+		                <img class="rounded-circle me-2" src="${clase.getImagen() != null ? clase.getImagen() :  'img/default.jpg'}" alt="clase">
+		                ${clase.getNombre()}
 		              </a> 
 		            </div>
 	            </c:forEach>
@@ -89,11 +90,11 @@
             <div class="card-header">
               Cuponeras
             </div>
-            <c:forEach items="${actividad.getCuponeras()}" var="cuponera">
+            <c:forEach items="${cuponeras}" var="cuponera">
 	            <div class="list-group list-group-flush">
-	              <a href="cuponeras/pelota" class="list-group-item">
-	                <img class="rounded-circle me-2" src="img/pelota.jpg" alt="cuponera">
-	                ${cuponera}
+	              <a href="cuponeras/${cuponera.getNombre()}" class="list-group-item">
+	                <img class="rounded-circle me-2" src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="cuponera">
+	                ${cuponera.getNombre()}
 	              </a>
 	            </div>
             </c:forEach>

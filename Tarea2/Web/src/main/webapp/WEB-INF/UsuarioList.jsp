@@ -21,9 +21,10 @@
   
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
+  <script src="js/sidebar.js"></script>
   
   <title>Personas | Entrenemos.uy</title>
-</head>
+</head> 
 <body>
   
   <jsp:include page="Navbar.jsp" />
@@ -40,31 +41,21 @@
         <div class="border-top my-4"></div>
 
         <div class="list-group list-group-flush">
-          <a href="usuarios/euge" class="list-group-item">
-            <img class="rounded-circle me-2" src="img/euge.jpg" alt="usuario">
-            euge
-          </a>
-          <a href="usuarios/guille" class="list-group-item">
-            <img class="rounded-circle me-2" src="img/guille.jpg" alt="usuario">
-            guille
-          </a>
-          <a href="usuarios/denis" class="list-group-item">
-            <img class="rounded-circle me-2" src="img/denis.jpg" alt="usuario">
-            denis
-          </a>
-          <a href="usuarios/nelson" class="list-group-item">
-            <img class="rounded-circle me-2" src="img/Nelson.jpg" alt="usuario">
-            Nelson
-          </a>
+          <c:forEach items="${usuarios}" var="usuario">
+	          <a href="usuarios/${usuario.getNickname()}" class="list-group-item">
+	            <img class="rounded-circle me-2" src="${usuario.getFoto() != null ? usuario.getFoto() :  'img/default.jpg'}" alt="NO FOTO">
+	            ${usuario.getNombre()}  ${usuario.getApellido()}
+	          </a>
+          </c:forEach>
         </div>
-
+            
       </div>
     </main>
     
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-  <script src="js/sidebar.js"></script>
+  
   
 </body>
 </html>

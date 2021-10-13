@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
@@ -18,13 +19,14 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/detail-page.css">
   
+  
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
   <title>${cuponera.getNombre()} | Entrenemos.uy</title>
 </head>
 <body>
-  
+   
   <jsp:include page="Navbar.jsp" />
     
   <div class="d-flex container-fluid page-wrapper px-0">
@@ -37,7 +39,7 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="img/pelota.jpg" alt="cuponera" class="img-fluid rounded">
+              <img src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="cuponera" class="img-fluid rounded">
               <div class="p-3">
                 <h1 class="mb-3">${cuponera.getNombre()}</h1>
                 <p>${cuponera.getDescripcion()}.</p>
@@ -46,25 +48,27 @@
           <div class="border-top my-4"></div>
           <h4 class="fw-light">Detalles</h4>
           <table class="table table-borderless">
+          <jsp:useBean id="date" class="java.util.Date"/>
+          
             <tr>
-              <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">${cuponera.getDescuento()}%</span></td>
+              <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">${String.format("%.1f", descuento)}%</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>PerÃ­odo: <span class="fw-bold ms-1">01/05/2021 - 31/07/2021</span></td>
+              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>PerÃ­odo: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaIni()}" type="date"  dateStyle = "short" timeStyle = "short" /> - <fmt:formatDate value="${cuponera.getFechaFin()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
             </tr>
             <tr>
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$${String.format("%.0f", cuponera.getCosto())}</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">{cuponera.getFechaAlta()}</span></td>
+              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaAlta()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>
           <p><span class="fw-bold">CategorÃ­as: </span>
-            <c:forEach items="${cuponera.getCategorias()}" var="categoria">
-            	 <a href="actividad_list.html" class="text-decoration-none">
-             		${categoria} ,
-             	</a>
+            <c:forEach items="${categorias}" var="categoria">
+            	 <a  href="buscar?cat=${categoria}" class="text-decoration-none">
+            	 ${categoria} ,
+            	 </a>
              </c:forEach>
           </p>
           <div class="border-top my-4 d-lg-none"></div>
@@ -76,14 +80,12 @@
               Actividades deportivas
             </div>
             <div class="list-group list-group-flush">
-              <a href="actividades/voleibol" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/voleibol.jpg" alt="actividad deportiva">
-                Voleibol
+             <c:forEach items="${actividades}" var="actividad">
+              <a href="actividades/${actividad.getNombre()}" class="list-group-item">
+                <img class="rounded-circle me-2" src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="actividad deportiva">
+                ${actividad.getNombre()}
               </a>
-              <a href="actividades/basquetbol" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/basquetbol.jpg" alt="actividad deportiva">
-                Basquetbol
-              </a>
+              </c:forEach>
             </div>
           </div>
         </aside>
