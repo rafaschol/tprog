@@ -36,14 +36,14 @@
 
       <section class="details p-3">
         <div class="details-main mb-3">
-          <img src="img/voleibol_clase.jpg" alt="clase" class="img-fluid rounded">
+          <img src="${clase.getImagen()}" alt="clase" class="img-fluid rounded">
           <div class="p-3">
-            <h1 class="mb-3">Voleibol</h1>
+            <h1 class="mb-3">${clase.getNombre()}</h1>
             <p class="lead mb-1">Clase de 
-              <a href="actividades/voleibol" class="text-decoration-none">Voleibol</a>
+              <a href="actividades/${clase.getActividad()}" class="text-decoration-none">${clase.getActividad()}</a>
             </p>
             <p class="lead mb-1">Dictada por  
-              <a href="usuario_detail.html" class="text-decoration-none">denis</a>
+              <a href="usuario_detail.html" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
             <a href="clases/registro?id=Voleibol" class="btn btn-primary mt-3">Registrarme a la clase</a>
           </div>
@@ -52,10 +52,10 @@
         <h4 class="fw-light">Detalles</h4>
         <table class="table table-borderless">
           <tr>
-            <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1">10/06/2021</span></td>
+            <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1">${clase.getFecha()}</span></td>
           </tr>
           <tr>
-            <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1">19:00</span></td>
+            <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1">${clase.getProfesor()}</span></td>
           </tr>
         </table>
       </section>

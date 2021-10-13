@@ -13,8 +13,9 @@ public class Clase {
 	private Profesor profesor;
 	private ActividadDeportiva actividad;
 	private Map<Integer, Registro> registros;
+	private String imagen;
 	
-	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta){
+	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta,String imagen){
 		this.setNombre(nombre);
 		this.setFecha(fecha);
 		this.setMinPersonas(minimo);
@@ -22,6 +23,7 @@ public class Clase {
 		this.setURL(urlClase);
 		this.setFechaAlta(alta);
 		this.setRegistros(new HashMap<Integer,Registro>());
+		this.setImagen(imagen);
 	}
 
 	public String getNombre() {
@@ -103,5 +105,13 @@ public class Clase {
 	public void addRegistro(Registro registro) {
 		Integer identificador = registro.getId();
 		this.registros.put(identificador, registro);
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 }

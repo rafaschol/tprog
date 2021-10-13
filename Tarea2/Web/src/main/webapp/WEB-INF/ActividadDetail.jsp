@@ -65,32 +65,30 @@
             <div class="card-header">
               Clases
             </div>
-            <div class="list-group list-group-flush">
-              <a href="clases/voleibol" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/voleibol_clase.jpg" alt="clase">
-                Voleibol
-              </a>
-              <a href="clases/braza" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/braza.jpg" alt="clase">
-                Braza
-              </a>
-              <a href="clases/mariposa" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/mariposa.jpg" alt="clase">
-                Mariposa
-              </a>
-            </div>
-          </div>
-          <div class="card">
+	            <c:forEach items="${actividad.getClases()}" var="clase">
+		            <div class="list-group list-group-flush">
+		              <a href="clases/Voleibol" class="list-group-item">
+		                <img class="rounded-circle me-2" src="img/voleibol_clase.jpg" alt="clase">
+		                ${clase}
+		              </a> 
+		            </div>
+	            </c:forEach>
+           </div>
+           
+           <div class="card">
             <div class="card-header">
               Cuponeras
             </div>
-            <div class="list-group list-group-flush">
-              <a href="cuponeras/pelota" class="list-group-item">
-                <img class="rounded-circle me-2" src="img/pelota.jpg" alt="cuponera">
-                Pelota
-              </a>
-            </div>
+            <c:forEach items="${actividad.getCuponeras()}" var="cuponera">
+	            <div class="list-group list-group-flush">
+	              <a href="cuponeras/pelota" class="list-group-item">
+	                <img class="rounded-circle me-2" src="img/pelota.jpg" alt="cuponera">
+	                ${cuponera}
+	              </a>
+	            </div>
+            </c:forEach>
           </div>
+
         </aside>
         
       </div>

@@ -12,6 +12,7 @@ public class DataClase {
 	private String profesor;
 	private String actividad;
 	private String institucion;
+	private String imagen;
 	
 	
 	public DataClase(Clase clase, String actividad, String institucion){
@@ -24,6 +25,7 @@ public class DataClase {
 		this.setProfesor(clase.getProfesor().getNickname());	
 		this.setActividad(actividad);
 		this.setInstitucion(institucion);
+		this.setImagen(clase.getImagen());
 	}
 	
 	public String getNombre() {
@@ -101,6 +103,14 @@ public class DataClase {
 	public String toString() {
 		
 		return this.nombre;	
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	private void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 

@@ -60,7 +60,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
     }
     
     public void altaClase(String nombre, Date fechaHora, Integer minimo,
-		Integer maximo, String url, Date fechaAlta, String profesor, String actividad)
+		Integer maximo, String url, Date fechaAlta, String profesor, String actividad,String imagen)
     	throws ClaseRepetidaException {
     	 
     	ManejadorActividad mActividad = ManejadorActividad.getinstance();
@@ -73,7 +73,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
             throw new ClaseRepetidaException("Ya existe una Clase con nombre '" + nombre + "' en el sistema");
     	
     	
-    	clase = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta);
+    	clase = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta, imagen);
     	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
     	clase.setProfesor(mProf.obtenerProfesor(profesor));
     	mProf.obtenerProfesor(profesor).addClase(clase);

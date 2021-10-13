@@ -89,7 +89,7 @@ class TestSistema {
 		ctrlI.aceptarRechazarActividad("Futbol", true);
 		ctrlI.aceptarRechazarActividad("GYM", false);
 		
-		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica");
+		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica","");
 	
 		ctrlU.registrarSocio("m1k4", "Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
 		
@@ -294,7 +294,7 @@ class TestSistema {
 			System.out.print("con cuponera: ");
 			ctrlU.compraCuponera("agustin34", "Musculos", new Date(2021, 5, 31));
 			ctrlI.aceptarRechazarActividad("Tenis", true);
-			ctrlI.altaClase("Tenis al aire libre", new Date(2021, 9, 27), 1, 5, "https://www.inatural.com/aeroam", new Date(2021, 9, 30), "TheBoss", "Tenis");
+			ctrlI.altaClase("Tenis al aire libre", new Date(2021, 9, 27), 1, 5, "https://www.inatural.com/aeroam", new Date(2021, 9, 30), "TheBoss", "Tenis","");
 			ctrlU.registrarSocio("agustin34","Tenis al aire libre", "Tenis", true, "Musculos", new Date(2021, 9, 20));
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException | ClaseRepetidaException e) {
 			// TODO Auto-generated catch block
@@ -442,7 +442,7 @@ class TestSistema {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testAltaClase() throws ClaseRepetidaException {
-		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol");
+		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol","");
 		DataClase data = ctrlI.obtenerDataClase("Futbol Sala");
 		
 		assertEquals(data.getNombre(), "Futbol Sala");
@@ -454,7 +454,7 @@ class TestSistema {
 		assertEquals(data.getFechaAlta(), new Date(2021, 6, 30));
 		assertEquals(data.getActividad(), "Futbol");
 		assertEquals(data.getInstitucion(), "IN");	
-		assertThrows(ClaseRepetidaException.class, () -> {ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol");});
+		assertThrows(ClaseRepetidaException.class, () -> {ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol","");});
 		
 	};
 		
