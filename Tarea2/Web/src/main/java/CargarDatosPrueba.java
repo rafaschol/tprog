@@ -385,15 +385,15 @@ public class CargarDatosPrueba {
 			controladorCuponera.altaCuponera("Pelota",
 					"Deportes con pelota.",
 					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30),
-					"img/cuponera_pelota.jpg");
+					"img/cuponera_pelota.jpg",10680);
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
 					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15),
-					"img/cuponera_gimnasia.jpg");
+					"img/cuponera_gimnasia.jpg",4200);
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
 					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
-					"img/cuponera_musculos.jpg");
+					"img/cuponera_musculos.jpg",15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}

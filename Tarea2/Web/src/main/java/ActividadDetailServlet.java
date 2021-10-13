@@ -31,7 +31,7 @@ public class ActividadDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombreActividad = request.getPathInfo().substring(1);
-		System.out.println(nombreActividad);
+		
 		DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividad(nombreActividad);
 		request.setAttribute("actividad", actividad);
 		

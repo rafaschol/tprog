@@ -13,8 +13,6 @@ public class DataActividad {
 	private String[] clases;
 	private String[] cuponeras;
 	private String[] categorias;
-
-	
 	private String foto;
 	
 	

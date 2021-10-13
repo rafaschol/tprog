@@ -13,8 +13,9 @@ public class Cuponera {
 	private String foto;
 	private Set<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
 	private Boolean comprada;
+	private Integer costo;
 	
-	public Cuponera(String nombre, String descripcion, Date fIni, Date fFin, Float descuento, Date fAlta,String foto) {
+	public Cuponera(String nombre, String descripcion, Date fIni, Date fFin, Float descuento, Date fAlta,String foto, Integer costo) {
 		this.setNombre(nombre);
 		this.setDescripcion(descripcion);
 		this.setFechaIni(fIni);
@@ -24,6 +25,7 @@ public class Cuponera {
 		this.setFoto(foto);
 		this.setActividadCuponera(new HashSet<ActividadDeCuponera>());
 		this.setComprada(false);
+		this.setCosto(costo);
 	}
 
 	public String getNombre() {
@@ -100,5 +102,13 @@ public class Cuponera {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Integer getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Integer costo) {
+		this.costo = costo;
 	}
 }

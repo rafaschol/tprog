@@ -35,50 +35,33 @@
     <!-- Page content -->
     <main class="main-content">
       <div id="index-page" class="container-fluid p-4 results-page">
+      
+      
+        <c:forEach items="${actividades}" var="actividad">
+	        <div class="card shadow mb-3">
+	          <div class="card-content-wrapper">
+	            <img src="img/${actividad.getFoto()}" alt="sin foto Actividad" class="img-fluid rounded-start">
+	            <div class="card-body">
+	              <h5 class="card-title">${actividad.getNombre()}</h5>
+	              <p class="card-text">${actividad.getDescripcion()}</p>
+	              <a href="actividades/${actividad.getNombre()}" class="btn btn-primary">Ver más</a>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
         
-        <div class="card shadow mb-3">
-          <div class="card-content-wrapper">
-            <img src="img/voleibol.jpg" alt="actividad deportiva" class="img-fluid rounded-start">
-            <div class="card-body">
-              <h5 class="card-title">Voleibol</h5>
-              <p class="card-text">Voleibol en todas sus formas</p>
-              <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card shadow mb-3">
-          <div class="card-content-wrapper">
-            <img src="img/atletismo.jpg" alt="actividad deportiva" class="img-fluid rounded-start">
-            <div class="card-body">
-              <h5 class="card-title">Atletismo</h5>
-              <p class="card-text">100m , 200m, postas y carreras con obstaculos.</p>
-              <a href="actividades/Atletismo" class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card shadow mb-3">
-          <div class="card-content-wrapper">
-            <img src="img/basquetbol.jpg" alt="actividad deportiva" class="img-fluid rounded-start">
-            <div class="card-body">
-              <h5 class="card-title">Basquetbol</h5>
-              <p class="card-text">Basquetbol para todos.</p>
-              <a href="actividades/Basquetbol" class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card shadow mb-3">
-          <div class="card-content-wrapper">
-            <img src="img/pelota.jpg" alt="cuponera" class="img-fluid rounded-start">
-            <div class="card-body">
-              <h5 class="card-title">Pelota</h5>
-              <p class="card-text">Deportes con pelota.</p>
-              <a href="cuponeras/Pelota" class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
-        </div>
+        <c:forEach items="${cuponeras}" var="cuponera">
+	        <div class="card shadow mb-3">
+	          <div class="card-content-wrapper">
+	            <img src="img/${cuponera.getFoto()}" alt="sin foto Cuponera" class="img-fluid rounded-start">
+	            <div class="card-body">
+	              <h5 class="card-title">${cuponera.getNombre()}</h5>
+	              <p class="card-text">${cuponera.getDescripcion()}</p>
+	              <a href="cuponeras/${cuponera.getNombre()}" class="btn btn-primary">Ver más</a>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
 
       </div>
     </main>

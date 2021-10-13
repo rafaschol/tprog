@@ -222,5 +222,19 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	Profesor profesor = mProf.obtenerProfesor(nombreProfesor);
     	profesor.addActividad(actividad);
     }
+	
+	public DataActividad[] listarActividadesWeb() {
+		ManejadorActividad mActividad = ManejadorActividad.getinstance();
+		DataActividad[] actividades = new DataActividad[mActividad.getActividadesAceptadas().size()];
+		int iterador = 0;
+		for (Entry<String, ActividadDeportiva> iter : mActividad.getActividadesAceptadas().entrySet()) {
+			//solo datos principales, ni clases, ni cuponeras asociadas
+			actividades[iterador] = new DataActividad(iter.getValue(),null,null,null);
+			iterador++;
+		}
+		
+		return actividades;
+
+	}
     
 }

@@ -5,7 +5,7 @@
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
   <!-- Meta tags -->
   <meta charset="UTF-8">
@@ -21,7 +21,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>Pelota | Entrenemos.uy</title>
+  <title>${cuponera.getNombre()} | Entrenemos.uy</title>
 </head>
 <body>
   
@@ -39,29 +39,33 @@
           <div class="details-main mb-3">
               <img src="img/pelota.jpg" alt="cuponera" class="img-fluid rounded">
               <div class="p-3">
-                <h1 class="mb-3">Pelota</h1>
-                <p>Deportes con pelota.</p>
+                <h1 class="mb-3">${cuponera.getNombre()}</h1>
+                <p>${cuponera.getDescripcion()}.</p>
               </div>
           </div>
           <div class="border-top my-4"></div>
           <h4 class="fw-light">Detalles</h4>
           <table class="table table-borderless">
             <tr>
-              <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">20%</span></td>
+              <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">${cuponera.getDescuento()}%</span></td>
             </tr>
             <tr>
               <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>PerÃ­odo: <span class="fw-bold ms-1">01/05/2021 - 31/07/2021</span></td>
             </tr>
             <tr>
-              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$10.680</span></td>
+              <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$${String.format("%.0f", cuponera.getCosto())}</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">30/04/2021</span></td>
+              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1">{cuponera.getFechaAlta()}</span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>
           <p><span class="fw-bold">CategorÃ­as: </span>
-            <a href="actividad_list.html" class="text-decoration-none">Deportes</a>
+            <c:forEach items="${cuponera.getCategorias()}" var="categoria">
+            	 <a href="actividad_list.html" class="text-decoration-none">
+             		${categoria} ,
+             	</a>
+             </c:forEach>
           </p>
           <div class="border-top my-4 d-lg-none"></div>
         </section>

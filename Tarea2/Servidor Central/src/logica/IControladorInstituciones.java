@@ -46,4 +46,6 @@ public interface IControladorInstituciones {
 	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public abstract void altaActividadDeportivaWeb(String nombreInstitucion, String nombre, String descripcion,
 		    int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto) throws ActividadRepetidaException;
+	
+	public abstract DataActividad[] listarActividadesWeb();
 }

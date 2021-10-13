@@ -6,7 +6,7 @@
 <c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
   <!-- Meta tags -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +21,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>Voleibol | Entrenemos.uy</title>
+  <title>${actividad.getNombre()} | Entrenemos.uy</title>
 </head>
 <body>
   
@@ -52,10 +52,20 @@
             <tr>
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$${String.format("%.0f", actividad.getCosto())}</span></td>
             </tr>
+            <tr>
+              <td><i class="fas fa-home rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Institucion: <span class="fw-bold ms-1">${actividad.getInstitucion()} </span></td>
+            </tr>
           </table>
           <div class="border-top my-4"></div>
           <p><span class="fw-bold">Categorías: </span>
-            <a href="actividad_list.html" class="text-decoration-none">Deportes</a>
+            
+             <c:forEach items="${actividad.getCategorias()}" var="categoria">
+            	 <a href="actividad_list.html" class="text-decoration-none">
+             		${categoria} ,
+             	</a>
+             </c:forEach>
+           
+            
           </p>
           <div class="border-top my-4 d-lg-none"></div>
         </section>

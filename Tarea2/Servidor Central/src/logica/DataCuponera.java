@@ -10,6 +10,7 @@ public class DataCuponera {
 	private Float descuento;
 	private Date fechaAlta;
 	private String foto;
+	private Integer costo;
 	private DataActividadCuponera[] actividadesCuponera;
 	
 	public DataCuponera(Cuponera cuponera, DataActividadCuponera[] dataActividad){
@@ -21,6 +22,7 @@ public class DataCuponera {
 		this.setFechaAlta(cuponera.getFechaAlta());
 		this.setActividadesCuponera(dataActividad);
 		this.setFoto(cuponera.getFoto());
+		this.setCosto(cuponera.getCosto());
 	}
 	
 	public String getNombre() {
@@ -85,5 +87,13 @@ public class DataCuponera {
 
 	private void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Integer getCosto() {
+		return costo;
+	}
+
+	private void setCosto(Integer costo) {
+		this.costo = costo;
 	}
 }

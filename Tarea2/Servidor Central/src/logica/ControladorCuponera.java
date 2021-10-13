@@ -18,13 +18,13 @@ public class ControladorCuponera implements IControladorCuponera {
     }
     
     public void altaCuponera(String nombre, String descripcion, Date inicio, Date fin, 
-    	Float descuento, Date fechaAlta,String foto) throws CuponeraRepetidaException{
+    	Float descuento, Date fechaAlta,String foto,Integer costo) throws CuponeraRepetidaException{
     	ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
     	Cuponera cuponera = mCup.obtenerCuponera(nombre);
     	if(cuponera != null) 
     		throw new CuponeraRepetidaException("Ya existe una Cuponera con nombre '" 
     		+ nombre + "' en el sistema");
-    	cuponera = new Cuponera(nombre,descripcion,inicio,fin,descuento,fechaAlta,foto);
+    	cuponera = new Cuponera(nombre,descripcion,inicio,fin,descuento,fechaAlta,foto,costo);
     	mCup.addCuponera(cuponera); 	
     }
     
