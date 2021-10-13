@@ -42,15 +42,15 @@
         
         <div class="filter-tags">
           <c:if test="${institucion != null}">
-            <div class="alert tag alert-primary alert-dismissible small mb-0" role="alert">
+            <div class="alert tag alert-primary alert-dismissible small mb-0 institucion-tag" role="alert">
               ${institucion}
-              <button type="button" class="btn-close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           </c:if>
           <c:if test="${categoria != null}">
-            <div class="alert tag alert-primary alert-dismissible small mb-0" role="alert">
+            <div class="alert tag alert-primary alert-dismissible small mb-0 categoria-tag" role="alert">
               ${categoria}
-              <button type="button" class="btn-close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           </c:if>
         </div>
@@ -78,6 +78,7 @@
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="js/sidebar.js"></script>
+  <script src="js/search.js"></script>
   
 </body>
 </html>

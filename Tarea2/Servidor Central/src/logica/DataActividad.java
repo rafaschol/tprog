@@ -2,7 +2,7 @@ package logica;
 
 import java.util.Date;
 
-public class DataActividad {
+public class DataActividad extends DataItem {
 	private Date fecha;
 	private String nombre;
 	private String descripcion;
@@ -135,6 +135,11 @@ public class DataActividad {
 
 	private void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+
+	public String getTipo() {
+		return "Actividad deportiva";
 	}
 
 

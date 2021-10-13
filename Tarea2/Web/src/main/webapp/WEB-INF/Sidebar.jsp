@@ -7,7 +7,7 @@
       <div class="collapse show" id="instituciones-submenu">
         <ul class="list-unstyled pb-1 small sidebar-submenu">
           <c:forEach items="${instituciones}" var="institucion">
-            <li><a href="buscar?ins=${institucion}" class="link-dark rounded">${institucion}</a></li>
+            <li><a href="buscar?ins=${institucion}" class="link-dark rounded sidebar-filter institucion-filter">${institucion}</a></li>
           </c:forEach>
         </ul>
       </div>
@@ -17,7 +17,7 @@
       <div class="collapse show" id="categorias-submenu">
         <ul class="list-unstyled pb-1 small sidebar-submenu">
           <c:forEach items="${categorias}" var="categoria">
-            <li><a href="buscar?cat=${categoria}" class="link-dark rounded">${categoria}</a></li>
+            <li><a href="buscar?cat=${categoria}" class="link-dark rounded sidebar-filter categoria-filter">${categoria}</a></li>
           </c:forEach>
         </ul>
       </div>

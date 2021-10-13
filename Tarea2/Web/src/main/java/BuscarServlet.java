@@ -31,6 +31,9 @@ public class BuscarServlet extends HttpServlet {
 			request.setAttribute("categoria", categoria);
 		}
 		
+		//DataItem[] resultados = controlador.buscar(busqueda, institucion, categoria);
+		//request.setAttribute("resultados", resultados);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Buscar.jsp");
 		dispatcher.forward(request, response);
 	}

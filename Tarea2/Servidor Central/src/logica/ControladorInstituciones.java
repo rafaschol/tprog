@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -236,6 +237,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		return actividades;
 
 	}
+
 	public DataCuponera[] listarDataCuponera(String nombreActividad) {
     	ManejadorActividad mActividad = ManejadorActividad.getinstance();
     	ActividadDeportiva actividad = mActividad.obtenerActividadAceptada(nombreActividad);
@@ -247,5 +249,49 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		}
     	return result;
     }
+
+	
+	private DataItem[] listarActividadesYCuponeras() {
+		// Falta implementar
+		return null;
+	}
+	
+	private boolean cumpleBusqueda(DataItem elemento, String busqueda, String institucion, String categoria) {
+		boolean cumpleTexto = true;
+		boolean cumpleInstitucion = true;
+		boolean cumpleCategoria = true;
+		
+		// Chequeo si el texto de la b�squeda est� en el nombre o en la descripci�n del elemento
+		if (busqueda != null) {
+			busqueda = busqueda.toLowerCase();
+			String nombreElemento = elemento.getNombre().toLowerCase();
+			String descripcionElemento = elemento.getDescripcion().toLowerCase();
+			cumpleTexto = (nombreElemento.contains(busqueda) || descripcionElemento.contains(busqueda));
+		}
+
+		// Chequeo si la instituci�n del filtrado es la misma que la del elemento
+		if (institucion != null) {			
+			String institucionElemento = elemento.getInstitucion();
+			cumpleInstitucion = (institucionElemento.equals(institucion));
+		}
+
+		// Chequeo si la categor�a del filtrado est� entre las categor�as del elemento
+		if (categoria != null) {			
+			String[] categoriasElemento = elemento.getCategorias();
+			cumpleCategoria = Arrays.stream(categoriasElemento).anyMatch(categoria::equals);
+		}
+
+		return (cumpleTexto && cumpleInstitucion && cumpleCategoria);
+	}
+	
+	public DataItem[] buscar(String query, String institucion, String categorias) {
+		
+		DataItem[] elementos = listarActividadesYCuponeras();
+		DataItem[] resultados = Arrays.stream(elementos)
+			.filter(elemento -> cumpleBusqueda(elemento, query, institucion, categorias))
+			.toArray(DataItem[]::new);
+		
+		return resultados;
+	}
     
 }

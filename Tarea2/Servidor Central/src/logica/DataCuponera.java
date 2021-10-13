@@ -2,7 +2,7 @@ package logica;
 
 import java.util.Date;
 
-public class DataCuponera {
+public class DataCuponera extends DataItem {
 	private String nombre;
 	private String descripcion;
 	private Date fechaIni;
@@ -95,5 +95,19 @@ public class DataCuponera {
 
 	private void setCosto(Float costo) {
 		this.costo = costo;
+	}
+
+	public String getInstitucion() {
+		// Falta implementar
+		return null;
+	}
+
+	public String[] getCategorias() {
+		// Falta implementar
+		return null;
+	}
+
+	public String getTipo() {
+		return "Cuponera";
 	}
 }

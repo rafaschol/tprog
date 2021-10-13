@@ -48,5 +48,8 @@ public interface IControladorInstituciones {
 		    int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto) throws ActividadRepetidaException;
 	
 	public abstract DataActividad[] listarActividadesWeb();
+	
 	public abstract DataCuponera[] listarDataCuponera(String nombreActividad);
+	
+	public abstract DataItem[] buscar(String query, String institucion, String categoria);
 }
