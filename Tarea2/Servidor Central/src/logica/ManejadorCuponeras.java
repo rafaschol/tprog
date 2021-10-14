@@ -1,7 +1,9 @@
 package logica;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ManejadorCuponeras {
 	private Map<String, Cuponera> cuponeras;
@@ -33,5 +35,15 @@ public class ManejadorCuponeras {
 	    	String nombre = cuponera.getNombre();
 	        cuponeras.put(nombre, cuponera);
 	 }
+	 public DataCuponera[] getDataCuponeras() {
+	        DataCuponera[] result = new DataCuponera[cuponeras.size()];
+	        int iterador = 0;
+			for (Entry<String, Cuponera> iter : cuponeras.entrySet()) {
+				DataCuponera dataCuponera = new DataCuponera(iter.getValue(),null);
+				result[iterador] = dataCuponera;
+				iterador++;
+			}		
+	        return result;
+	    }
     
 }

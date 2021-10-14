@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
+
 import excepciones.ActividadRepetidaException;
 import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
@@ -252,9 +254,24 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 	
 	private DataItem[] listarActividadesYCuponeras() {
-		// Falta implementar
-		return null;
+		ManejadorInstituciones mInst =  ManejadorInstituciones.getinstance();
+		ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
+		 DataInstitucion[] instituciones =  mInst.getDataInstituciones();
+		 DataCuponera[] cuponeras =mCup.getDataCuponeras(); 
+		 DataItem[] resultado = new DataItem[cuponeras.length + instituciones.length];
+		 int iterador = 0;
+		 for(int j = 0; j < cuponeras.length; j++) {
+			 resultado[iterador] = cuponeras[j];
+			 iterador++;
+		 }
+		 for(int j = 0; j < instituciones.length; j++) {
+			 
+			 resultado[iterador] = instituciones[j];
+			 iterador++;
+		 }
+		 return resultado;
 	}
+	
 	
 	private boolean cumpleBusqueda(DataItem elemento, String busqueda, String institucion, String categoria) {
 		boolean cumpleTexto = true;
@@ -271,7 +288,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 		// Chequeo si la instituci�n del filtrado es la misma que la del elemento
 		if (institucion != null) {			
-			String institucionElemento = elemento.getInstitucion();
+			String[] institucionElemento = elemento.getInstituciones();
 			cumpleInstitucion = (institucionElemento.equals(institucion));
 		}
 

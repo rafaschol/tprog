@@ -142,6 +142,9 @@ public class DataActividad extends DataItem {
 		return "Actividad deportiva";
 	}
 
+	public String[] getInstituciones() {
+		return null;
+	}
 
 
 	

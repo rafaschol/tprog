@@ -38,9 +38,8 @@ public class UsuarioDetailServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("aaaaaa");
-		String nombreUsuario = request.getPathInfo().substring(1);
 		
+		String nombreUsuario = request.getPathInfo().substring(1);
 		HttpSession session = request.getSession();
 		DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");
 		
@@ -97,7 +96,9 @@ public class UsuarioDetailServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
+	
 	}
 
 }

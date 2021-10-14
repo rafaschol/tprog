@@ -60,7 +60,9 @@
               <button class="nav-link" id="nav-clases-tab" data-bs-toggle="tab" data-bs-target="#nav-clases" type="button" role="tab" aria-controls="nav-clases" aria-selected="false">Clases</button>
               <c:if test = "${esProfesor}">
 	              <button class="nav-link" id="nav-actividades-aceptadas-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades-aceptadas" type="button" role="tab" aria-controls="nav-actividades-aceptadas" aria-selected="false">Actividades deportivas</button>
-	              <button class="nav-link" id="nav-actividades-sin-aceptar-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades-sin-aceptar" type="button" role="tab" aria-controls="nav-actividades-sin-aceptar" aria-selected="false">Actividades deportivas (sin aceptar)</button>
+	               <c:if test = "${esProfesor && suCuenta}">
+	              	<button class="nav-link" id="nav-actividades-sin-aceptar-tab" data-bs-toggle="tab" data-bs-target="#nav-actividades-sin-aceptar" type="button" role="tab" aria-controls="nav-actividades-sin-aceptar" aria-selected="false">Actividades deportivas (sin aceptar)</button>
+	              </c:if>
 	          </c:if>
 	          <c:if test="${esSocio && suCuenta}">
 	          	<button class="nav-link" id="nav-cuponeras-tab" data-bs-toggle="tab" data-bs-target="#nav-cuponeras" type="button" role="tab" aria-controls="nav-cuponeras" aria-selected="false">Cuponeras</button>
@@ -136,36 +138,37 @@
             </c:if>
             
            
-	         
-	            <!-- Tabs de actividades deportivas -->
-            <div class="tab-pane fade" id="nav-actividades-aceptadas" role="tabpanel" aria-labelledby="nav-actividades-aceptadas-tab">
-              <div class="list-group list-group-flush">
-              <c:forEach items="${actividades}" var="vidad">
-                <a href="actividad_detail.html" class="list-group-item">
-                  <img class="rounded-circle me-2" src="img/voleibol.jpg" alt="cuponera">
-                  Voleibol
-                </a>
-                </c:forEach>
-              </div>
-            </div>
-
-            <div class="tab-pane fade" id="nav-actividades-sin-aceptar" role="tabpanel" aria-labelledby="nav-actividades-sin-aceptar-tab">
-              <div class="list-group list-group-flush">
-              <c:forEach items="${actividadesPendientes}" var="vidad">
-	                <a href="actividad_detail.html" class="list-group-item d-flex align-items-center">
-	                  <img class="rounded-circle me-2" src="img/voleibol_ii.jpg" alt="cuponera">
-	                  Voleibol II
-	                  <span class="badge bg-danger ms-auto p-2">Rechazada</span>
+	        <c:if test="${esProfesor}">
+		            <!-- Tabs de actividades deportivas -->
+	            <div class="tab-pane fade" id="nav-actividades-aceptadas" role="tabpanel" aria-labelledby="nav-actividades-aceptadas-tab">
+	              <div class="list-group list-group-flush">
+	              <c:forEach items="${actividades}" var="actividad">
+	                <a href="actividades/${actividad.getNombre()}" class="list-group-item">
+	                  <img class="rounded-circle me-2" src=" ${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="cuponera">
+	                  ${actividad.getNombre()}
 	                </a>
-               </c:forEach>
-              </div>
-            </div>
-	      
+	                </c:forEach>
+	              </div>
+	            </div>
+	 		<c:if test="${esProfesor && ( suCuenta)}">
+	            <div class="tab-pane fade" id="nav-actividades-sin-aceptar" role="tabpanel" aria-labelledby="nav-actividades-sin-aceptar-tab">
+	              <div class="list-group list-group-flush">
+	              <c:forEach items="${actividadesPendientes}" var="actividad">
+		                <a href="actividades/${actividad.getNombre()}" class="list-group-item d-flex align-items-center">
+		                  <img class="rounded-circle me-2" src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="cuponera">
+		                  ${actividad.getNombre()}
+		                  <span class="badge bg-danger ms-auto p-2">${actividad.getEstado()}</span>
+		                </a>
+	               </c:forEach>
+	              </div>
+	            </div>
+	          </c:if>
+	      </c:if>
             <!-- Tabs de seguidos y seguidores -->
             <div class="tab-pane fade" id="nav-seguidos" role="tabpanel" aria-labelledby="nav-seguidos-tab">
               <div class="list-group list-group-flush">
               <c:forEach items="${seguidos}" var="seguido">
-	                <a href="usuarios/${seguido.getNombre()}" class="list-group-item">
+	                <a href="usuarios/${seguido.getNickname()}" class="list-group-item">
 	                  <img class="rounded-circle me-2" src="${seguido.getFoto() != null ? seguido.getFoto() :  'img/default.jpg'}" alt="usuario">
 	                  ${seguido.getNombre()}
 	                </a>
@@ -176,7 +179,7 @@
             <div class="tab-pane fade" id="nav-seguidores" role="tabpanel" aria-labelledby="nav-seguidores-tab">
               <div class="list-group list-group-flush">
                <c:forEach items="${seguidores}" var="seguidor">
-	                <a href="usuarios/${seguidor.getNombre()}" class="list-group-item">
+	                <a href="usuarios/${seguidor.getNickname()}" class="list-group-item">
 	                  <img class="rounded-circle me-2" src="${seguidor.getFoto() != null ? seguidor.getFoto() :  'img/default.jpg'}" alt="usuario">
 	                  ${seguidor.getNombre()}
 	                </a>

@@ -44,6 +44,21 @@ public class ManejadorInstituciones {
 		}		
         return result;
     }
+    public DataInstitucion[] getDataInstituciones() {
+        DataInstitucion[] result = new DataInstitucion[instituciones.size()];
+        int iterador = 0;
+		for (Entry<String, InstitucionDeportiva> iter : instituciones.entrySet()) {
+			
+			DataInstitucion dataInstitucion = new DataInstitucion(iter.getValue());
+			result[iterador] = dataInstitucion;
+			iterador++;
+		}		
+        return result;
+    }
+    
+
+    
+    
   }
 
 

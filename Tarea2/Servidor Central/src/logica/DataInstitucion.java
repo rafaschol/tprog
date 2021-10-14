@@ -1,15 +1,24 @@
 package logica;
 
-public class DataInstitucion {
+public class DataInstitucion extends DataItem{
 	  	private String nombre;
 	    private String[] profesores;
 	    private String[] actividades;
+	    
+	    //
+	    private String descripcion;
+		private String url;
 
 
 	    public DataInstitucion(String nombre, String[] profesores, String[] actividades) {
 	        this.setNombre(nombre);
 	        this.setProfesores(profesores);
 	        this.setActividades(actividades);
+	    }
+	    public DataInstitucion(InstitucionDeportiva inst) {
+	        this.setNombre(inst.getNombre());
+	        this.setDescripcion(inst.getDescripcion());
+	        this.setUrl(inst.getURL());
 	    }
 
 	    public String getNombre() {
@@ -40,6 +49,42 @@ public class DataInstitucion {
 	    public String toString() {
 			
 			return this.nombre;	
+		}
+
+		public String getDescripcion() {
+			return descripcion;
+		}
+
+		private void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+
+		public String getURL() {
+			return url;
+		}
+
+		private void setUrl(String url) {
+			this.url = url;
+		}
+		@Override
+		public String[] getInstituciones() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String[] getCategorias() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String getFoto() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String getTipo() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 

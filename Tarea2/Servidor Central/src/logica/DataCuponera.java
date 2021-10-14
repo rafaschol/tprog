@@ -97,7 +97,7 @@ public class DataCuponera extends DataItem {
 		this.costo = costo;
 	}
 
-	public String getInstitucion() {
+	public String[] getInstituciones() {
 		// Falta implementar
 		return null;
 	}
