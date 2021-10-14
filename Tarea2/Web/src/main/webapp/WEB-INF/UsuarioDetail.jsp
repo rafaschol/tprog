@@ -73,42 +73,189 @@
           </nav>
           <div class="tab-content" id="nav-tabContent">
 
-            <!-- Tab de perfil -->
-            <div class="tab-pane fade show active py-2 px-3" id="nav-perfil" role="tabpanel" aria-labelledby="nav-home-tab">
-              <form>
-                <div class="row mb-1 perfil-group">
-                  <label for="nombreUsuarioInput" class="col-sm-3 col-form-label">Nombre de usuario</label>
-                  <div class="col-10 col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" name="nombreUsuario" id="nombreUsuarioInput" value="${usuario.getNickname()}">
-                  </div>
-                </div>
-                <div class="row mb-1 perfil-group">
-                  <label for="nombreInput" class="col-sm-3 col-form-label">Nombre</label>
-                  <div class="col-10 col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" name="nombre" id="nombreInput" value="${usuario.getNombre()}">
-                  </div>
-                </div>
-                <div class="row mb-1 perfil-group">
-                  <label for="apellidoInput" class="col-sm-3 col-form-label">Apellido</label>
-                  <div class="col-10 col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" name="apellido" id="apellidoInput" value="${usuario.getApellido()}">
-                  </div>
-                </div>
-                <div class="row mb-1 perfil-group">
-                  <label for="correoInput" class="col-sm-3 col-form-label">Correo electrÃ³nico</label>
-                  <div class="col-10 col-sm-7">
-                    <input type="email" readonly class="form-control-plaintext" name="correo" id="correoInput" value="${usuario.getEmail()}">
-                  </div>
-                </div>
-                <div class="row mb-1 perfil-group">
-                  <label for="nacimientoInput" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
-                  <div class="col-10 col-sm-7">
-                    <jsp:useBean id="date" class="java.util.Date"/>
-                    <input type="text" readonly class="form-control-plaintext" path="dueDate" class= "date" name = "dueDate" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
-                  </div>
-                </div>
-              </form>
-            </div>
+            <!-- Tab de perfil Socio -->
+            <c:if test="${esSocio}">
+	            <div class="tab-pane fade show active py-2 px-3" id="nav-perfil" role="tabpanel" aria-labelledby="nav-home-tab">
+	              <form>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="nombreUsuarioInput" class="col-sm-3 col-form-label">Nombre de usuario</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="nombreUsuario" id="nombreUsuarioInput" value="${usuario.getNickname()}">
+	                  </div>
+	                </div>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="nombreInput" class="col-sm-3 col-form-label">Nombre</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="nombre" id="nombreInput" value="${usuario.getNombre()}">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="apellidoInput" class="col-sm-3 col-form-label">Apellido</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="apellido" id="apellidoInput" value="${usuario.getApellido()}">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	               
+	                <div class="row mb-1 perfil-group">
+	                  <label for="correoInput" class="col-sm-3 col-form-label">Correo electrÃ³nico</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="email" readonly class="form-control-plaintext" name="correo" id="correoInput" value="${usuario.getEmail()}">
+	                  </div>
+	                </div>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="nacimientoInput" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+	                  <div class="col-10 col-sm-7">
+	                    <jsp:useBean id="date" class="java.util.Date"/>
+	                    <input type="text" readonly class="form-control-plaintext" path="dueDate" class= "date" name = "dueDate" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                  
+	                  
+	                </div>
+	              </form>
+	            </div>
+	         </c:if>
+            
+            
+            <!-- Tab de perfil Profesor -->
+            <c:if test="${esProfesor}">
+	            <div class="tab-pane fade show active py-2 px-3" id="nav-perfil" role="tabpanel" aria-labelledby="nav-home-tab">
+	              <form>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="nombreUsuarioInput" class="col-sm-3 col-form-label">Nombre de usuario</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="nombreUsuario" id="nombreUsuarioInput" value="denis">
+	                  </div>
+	                </div>
+	                <div class="row mb-1 perfil-group" id="nombreGroup">
+	                  <label for="nombreInput" class="col-sm-3 col-form-label">Nombre</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="nombre" id="nombreInput" value="Denis">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	                <div class="row mb-1 perfil-group" id="apellidoGroup">
+	                  <label for="apellidoInput" class="col-sm-3 col-form-label">Apellido</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="apellido" id="apellidoInput" value="Miguel">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="correoInput" class="col-sm-3 col-form-label">Correo electrónico</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="email" readonly class="form-control-plaintext" name="correo" id="correoInput" value="den80@fuerza.com">
+	                  </div>
+	                </div>
+	                <div class="row mb-1 perfil-group" id="nacimientoGroup">
+	                  <label for="nacimientoInput" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="date" readonly class="form-control-plaintext" name="nacimiento" id="nacimientoInput" value="1980-06-14">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	                <div class="row mb-1 perfil-group">
+	                  <label for="institucionInput" class="col-sm-3 col-form-label">Institución</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="text" readonly class="form-control-plaintext" name="institucion" id="institucionInput" value="Telón">
+	                  </div>
+	                </div>
+	
+	                <div class="row mb-1 perfil-group" id="descripcionGroup">
+	                  <label for="descripcionInput" class="col-sm-3 col-form-label">Descripción</label>
+	                  <div class="col-10 col-sm-7">
+	                    <textarea readonly class="form-control-plaintext" name="descripcion" id="descripcionInput">A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball</textarea>
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	
+	                <div class="row mb-1 perfil-group" id="biografiaGroup">
+	                  <label for="biografiaInput" class="col-sm-3 col-form-label">Biografía</label>
+	                  <div class="col-10 col-sm-7">
+	                    <textarea readonly class="form-control-plaintext" name="biografia" id="biografiaInput">Denis fue un jugador de voleibol profesional.</textarea>
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	
+	                <div class="row mb-1 perfil-group" id="sitioWebGroup">
+	                  <label for="sitioWebInput" class="col-sm-3 col-form-label">Sitio web</label>
+	                  <div class="col-10 col-sm-7">
+	                    <input type="url" readonly class="form-control-plaintext" name="sitioWeb" id="sitioWebInput" value="www.denis.com">
+	                  </div>
+	                  <c:if test="${suCuenta}">
+		                  <div class="col-2">
+		                    <button class="btn btn-outline-secondary" type="button">
+		                      <i class="fas fa-edit"></i>
+		                      <i class="fas fa-save"></i>
+		                    </button>
+		                  </div>
+	                  </c:if>
+	                </div>
+	
+	              </form>
+	            </div>
+	         </c:if>
+            
+            
+            
 
             <!-- Tab de clases -->
             <div class="tab-pane fade" id="nav-clases" role="tabpanel" aria-labelledby="nav-clases-tab">
@@ -197,6 +344,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/usuario-detail.js"></script>
+  <script src="js/edit-perfil.js"></script>
   
 </body>
 </html>

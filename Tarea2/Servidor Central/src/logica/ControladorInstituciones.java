@@ -261,6 +261,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		 DataItem[] resultado = new DataItem[cuponeras.length + instituciones.length];
 		 int iterador = 0;
 		 for(int j = 0; j < cuponeras.length; j++) {
+			 
 			 resultado[iterador] = cuponeras[j];
 			 iterador++;
 		 }

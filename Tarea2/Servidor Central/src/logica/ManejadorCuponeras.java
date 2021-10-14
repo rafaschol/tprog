@@ -2,8 +2,10 @@ package logica;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class ManejadorCuponeras {
 	private Map<String, Cuponera> cuponeras;
@@ -39,7 +41,15 @@ public class ManejadorCuponeras {
 	        DataCuponera[] result = new DataCuponera[cuponeras.size()];
 	        int iterador = 0;
 			for (Entry<String, Cuponera> iter : cuponeras.entrySet()) {
-				DataCuponera dataCuponera = new DataCuponera(iter.getValue(),null);
+				Set<String> setInstituciones = new HashSet<String>();
+				Set<ActividadDeCuponera> actividadesCuponera = iter.getValue().getActividadCuponera();
+		    	//Convierto Set a Array
+		    	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
+		    	for (int j = 0; j < arrActCup.length; j++) {
+		    		setInstituciones.add(arrActCup[j].getActividad().getInstitucion().getNombre());
+		    	}
+		    	String[] instituciones = setInstituciones.toArray(new String[setInstituciones.size()]);
+				DataCuponera dataCuponera = new DataCuponera(iter.getValue(),instituciones,null);
 				result[iterador] = dataCuponera;
 				iterador++;
 			}		
