@@ -366,7 +366,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
 	public Boolean yaSigueAUsuario(String nickSeguidor, String nickSeguido)
 	{
-		Boolean res;
+		Boolean res = false;
 		
 	    if (nickSeguidor.equals(nickSeguido)) {
 	    	res = false;
@@ -382,11 +382,8 @@ public class ControladorUsuario implements IControladorUsuario {
 	
 	public void seguirUsuario(String nickSeguidor, String nickSeguido) 	throws 	/*UsuarioSigueASiMismoException,*/ // <-- excepcion no necesaria. La dejo comentada.
 																				UsuarioYaSigueAUsuarioException
-	{
-	/*	if (nickSeguidor.equals(nickSeguido)) {
-			throw new UsuarioSigueASiMismoException("No puede seguirse a sí mismo.");
-		}
-		else*/ if (yaSigueAUsuario(nickSeguidor, nickSeguido)) {
+	{//yaSigueAUsuario(nickSeguidor, nickSeguido)
+		if (false) {
 			throw new UsuarioYaSigueAUsuarioException("Ya sigue a este usuario.");
 		}
 		else {
@@ -394,7 +391,11 @@ public class ControladorUsuario implements IControladorUsuario {
 			Usuario seguido 	= obtenerUsuarioPorNick(nickSeguido);
 			
 			seguidor.addSeguido(seguido);
+			seguido.addSeguidor(seguidor); 
+			
+			
 		}
+		
 	}
 	
 	public DataUsuario[] listarUsuariosWeb()
@@ -421,7 +422,113 @@ public class ControladorUsuario implements IControladorUsuario {
 		return result;
     }
 	
-
+	public DataUsuario mostrarDataUsuarioWeb(String nickname)
+    {
+    	DataUsuario res;
+    	
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	ManejadorProfesores mProf = ManejadorProfesores.getinstance();
+    	
+    	Socio socio = mSocios.obtenerSocio(nickname);
+    	
+    	
+    	if (socio == null) {
+    		// usuario es un profesor		
+    		Profesor profesor = mProf.obtenerProfesor(nickname);
+    		int iterador = 0;
+    		DataUsuario[] seguidores = new DataUsuario[profesor.getSeguidores().size()];
+    		DataUsuario[] seguidos = new DataUsuario[profesor.getSeguidos().size()];
+    		
+    		for (Map.Entry<String, Usuario> iter : profesor.getSeguidores().entrySet()) {
+    			seguidores[iterador] = new DataUsuario(iter.getValue());
+    			iterador++;
+    		}
+    		iterador = 0;
+    		for (Map.Entry<String, Usuario> iter : profesor.getSeguidos().entrySet()) {
+    			seguidos[iterador] = new DataUsuario(iter.getValue());
+    			iterador++;
+    		}
+    		iterador = 0;
+    		
+    		
+    		DataClase[] clases = new DataClase[profesor.getClases().size()];
+    		for (Map.Entry<String, Clase> iter : profesor.getClases().entrySet()) {
+    			clases[iterador] = new DataClase(iter.getValue(),null,null);
+    			iterador++;
+    		}
+    	
+    		
+    		
+    		
+    		DataActividad[] actividadesAceptadas = new DataActividad[profesor.getActividadesAceptadas().length];
+    		DataActividad[] actividadesSinAceptar = new DataActividad[profesor.getActividadesIngresadas().length + profesor.getActividadesRechazadas().length];
+    		
+    		iterador = 0;
+    		for (Map.Entry<String, ActividadDeportiva> iter : profesor.getActividades().entrySet()) {
+    			if (iter.getValue().getEstado() == Estado.Aceptada) {
+    			actividadesAceptadas[iterador] = new DataActividad(iter.getValue(),null,null,null);
+    			iterador++;		
+    			}
+    		}
+    		  		
+    		iterador = 0;
+    	
+    		for (Map.Entry<String, ActividadDeportiva> iter : profesor.getActividades().entrySet()) {
+    			if (iter.getValue().getEstado() != Estado.Aceptada) {
+    			actividadesSinAceptar[iterador] = new DataActividad(iter.getValue(),null,null,null);
+    			iterador++;		
+    			}
+    		}
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		res = new DataProfesor(profesor, clases, null, seguidos,seguidores,actividadesAceptadas,actividadesSinAceptar);
+    	}
+    	
+    	else {
+    		// usuario es un socio
+    		int iterador = 0;
+    		DataUsuario[] seguidores = new DataUsuario[socio.getSeguidores().size()];
+    		DataUsuario[] seguidos = new DataUsuario[socio.getSeguidos().size()];
+    		
+    		for (Map.Entry<String, Usuario> iter : socio.getSeguidores().entrySet()) {
+    			seguidores[iterador] = new DataUsuario(iter.getValue());
+    			iterador++;
+    		}
+    		iterador = 0;
+    		for (Map.Entry<String, Usuario> iter : socio.getSeguidos().entrySet()) {
+    			seguidos[iterador] = new DataUsuario(iter.getValue());
+    			iterador++;
+    		}
+    		iterador = 0;
+    		
+    		DataCuponera[] cuponeras = new DataCuponera[socio.getCompras().size()];
+    		Set<Compra> compras = socio.getCompras();
+        	Compra[] arrCompras = compras.toArray(new Compra[compras.size()]);
+        	for (int j = 0; j < arrCompras.length; j++) {
+        		cuponeras[iterador] = new DataCuponera(arrCompras[j].getCuponera(),null);
+        		iterador++;	
+        	}
+        	
+    		
+    		Map<Integer, Registro> regs = socio.getRegistros();
+    		DataClase[] clases = new DataClase[regs.size()];
+    		
+    		iterador = 0;
+    		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
+    			clases[iterador] =  new DataClase(iter.getValue().getClase(),null,null);
+    			iterador++;
+    		}
+    		
+    		res = new DataUsuario(socio, clases,cuponeras,seguidos,seguidores);
+    	}
+    	
+    	return res;
+    }
       
 }
 	

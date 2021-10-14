@@ -33,7 +33,7 @@ public class ClaseDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombreClase = request.getPathInfo().substring(1);
 			 
-		System.out.println(nombreClase);
+		
 		
 		DataClase clase = (DataClase) controladorInstitucion.obtenerDataClase(nombreClase);
 		System.out.println(clase.getNombre());

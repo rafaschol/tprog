@@ -28,12 +28,14 @@
     
     
     <% if (session.getAttribute("usuarioLogueado") != null) { %>
+    <% DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");%>
+    
     <li class="border-top my-3"></li>
     <li class="mb-1">
       <button class="btn sidebar-submenu-button align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#cuenta-submenu" aria-expanded="true">Cuenta</button>
       <div class="collapse show" id="cuenta-submenu">
         <ul class="list-unstyled pb-1 small sidebar-submenu">
-          <li><a href="usuario_socio_detail.html" class="link-dark rounded">Mi perfil</a></li>
+          <li><a href="usuarios/${usuarioLogueado.getNickname()}" class="link-dark rounded">Mi perfil</a></li>
           
           <% DataUsuario usr = (DataUsuario)session.getAttribute("usuarioLogueado"); %>
           <% if (usr.getTipoUsuario().equals("Socio")) { %>

@@ -495,6 +495,7 @@ class TestSistema {
 		ctrlI.altaActividadDeportivaWeb("IN", "Pesas", "Para todas las edades", 30, 500, new Date(2021, 9, 20), "TheBoss", arrayVacio, "png");
 		
 	}
+
 	
 		
 	

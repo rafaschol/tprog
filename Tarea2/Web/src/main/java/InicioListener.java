@@ -39,6 +39,7 @@ public class InicioListener implements ServletContextListener {
 		datosPrueba.cargarRegistrosClases();
 		datosPrueba.cargarActividadesCuponeras();
 		datosPrueba.cargarCompraCuponera();
+		datosPrueba.cargarSeguidores();
 		
 		String[] instituciones = Arrays.stream(controladorInstitucion.listarDataInstituciones())
 				.map(institucion -> institucion.getNombre()).toArray(String[]::new);

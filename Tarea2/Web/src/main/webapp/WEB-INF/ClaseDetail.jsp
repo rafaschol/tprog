@@ -44,7 +44,7 @@
               <a href="actividades/${clase.getActividad()}" class="text-decoration-none">${clase.getActividad()}</a>
             </p>
             <p class="lead mb-1">Dictada por  
-              <a href="profesores/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
+              <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
             <a href="clases/registro?id=${clase.getNombre()}" class="btn btn-primary mt-3">Registrarme a la clase</a>
           </div>

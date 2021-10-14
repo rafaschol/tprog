@@ -10,6 +10,11 @@ public class DataProfesor extends DataUsuario {
 	private String[] actividadesAceptadas; 
 	private String[] actividadesRechazadas;
 	private String[] actividadesIngresadas;
+	
+	//operaciones para la web
+	private DataActividad[] actividadesAceptadasWeb;
+	private DataActividad[] actividadesSinAceptarWeb;
+	
 
 	public DataProfesor(Usuario usuario, String[] clases, String[] actividades) {
 		super(usuario, clases);
@@ -22,6 +27,20 @@ public class DataProfesor extends DataUsuario {
 		this.setActividadesRechazadas(Profesor.class.cast(usuario).getActividadesRechazadas());
 		this.setActividadesAceptadas(Profesor.class.cast(usuario).getActividadesAceptadas());
 		this.setActividadesIngresadas(Profesor.class.cast(usuario).getActividadesIngresadas());
+		}
+	
+	public DataProfesor(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores,  DataActividad[] actividadesAceptadasWeb, DataActividad[] actividadesSinAceptarWeb) {
+		super(usuario, clasesWeb, cuponerasWeb, seguidos, seguidores);
+    	// Dynamic Cast a Profesor.
+		this.setDescripcion(Profesor.class.cast(usuario).getDescripcion());
+		this.setBiografia(Profesor.class.cast(usuario).getBiografia());
+		this.setSitioWeb(Profesor.class.cast(usuario).getSitioWeb());
+		this.setInstitucion(Profesor.class.cast(usuario).getInstitucion().getNombre());
+		this.setActividadesRechazadas(Profesor.class.cast(usuario).getActividadesRechazadas());
+		this.setActividadesAceptadas(Profesor.class.cast(usuario).getActividadesAceptadas());
+		this.setActividadesIngresadas(Profesor.class.cast(usuario).getActividadesIngresadas());
+		this.setActividadesAceptadasWeb(actividadesAceptadasWeb);
+		this.setActividadesSinAceptarWeb(actividadesSinAceptarWeb);
 		}
 
 	public String getDescripcion() {
@@ -96,5 +115,21 @@ public class DataProfesor extends DataUsuario {
 
 	private void setActividadesIngresadas(String[] actividadesIngresadas) {
 		this.actividadesIngresadas = actividadesIngresadas;
+	}
+
+	public DataActividad[] getActividadesAceptadasWeb() {
+		return actividadesAceptadasWeb;
+	}
+
+	private void setActividadesAceptadasWeb(DataActividad[] actividadesAceptadasWeb) {
+		this.actividadesAceptadasWeb = actividadesAceptadasWeb;
+	}
+
+	public DataActividad[] getActividadesSinAceptarWeb() {
+		return actividadesSinAceptarWeb;
+	}
+
+	private void setActividadesSinAceptarWeb(DataActividad[] actividadesSinAceptadarWeb) {
+		this.actividadesSinAceptarWeb = actividadesSinAceptadarWeb;
 	}
 }
