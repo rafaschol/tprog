@@ -35,15 +35,15 @@ public class CargarDatosPrueba {
 	public void cargarSocios() {
 		try {
 							// altaSocio(nickname , nombre, apellido, email, fechaNacimiento, contraseña, foto
-	/* EL */controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31), "asdfg456", "img/Emi71.jpg");
-	/* CO */controladorUsuario.altaSocio("caro", "Carolina", "Omega", "caro@gmail.com", new Date(83, 10, 15), "123rtgfdv", "img/caro.jpg");
-	/* EW */controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15), "poiuy086", "img/euge.jpg");
-	/* GH */controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15), "GTO468", "img/guille.jpg");
-	/* SP */controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28), "HGF135", "img/sergiop.jpg");
-	/* AR */controladorUsuario.altaSocio("andy", "Andr\u00E9s", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17), "lkj65D", "img/andy.jpg");
-	/* AP */controladorUsuario.altaSocio("tonyp", "Antonio", "Paz", "eltony@gmail.org.uy", new Date(55, 1, 14), "jhvf395", "img/tonyp.jpg");
-	/* ML */controladorUsuario.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(87, 1, 23), "ijngr024", "img/m1k4.jpg");
-	/* CB */controladorUsuario.altaSocio("charly", "Carlos", "Boston", "charly@gmail.com.uy", new Date(37, 4, 8), "987mnbgh", "img/charly.jpg");
+	/* EL */controladorUsuario.altaSocio("Emi71", "Emiliano", "Lucas", "emi71@gmail.com", new Date(71, 11, 31), "asdfg456", "media/usuarios/Emi71.jpg");
+	/* CO */controladorUsuario.altaSocio("caro", "Carolina", "Omega", "caro@gmail.com", new Date(83, 10, 15), "123rtgfdv", "media/usuarios/caro.jpg");
+	/* EW */controladorUsuario.altaSocio("euge", "Eugenia", "Williams", "e.will@gmail.com", new Date(90, 3, 15), "poiuy086", "media/usuarios/euge.jpg");
+	/* GH */controladorUsuario.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.com", new Date(59, 4, 15), "GTO468", "media/usuarios/guille.jpg");
+	/* SP */controladorUsuario.altaSocio("sergiop", "Sergio", "Perez", "sergi@gmail.com.uy", new Date(50, 0, 28), "HGF135", "media/usuarios/sergiop.jpg");
+	/* AR */controladorUsuario.altaSocio("andy", "Andr\u00E9s", "Roman", "chino@gmail.org.uy", new Date(76, 2, 17), "lkj65D", "media/usuarios/andy.jpg");
+	/* AP */controladorUsuario.altaSocio("tonyp", "Antonio", "Paz", "eltony@gmail.org.uy", new Date(55, 1, 14), "jhvf395", "media/usuarios/tonyp.jpg");
+	/* ML */controladorUsuario.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(87, 1, 23), "ijngr024", "media/usuarios/m1k4.jpg");
+	/* CB */controladorUsuario.altaSocio("charly", "Carlos", "Boston", "charly@gmail.com.uy", new Date(37, 4, 8), "987mnbgh", "media/usuarios/charly.jpg");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			e.printStackTrace();
 		}
@@ -223,7 +223,7 @@ public class CargarDatosPrueba {
 			
 	/* A2 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol",
 					"Voleibol en todas sus formas",
-					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "img/voleibol.jpg");
+					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "media/actividades/Voleibol.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
 			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
 			
@@ -245,14 +245,14 @@ public class CargarDatosPrueba {
 			
 	/* A5 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Atletismo",
 					"100m , 200m, postas y carreras con obstaculos.",
-					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "img/atletismo.jpg");
+					150, (float) 500.0, new Date(121, 6, 8), "denis", arrayVacio, "media/actividades/Atletismo.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Atletismo", true);
 			controladorInstitucion.agregarCategoriaAActividad("Atletismo", "Deportes");
 			
 			
 	/* A6 */controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Basquetbol",
 					"Basquetbol para todos.",
-					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "img/basquetbol.jpg");
+					80, (float) 450.0, new Date(121, 6, 31), "Nelson", arrayVacio, "media/actividades/Basquetbol.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Basquetbol", true);
 			controladorInstitucion.agregarCategoriaAActividad("Basquetbol", "Deportes");
 			
@@ -276,7 +276,7 @@ public class CargarDatosPrueba {
 	/* A9 */String[] categoriasA9 = {"Deportes", "Al aire libre"};
 			controladorInstitucion.altaActividadDeportivaWeb("Tel\u00F3n", "Voleibol II",
 					"Voleibol avanzado.",
-					120, (float) 1000.0, new Date(121, 8, 1),"denis", categoriasA9, "img/voleibol_ii.jpg");
+					120, (float) 1000.0, new Date(121, 8, 1),"denis", categoriasA9, "media/actividades/Voleibol_II.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol II", false);
 			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Deportes");
 			//controladorInstitucion.agregarCategoriaAActividad("Voleibol II", "Al aire libre");
@@ -385,7 +385,7 @@ public class CargarDatosPrueba {
 			controladorCuponera.altaCuponera("Pelota",
 					"Deportes con pelota.",
 					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30),
-					"img/pelota.jpg", (float) 10680.0);
+					"media/cuponeras/Pelota.jpg", (float) 10680.0);
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
 					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15),

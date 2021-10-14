@@ -59,16 +59,19 @@
           <div class="border-top my-4"></div>
         </c:if>
         
-        <div class="card shadow mb-3">
-          <div class="card-content-wrapper">
-            <img src="img/voleibol.jpg" alt="actividad deportiva" class="img-fluid rounded-start">
-            <div class="card-body">
-              <h5 class="card-title">Voleibol</h5>
-              <p class="card-text">Voleibol en todas sus formas</p>
-              <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
+        <c:forEach items="${resultados}" var="resultado">
+          <div class="card shadow mb-3">
+            <div class="card-content-wrapper">
+              <img src="${resultado.getFoto() != null ? resultado.getFoto() : 'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded-start">
+              <div class="card-body">
+                <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} bg-warning badge-elemento">${resultado.getTipo()}</div>
+                <h5 class="card-title">${resultado.getNombre()}</h5>
+                <p class="card-text">${resultado.getNombre()}</p>
+                <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
+              </div>
             </div>
           </div>
-        </div>
+        </c:forEach>
 
       </div>
     </main>

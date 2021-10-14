@@ -8,6 +8,14 @@
   width: 100%;
 }
 
+.results-page .card .badge-elemento {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
 @media screen and (min-width: 576px) {
   .results-page .card .card-content-wrapper {
     flex-direction: row;

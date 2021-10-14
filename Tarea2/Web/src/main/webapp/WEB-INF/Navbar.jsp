@@ -10,7 +10,7 @@
     <% if (session.getAttribute("usuarioLogueado") != null) { %>
     <div class="navbar-profile me-3 me-lg-0">
       <a href="usuarios/${usuarioLogueado.getNickname()}">
-        <img class="rounded-circle" src="${ usuarioLogueado.getFoto() }" alt="foto de perfil">
+        <img class="rounded-circle" src="${ usuarioLogueado.getFoto() != null ? usuarioLogueado.getFoto() : 'img/profile.jpg' }" alt="foto de perfil">
       </a>
     </div>
     <% } %>

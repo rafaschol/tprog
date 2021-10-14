@@ -143,7 +143,7 @@ public class DataActividad extends DataItem {
 	}
 
 	public String[] getInstituciones() {
-		return null;
+		return new String[] {this.institucion};
 	}
 
 

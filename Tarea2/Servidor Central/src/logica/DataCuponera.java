@@ -109,13 +109,12 @@ public class DataCuponera extends DataItem {
 	}
 
 	public String[] getInstituciones() {
-		// Falta implementar
-		return null;
+		return this.instituciones;
 	}
-
+	
 	public String[] getCategorias() {
 		// Falta implementar
-		return null;
+		return new String[] {"Deportes"};
 	}
 
 	public String getTipo() {

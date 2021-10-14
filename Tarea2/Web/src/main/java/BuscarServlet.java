@@ -8,12 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logica.DataItem;
+import logica.Fabrica;
+import logica.IControladorInstituciones;
+
 @WebServlet("/buscar")
 public class BuscarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private IControladorInstituciones controladorInstitucion;
        
     public BuscarServlet() {
         super();
+        Fabrica fabrica = Fabrica.getInstance();
+        controladorInstitucion = fabrica.getIControladorInstitucion();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +38,8 @@ public class BuscarServlet extends HttpServlet {
 			request.setAttribute("categoria", categoria);
 		}
 		
-		//DataItem[] resultados = controlador.buscar(busqueda, institucion, categoria);
-		//request.setAttribute("resultados", resultados);
+		DataItem[] resultados = controladorInstitucion.buscar(busqueda, institucion, categoria);
+		request.setAttribute("resultados", resultados);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Buscar.jsp");
 		dispatcher.forward(request, response);

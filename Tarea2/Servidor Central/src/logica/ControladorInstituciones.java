@@ -279,7 +279,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		boolean cumpleInstitucion = true;
 		boolean cumpleCategoria = true;
 		
-		// Chequeo si el texto de la b�squeda est� en el nombre o en la descripci�n del elemento
+		// Chequeo si el texto de la busqueda esta en el nombre o en la descripcion del elemento
 		if (busqueda != null) {
 			busqueda = busqueda.toLowerCase();
 			String nombreElemento = elemento.getNombre().toLowerCase();
@@ -287,13 +287,13 @@ public class ControladorInstituciones implements IControladorInstituciones {
 			cumpleTexto = (nombreElemento.contains(busqueda) || descripcionElemento.contains(busqueda));
 		}
 
-		// Chequeo si la instituci�n del filtrado es la misma que la del elemento
-		if (institucion != null) {			
-			String[] institucionElemento = elemento.getInstituciones();
-			cumpleInstitucion = (institucionElemento.equals(institucion));
+		// Chequeo si la institucion del filtrado es la misma que la del elemento
+		if (institucion != null) {
+			String[] institucionesElemento = elemento.getInstituciones();
+			cumpleInstitucion = Arrays.stream(institucionesElemento).anyMatch(institucion::equals);
 		}
 
-		// Chequeo si la categor�a del filtrado est� entre las categor�as del elemento
+		// Chequeo si la categoria del filtrado esta entre las categorias del elemento
 		if (categoria != null) {			
 			String[] categoriasElemento = elemento.getCategorias();
 			cumpleCategoria = Arrays.stream(categoriasElemento).anyMatch(categoria::equals);
@@ -303,7 +303,6 @@ public class ControladorInstituciones implements IControladorInstituciones {
 	}
 	
 	public DataItem[] buscar(String query, String institucion, String categorias) {
-		
 		DataItem[] elementos = listarActividadesYCuponeras();
 		DataItem[] resultados = Arrays.stream(elementos)
 			.filter(elemento -> cumpleBusqueda(elemento, query, institucion, categorias))
