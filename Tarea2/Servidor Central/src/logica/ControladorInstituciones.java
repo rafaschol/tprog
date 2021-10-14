@@ -3,6 +3,7 @@ package logica;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -254,22 +255,51 @@ public class ControladorInstituciones implements IControladorInstituciones {
 
 	
 	private DataItem[] listarActividadesYCuponeras() {
-		ManejadorInstituciones mInst =  ManejadorInstituciones.getinstance();
+		ManejadorActividad mAct =  ManejadorActividad.getinstance();
 		ManejadorCuponeras mCup = ManejadorCuponeras.getinstance();
-		 DataInstitucion[] instituciones =  mInst.getDataInstituciones();
-		 DataCuponera[] cuponeras =mCup.getDataCuponeras(); 
-		 DataItem[] resultado = new DataItem[cuponeras.length + instituciones.length];
-		 int iterador = 0;
-		 for(int j = 0; j < cuponeras.length; j++) {
-			 
-			 resultado[iterador] = cuponeras[j];
-			 iterador++;
-		 }
-		 for(int j = 0; j < instituciones.length; j++) {
-			 
-			 resultado[iterador] = instituciones[j];
-			 iterador++;
-		 }
+		Map<String, ActividadDeportiva> actividades =  mAct.getActividadesAceptadas();
+		DataCuponera[] cuponeras = new DataCuponera[mCup.getCuponeras().size()];	 
+		DataItem[] resultado = new DataItem[cuponeras.length + actividades.size()];
+		
+		
+		
+
+	 
+        int iterador = 0;
+		for (Entry<String, Cuponera> iter : mCup.getCuponeras().entrySet()) {
+			Set<String> setInstituciones = new HashSet<String>();
+			Set<String> setCategorias = new HashSet<String>();
+			Set<ActividadDeCuponera> actividadesCuponera = iter.getValue().getActividadCuponera();
+	    	//Convierto Set a Array
+	    	ActividadDeCuponera[] arrActCup = actividadesCuponera.toArray(new ActividadDeCuponera[actividadesCuponera.size()]);
+	    	for (int j = 0; j < arrActCup.length; j++) {
+	    		setInstituciones.add(arrActCup[j].getActividad().getInstitucion().getNombre());
+	    		
+	    		for (Entry<String, Categoria> iter3:  arrActCup[j].getActividad().getCategorias().entrySet())
+	    			setCategorias.add(iter3.getKey());	
+	    	}
+	    	
+	    	String[] instituciones = setInstituciones.toArray(new String[setInstituciones.size()]);
+	    	String[] categorias = setCategorias.toArray(new String[setCategorias.size()]);
+	    	  			
+			DataCuponera dataCuponera = new DataCuponera(iter.getValue(),instituciones,categorias);
+			resultado[iterador] = dataCuponera;
+			iterador++;
+		}		
+        
+
+		for (Entry<String, ActividadDeportiva> iter : actividades.entrySet()) {
+			String[] categorias = new String[iter.getValue().getCategorias().size()];
+			int iterador2 = 0;
+			for (Entry<String, Categoria> iter2 : iter.getValue().getCategorias().entrySet()) {
+				categorias[iterador2] = iter2.getKey();
+				iterador2++;
+			}
+			iterador2= 0;
+			resultado[iterador] = new DataActividad(iter.getValue(),null,null,categorias);
+			iterador++;
+		}
+
 		 return resultado;
 	}
 	

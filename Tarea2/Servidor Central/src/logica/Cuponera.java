@@ -12,6 +12,7 @@ public class Cuponera {
 	private Date fechaAlta;
 	private String foto;
 	private Set<ActividadDeCuponera> actividadCuponera; // Coleccion de actividades en al cuponera.
+	
 	private Boolean comprada;
 	private Float costo;
 	

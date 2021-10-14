@@ -1,6 +1,6 @@
 package logica;
 
-public class DataInstitucion extends DataItem{
+public class DataInstitucion {
 	  	private String nombre;
 	    private String[] profesores;
 	    private String[] actividades;
@@ -66,26 +66,7 @@ public class DataInstitucion extends DataItem{
 		private void setUrl(String url) {
 			this.url = url;
 		}
-		@Override
-		public String[] getInstituciones() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public String[] getCategorias() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public String getFoto() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public String getTipo() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	
 
 
 	}
