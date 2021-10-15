@@ -46,6 +46,7 @@ public interface IControladorUsuario {
 	
 	public abstract void seguirUsuario(String nickSeguidor, String nickSeguido) throws 	/*UsuarioSigueASiMismoException,*/
 																						UsuarioYaSigueAUsuarioException;
+	public abstract void dejarSeguirUsuario(String nickSeguidor, String nickSeguido); 
 	public abstract DataUsuario[] listarUsuariosWeb();
 	
 	public abstract DataUsuario mostrarDataUsuarioWeb(String nickname);

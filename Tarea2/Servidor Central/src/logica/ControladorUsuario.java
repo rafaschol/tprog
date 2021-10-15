@@ -383,10 +383,10 @@ public class ControladorUsuario implements IControladorUsuario {
 	public void seguirUsuario(String nickSeguidor, String nickSeguido) 	throws 	/*UsuarioSigueASiMismoException,*/ // <-- excepcion no necesaria. La dejo comentada.
 																				UsuarioYaSigueAUsuarioException
 	{//yaSigueAUsuario(nickSeguidor, nickSeguido)
-		if (false) {
-			throw new UsuarioYaSigueAUsuarioException("Ya sigue a este usuario.");
-		}
-		else {
+	//	if (false) {
+	//		throw new UsuarioYaSigueAUsuarioException("Ya sigue a este usuario.");
+	//	}
+	//	else {
 			Usuario seguidor 	= obtenerUsuarioPorNick(nickSeguidor);
 			Usuario seguido 	= obtenerUsuarioPorNick(nickSeguido);
 			
@@ -394,9 +394,17 @@ public class ControladorUsuario implements IControladorUsuario {
 			seguido.addSeguidor(seguidor); 
 			
 			
-		}
-		
+	}	
+	
+	
+	public  void dejarSeguirUsuario(String nickSeguidor, String nickSeguido) {
+		Usuario seguidor 	= obtenerUsuarioPorNick(nickSeguidor);
+		Usuario seguido 	= obtenerUsuarioPorNick(nickSeguido);
+		seguidor.removeSeguido(seguido);
+		seguido.removeSeguidor(seguidor); 
 	}
+	
+	
 	
 	public DataUsuario[] listarUsuariosWeb()
     {
