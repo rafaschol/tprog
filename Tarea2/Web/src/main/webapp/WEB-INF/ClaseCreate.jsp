@@ -35,9 +35,9 @@
       <div class="form-floating mb-3">
         <select class="form-select" name="actividad" id="actividadSelect">
           <option selected disabled hidden>Selecciona una actividad deportiva</option>
-          <option value="Voleibol">Voleibol</option>
-          <option value="Atletismo">Atletismo</option>
-          <option value="Basquetbol">Basquetbol</option>
+          <c:forEach items="${actividades}" var="actividad">
+          <option value="${actividad}">${actividad}</option>
+          </c:forEach>
         </select>
         <label for="actividadSelect">Actividad deportiva</label>
       </div>

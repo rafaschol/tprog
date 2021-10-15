@@ -48,6 +48,8 @@ public class UsuarioDetailServlet extends HttpServlet {
 		DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");
 		
 		DataUsuario dataUsuario = (DataUsuario)  controladorUsuario.mostrarDataUsuarioWeb(nombreUsuario);
+		
+		
 	
 		boolean esSocio= dataUsuario.getTipoUsuario().equals("Socio");
 		boolean esProfesor = dataUsuario.getTipoUsuario().equals("Profesor");
