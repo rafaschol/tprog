@@ -147,15 +147,8 @@ public class DataActividad extends DataItem {
 	}
 
 
-	
-
-
-
-
-
-	
-	
-	
-
+	public Date getFechaAlta() {
+		return getFecha();
+	}
 
 }

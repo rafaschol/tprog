@@ -1,13 +1,13 @@
 package logica;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-
+import java.util.stream.Stream;
 
 import excepciones.ActividadRepetidaException;
 import excepciones.CategoriaRepetidaException;
@@ -332,13 +332,24 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		return (cumpleTexto && cumpleInstitucion && cumpleCategoria);
 	}
 	
-	public DataItem[] buscar(String query, String institucion, String categorias) {
+	private Stream<DataItem> ordenar(Stream<DataItem> elementos, String criterio) {
+		if (criterio == null) return elementos;
+		if (criterio.equals("name")) {
+			return elementos.sorted(Comparator.comparing(DataItem::getNombre));
+		}
+		if (criterio.equals("new")) {
+			return elementos.sorted(Comparator.comparing(DataItem::getFechaAlta).reversed());
+		}
+		return Arrays.stream(new DataItem[]{});
+	}
+	
+	public DataItem[] buscar(String query, String institucion, String categorias, String orden) {
 		DataItem[] elementos = listarActividadesYCuponeras();
-		DataItem[] resultados = Arrays.stream(elementos)
-			.filter(elemento -> cumpleBusqueda(elemento, query, institucion, categorias))
-			.toArray(DataItem[]::new);
+		Stream<DataItem> resultados = Arrays.stream(elementos)
+			.filter(elemento -> cumpleBusqueda(elemento, query, institucion, categorias));
 		
-		return resultados;
+		resultados = ordenar(resultados, orden);
+		return resultados.toArray(DataItem[]::new);
 	}
     
 }

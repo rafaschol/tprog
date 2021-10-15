@@ -57,27 +57,27 @@ public class CargarDatosPrueba {
 	/* VP */controladorUsuario.altaProfesor("viktor", "Victor", "Perez", "vperez@fuerza.com", new Date(77, 0, 1), "Fuerza Bruta",
 					"Victor es un apasionado de los m\u00FAculos. Sus clases son organizadas en funci\u00F3n de distintos aparatos y pesas con el objetivo de desarrollar m\u00FAsculos",
 					"Victor naci\u00F3 en Moscow en 1977. En el a\u00F1o 2005 emigr\u00F3 a Uruguay luego de quedar encantado con el pa\u00EDs en un viaje tur\u00EDstico.",
-					"www.vikgym.com", "lkj34df", "https://bit.ly/3zetdMl");
+					"www.vikgym.com", "lkj34df", "media/usuarios/viktor.jpg");
 	/* DM */controladorUsuario.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(80, 5, 14), "Tel\u00F3n",
 					"A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball",
 					"Denis fue un jugador de voleibol profesional.",
-					"www.depecho.co", "poke579", "https://bit.ly/3lKq8Px");
+					"www.depecho.co", "poke579", "media/usuarios/denis.jpg");
 	/* CL */controladorUsuario.altaProfesor("clazar", "Carlos", "Lazaro", "claz4r0@hotmail.com", new Date(53, 5, 22), "Instituto Natural",
 					"Carlos es un profesor muy divertido cuyas clases de aer\u00F3bica est\u00E1n cargadas de energ\u00EDa.",
 					"El inter\u00E9s por la actividad f\u00EDsica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.",
-					"www.enforma.co", "mkji648", "https://bit.ly/2VJvT6S");
+					"www.enforma.co", "mkji648", "media/usuarios/clazar.jpg");
 	/* BS */controladorUsuario.altaProfesor("TheBoss", "Bruno", "Sosa", "bruceTheBoss@gmail.com", new Date(49, 8, 23), "Fuerza Bruta",
 					"Bruno es un ex-boxeardor que busca entrenar a futuros campeones.",
 					"Bruno, mejor conocido como Bruce en el ring, compiti\u00F3 como boxeador entre los a\u00F1os 60s y 70s.",
-					"www.bruce.net", "fcku0123", "https://bit.ly/3kdT9TV");
+					"www.bruce.net", "fcku0123", "media/usuarios/TheBoss.jpg");
 	/* TN */controladorUsuario.altaProfesor("Nelson", "Luis", "Nelson", "nelson@hotmail.com", new Date(98, 0, 1), "Tel\u00F3n",
 					"Profesor de nataci\u00F3n. Especializado en braza y mariposa.",
 					"",
-					"www.nelson.uy", "vbmn4r", "https://bit.ly/3lxsDo7");
+					"www.nelson.uy", "vbmn4r", "media/usuarios/Nelson.jpg");
 	/* LL */controladorUsuario.altaProfesor("lale", "Laura", "Leyes", "la_le@outlook.com", new Date(87, 1, 14), "Tel\u00F3n",
 					"Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a ense\u00F1ar t\u00E1cticas de futbol",
 					"Jugadora profesional de futbol desde 2010 a 2020.",
-					"www.laley.com", "ncnl123", "https://bit.ly/3EmlY8F");
+					"www.laley.com", "ncnl123", "media/usuarios/lale.jpg");
 	/* PI */controladorUsuario.altaProfesor("prisc", "Priscila", "Pappo", "pripa@gmail.com", new Date(81, 7, 13), "Olympic",
 					"Laura tiene un gran inter\u00E9s por los deportes ol\u00EDmpicos.",
 					"",
@@ -85,11 +85,11 @@ public class CargarDatosPrueba {
 	/* DY */controladorUsuario.altaProfesor("dagost", "Daiana", "Agostini", "d_1940_ago@gmail.com", new Date(40, 2, 5), "Olympic",
 					"Profesora dedicada y exigente. No acepta un \u201Cno puedo\u201D como respuesta.",
 					"",
-					"www.dygym.com", "1o1vbm", "https://bit.ly/3hB3zvo");
+					"www.dygym.com", "1o1vbm", "media/usuarios/dagost.jpg");
 	/* AL */controladorUsuario.altaProfesor("aldo", "Aldo", "Vivaldi", "aldo@outlook.com", new Date(52, 6, 17), "Tel\u00F3n",
 					"Dada su gran estatura Aldo siempre jug\u00F3 al basquetbol, hoy se dedica a ense\u00F1arlo.",
 					"",
-					"www.sportsaldo.net", "ultraton01", "https://bit.ly/2VLnzUj");
+					"www.sportsaldo.net", "ultraton01", "media/usuarios/aldo.jpg");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			e.printStackTrace();
 		}
@@ -392,7 +392,7 @@ public class CargarDatosPrueba {
 					null, (float) 4200);
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
-					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
+					new Date(121, 6, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
 					null,(float) 15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();

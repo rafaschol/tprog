@@ -40,7 +40,7 @@
         <div class="details-main mb-4">
           <img src="${usuario.getFoto()}" alt="foto de perfil" class="img-fluid rounded">
           <div class="p-3">
-            <h1>${usuario.getNombre()}  ${usuario.getApellido()}<span class="text-muted fw-light">(${usuario.getNickname()})</span></h1>
+            <h1>${usuario.getNombre()} ${usuario.getApellido()}<span class="text-muted fw-light"> (${usuario.getNickname()})</span></h1>
             <p class="lead text-muted mb-1">
               ${usuario.getEmail()} &#8212;
               <a href="#" class="text-decoration-none text-reset me-1"><span class="fw-bold">${nSeguidos}</span> seguidos</a>
@@ -279,8 +279,8 @@
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="js/sidebar.js"></script>
-  <script src="js/usuario-detail.js"></script>
-  <script src="js/edit-perfil.js"></script>
+  <c:if test="${uLogueado && (not suCuenta)}"><script src="js/usuario-detail.js"></script></c:if>
+  <c:if test="${(esSocio || esProfesor) && suCuenta}"></c:if> <script src="js/edit-perfil.js"></script>
   
 </body>
 </html>

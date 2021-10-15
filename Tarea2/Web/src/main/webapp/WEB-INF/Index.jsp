@@ -41,7 +41,7 @@
 	          <div class="card-content-wrapper">
 	            <img src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="sin foto Actividad" class="img-fluid rounded-start">
 	            <div class="card-body">
-	              <div class="badge bg-info badge-elemento">Actividad deportiva</div>
+	              <div class="badge bg-info badge-elemento fw-light">Actividad deportiva</div>
 	              <h5 class="card-title">${actividad.getNombre()}</h5>
 	              <p class="card-text">${actividad.getDescripcion()}</p>
 	              <a href="actividades/${actividad.getNombre()}" class="btn btn-primary">Ver más</a>
@@ -55,7 +55,7 @@
 	          <div class="card-content-wrapper">
 	            <img src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="sin foto Cuponera" class="img-fluid rounded-start">
 	            <div class="card-body">
-                  <div class="badge bg-warning badge-elemento">Cuponera</div>
+                  <div class="badge bg-warning badge-elemento fw-light">Cuponera</div>
 	              <h5 class="card-title">${cuponera.getNombre()}</h5>
 	              <p class="card-text">${cuponera.getDescripcion()}</p>
 	              <a href="cuponeras/${cuponera.getNombre()}" class="btn btn-primary">Ver más</a>

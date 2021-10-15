@@ -25,3 +25,16 @@ if (inSearchPage) {
   }
 
 }
+
+const sortFilter = document.getElementById('sortControl');
+sortFilter.addEventListener('change', event => {
+  const searchParamsFilters = new URLSearchParams(window.location.search);
+  const newValue = event.target.value;
+
+  if (newValue != 'default') {
+    searchParamsFilters.set('sort', newValue);
+  } else {
+    searchParamsFilters.delete('sort');
+  }
+  window.location.href = 'buscar?' + searchParamsFilters.toString();
+});

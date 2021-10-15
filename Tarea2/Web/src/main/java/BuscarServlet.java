@@ -27,6 +27,7 @@ public class BuscarServlet extends HttpServlet {
 		String busqueda = request.getParameter("q");
 		String institucion = request.getParameter("ins");
 		String categoria = request.getParameter("cat");
+		String orden = request.getParameter("sort");
 		
 		if (busqueda != null && !busqueda.equals("")) {
 			request.setAttribute("busqueda", busqueda);
@@ -37,8 +38,11 @@ public class BuscarServlet extends HttpServlet {
 		if (categoria != null && !categoria.equals("")) {
 			request.setAttribute("categoria", categoria);
 		}
+		if (orden != null && !orden.equals("")) {
+			request.setAttribute("orden", orden);
+		}
 		
-		DataItem[] resultados = controladorInstitucion.buscar(busqueda, institucion, categoria);
+		DataItem[] resultados = controladorInstitucion.buscar(busqueda, institucion, categoria, orden);
 		request.setAttribute("resultados", resultados);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Buscar.jsp");

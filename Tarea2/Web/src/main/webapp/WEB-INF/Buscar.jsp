@@ -36,9 +36,19 @@
     <main class="main-content">
       <div id="index-page" class="container-fluid p-4 results-page">
         
-        <c:if test="${busqueda != null}">
-          <h2 class="display-6 mb-3">Resultados de "${busqueda}"</h2>
-        </c:if>
+        <div class="d-flex justify-content-between mb-3">
+          <h3 class="mb-0">Resultados${busqueda != null ? ' de ' : ''}<c:if test="${busqueda != null}"><span class="fw-bold">${busqueda}</span></c:if></h3>
+          <div class="d-flex align-items-center">
+            <p class="mb-0 small">${fn:length(resultados)} resultados</p>
+            <div class="border-start border-secondary mx-4 h-50"></div>
+            <label class="me-2 col-form-label col-form-label-sm" for="sortControl">Ordenar por</label>
+            <select class="form-select form-select-sm w-auto" id="sortControl">
+              <option${orden == null ? ' selected' : ''} value="default">Por defecto</option>
+              <option${orden == 'name' ? ' selected' : ''} value="name">Nombre</option>
+              <option${orden == 'new' ? ' selected' : ''} value="new">Más recientes</option>
+            </select>
+          </div>
+        </div>
         
         <div class="filter-tags">
           <c:if test="${institucion != null}">
@@ -55,16 +65,14 @@
           </c:if>
         </div>
         
-        <c:if test="${busqueda != null || institucion != null || categoria != null}">
-          <div class="border-top my-4"></div>
-        </c:if>
+        <div class="border-top my-4"></div>
         
         <c:forEach items="${resultados}" var="resultado">
           <div class="card shadow mb-3">
             <div class="card-content-wrapper">
               <img src="${resultado.getFoto() != null ? resultado.getFoto() : 'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded-start">
               <div class="card-body">
-                <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} badge-elemento">${resultado.getTipo()}</div>
+                <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} badge-elemento fw-light">${resultado.getTipo()}</div>
                 <h5 class="card-title">${resultado.getNombre()}</h5>
                 <p class="card-text">${resultado.getDescripcion()}</p>
                 <a href="${resultado.getTipo() == 'Cuponera' ? 'cuponeras' : 'actividades'}/${resultado.getNombre()}" class="btn btn-primary">Ver más</a>
