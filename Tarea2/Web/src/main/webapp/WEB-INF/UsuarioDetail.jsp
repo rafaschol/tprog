@@ -105,7 +105,7 @@
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
 	                    <jsp:useBean id="date2" class="java.util.Date"/>
-	                    <input type="text" readonly class="form-control-plaintext" path="dueDate" class= "date2" name = "dueDate" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
+	                    <input type="text" readonly class="form-control-plaintext editable-field" path="dueDate" class= "date2" name = "nacimiento" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
 	                  </div>
 	                </div>
 
@@ -151,7 +151,7 @@
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
 	                    <jsp:useBean id="date" class="java.util.Date"/>
-	                    <input type="text" readonly class="form-control-plaintext" path="dueDate" class= "date" name = "dueDate" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
+	                    <input type="text" readonly class="form-control-plaintext editable-field date" path="dueDate" name="nacimiento" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
 
 	                  </div>
 	                </div>
@@ -182,7 +182,7 @@
 	                    <input type="text" class="form-control-plaintext editable-field" readonly name="sitioWeb" id="sitioWebInput" value="${usuario.getSitioWeb()}">
 	                  </div>
 	                </div>
-					<c:if test="${esSocio && suCuenta}">
+					<c:if test="${suCuenta}">
 		                <div class="text-center">
 		                  <button class="btn btn-primary mt-3 edit" id="edit-button">Editar perfil</button>
 		                </div>

@@ -1,32 +1,23 @@
-const editButtons = document.querySelectorAll('.perfil-group button');
+const editButton = document.getElementById('edit-button');
+const editableFields = document.getElementsByClassName('editable-field');
 
-for (let editButton of editButtons) {
+editButton.addEventListener('click', event => {
+  const editing = !editButton.classList.contains('edit');
 
-  editButton.addEventListener('click', event => {
-    const editing = editButton.classList.contains('editing');
-  
-    const formGroup = editButton.closest('.perfil-group');
-    const input = formGroup.querySelector('input') ? formGroup.querySelector('input') : formGroup.querySelector('textarea');
-    const editIcon = editButton.querySelector('i.fa-edit');
-    const saveIcon = editButton.querySelector('i.fa-save');
-  
-    if (!editing) {
-      input.readOnly = false;
-      input.classList.remove('form-control-plaintext');
-      input.classList.add('form-control');
-      editIcon.style.display = 'none';
-      saveIcon.style.display = 'initial';
-    } else {
-      input.readOnly = true;
-      input.classList.remove('form-control');
-      input.classList.add('form-control-plaintext');
-      editIcon.style.display = 'initial';
-      saveIcon.style.display = 'none';
+  if (!editing) {
+    event.preventDefault();
 
-      // En el futuro acá se deben mandar los datos que se modificaron al servidor con una PATCH request
+    for (let field of editableFields) {
+      field.readOnly = false;
+      field.classList.remove('form-control-plaintext');
+      field.classList.add('form-control');
     }
-  
-    editButton.classList.toggle('editing');
-  });
 
-}
+    editButton.classList.toggle('edit');
+    editButton.setAttribute('type', 'submit');
+    editButton.innerText = 'Guardar cambios';
+    editButton.classList.remove('btn-primary');
+    editButton.classList.add('btn-outline-primary');
+  }
+
+});

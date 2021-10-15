@@ -64,10 +64,10 @@
             <div class="card-content-wrapper">
               <img src="${resultado.getFoto() != null ? resultado.getFoto() : 'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded-start">
               <div class="card-body">
-                <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} bg-warning badge-elemento">${resultado.getTipo()}</div>
+                <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} badge-elemento">${resultado.getTipo()}</div>
                 <h5 class="card-title">${resultado.getNombre()}</h5>
-                <p class="card-text">${resultado.getNombre()}</p>
-                <a href="actividades/Voleibol" class="btn btn-primary">Ver más</a>
+                <p class="card-text">${resultado.getDescripcion()}</p>
+                <a href="${resultado.getTipo() == 'Cuponera' ? 'cuponeras' : 'actividades'}/${resultado.getNombre()}" class="btn btn-primary">Ver más</a>
               </div>
             </div>
           </div>
