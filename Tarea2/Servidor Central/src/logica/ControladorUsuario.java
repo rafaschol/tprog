@@ -197,7 +197,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	profesor.setBiografia(biografia);
     	//Preguntar si se puede cambiar la institucion, y que pasaria con las clases
     	profesor.setDescripcion(descripcion);
-    	profesor.setBiografia(biografia);	
+    	profesor.setSitioWeb(sitioWeb);
     	
     }
     

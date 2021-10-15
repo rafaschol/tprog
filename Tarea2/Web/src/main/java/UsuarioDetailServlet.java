@@ -1,5 +1,9 @@
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,8 +68,7 @@ public class UsuarioDetailServlet extends HttpServlet {
 			DataActividad[] actividades = prof.getActividadesAceptadasWeb();
 		
 			DataActividad[] actividadesPendientes = prof.getActividadesSinAceptarWeb();
-			System.out.println(prof.getActividadesSinAceptarWeb().length);
-			System.out.println(prof.getActividadesSinAceptarWeb().length);
+
 			
 			request.setAttribute("actividadesPendientes", actividadesPendientes);
 			request.setAttribute("actividades", actividades);
@@ -96,8 +99,42 @@ public class UsuarioDetailServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/UsuarioDetail.jsp");
+		String nombreUsuario = request.getPathInfo().substring(1);
+		
+		String apellido = request.getParameter("apellido");
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		String biografia = request.getParameter("biografia");
+		String sitioWeb = request.getParameter("sitioWeb");
+		String nacimientoString = request.getParameter("nacimiento");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date nacimiento;
+		
+		try {
+			nacimiento = format.parse(nacimientoString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			nacimiento = new Date();
+			
+		}
+		
+		
+		DataUsuario dataUsuario = (DataUsuario)  controladorUsuario.mostrarDataUsuarioWeb(nombreUsuario);
+		boolean esProfesor = dataUsuario.getTipoUsuario().equals("Profesor");
+		
+		
+			if (esProfesor) {
+				controladorUsuario.modificarDatosProfesor(nombreUsuario, nombre, apellido, nacimiento, descripcion, biografia, sitioWeb);
+			}
+			else {
+				controladorUsuario.modificarDatosSocio(nombreUsuario,nombre,apellido, nacimiento);
+			}
+			
+			response.sendRedirect("");
+			
+		
+		
 	
 	}
 
