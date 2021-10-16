@@ -50,6 +50,8 @@ public interface IControladorUsuario {
 	public abstract DataUsuario[] listarUsuariosWeb();
 	
 	public abstract DataUsuario mostrarDataUsuarioWeb(String nickname);
+	
+	public abstract String[]  listarCuponerasActividadWeb(String nickname, String nombreActividad);
 
     
 }

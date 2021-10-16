@@ -7,9 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logica.DataActividad;
 import logica.DataClase;
+import logica.DataProfesor;
+import logica.DataUsuario;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -36,7 +39,6 @@ public class ClaseDetailServlet extends HttpServlet {
 		
 		
 		DataClase clase = (DataClase) controladorInstitucion.obtenerDataClase(nombreClase);
-		System.out.println(clase.getNombre());
 		request.setAttribute("clase", clase);
 		
 		
@@ -47,6 +49,7 @@ public class ClaseDetailServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+	
 	}
 
 }

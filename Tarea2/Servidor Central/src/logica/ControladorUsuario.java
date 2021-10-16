@@ -537,6 +537,24 @@ public class ControladorUsuario implements IControladorUsuario {
     	
     	return res;
     }
+	
+	public String[]  listarCuponerasActividadWeb(String nickname, String nombreActividad){
+    	ManejadorSocios mSocios = ManejadorSocios.getinstance();
+    	Socio socio = mSocios.obtenerSocio(nickname);
+    	Date fecha = new Date();
+    	HashSet<String> cuponeras = new HashSet<String>();
+    	Set<Participa> participaciones = socio.getParticipa();
+    	Participa[] arrPart = participaciones.toArray(new Participa[participaciones.size()]);
+    	for (int j = 0; j < arrPart.length; j++) {
+    		Participa participa = arrPart[j];
+    		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
+    		if((acd.getActividad().getNombre()).equals(nombreActividad) && acd.getCuponera().getFechaFin().before(fecha) ) 
+    			cuponeras.add(acd.getCuponera().getNombre());	
+    	}
+    	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
+    	return arrCupo;  	
+    }
+	
       
 }
 	

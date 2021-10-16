@@ -46,7 +46,7 @@
             <p class="lead mb-1">Dictada por  
               <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
-            <a href="clases/registro?id=${clase.getNombre()}" class="btn btn-primary mt-3">Registrarme a la clase</a>
+            <a href="clases/registro?id=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
           </div>
         </div>
         <div class="border-top my-4"></div>

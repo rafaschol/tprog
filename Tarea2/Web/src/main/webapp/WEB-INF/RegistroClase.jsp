@@ -64,7 +64,9 @@
         <div class="form-floating mb-3">
           <select class="form-select" name="cuponera" id="cuponeraSelect" disabled>
             <option selected disabled hidden>Selecciona una cuponera</option>
-            <option value="Pelota">Pelota</option>
+             <c:forEach items="${cuponeras}" var="cuponera">
+           	 	<option value="Pelota">${cuponera}</option>
+             </c:forEach>
           </select>
           <label for="cuponeraSelect">Cuponera</label>
         </div>

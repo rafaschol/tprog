@@ -54,10 +54,9 @@
         <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o mÃ¡s categorÃ­as</label>
         <select class="form-select mb-3" multiple name="categorias" id="categoriasSelect">
           <option selected disabled hidden>Selecciona una o mÃ¡s categorÃ­as</option>
-          <option value="Fuerza Bruta">Al aire libre</option>
-          <option value="TelÃ³n">Deportes</option>
-          <option value="TelÃ³n">Fitness</option>
-          <option value="TelÃ³n">Gimnasia</option>
+          <c:forEach items="${categorias}" var="categoria">
+          	<option value="${categoria}">${categoria}</option>
+ 	      </c:forEach>
         </select>
       </div>
       <button class="btn btn-secondary rounded-circle" id="prev-button">
