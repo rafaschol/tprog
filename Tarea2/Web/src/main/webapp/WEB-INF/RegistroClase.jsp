@@ -28,60 +28,59 @@
   <!-- Form page -->
   <main class="form-page tab-page">
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" id="registro-clase-form" method="${dataTab == 0 ? 'get' : 'post'}" data-tab="${dataTab}">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Registro a clase</h5>
       <div class="border-top my-4"></div>
-      <div class="form-tab active">
-        <div class="form-floating mb-3">
-          <select class="form-select" name="actividad" id="actividadSelect">
-            <option selected disabled hidden>Selecciona una actividad deportiva</option>
-            <option value="Voleibol">Voleibol</option>
-            <option value="Atletismo">Atletismo</option>
-            <option value="Basquetbol">Basquetbol</option>
-          </select>
-          <label for="actividadSelect">Actividad deportiva</label>
-        </div>
-        <div class="form-floating mb-3">
-          <select class="form-select" name="clase" id="claseSelect">
-            <option selected disabled hidden>Selecciona una clase</option>
-            <option value="Voleibol">Voleibol</option>
-            <option value="Atletismo">Atletismo</option>
-            <option value="Basquetbol">Basquetbol</option>
-          </select>
-          <label for="claseSelect">Clase</label>
-        </div>
+      
+      <c:if test="${dataTab == 0}">
+      <div class="form-floating mb-3">
+        <select class="form-select" name="actividad" id="actividadSelect">
+          <option ${actividadSeleccionada != null ? '' : 'selected '}disabled hidden>Selecciona una actividad deportiva</option>
+          <c:forEach items="${actividades}" var="actividad">
+            <option ${actividadSeleccionada != null && actividadSeleccionada == actividad.getNombre() ? 'selected ' : ''}
+                value="${actividad.getNombre()}">${actividad.getNombre()}</option>
+          </c:forEach>
+        </select>
+        <label for="actividadSelect">Actividad deportiva</label>
       </div>
-      <div class="form-tab">
-        <div class="mb-2">
-          <input type="radio" class="btn-check" name="tipoRegistro" id="registroNormal" autocomplete="off" checked>
-          <label class="btn btn-outline-secondary w-100" for="registroNormal">Registro normal</label>
-        </div>
-        <div class="mb-3">
-          <input type="radio" class="btn-check" name="tipoRegistro" id="registroCuponera" autocomplete="off">
-          <label class="btn btn-outline-secondary w-100" for="registroCuponera">Registro con cuponera</label>
-        </div>
-        <div class="form-floating mb-3">
-          <select class="form-select" name="cuponera" id="cuponeraSelect" disabled>
-            <option selected disabled hidden>Selecciona una cuponera</option>
-             <c:forEach items="${cuponeras}" var="cuponera">
-           	 	<option value="Pelota">${cuponera}</option>
-             </c:forEach>
-          </select>
-          <label for="cuponeraSelect">Cuponera</label>
-        </div>
+      <div class="form-floating mb-3">
+        <select class="form-select" name="clase" id="claseSelect">
+          <option selected disabled hidden>Selecciona una clase</option>
+          <c:forEach items="${clases}" var="clase">
+            <option value="${clase.getNombre()}">${clase.getNombre()}</option>
+          </c:forEach>
+        </select>
+        <label for="claseSelect">Clase</label>
       </div>
-      <button class="btn btn-secondary rounded-circle" id="prev-button">
-        <i class="fas fa-arrow-left" style="padding: 5px 0;"></i>
-      </button>
-      <button class="btn btn-lg btn-primary w-100 mt-2" id="next-button">Siguiente</button>  
-      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2" id="submit-button">Registrarme</button> 
+      </c:if>
+      
+      <c:if test="${dataTab == 1}">
+      <div class="mb-2">
+        <input type="radio" class="btn-check" name="tipoRegistro" id="registroNormal" autocomplete="off" checked>
+        <label class="btn btn-outline-secondary w-100" for="registroNormal">Registro normal</label>
+      </div>
+      <div class="mb-3">
+        <input type="radio" class="btn-check" name="tipoRegistro" id="registroCuponera" autocomplete="off">
+        <label class="btn btn-outline-secondary w-100" for="registroCuponera">Registro con cuponera</label>
+      </div>
+      <div class="form-floating mb-3">
+        <select class="form-select" name="cuponera" id="cuponeraSelect" disabled>
+          <option selected disabled hidden>Selecciona una cuponera</option>
+           <c:forEach items="${cuponeras}" var="cuponera">
+         	 	<option value="Pelota">${cuponera}</option>
+           </c:forEach>
+        </select>
+        <label for="cuponeraSelect">Cuponera</label>
+      </div>
+      </c:if>
+        
+      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">${dataTab == 0 ? 'Seleccionar clase' : 'Registrarme a la clase' }</button>
     </form>
 
   </main>
     
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-  <script src="js/form-tabs.js"></script>
   <script src="js/registro-clase.js"></script>
   
 </body>
