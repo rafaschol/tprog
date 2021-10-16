@@ -56,12 +56,16 @@
       </c:if>
       
       <c:if test="${dataTab == 1}">
+      <div class="form-floating mb-3">
+  		<input type="text" readonly class="form-control" name="clase" id="claseInput" value="${claseSeleccionada}">
+ 	    <label for="claseInput">Clase seleccionada</label>
+      </div>
       <div class="mb-2">
-        <input type="radio" class="btn-check" name="tipoRegistro" id="registroNormal" autocomplete="off" checked>
+        <input type="radio" class="btn-check" name="tipoRegistro" value="normal" id="registroNormal" autocomplete="off" checked>
         <label class="btn btn-outline-secondary w-100" for="registroNormal">Registro normal</label>
       </div>
       <div class="mb-3">
-        <input type="radio" class="btn-check" name="tipoRegistro" id="registroCuponera" autocomplete="off">
+        <input type="radio" class="btn-check" name="tipoRegistro" value="cuponera" id="registroCuponera" autocomplete="off">
         <label class="btn btn-outline-secondary w-100" for="registroCuponera">Registro con cuponera</label>
       </div>
       <div class="form-floating mb-3">
