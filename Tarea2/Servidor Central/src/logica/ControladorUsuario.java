@@ -548,8 +548,10 @@ public class ControladorUsuario implements IControladorUsuario {
     	for (int j = 0; j < arrPart.length; j++) {
     		Participa participa = arrPart[j];
     		ActividadDeCuponera acd = participa.getActividades();//GET ACTIVIDAD!
-    		if((acd.getActividad().getNombre()).equals(nombreActividad) && acd.getCuponera().getFechaFin().before(fecha) ) 
+    		if((acd.getActividad().getNombre()).equals(nombreActividad) && acd.getCuponera().getFechaFin().after(fecha) && (participa.getClasesRestantes() > 0)) {
+    			
     			cuponeras.add(acd.getCuponera().getNombre());	
+    		}
     	}
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	

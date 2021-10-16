@@ -384,7 +384,7 @@ public class CargarDatosPrueba {
 							 // altaCuponera(nombre, descripcion, inicio, fin, descuento, fechaAlta, foto)
 			controladorCuponera.altaCuponera("Pelota",
 					"Deportes con pelota.",
-					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30),
+					new Date(121, 4, 1), new Date(121, 11, 31), (float) 0.2, new Date(121, 3, 30),
 					"media/cuponeras/Pelota.jpg", (float) 10680.0);
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
@@ -404,7 +404,7 @@ public class CargarDatosPrueba {
 	public void cargarActividadesCuponeras() {
 		
 		try {
-			controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 7);
+			controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 1);
 			controladorCuponera.agregarActividadACuponera("Pelota", "Basquetbol", 18);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aer\u00F3bica", 2);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aparatos y pesas", 8);

@@ -119,8 +119,9 @@ public class ActividadDeportiva {
 	}
 	
 	public DataClase[] getDataClasesVigentes() {
-		DataClase[] res = new DataClase[clases.size()];
-		int iterador = 0;
+		
+		Set<DataClase> clasesSet = new HashSet<DataClase>();
+	
 		//Constructor Fecha Actual
 		Date fechaActual = new Date();
 	
@@ -129,12 +130,11 @@ public class ActividadDeportiva {
 			
 			if(iter.getValue().getFecha().after(fechaActual)) {
 			DataClase clase = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
-			res[iterador] = clase;
-			iterador++;
+			clasesSet.add(clase);	
 			}
 		}
-		return res;
-		
+		DataClase[] result = clasesSet.toArray(new DataClase[clasesSet.size()]);
+		return result;		
 	}
 	
 	
