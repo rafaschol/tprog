@@ -16,8 +16,8 @@ public class ManejadorCuponeras {
     }
 
     public static ManejadorCuponeras getinstance() {
-        if (instancia == null)
-            instancia = new ManejadorCuponeras();
+        if (instancia == null) {
+            instancia = new ManejadorCuponeras(); }
         return instancia;
     }
 
@@ -37,6 +37,7 @@ public class ManejadorCuponeras {
 	    	String nombre = cuponera.getNombre();
 	        cuponeras.put(nombre, cuponera);
 	 }
+	 
 	 public DataCuponera[] getDataCuponeras() {
 	        DataCuponera[] result = new DataCuponera[cuponeras.size()];
 	        int iterador = 0;
@@ -49,7 +50,7 @@ public class ManejadorCuponeras {
 		    		setInstituciones.add(arrActCup[j].getActividad().getInstitucion().getNombre());
 		    	}
 		    	String[] instituciones = setInstituciones.toArray(new String[setInstituciones.size()]);
-				DataCuponera dataCuponera = new DataCuponera(iter.getValue(),instituciones,null);
+				DataCuponera dataCuponera = new DataCuponera(iter.getValue(), instituciones, null);
 				result[iterador] = dataCuponera;
 				iterador++;
 			}		

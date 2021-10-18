@@ -12,8 +12,8 @@ public class ManejadorCategoria {
     }
 
     public static ManejadorCategoria getinstance() {
-        if (instancia == null)
-            instancia = new ManejadorCategoria();
+        if (instancia == null) {
+            instancia = new ManejadorCategoria(); }
         return instancia;
     }
     
@@ -26,7 +26,7 @@ public class ManejadorCategoria {
         categorias.put(nombre, categoria);
     }
     
-    public Map<String, Categoria> getCategorias(){
+    public Map<String, Categoria> getCategorias() {
     	return this.categorias;
     }
 }

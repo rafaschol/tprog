@@ -7,7 +7,7 @@ import java.util.Map;
 public class ManejadorSocios {
     private Map<String, Socio> nicknames; // Coleccion de Socios.
     private Map<String, Socio> mails; // Coleccion para validar mail.
-    private Integer identificadorRegistro = 0;//Falta inicializarlo, hardcodear?
+    private Integer identificadorRegistro = 0; //Falta inicializarlo, hardcodear?
     private static ManejadorSocios instancia = null;
 
     private ManejadorSocios() {
@@ -22,7 +22,7 @@ public class ManejadorSocios {
         return instancia;
     }
 
-    public Map<String, Socio> getNicknames(){   	
+    public Map<String, Socio> getNicknames() {   	
     	return this.nicknames;
     }
     
@@ -41,7 +41,7 @@ public class ManejadorSocios {
         return ((Socio) mails.get(mail));
     }
 
-    /*public Socio[] getSocios() {
+ /*public Socio[] getSocios() {
         if (nicknames.isEmpty())
             return null;
         else {

@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,36 +91,37 @@ public class Profesor extends Usuario {
 		this.actividades.put(nombreActividad, actividad);
 	}
 	
-	public String[] getActividadesAceptadas(){
+	public String[] getActividadesAceptadas() {
 		Map<String, ActividadDeportiva> actividades = this.getActividades();
 		Map<String, ActividadDeportiva> aceptadas = new HashMap<String, ActividadDeportiva>();
 		
-		for(Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()){
-			if(iter.getValue().getEstado() == Estado.Aceptada)
-				aceptadas.put(iter.getKey(), iter.getValue());
+		for (Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()) {
+			if (iter.getValue().getEstado() == Estado.Aceptada) {
+				aceptadas.put(iter.getKey(), iter.getValue()); }
 		}
 		String[] res = aceptadas.keySet().toArray(new String[0]);
 		return res;
 	}
-	public String[] getActividadesRechazadas(){
+	
+	public String[] getActividadesRechazadas() {
 		Map<String, ActividadDeportiva> actividades = this.getActividades();
 		Map<String, ActividadDeportiva> rechazadas = new HashMap<String, ActividadDeportiva>();
 		
-		for(Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()){
-			if(iter.getValue().getEstado() == Estado.Rechazada)
-				rechazadas.put(iter.getKey(), iter.getValue());
+		for (Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()) {
+			if (iter.getValue().getEstado() == Estado.Rechazada) {
+				rechazadas.put(iter.getKey(), iter.getValue()); }
 		}
 		String[] res = rechazadas.keySet().toArray(new String[0]);
 		return res;
 	}
 	
-	public String[] getActividadesIngresadas(){
+	public String[] getActividadesIngresadas() {
 		Map<String, ActividadDeportiva> actividades = this.getActividades();
 		Map<String, ActividadDeportiva> ingresadas = new HashMap<String, ActividadDeportiva>();
 		
-		for(Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()){
-			if(iter.getValue().getEstado() == Estado.Ingresada)
-				ingresadas.put(iter.getKey(), iter.getValue());
+		for (Map.Entry<String, ActividadDeportiva> iter : actividades.entrySet()) {
+			if (iter.getValue().getEstado() == Estado.Ingresada) {
+				ingresadas.put(iter.getKey(), iter.getValue()); }
 		}
 		String[] res = ingresadas.keySet().toArray(new String[0]);
 		return res;

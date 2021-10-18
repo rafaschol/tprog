@@ -7,12 +7,12 @@ public class InstitucionDeportiva {
 	
 	private String nombre;
 	private String descripcion;
-	private String URL;
+	private String url;
 	//colecciones para visibilidad
 	private Map<String, Profesor> profesores;
 	private Map<String, ActividadDeportiva> actividades;
 
-	public InstitucionDeportiva(String nombre, String descripcion, String urlInst){
+	public InstitucionDeportiva(String nombre, String descripcion, String urlInst) {
 		this.setNombre(nombre);
 		this.setDescripcion(descripcion);
 		this.setURL(urlInst);
@@ -37,11 +37,11 @@ public class InstitucionDeportiva {
 	}
 
 	public String getURL() {
-		return URL;
+		return url;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String urlset) {
+		url = urlset;
 	}
 
 	public Map<String, Profesor> getProfesores() {
@@ -60,6 +60,7 @@ public class InstitucionDeportiva {
 		this.actividades = actividades;
 	}
 	//transforma la colecciones en arreglos con sus respectivas claves 
+	
 	public String[] listarProfesores() {
 		String[] res = profesores.keySet().toArray(new String[0]);
 		return res;
@@ -76,6 +77,7 @@ public class InstitucionDeportiva {
 		String nombre = actividad.getNombre();
 		this.actividades.put(nombre, actividad);
 	}
+	
 	public void addProfesor(Profesor profesor) {
 		String nickname = profesor.getNickname();
 		this.profesores.put(nickname, profesor);

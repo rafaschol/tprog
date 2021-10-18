@@ -18,7 +18,7 @@ public class DataProfesor extends DataUsuario {
 
 	public DataProfesor(Usuario usuario, String[] clases, String[] actividades) {
 		super(usuario, clases);
-    	// Dynamic Cast a Profesor.
+  // Dynamic Cast a Profesor.
 		this.setDescripcion(Profesor.class.cast(usuario).getDescripcion());
 		this.setBiografia(Profesor.class.cast(usuario).getBiografia());
 		this.setSitioWeb(Profesor.class.cast(usuario).getSitioWeb());
@@ -31,7 +31,7 @@ public class DataProfesor extends DataUsuario {
 	
 	public DataProfesor(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores,  DataActividad[] actividadesAceptadasWeb, DataActividad[] actividadesSinAceptarWeb) {
 		super(usuario, clasesWeb, cuponerasWeb, seguidos, seguidores);
-    	// Dynamic Cast a Profesor.
+  // Dynamic Cast a Profesor.
 		this.setDescripcion(Profesor.class.cast(usuario).getDescripcion());
 		this.setBiografia(Profesor.class.cast(usuario).getBiografia());
 		this.setSitioWeb(Profesor.class.cast(usuario).getSitioWeb());
@@ -83,6 +83,7 @@ public class DataProfesor extends DataUsuario {
 	private void setActividades(String[] actividades) {
 		this.actividades = actividades;
 	}
+	
 	public String[] getActividadesAceptadas() {
 		return actividadesAceptadas;
 	}

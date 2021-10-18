@@ -15,6 +15,7 @@ public class DataInstitucion {
 	        this.setProfesores(profesores);
 	        this.setActividades(actividades);
 	    }
+	    
 	    public DataInstitucion(InstitucionDeportiva inst) {
 	        this.setNombre(inst.getNombre());
 	        this.setDescripcion(inst.getDescripcion());

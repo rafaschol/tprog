@@ -1,4 +1,5 @@
 package test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
@@ -6,11 +7,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
 import excepciones.ClaseRepetidaException;
@@ -63,8 +62,8 @@ class TestSistema {
 		
 		mSocios.setIdentificadorRegistro(0);
 		
-		ctrlU.altaSocio("m1k4","Micaela","Lopez", "mika@gmail.com.ar", new Date(1987, 2, 23), "ijngr024", "https://bit.ly/3zglsWf");
-		ctrlU.altaSocio("andy","Andres","Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
+		ctrlU.altaSocio("m1k4", "Micaela", "Lopez", "mika@gmail.com.ar", new Date(1987, 2, 23), "ijngr024", "https://bit.ly/3zglsWf");
+		ctrlU.altaSocio("andy", "Andres", "Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
 		
 		String descInt = "Clases de gimnasia, aeróbica, spinning y yoga";
 		
@@ -73,30 +72,30 @@ class TestSistema {
 		String descripcion = "Bruno es un ex-boxeardor que busca entrenar futuros campeones.";
 		String bio = "Bruno, mejor conocido como Bruce en el ring, compitió como boxeador entre los años 60s y 70s.";
 		
-		ctrlU.altaProfesor("TheBoss", "Bruno", "Sosa", "TheBoss@gmail.com",new Date(1949, 9, 23),"IN", descripcion, bio, "www.bruce.net", "fcku0123", "https://bit.ly/3kdT9tv");
+		ctrlU.altaProfesor("TheBoss", "Bruno", "Sosa", "TheBoss@gmail.com", new Date(1949, 9, 23), "IN", descripcion, bio, "www.bruce.net", "fcku0123", "https://bit.ly/3kdT9tv");
 		
 		ctrlI.altaCategoria("Deportes");
 		
 		String descAct = "Para cuidar el aparato cardiovascular";
 		String[] arrayVacio = new String[0];
 		
-		ctrlI.altaActividadDeportiva("IN", "Aerobica",descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
-		ctrlI.altaActividadDeportiva("IN", "GYM",descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
-		ctrlI.altaActividadDeportiva("IN", "Tenis",descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
-		ctrlI.altaActividadDeportiva("IN", "Futbol",descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
+		ctrlI.altaActividadDeportiva("IN", "Aerobica", descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
+		ctrlI.altaActividadDeportiva("IN", "GYM", descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
+		ctrlI.altaActividadDeportiva("IN", "Tenis", descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
+		ctrlI.altaActividadDeportiva("IN", "Futbol", descAct, 110, 800, new Date(2021, 5, 30), arrayVacio, "https://bit.ly/3");
 		
 		ctrlI.aceptarRechazarActividad("Aerobica", true);
 		ctrlI.aceptarRechazarActividad("Futbol", true);
 		ctrlI.aceptarRechazarActividad("GYM", false);
 		
-		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica","");
+		ctrlI.altaClase("Aerobico adulto mayor", new Date(2021, 8, 30), 5, 10, "https://www.inatural.com/aeroam", new Date(2021, 5, 30), "TheBoss", "Aerobica", "");
 	
 		ctrlU.registrarSocio("m1k4", "Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 8, 31));
 		
-		ctrlC.altaCuponera("Musculos", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",(float) 0);	
+		ctrlC.altaCuponera("Musculos", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3", (float) 0);	
 		
-		ctrlC.agregarActividadACuponera("Musculos","Aerobica", 6);
-		ctrlC.agregarActividadACuponera("Musculos","Futbol", 6);
+		ctrlC.agregarActividadACuponera("Musculos", "Aerobica", 6);
+		ctrlC.agregarActividadACuponera("Musculos", "Futbol", 6);
 		
 		ctrlI.agregarCategoriaAActividad("Aerobica", "Deportes");
 		
@@ -110,7 +109,7 @@ class TestSistema {
 	@DisplayName("TEST testAltaSocioOk")
 	void testAltaSocioOk() throws ParseException, Exception {
 		try {
-			ctrlU.altaSocio("andy","Andres","Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
+			ctrlU.altaSocio("andy", "Andres", "Roman", "chino@gmail.org.uy", new Date(1976, 3, 17), "lkj65D", "https://bit.ly/3hDWgTD");
 			DataUsuario dusuario = ctrlU.mostrarDataUsuario("Emi71");
 			assertEquals(dusuario.getNickname(), "Emi71");
 			assertEquals(dusuario.getNombre(), "Emiliano");
@@ -132,7 +131,7 @@ class TestSistema {
 	void testAltaSocioRepetido() throws ParseException, Throwable {
 		//System.out.print("1");
 		try {
-			ctrlU.altaSocio("guille","Guillermo","Hector", "ghector@gmail.org.uy", new Date(1959, 5, 15), "GTO468", "https://bit.ly/SXkrKH9");
+			ctrlU.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.org.uy", new Date(1959, 5, 15), "GTO468", "https://bit.ly/SXkrKH9");
 			DataUsuario dusuario = ctrlU.mostrarDataUsuario("guille");
 			assertEquals(dusuario.getNickname(), "guille");
 		} catch (UsuarioRepetidoException e) {
@@ -141,7 +140,7 @@ class TestSistema {
 			e.printStackTrace();
 		}
 		assertThrows(UsuarioRepetidoException.class, () -> {
-			ctrlU.altaSocio("guille","Guillermo","Hector", "ghector@gmail.org.uy", new Date(1959, 5, 15), "GTO468", "https://bit.ly/SXkrKH9");
+			ctrlU.altaSocio("guille", "Guillermo", "Hector", "ghector@gmail.org.uy", new Date(1959, 5, 15), "GTO468", "https://bit.ly/SXkrKH9");
 		});
 	}
 	
@@ -150,7 +149,7 @@ class TestSistema {
 	@DisplayName("TEST testAltaSocioRepetido")
 	void testAltaSocioRepetidoMail() throws ParseException, Throwable {
 		try {
-			ctrlU.altaSocio("diegol","Diego","Alpha", "diego@gmail.com", new Date(1983, 11, 15), "rtrhd1234", "png");
+			ctrlU.altaSocio("diegol", "Diego", "Alpha", "diego@gmail.com", new Date(1983, 11, 15), "rtrhd1234", "png");
 		} catch (MailRepetidoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
@@ -158,7 +157,7 @@ class TestSistema {
 		}
 		//System.out.print("1");
 		assertThrows(MailRepetidoException.class, () -> {
-			ctrlU.altaSocio("die","Diego","Alpha", "diego@gmail.com", new Date(1983, 11, 15), "rtrhd1234", "png");});
+			ctrlU.altaSocio("die", "Diego", "Alpha", "diego@gmail.com", new Date(1983, 11, 15), "rtrhd1234", "png"); });
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -168,7 +167,7 @@ class TestSistema {
 		try {
 			String descripcion = "Victor es un apasionado de los músculos";
 			String bio = "Victor nació en Moscow en 1977.";
-			ctrlU.altaProfesor("viktor", "Victor", "Perez", "verez@fuerza.com",new Date(1977, 1, 1), "IN", descripcion, bio, "www.vikym.com", "1234", "png");
+			ctrlU.altaProfesor("viktor", "Victor", "Perez", "verez@fuerza.com", new Date(1977, 1, 1), "IN", descripcion, bio, "www.vikym.com", "1234", "png");
 			DataUsuario dusuario = ctrlU.mostrarDataUsuario("viktor");
 			assertEquals(dusuario.getNickname(), "viktor");
 			assertEquals(dusuario.getNombre(), "Victor");
@@ -188,14 +187,14 @@ class TestSistema {
 		String descripcion = "A Denis le interesan los deportes con pelota, principalmente el voleibol y el handball";
 		String bio = "Denis fue un jugador de voleibol profesional";
 		try {
-			ctrlU.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com",new Date(1977, 1, 1), "IN", descripcion, bio, "www.depecho.com", "1234", "png");
+			ctrlU.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(1977, 1, 1), "IN", descripcion, bio, "www.depecho.com", "1234", "png");
 		} catch (UsuarioRepetidoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
 			e.printStackTrace();
 		}
 		assertThrows(UsuarioRepetidoException.class, () -> {
-			ctrlU.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com",new Date(1977, 1, 1), "IN", descripcion, bio, "www.depecho.com", "1234", "png");});
+			ctrlU.altaProfesor("denis", "Denis", "Miguel", "den80@fuerza.com", new Date(1977, 1, 1), "IN", descripcion, bio, "www.depecho.com", "1234", "png"); });
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -211,35 +210,41 @@ class TestSistema {
 			assertEquals(dataUDesp.getNickname(), "TheBoss");
 			assertEquals(dataUDesp.getNombre(), "Bruno");
 			assertEquals(dataUDesp.getApellido(), "Lopez");
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testModificarDatosSocio() {
 		@SuppressWarnings("unused")
 		DataUsuario dataUAnt = ctrlU.mostrarDataUsuario("m1k4");
-		ctrlU.modificarDatosSocio("m1k4","Camila","Perez", new Date(1987, 4, 23));
-		DataUsuario dataUDesp = ( ctrlU.mostrarDataUsuario("m1k4"));
+		ctrlU.modificarDatosSocio("m1k4", "Camila", "Perez", new Date(1987, 4, 23));
+		DataUsuario dataUDesp = (ctrlU.mostrarDataUsuario("m1k4"));
 		assertEquals(dataUDesp.getNickname(), "m1k4");
 		assertEquals(dataUDesp.getNombre(), "Camila");
 		assertEquals(dataUDesp.getApellido(), "Perez");
 		assertEquals(dataUDesp.getFechaNacimiento(), new Date(1987, 4, 23));
 		assertEquals(dataUDesp.getTipoUsuario(), "Socio");
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testRegistrarSocioRep() throws ParseException, Throwable {
 		try {
 			ctrlU.registrarSocio("Emi71", "Aerobico adulto mayor", "Aerobica", false, "-", new Date(2021, 8, 31));	
-		}catch(SocioRegistradoException e) {
+		} catch (SocioRegistradoException e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
 			e.printStackTrace();
 		}
 		assertThrows(SocioRegistradoException.class, () -> {
-			ctrlU.registrarSocio("Emi71","Aerobico adulto mayor", "Aerobica", false, "-", new Date(2021, 8, 31));});
-	};
+			ctrlU.registrarSocio("Emi71", "Aerobico adulto mayor", "Aerobica", false, "-", new Date(2021, 8, 31)); });
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
@@ -248,29 +253,35 @@ class TestSistema {
 		assertEquals(dataU.getNickname(), "andy");
 		assertEquals(dataU.getNombre(), "Andres");
 		assertEquals(dataU.getApellido(), "Roman");
-		assertEquals(dataU.getFechaNacimiento(),new Date(1976, 3, 17));
+		assertEquals(dataU.getFechaNacimiento(), new Date(1976, 3, 17));
 		assertEquals(dataU.getEmail(), "chino@gmail.org.uy");
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarUsuarios() {
 		String[] listaU = ctrlU.listarUsuarios();
 		//System.out.print(listaU[0]);
 		assertEquals(listaU[0], "Emi71");
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarSocios() {
 		String[] listaU = ctrlU.listarSocios();
 		//System.out.print(listaU[0]);
 		assertEquals(listaU[0], "Emi71");
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testRegistrarSocios() throws CuposAgotadosException, SocioRegistradoException, ClasesRestantesException, CuponeraVencidaException, ActividadDeCuponeraRepetidaException, ClaseRepetidaException {
 		try {
-			ctrlU.registrarSocio("andy","Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 9, 31));
+			ctrlU.registrarSocio("andy", "Aerobico adulto mayor", "Aerobica", false, "", new Date(2021, 9, 31));
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -285,7 +296,7 @@ class TestSistema {
 		//assertEquals(registro.isConCuponera(),false);
 		//Con Cuponera
 		try {
-			ctrlU.altaSocio("agustin34","Andres","Roman", "juanandres@gmail.org.uy", new Date(1976, 4, 17), "1234", "png");
+			ctrlU.altaSocio("agustin34", "Andres", "Roman", "juanandres@gmail.org.uy", new Date(1976, 4, 17), "1234", "png");
 		} catch (UsuarioRepetidoException | MailRepetidoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -294,8 +305,8 @@ class TestSistema {
 			System.out.print("con cuponera: ");
 			ctrlU.compraCuponera("agustin34", "Musculos", new Date(2021, 5, 31));
 			ctrlI.aceptarRechazarActividad("Tenis", true);
-			ctrlI.altaClase("Tenis al aire libre", new Date(2021, 9, 27), 1, 5, "https://www.inatural.com/aeroam", new Date(2021, 9, 30), "TheBoss", "Tenis","");
-			ctrlU.registrarSocio("agustin34","Tenis al aire libre", "Tenis", true, "Musculos", new Date(2021, 9, 20));
+			ctrlI.altaClase("Tenis al aire libre", new Date(2021, 9, 27), 1, 5, "https://www.inatural.com/aeroam", new Date(2021, 9, 30), "TheBoss", "Tenis", "");
+			ctrlU.registrarSocio("agustin34", "Tenis al aire libre", "Tenis", true, "Musculos", new Date(2021, 9, 20));
 		} catch (CuposAgotadosException | SocioRegistradoException | ClasesRestantesException | CuponeraVencidaException | ClaseRepetidaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -307,12 +318,14 @@ class TestSistema {
 		map = soc.getRegistros();
 		registro = map.get(3);
 		//System.out.print(registro.getCosto());
-		assertEquals(registro.getCosto(),720.0);
-		assertEquals(registro.getFecha(),new Date(2020, 5, 31));
-		assertEquals(registro.getId(),3);
-		assertEquals(registro.isConCuponera(),true);
+		assertEquals(registro.getCosto(), 720.0);
+		assertEquals(registro.getFecha(), new Date(2020, 5, 31));
+		assertEquals(registro.getId(), 3);
+		assertEquals(registro.isConCuponera(), true);
 		
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
@@ -327,63 +340,75 @@ class TestSistema {
 		Socio socio = mSocios.obtenerSocio("andy");
 		Set<Compra> comp = socio.getCompras();
 	
-	};
+	}
+	
+	;
 
-///////////////////////////////////// TEST CONTROLADOR CUPONERA //////////////////////////////////////
+ ///////////////////////////////////// TEST CONTROLADOR CUPONERA //////////////////////////////////////
 
 	@SuppressWarnings("deprecation")
 	//@SuppressWarnings("deprecation")
 	@Test
 	void testAltaCuponera() throws CuponeraRepetidaException {
 			//altaCuponera(String nombre, String descripcion, Date inicio, Date fin, Float descuento, Date fechaAlta) throws CuponeraRepetidaException;
-			ctrlC.altaCuponera("Pelota", "Deportes con pelota", new Date(2021, 5, 1), new Date(2021, 7, 31), (float) 20, new Date(2021, 4, 30), "png",(float) 0);
+			ctrlC.altaCuponera("Pelota", "Deportes con pelota", new Date(2021, 5, 1), new Date(2021, 7, 31), (float) 20, new Date(2021, 4, 30), "png", (float) 0);
 			String[] cuponeras = ctrlC.listarCuponeras();
 			System.out.print(cuponeras[0]);
 			assertEquals(cuponeras[0], "Pelota");
 		
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarCuponeras() {
 		String[] cuponeras = ctrlC.listarCuponeras();
 		assertEquals(cuponeras[0], "Musculos");
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarActividadesNoEnCuponera() {
 		String[] cuponeras = ctrlC.listarActividadesNoEnCuponera("Musculos", "IN");
 		
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testAgregarActividadACuponera() throws ActividadDeCuponeraRepetidaException, CuponeraRepetidaException {
-		ctrlC.altaCuponera("Fuerza", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3",(float) 0);	
-		ctrlI.aceptarRechazarActividad("Tenis", true);//agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
+		ctrlC.altaCuponera("Fuerza", "Pesas", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "https://bit.ly/3", (float) 0);	
+		ctrlI.aceptarRechazarActividad("Tenis", true); //agregarActividadACuponera(String nombreCuponera, String nombreActividad, Integer cantClases);
 		ctrlC.agregarActividadACuponera("Fuerza", "Tenis", 2);
 		Cuponera cup = mCup.obtenerCuponera("Fuerza");
 		ctrlI.listarCategorias();
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testConsultaCuponera() throws CuponeraRepetidaException, ActividadDeCuponeraRepetidaException {
 		//DataCuponera consultaCuponera(String nombreCuponera);
-		ctrlC.altaCuponera("Gymnacia", "asd", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "png",(float) 0);
-		ctrlC.agregarActividadACuponera("Gymnacia","Tenis", 4);
+		ctrlC.altaCuponera("Gymnacia", "asd", new Date(2021, 8, 15), new Date(2021, 11, 15), (float) 10, new Date(2021, 8, 1), "png", (float) 0);
+		ctrlC.agregarActividadACuponera("Gymnacia", "Tenis", 4);
 		DataCuponera data = ctrlC.consultaCuponera("Gymnacia");
 		assertEquals(data.getNombre(), "Gymnacia");
 		assertEquals(data.getDescripcion(), "asd");
 		assertEquals(data.getFechaIni(), new Date(2021, 8, 15));
-		assertEquals(data.getFechaFin(),new Date(2021, 11, 15));
+		assertEquals(data.getFechaFin(), new Date(2021, 11, 15));
 		assertEquals(data.getDescuento(), (float) 10);
 		assertEquals(data.getFechaAlta(), new Date(2021, 8, 1));
 		DataActividadCuponera[] cuponeras = data.getActividadesCuponera();
 		
 		assertEquals(cuponeras[0].getActividad(), "Tenis");
 			
-	};
-//////////////////////////////////////TEST CONTROLADOR INSTITUCIONES //////////////////////////////////
+	}
+	
+	;
+ //////////////////////////////////////TEST CONTROLADOR INSTITUCIONES //////////////////////////////////
 
 	@SuppressWarnings("deprecation")
 	@Test
@@ -391,7 +416,7 @@ class TestSistema {
 		//altaActividadDeportiva(String nombreInstitucion, String nombre, String descripcion,int duracion, float costo, Date fecha) throws ActividadRepetidaException; //Falta agregar excepcion
 		try {
 			String[] arrayVacio = new String[0];
-			ctrlI.altaActividadDeportiva("IN", "Handball","Solo femenino", 200, 1500, new Date(2021, 6, 22), arrayVacio, "png");
+			ctrlI.altaActividadDeportiva("IN", "Handball", "Solo femenino", 200, 1500, new Date(2021, 6, 22), arrayVacio, "png");
 			ctrlI.aceptarRechazarActividad("Handball", true);
 			DataActividad dataA = ctrlI.listarDataActividad("Handball");
 		
@@ -406,7 +431,9 @@ class TestSistema {
 			e.printStackTrace();
 		}
 		
-	};
+	}
+	
+	;
 	
 	@Test
 	void testAltaInstitucionDeportiva() throws InstitucionRepetidaException {
@@ -422,55 +449,66 @@ class TestSistema {
 		fail(e.getMessage());
 		e.printStackTrace();
 	}
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarDataInstituciones() {
 		DataInstitucion[] data = ctrlI.listarDataInstituciones();
 		DataInstitucion institucion = data[0];
 		assertEquals(institucion.getNombre(), "IN");
-	};
+	}
+	
+	;
 	
 	@Test
 	void testListarCuponerasActividad() {
-		ctrlU.listarCuponerasActividad("m1k4","Musculos");
+		ctrlU.listarCuponerasActividad("m1k4", "Musculos");
 		//
-	};
+	}
+	
+	;
 		
 	
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testAltaClase() throws ClaseRepetidaException {
-		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol","");
+		ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol", "");
 		DataClase data = ctrlI.obtenerDataClase("Futbol Sala");
 		
 		assertEquals(data.getNombre(), "Futbol Sala");
 		assertEquals(data.getFecha(), new Date(2021, 7, 30));
 		assertEquals(data.getMinPersonas(), 4);
-		assertEquals(data.getMaxPersonas(),34);
+		assertEquals(data.getMaxPersonas(), 34);
 		assertEquals(data.getProfesor(), "TheBoss");
 		assertEquals(data.getURL(), "https://www.inatural.com/aeroam");
 		assertEquals(data.getFechaAlta(), new Date(2021, 6, 30));
 		assertEquals(data.getActividad(), "Futbol");
 		assertEquals(data.getInstitucion(), "IN");	
-		assertThrows(ClaseRepetidaException.class, () -> {ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol","");});
+		assertThrows(ClaseRepetidaException.class, () -> {
+			ctrlI.altaClase("Futbol Sala", new Date(2021, 7, 30), 4, 34, "https://www.inatural.com/aeroam", new Date(2021, 6, 30), "TheBoss", "Futbol", ""); });
 		
-	};
+	}
+	
+	;
 		
 	@SuppressWarnings("deprecation")
 	@Test
 	void testListarDataClases() {
-		DataClase[] clases =ctrlI.listarDataClases("Aerobica");
+		DataClase[] clases = ctrlI.listarDataClases("Aerobica");
 		DataClase data = clases[0];
 		assertEquals(data.getNombre(), "Aerobico adulto mayor");
 		assertEquals(data.getFecha(), new Date(2021, 8, 30));
 		assertEquals(data.getMinPersonas(), 5);
-		assertEquals(data.getMaxPersonas(),10);
+		assertEquals(data.getMaxPersonas(), 10);
 		assertEquals(data.getProfesor(), "TheBoss");
 		assertEquals(data.getURL(), "https://www.inatural.com/aeroam");
 		
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
@@ -480,18 +518,20 @@ class TestSistema {
 		assertEquals(data.getNombre(), "Aerobica");
 		assertEquals(data.getDescripcion(), "Para cuidar el aparato cardiovascular");
 		assertEquals(data.getDuracion(), 110);
-		assertEquals(data.getCosto(),800);
+		assertEquals(data.getCosto(), 800);
 		assertEquals(data.getFecha(), new Date(2021, 5, 30));
 		assertArrayEquals(data.getCuponeras(), new String[]{"Musculos"});
 		assertArrayEquals(data.getClases(), new String[]{"Aerobico adulto mayor"});	
-	};
+	}
+	
+	;
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	void testAltaActividadDeportivaWeb() throws ActividadRepetidaException {
 		String[] arrayVacio = new String[0];
 		//String nombreInstitucion, String nombre, String descripcion,
-	    //int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto
+  //int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto
 		ctrlI.altaActividadDeportivaWeb("IN", "Pesas", "Para todas las edades", 30, 500, new Date(2021, 9, 20), "TheBoss", arrayVacio, "png");
 		
 	}

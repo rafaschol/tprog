@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 
@@ -24,7 +23,7 @@ public class ActividadDeportiva {
 	private Map<String, Categoria> categorias; 
 	private Estado estado;
 	
-	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion, String foto){
+	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion, String foto) {
 		this.setNombre(nombre);
 		this.setFecha(fecha);
 		this.setDescripcion(descripcion);
@@ -128,7 +127,7 @@ public class ActividadDeportiva {
 		
 		for (Entry<String, Clase> iter : clases.entrySet()) {
 			
-			if(iter.getValue().getFecha().after(fechaActual)) {
+			if (iter.getValue().getFecha().after(fechaActual)) {
 			DataClase clase = new DataClase(iter.getValue(), this.getNombre(), this.getInstitucion().getNombre());
 			clasesSet.add(clase);	
 			}
@@ -147,10 +146,11 @@ public class ActividadDeportiva {
 		return res;
 		
 	}
+	
 	public String[] listarCuponeras() {
 		String[] res = new String[actividadesCuponera.size()];
 		int iter = 0;
-		for(ActividadDeCuponera ac : actividadesCuponera) {
+		for (ActividadDeCuponera ac : actividadesCuponera) {
 			res[iter] = ac.getCuponera().getNombre();
 			iter++;		
 		}
@@ -161,9 +161,11 @@ public class ActividadDeportiva {
 	public void addActividadDeCuponera(ActividadDeCuponera adc) {
 		this.actividadesCuponera.add(adc);
 	}
+	
 	public Estado getEstado() {
 		return estado;
 	}
+	
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
@@ -181,11 +183,11 @@ public class ActividadDeportiva {
 		this.categorias.put(nombreCategoria, categoria);
 	}
 	
-	public Categoria obtenerCategoria(String nombreCategoria){
+	public Categoria obtenerCategoria(String nombreCategoria) {
 		return (categorias.get(nombreCategoria));
 	}
 	
-	public String[] listarCategorias(){
+	public String[] listarCategorias() {
 		String[] res = categorias.keySet().toArray(new String[0]);
 		return res;
 	}

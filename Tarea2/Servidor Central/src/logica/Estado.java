@@ -1,7 +1,6 @@
 package logica;
 
-public enum Estado 
-{
+public enum Estado {
 	Ingresada,
 	Aceptada,
 	Rechazada

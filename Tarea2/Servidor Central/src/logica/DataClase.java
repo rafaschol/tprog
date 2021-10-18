@@ -7,7 +7,7 @@ public class DataClase {
 	private Date fecha;
 	private Integer minPersonas;
 	private Integer maxPersonas;
-	private String URL;
+	private String url;
 	private Date fechaAlta;	
 	private String profesor;
 	private String actividad;
@@ -15,7 +15,7 @@ public class DataClase {
 	private String imagen;
 	
 	
-	public DataClase(Clase clase, String actividad, String institucion){
+	public DataClase(Clase clase, String actividad, String institucion) {
 		this.setNombre(clase.getNombre());
 		this.setFecha(clase.getFecha());
 		this.setMinPersonas(clase.getMinPersonas());
@@ -61,11 +61,11 @@ public class DataClase {
 	}
 
 	public String getURL() {
-		return URL;
+		return url;
 	}
 
-	private  void setURL(String uRL) {
-		URL = uRL;
+	private  void setURL(String urlset) {
+		url = urlset;
 	}
 
 	public Date getFechaAlta() {

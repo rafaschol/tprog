@@ -4,7 +4,7 @@ public class DataActividadCuponera {
 	private Integer cantidadDeClases;
 	private String actividad;
 	
-	public DataActividadCuponera(ActividadDeCuponera adc){
+	public DataActividadCuponera(ActividadDeCuponera adc) {
 		this.setCantidadDeClases(adc.getCantidadDeClases());
 		this.setActividad(adc.getActividad().getNombre());
 	}

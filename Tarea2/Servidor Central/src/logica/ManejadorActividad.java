@@ -14,8 +14,8 @@ public class ManejadorActividad {
     }
 
     public static ManejadorActividad getinstance() {
-        if (instancia == null)
-            instancia = new ManejadorActividad();
+        if (instancia == null) {
+            instancia = new ManejadorActividad(); }
         return instancia;
     }
     
@@ -42,7 +42,7 @@ public class ManejadorActividad {
         actividades.remove(nombre, actividad);
     }
     
-    public Map<String, ActividadDeportiva> getActividades(){
+    public Map<String, ActividadDeportiva> getActividades() {
     	return this.actividades;
     }
 

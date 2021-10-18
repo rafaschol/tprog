@@ -1,11 +1,12 @@
 package logica;
+
 import java.util.Date;
 
 public class Compra {
 	private Date fecha;
 	private Cuponera cuponera; // Cuponera a la cual corresponde la compra.
 	
-	public Compra(Date fecha, Cuponera cuponera){
+	public Compra(Date fecha, Cuponera cuponera) {
 		this.setFecha(fecha);
 		this.setCuponera(cuponera);
 	}

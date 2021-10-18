@@ -2,8 +2,7 @@ package logica;
 
 import java.util.Date;
 
-public class DataUsuario 
-{
+public class DataUsuario  {
 	private String nickname;
 	private String tipoUsuario;
 	private String nombre;
@@ -25,8 +24,7 @@ public class DataUsuario
 	
 	
 	
-	public DataUsuario(Usuario usuario, String[] clases)
-	{
+	public DataUsuario(Usuario usuario, String[] clases) {
 		this.setNickname(usuario.getNickname());
 		this.setTipoUsuario(usuario.getClass() == Socio.class ? "Socio" : "Profesor");
 		this.setNombre(usuario.getNombre());
@@ -38,7 +36,7 @@ public class DataUsuario
 		this.setContrasena(usuario.getContrasena());
 	}
 	
-	public DataUsuario(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores){
+	public DataUsuario(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores) {
 		this.setNickname(usuario.getNickname());
 		this.setTipoUsuario(usuario.getClass() == Socio.class ? "Socio" : "Profesor");
 		this.setNombre(usuario.getNombre());
@@ -52,8 +50,8 @@ public class DataUsuario
 		this.setSeguidores(seguidores);
 		this.setSeguidos(seguidos);
 	}
-	public DataUsuario(Usuario usuario)
-	{
+	
+	public DataUsuario(Usuario usuario) {
 		this.setNickname(usuario.getNickname());
 		this.setTipoUsuario(usuario.getClass() == Socio.class ? "Socio" : "Profesor");
 		this.setNombre(usuario.getNombre());

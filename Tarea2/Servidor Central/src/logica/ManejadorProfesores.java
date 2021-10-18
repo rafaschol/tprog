@@ -15,12 +15,12 @@ public class ManejadorProfesores {
     }
 
     public static ManejadorProfesores getinstance() {
-        if (instancia == null)
-            instancia = new ManejadorProfesores();
+        if (instancia == null) {
+            instancia = new ManejadorProfesores(); }
         return instancia;
     }
 
-    public Map<String, Profesor> getNicknames(){
+    public Map<String, Profesor> getNicknames() {
     	return this.nicknames;
     }
     
@@ -39,7 +39,7 @@ public class ManejadorProfesores {
         return ((Profesor) mails.get(mail));
     }
 
- /*   public Profesor[] getProfesoers() {
+    /*   public Profesor[] getProfesoers() {
         if (nicknames.isEmpty())
             return null;
         else {

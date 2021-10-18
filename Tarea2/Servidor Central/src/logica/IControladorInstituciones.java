@@ -1,7 +1,7 @@
 package logica;
+
 import java.sql.Time;
 import java.util.Date;
-
 import excepciones.ActividadRepetidaException;
 import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
@@ -21,7 +21,7 @@ public interface IControladorInstituciones {
 	public abstract DataInstitucion[] listarDataInstituciones(); 
 	
 	public abstract void altaClase(String nombre, Date fecha, Integer minimo,
-		Integer maximo, String url, Date fechaAlta, String profesor, String actividad,String imagen)
+		Integer maximo, String url, Date fechaAlta, String profesor, String actividad, String imagen)
 		throws ClaseRepetidaException;
 	
 	//Para el caso de uso consultar clase
@@ -45,7 +45,7 @@ public interface IControladorInstituciones {
 	
 	//Para el caso de uso crear Actividad Deportiva por Profesor
 	public abstract void altaActividadDeportivaWeb(String nombreInstitucion, String nombre, String descripcion,
-		    int duracion, float costo, Date fecha, String profesor, String[] categorias,String foto) throws ActividadRepetidaException;
+		    int duracion, float costo, Date fecha, String profesor, String[] categorias, String foto) throws ActividadRepetidaException;
 	
 	public abstract DataActividad[] listarActividadesWeb();
 	

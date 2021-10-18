@@ -15,7 +15,7 @@ public class DataCuponera extends DataItem {
 	private String[] instituciones;
 	private String[] categorias;
 
-	public DataCuponera(Cuponera cuponera, DataActividadCuponera[] dataActividad){
+	public DataCuponera(Cuponera cuponera, DataActividadCuponera[] dataActividad) {
 		this.setNombre(cuponera.getNombre());
 		this.setDescripcion(cuponera.getDescripcion());
 		this.setFechaIni(cuponera.getFechaIni());
@@ -26,7 +26,8 @@ public class DataCuponera extends DataItem {
 		this.setFoto(cuponera.getFoto());
 		this.setCosto(cuponera.getCosto());
 	}
-	public DataCuponera(Cuponera cuponera, String[] instituciones,String[] categorias){
+	
+	public DataCuponera(Cuponera cuponera, String[] instituciones, String[] categorias) {
 		this.setNombre(cuponera.getNombre());
 		this.setDescripcion(cuponera.getDescripcion());
 		this.setFechaIni(cuponera.getFechaIni());
@@ -91,6 +92,7 @@ public class DataCuponera extends DataItem {
 	
 		return actividadesCuponera;
 	}
+	
 	private void setActividadesCuponera(DataActividadCuponera[] actividadesCuponera) {
 		this.actividadesCuponera = actividadesCuponera;
 	}
@@ -119,6 +121,7 @@ public class DataCuponera extends DataItem {
 		
 		return this.categorias;
 	}
+	
 	private void setCategorias(String[] categorias) {
 		this.categorias = categorias;
 		

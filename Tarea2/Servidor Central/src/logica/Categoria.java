@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Categoria {
 	private String nombre;
-	private Map<String,ActividadDeportiva> actividades;
+	private Map<String, ActividadDeportiva> actividades;
 	
 	public Categoria(String nombre) {
 		this.nombre = nombre;
-		this.actividades = new HashMap<String,ActividadDeportiva>();
+		this.actividades = new HashMap<String, ActividadDeportiva>();
 	}
 
 	public String getNombre() {
@@ -20,11 +20,11 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 
-	public Map<String,ActividadDeportiva> getActividades() {
+	public Map<String, ActividadDeportiva> getActividades() {
 		return actividades;
 	}
 
-	public void setActividades(Map<String,ActividadDeportiva> actividades) {
+	public void setActividades(Map<String, ActividadDeportiva> actividades) {
 		this.actividades = actividades;
 	}
 	

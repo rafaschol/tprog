@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 
 public class Registro {
@@ -9,7 +10,7 @@ public class Registro {
 	private Boolean conCuponera;
 	private Clase clase; // Clase a la cual corresponde el registro.
 	
-	public Registro(Integer identificador, Date fecha, Float costo, Boolean cuponera, Clase clase){
+	public Registro(Integer identificador, Date fecha, Float costo, Boolean cuponera, Clase clase) {
 		this.setId(identificador);
 		this.setFecha(fecha);
 		this.setCosto(costo);

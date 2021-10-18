@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -66,21 +67,23 @@ public abstract class Usuario {
 		this.foto = foto;	
 	}
 	
-	public String getFoto(){
+	public String getFoto() {
 		return this.foto;
 	}
 	
 	// Red Socioal
-	public Map<String, Usuario> getSeguidos(){
+	public Map<String, Usuario> getSeguidos() {
 		return this.seguidos;
 	}
 	
-	public Map<String, Usuario> getSeguidores(){
+	public Map<String, Usuario> getSeguidores() {
 		return this.seguidores;
 	}
+	
 	public void addSeguido(Usuario usuario) {
 		this.seguidos.put(usuario.getNickname(), usuario);
 	}
+	
 	public void addSeguidor(Usuario usuario) {
 		this.seguidores.put(usuario.getNickname(), usuario);
 	}
@@ -88,6 +91,7 @@ public abstract class Usuario {
 	public void removeSeguido(Usuario usuario) {
 		this.seguidos.remove(usuario.getNickname());
 	}
+	
 	public void removeSeguidor(Usuario usuario) {
 		this.seguidores.remove(usuario.getNickname());
 	}

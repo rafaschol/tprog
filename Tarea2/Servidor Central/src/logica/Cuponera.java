@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,13 +17,13 @@ public class Cuponera {
 	private Boolean comprada;
 	private Float costo;
 	
-	public Cuponera(String nombre, String descripcion, Date fIni, Date fFin, Float descuento, Date fAlta,String foto, Float costo) {
+	public Cuponera(String nombre, String descripcion, Date fini, Date ffin, Float descuento, Date falta, String foto, Float costo) {
 		this.setNombre(nombre);
 		this.setDescripcion(descripcion);
-		this.setFechaIni(fIni);
-		this.setFechaFin(fFin);
+		this.setFechaIni(fini);
+		this.setFechaFin(ffin);
 		this.setDescuento(descuento);
-		this.setFechaAlta(fAlta);
+		this.setFechaAlta(falta);
 		this.setFoto(foto);
 		this.setActividadCuponera(new HashSet<ActividadDeCuponera>());
 		this.setComprada(false);

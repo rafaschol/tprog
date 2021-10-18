@@ -14,8 +14,8 @@ public class ManejadorInstituciones {
     }
 
     public static ManejadorInstituciones getinstance() {
-        if (instancia == null)
-            instancia = new ManejadorInstituciones();
+        if (instancia == null) {
+            instancia = new ManejadorInstituciones(); }
         return instancia;
     }
     
@@ -44,6 +44,7 @@ public class ManejadorInstituciones {
 		}		
         return result;
     }
+    
     public DataInstitucion[] getDataInstituciones() {
         DataInstitucion[] result = new DataInstitucion[instituciones.size()];
         int iterador = 0;

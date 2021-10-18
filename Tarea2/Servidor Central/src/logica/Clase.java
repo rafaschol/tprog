@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,21 +9,21 @@ public class Clase {
 	private Date fecha;
 	private Integer minPersonas;
 	private Integer maxPersonas;
-	private String URL;
+	private String url;
 	private Date fechaAlta;	
 	private Profesor profesor;
 	private ActividadDeportiva actividad;
 	private Map<Integer, Registro> registros;
 	private String imagen;
 	
-	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta,String imagen){
+	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta, String imagen) {
 		this.setNombre(nombre);
 		this.setFecha(fecha);
 		this.setMinPersonas(minimo);
 		this.setMaxPersonas(maximo);
 		this.setURL(urlClase);
 		this.setFechaAlta(alta);
-		this.setRegistros(new HashMap<Integer,Registro>());
+		this.setRegistros(new HashMap<Integer, Registro>());
 		this.setImagen(imagen);
 	}
 
@@ -59,11 +60,11 @@ public class Clase {
 	}
 
 	public String getURL() {
-		return URL;
+		return url;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String urlset) {
+		url = urlset;
 	}
 
 	public Date getFechaAlta() {
