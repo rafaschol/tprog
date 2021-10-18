@@ -28,7 +28,7 @@
   <!-- Form page -->
   <main class="form-page tab-page">
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST"  enctype="multipart/form-data">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Nueva actividad deportiva</h5>
       <div class="border-top my-4"></div>
@@ -58,6 +58,12 @@
           	<option value="${categoria}">${categoria}</option>
  	      </c:forEach>
         </select>
+      </div>
+      <div class="form-tab">
+        <div class="mb-3">
+          <label for="fotoFile" class="form-label">Foto de la Actividad Deportiva</label>
+          <input class="form-control" type="file" name="foto" id="fotoFile" accept="image/png, image/jpeg">
+        </div>
       </div>
       <button class="btn btn-secondary rounded-circle" id="prev-button">
         <i class="fas fa-arrow-left" style="padding: 5px 0;"></i>
