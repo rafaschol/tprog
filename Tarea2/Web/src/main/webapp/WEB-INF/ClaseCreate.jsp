@@ -28,7 +28,7 @@
   <!-- Form page -->
   <main class="form-page">
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST" enctype="multipart/form-data">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Nueva clase</h5>
       <div class="border-top my-4"></div>
@@ -61,6 +61,10 @@
         <input type="url" class="form-control" name="url" id="urlInput" placeholder="Link de la clase">
         <label for="urlInput">Link de la clase</label>
       </div>
+      <div class="mb-3">
+          <label for="fotoFile" class="form-label">Foto de la Clase</label>
+          <input class="form-control" type="file" name="foto" id="fotoFile" accept="image/png, image/jpeg">
+     </div>
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">Crear</button>
     </form>
 
