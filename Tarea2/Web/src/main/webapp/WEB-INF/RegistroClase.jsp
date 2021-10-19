@@ -45,7 +45,7 @@
         <label for="actividadSelect">Actividad deportiva</label>
       </div>
       <div class="form-floating mb-3">
-        <select class="form-select" name="clase" id="claseSelect">
+        <select class="form-select" name="clase" id="claseSelect" "<c:if test="${actividadSeleccionada != null}"> required  </c:if>>
           <option selected disabled hidden>Selecciona una clase</option>
           <c:forEach items="${clases}" var="clase">
             <option value="${clase.getNombre()}">${clase.getNombre()}</option>

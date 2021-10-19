@@ -1,5 +1,5 @@
 var currentTab;
-
+const datePickerId = document.getElementById('nacimientoInput');
 const registerForm = document.getElementById('register-form');
 const socioButton = document.getElementById('socio-button');
 const profesorButton = document.getElementById('profesor-button');
@@ -98,6 +98,7 @@ function moveTab(step) {
 }
 
 loadForm();
+datePickerId.max = new Date().toISOString().split("T")[0];
 
 socioButton.addEventListener('click', event => {
   event.preventDefault();
