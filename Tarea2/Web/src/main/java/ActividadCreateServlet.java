@@ -46,7 +46,7 @@ public class ActividadCreateServlet extends HttpServlet {
 		String[] categorias =  controladorInstitucion.listarCategorias();
 		
 		request.setAttribute("categorias",categorias);
-		
+		request.setAttribute("dataTab", "0");
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadCreate.jsp");
@@ -54,13 +54,13 @@ public class ActividadCreateServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadCreate.jsp");
 		HttpSession session = request.getSession();
 		DataProfesor usuarioLogueado = (DataProfesor) session.getAttribute("usuarioLogueado");
 		String nickname = usuarioLogueado.getNickname();
 		
 		String nombreActividad = request.getParameter("nombre");
-		String descricpcion = request.getParameter("descripcion");
+		String descripcion = request.getParameter("descripcion");
 		String duracion = request.getParameter("duracion");
 		String costo = request.getParameter("costo");
 		
@@ -94,15 +94,23 @@ public class ActividadCreateServlet extends HttpServlet {
 		
 		
 		
-		//String nombreInstitucion, String nombre, String descripcion,
-	    //int duracion, float costo, Date fecha, String nombreProfesor, String[] categorias,String foto
+		
 		
 		try {
-			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descricpcion, duracionInt, costoInt, fecha, nickname, categorias, rutaFoto);
+			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoInt, fecha, nickname, categorias, rutaFoto);
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (ActividadRepetidaException e) {
-			// TODO Auto-generated catch block
-			doGet(request, response);
+			request.setAttribute("actividadRepetida", true);
+			String[] categoriass =  controladorInstitucion.listarCategorias();
+			request.setAttribute("dataTab", "1");
+			request.setAttribute("categorias",categoriass);
+			
+			
+			request.setAttribute("nombre", nombreActividad);
+			request.setAttribute("descripcion", descripcion);
+			request.setAttribute("duracion", duracion);
+			request.setAttribute("costo", costo);
+			dispatcher.forward(request, response);
 		}
 		
 		

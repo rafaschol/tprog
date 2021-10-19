@@ -26,33 +26,38 @@
 <body>
     
   <!-- Form page -->
-  <main class="form-page tab-page">
+  <main class="form-page tab-page" >
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST"  enctype="multipart/form-data">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST" id="activity-form" enctype="multipart/form-data" data-tab="${dataTab}">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Nueva actividad deportiva</h5>
       <div class="border-top my-4"></div>
       <div class="form-tab active">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="nombre" id="nombreInput" placeholder="Nombre">
+          <input type="text" class="form-control" name="nombre" id="nombreInput" placeholder="Nombre" value="${nombre != null ? nombre : ''}"  aria-describedly="invalidUsername" required>
           <label for="nombreInput">Nombre</label>
+          <c:if test="${actividadRepetida}">
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	          Ya existe una actividad con ese nombre.
+	       </div>
+        </c:if>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="DescripciÃ³n"></textarea>
+          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="DescripciÃ³n" required>${descripcion != null ? descripcion : ''}</textarea>
           <label for="descripcionTextArea">DescripciÃ³n</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="DuraciÃ³n (minutos)" value="60" min="1">
+          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="DuraciÃ³n (minutos)" value="${duracion != null ? duracion : '60'}" min="1" required>
           <label for="duracionInput">DuraciÃ³n (minutos)</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="costo" id="costoInput" placeholder="Costo ($)">
+          <input type="number" class="form-control" name="costo" id="costoInput" placeholder="Costo ($)" value="${costo != null ? costo : ''}" required>
           <label for="costoInput">Costo ($)</label>
         </div>
       </div>
       <div class="form-tab">
         <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o mÃ¡s categorÃ­as</label>
-        <select class="form-select mb-3" multiple name="categorias" id="categoriasSelect">
+        <select class="form-select mb-3" multiple name="categorias" id="categoriasSelect" required>
           <option selected disabled hidden>Selecciona una o mÃ¡s categorÃ­as</option>
           <c:forEach items="${categorias}" var="categoria">
           	<option value="${categoria}">${categoria}</option>
@@ -62,7 +67,7 @@
       <div class="form-tab">
         <div class="mb-3">
           <label for="fotoFile" class="form-label">Foto de la Actividad Deportiva</label>
-          <input class="form-control" type="file" name="foto" id="fotoFile" accept="image/png, image/jpeg">
+          <input class="form-control" type="file" name="foto" id="fotoFile"  value="${foto != null ? foto : ''}" accept="image/png, image/jpeg">
         </div>
       </div>
       <button class="btn btn-secondary rounded-circle" id="prev-button">

@@ -67,6 +67,7 @@ public class RegistroClaseServlet extends HttpServlet {
 			request.setAttribute("claseSeleccionada", nombreClase); 
 			// Ac� debo mandar a la segunda tab del formulario
 			request.setAttribute("dataTab", "1");
+			request.setAttribute("selector", 0);
 		}
 		
 		
@@ -76,7 +77,7 @@ public class RegistroClaseServlet extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/RegistroClase.jsp");
 	
 		
 		HttpSession session = request.getSession();
@@ -92,6 +93,14 @@ public class RegistroClaseServlet extends HttpServlet {
 		String nombreCuponera = request.getParameter("cuponera");
 		Date fecha = new Date();
 		boolean conCuponera = nombreCuponera != null;
+		request.setAttribute("claseSeleccionada", nombreClase); 
+		request.setAttribute("dataTab", "1");
+		String[] cuponeras = controladorUsuario.listarCuponerasActividadWeb(nickname, nombreActividad);
+		request.setAttribute("cuponeras", cuponeras);
+		request.setAttribute("nombreCuponera", nombreCuponera);
+		int selector = 0;
+		if (conCuponera) selector = 1;
+		request.setAttribute("selector", selector);
 		
 		
 			try {
@@ -99,19 +108,19 @@ public class RegistroClaseServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/");
 			} catch (CuposAgotadosException e) {
 				
-				
-				doGet(request, response);
+				request.setAttribute("CuposAgotados", true);
+				dispatcher.forward(request, response);
 			} catch (SocioRegistradoException e) {
-				
-				doGet(request, response);
+				request.setAttribute("SocioRegistrado", true);
+				dispatcher.forward(request, response);
 			} catch (ClasesRestantesException e) {
 				// TODO Auto-generated catch block
-				
-				doGet(request, response);
+				request.setAttribute("ClasesRestantes", true);
+				dispatcher.forward(request, response);
 			} catch (CuponeraVencidaException e) {
 				// TODO Auto-generated catch block
-				
-				doGet(request, response);
+				request.setAttribute("CuponeraVencida", true);
+				dispatcher.forward(request, response);
 			}
 			
 		

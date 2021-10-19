@@ -61,24 +61,49 @@
  	    <label for="claseInput">Clase seleccionada</label>
       </div>
       <div class="mb-2">
-        <input type="radio" class="btn-check" name="tipoRegistro" value="normal" id="registroNormal" autocomplete="off" checked>
+        <input type="radio" class="btn-check" name="tipoRegistro" value="normal" id="registroNormal" autocomplete="off"<c:if test="${selector != 1}"> checked  </c:if> >
         <label class="btn btn-outline-secondary w-100" for="registroNormal">Registro normal</label>
       </div>
       <div class="mb-3">
-        <input type="radio" class="btn-check" name="tipoRegistro" value="cuponera" id="registroCuponera" autocomplete="off">
+        <input type="radio" class="btn-check" name="tipoRegistro" value="cuponera" id="registroCuponera" autocomplete="off"<c:if test="${selector == 1}"> checked  </c:if> >
         <label class="btn btn-outline-secondary w-100" for="registroCuponera">Registro con cuponera</label>
       </div>
       <div class="form-floating mb-3">
-        <select class="form-select" name="cuponera" id="cuponeraSelect" disabled>
-          <option selected disabled hidden>Selecciona una cuponera</option>
+        <select class="form-select" name="cuponera" id="cuponeraSelect" disabled required>
+          <option ${nombreCuponera != null ? '' : 'selected '} disabled hidden>Selecciona una cuponera</option>
            <c:forEach items="${cuponeras}" var="cuponera">
-         	 	<option value="Pelota">${cuponera}</option>
+         	 	<option ${nombreCuponera != null && nombreCuponera  == cuponera ? 'selected ' : ''}
+         	 	 value="Pelota">${cuponera}</option>
            </c:forEach>
         </select>
         <label for="cuponeraSelect">Cuponera</label>
       </div>
       </c:if>  
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">${dataTab == 0 ? 'Seleccionar clase' : 'Registrarme a la clase' }</button>
+       <c:if test="${SocioRegistrado}">
+        
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	          Ya estas registrado a esta clase.
+	        </div>
+        </c:if>
+         <c:if test="${CuposAgotados}">
+        
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	         No quedan cupos disponibles para esta clase.
+	        </div>
+        </c:if>
+         <c:if test="${ClasesRestantes}">
+        
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	          Ya agotaste las clases restantes en esta cuponera.
+	        </div>
+        </c:if>
+         <c:if test="${CuponeraVencida}">
+        
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	          La cuponera ya venció.
+	        </div>
+        </c:if>
     </form>
 
   </main>
