@@ -33,16 +33,22 @@
       <h5 class="fw-light">Comprar cuponera</h5>
       <div class="border-top my-4"></div>
       <div class="form-floating mb-3">
-        <select class="form-select" name="cuponera" id="cuponeraSelect">
-        <option selected disabled hidden>Selecciona una cuponera</option>
+        <select class="form-select" name="cuponera" id="cuponeraSelect"   aria-describedly="invalidUsername" required>
+        <option ${nombreCuponera != null ? '' : 'selected '} disabled hidden>Selecciona una cuponera</option>
           <c:forEach items="${cuponeras}" var="cuponera">
-          	<option value="${cuponera}">${cuponera}</option>
-          </c:forEach>
-          
-          
+            <option ${nombreCuponera != null && nombreCuponera  == cuponera ? 'selected ' : ''}
+            value="${cuponera}">${cuponera}</option>
+          </c:forEach>           
         </select>
         <label for="cuponeraSelect">Cuponera</label>
+         <c:if test="${cuponeraComprada}">
+        
+            <div id="invalidUsername" class="invalid-feedback d-block">
+	          Ya compraste esa cuponera.
+	        </div>
+        </c:if>
       </div>
+       
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">Comprar</button>
     </form>
   </main>

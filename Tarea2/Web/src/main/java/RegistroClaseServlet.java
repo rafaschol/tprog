@@ -99,18 +99,18 @@ public class RegistroClaseServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/");
 			} catch (CuposAgotadosException e) {
 				
-				System.out.print(1);
+				
 				doGet(request, response);
 			} catch (SocioRegistradoException e) {
-				System.out.print(2);
+				
 				doGet(request, response);
 			} catch (ClasesRestantesException e) {
 				// TODO Auto-generated catch block
-				System.out.print(3);
+				
 				doGet(request, response);
 			} catch (CuponeraVencidaException e) {
 				// TODO Auto-generated catch block
-				System.out.print(4);
+				
 				doGet(request, response);
 			}
 			

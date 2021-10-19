@@ -35,7 +35,7 @@
       
       <c:if test="${dataTab == 0}">
       <div class="form-floating mb-3">
-        <select class="form-select" name="actividad" id="actividadSelect">
+        <select class="form-select required" name="actividad" id="actividadSelect" required>
           <option ${actividadSeleccionada != null ? '' : 'selected '}disabled hidden>Selecciona una actividad deportiva</option>
           <c:forEach items="${actividades}" var="actividad">
             <option ${actividadSeleccionada != null && actividadSeleccionada == actividad.getNombre() ? 'selected ' : ''}
@@ -77,8 +77,7 @@
         </select>
         <label for="cuponeraSelect">Cuponera</label>
       </div>
-      </c:if>
-        
+      </c:if>  
       <button type="submit" class="btn btn-lg btn-primary w-100 mt-2">${dataTab == 0 ? 'Seleccionar clase' : 'Registrarme a la clase' }</button>
     </form>
 

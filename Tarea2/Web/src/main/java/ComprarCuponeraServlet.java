@@ -43,7 +43,7 @@ public class ComprarCuponeraServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ComprarCuponera.jsp");
 		
 		String nombreCuponera = request.getParameter("cuponera");
 		
@@ -61,8 +61,13 @@ public class ComprarCuponeraServlet extends HttpServlet {
 			controladorUsuario.compraCuponera(nicknameSocio, nombreCuponera,fechaActual );
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (CuponeraCompradaException e) {
-			//Falta dar un mensaje que el usuaeio ya tiene comprada y si desea seguir o cancelar 
-			doGet(request, response);
+			request.setAttribute("cuponeraComprada", true);
+			request.setAttribute("nombreCuponera",  nombreCuponera);
+			String[] cuponeras = controladorCuponera.listarCuponeras();
+			request.setAttribute("cuponeras", cuponeras);
+			
+		
+			dispatcher.forward(request, response);
 		}
 		
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +66,11 @@ public class ClaseCreateServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ClaseCreate.jsp");
+		
+		
 		
 		HttpSession session = request.getSession();
 		DataProfesor usuarioLogueado = (DataProfesor) session.getAttribute("usuarioLogueado");
@@ -78,16 +83,26 @@ public class ClaseCreateServlet extends HttpServlet {
 		int min = Integer.parseInt(minSocios);
 		int max = Integer.parseInt(maxSocios);
 		String url = request.getParameter("url");
-		String fechaHora = request.getParameter("fechaHora");
+		String inputFecha = request.getParameter("fecha");
+		String inputHora = request.getParameter("hora");
+		System.out.println(inputHora);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date fecha;
+		
 	
 		
+		
 		try {
-			fecha = format.parse(fechaHora);
+			fecha = format.parse(inputFecha);
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+			Date hora = sdf.parse(inputHora);
+			fecha.setHours(hora.getHours());
+			fecha.setMinutes(hora.getMinutes());
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 			fecha = new Date();
+			
 		}
 		
 		Date fechaAlta = new Date();
@@ -103,9 +118,6 @@ public class ClaseCreateServlet extends HttpServlet {
 			File archivo = new File(uploads, nombreArchivo);
 			
 			try(InputStream fotoStream = foto.getInputStream()) {
-				//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
-				//System.out.println(request.getServletContext().getResource("/img"));
-				//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
 				Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				rutaFoto = "media/clases/" + nombreClase + ".jpg";
 			} catch(Exception e) {rutaFoto = null;}
@@ -117,8 +129,29 @@ public class ClaseCreateServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/");
 			
 		} catch (ClaseRepetidaException e) {
+			request.setAttribute("claseRepetida", true);
+			String nombreInstitucion = usuarioLogueado.getInstitucion();
+			DataInstitucion[] instituciones = controladorInstitucion.listarDataInstituciones();
+			String[] actividades = null;
 			
-			doGet(request, response);
+			for(int j = 0; j < instituciones.length; j++) {
+				if(instituciones[j].getNombre().equals(nombreInstitucion))
+					actividades = instituciones[j].getActividades();
+			}
+			
+			request.setAttribute("actividades",actividades);
+		
+			
+			request.setAttribute("nombre", nombreClase);
+			request.setAttribute("minSocios", minSocios);
+			request.setAttribute("maxSocios", maxSocios);
+			request.setAttribute("nombreActividad", nombreActividad);
+			request.setAttribute("fecha", inputFecha);
+			request.setAttribute("hora", inputHora);
+			request.setAttribute("url", url);
+		
+			
+			dispatcher.forward(request, response);
 		}
 		
 		
