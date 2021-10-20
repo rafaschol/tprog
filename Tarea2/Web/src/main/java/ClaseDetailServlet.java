@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,13 +36,22 @@ public class ClaseDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombreClase = request.getPathInfo().substring(1);
-			 
+		HttpSession session = request.getSession();
+		DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");
+		boolean esSocio = false;
+		
+		
+		if (usuarioLogueado != null)
+		esSocio= usuarioLogueado.getTipoUsuario().equals("Socio");	 
 		
 		
 		DataClase clase = (DataClase) controladorInstitucion.obtenerDataClase(nombreClase);
+		Date fechaActual = new Date();
+		boolean noExpiro = clase.getFecha().after(fechaActual);
+		
 		request.setAttribute("clase", clase);
-		
-		
+		request.setAttribute("esSocio", esSocio);
+		request.setAttribute("noExpiro", noExpiro);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ClaseDetail.jsp");
 		dispatcher.forward(request, response);

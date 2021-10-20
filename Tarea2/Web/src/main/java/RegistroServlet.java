@@ -72,29 +72,36 @@ public class RegistroServlet extends HttpServlet {
 		/* Manejo de la imagen */
 		String rutaFoto;
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) {
-			String pathToImages = request.getServletContext().getResource("/media/usuarios").getPath();
-			File uploads = new File(pathToImages);
-			String nombreArchivo = nombreUsuario.replaceAll(" ", "_") + ".jpg";
-			File archivo = new File(uploads, nombreArchivo);
-			
-			try(InputStream fotoStream = foto.getInputStream()) {
-				//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
-				//System.out.println(request.getServletContext().getResource("/img"));
-				//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
-				Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				rutaFoto = "media/usuarios/" + nombreUsuario + ".jpg";
-			} catch(Exception e) {rutaFoto = null;}
-		} else {rutaFoto = null;}
+		if (foto.getSize() > 0) 
+			rutaFoto = "media/usuarios/" + nombreUsuario + ".jpg";
+		else
+		rutaFoto = null;
+		
 		
 		/* Hacer el alta del usuario */
 		try {
 			if (esProfesor) {
 				controladorUsuario.altaProfesor(nombreUsuario, nombre, apellido, correo, nacimiento, institucion, descripcion, biografia, sitioWeb, contrasena, rutaFoto);
+				
 			}
 			else {
 				controladorUsuario.altaSocio(nombreUsuario, nombre, apellido, correo, nacimiento, contrasena, rutaFoto);
 			}
+			/* Manejo de la imagen */
+			if (foto.getSize() > 0) {
+				String pathToImages = request.getServletContext().getResource("/media/usuarios").getPath();
+				File uploads = new File(pathToImages);
+				String nombreArchivo = nombreUsuario.replaceAll(" ", "_") + ".jpg";
+				File archivo = new File(uploads, nombreArchivo);
+				
+				try(InputStream fotoStream = foto.getInputStream()) {
+					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
+					//System.out.println(request.getServletContext().getResource("/img"));
+					//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
+					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					rutaFoto = "media/usuarios/" + nombreUsuario + ".jpg";
+				} catch(Exception e) {rutaFoto = null;}
+			} else {rutaFoto = null;}
 			
 			HttpSession sesion = request.getSession();
 			DataUsuario usuario;

@@ -152,7 +152,6 @@
 	                  <div class="col-6">
 	                    <jsp:useBean id="date" class="java.util.Date"/>
 	                    <input type="text" readonly class="form-control-plaintext editable-field date" path="dueDate" name="nacimiento" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
-
 	                  </div>
 	                </div>
 	                <div class="row mb-1 perfil-group">

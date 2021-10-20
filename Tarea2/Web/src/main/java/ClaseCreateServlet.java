@@ -111,21 +111,32 @@ public class ClaseCreateServlet extends HttpServlet {
 		/* Manejo de la imagen */
 		String rutaFoto;
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) {
-			String pathToImages = request.getServletContext().getResource("/media/clases").getPath();
-			File uploads = new File(pathToImages);
-			String nombreArchivo = nombreClase.replaceAll(" ", "_") + ".jpg";
-			File archivo = new File(uploads, nombreArchivo);
-			
-			try(InputStream fotoStream = foto.getInputStream()) {
-				Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				rutaFoto = "media/clases/" + nombreClase + ".jpg";
-			} catch(Exception e) {rutaFoto = null;}
-		} else {rutaFoto = null;}
+		if (foto.getSize() > 0) 
+		rutaFoto = "media/clases/" + nombreClase + ".jpg";
+		else
+		rutaFoto = null;
+		
+		
 		
 		
 		try {
 			controladorInstitucion.altaClase(nombreClase, fecha, min, max,url,fechaAlta,nickname,nombreActividad, rutaFoto);
+			
+			/* Manejo de la imagen */
+			if (foto.getSize() > 0) {
+				String pathToImages = request.getServletContext().getResource("/media/clases").getPath();
+				File uploads = new File(pathToImages);
+				String nombreArchivo = nombreClase.replaceAll(" ", "_") + ".jpg";
+				File archivo = new File(uploads, nombreArchivo);
+				
+				try(InputStream fotoStream = foto.getInputStream()) {
+					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					rutaFoto = "media/clases/" + nombreClase + ".jpg";
+				} catch(Exception e) {rutaFoto = null;}
+			} else {rutaFoto = null;}
+			
+			
+			
 			response.sendRedirect(request.getContextPath() + "/");
 			
 		} catch (ClaseRepetidaException e) {

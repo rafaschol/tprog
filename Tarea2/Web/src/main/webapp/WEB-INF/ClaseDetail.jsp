@@ -46,7 +46,9 @@
             <p class="lead mb-1">Dictada por  
               <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
-            <a href="clases/registro?clase=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
+            <c:if test="${esSocio && noExpiro}">
+            	<a href="clases/registro?clase=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
+            </c:if>
           </div>
         </div>
         <div class="border-top my-4"></div>

@@ -72,32 +72,36 @@ public class ActividadCreateServlet extends HttpServlet {
 		String[] categorias = request.getParameterValues("categorias"); //VER SI ANDA BIEN
 		String nombreInstitucion = usuarioLogueado.getInstitucion();
 		
-
-		
 		/* Manejo de la imagen */
 		String rutaFoto;
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) {
-			String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
-			File uploads = new File(pathToImages);
-			String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
-			File archivo = new File(uploads, nombreArchivo);
-			
-			try(InputStream fotoStream = foto.getInputStream()) {
-				//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
-				//System.out.println(request.getServletContext().getResource("/img"));
-				//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
-				Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				rutaFoto = "media/actividades/" + nombreActividad + ".jpg";
-			} catch(Exception e) {rutaFoto = null;}
-		} else {rutaFoto = null;}
-		
-		
-		
-		
+		if (foto.getSize() > 0) 
+		rutaFoto = "media/actividades/" + nombreActividad + ".jpg";
+		else
+		rutaFoto = null;
+	
 		
 		try {
 			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoInt, fecha, nickname, categorias, rutaFoto);
+			
+			/* Manejo de la imagen */
+			if (foto.getSize() > 0) {
+				String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
+				File uploads = new File(pathToImages);
+				String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
+				File archivo = new File(uploads, nombreArchivo);
+				
+				try(InputStream fotoStream = foto.getInputStream()) {
+					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
+					//System.out.println(request.getServletContext().getResource("/img"));
+					//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
+					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					rutaFoto = "media/actividades/" + nombreActividad + ".jpg";
+				} catch(Exception e) {rutaFoto = null;}
+			} else {rutaFoto = null;}
+			
+			
+			
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (ActividadRepetidaException e) {
 			request.setAttribute("actividadRepetida", true);

@@ -54,11 +54,11 @@
       
       <div class="form-floating mb-3" style="display: flex; gap: 15px; height:100%; margin-bottom: 0px !important;">
         <div class="form-floating mb-3">
-        <input type="date" class="form-control" name="fecha" id="FechaInput" placeholder="Fecha" required >
+        <input type="date" class="form-control" name="fecha" id="FechaInput" placeholder="Fecha" value="${fecha!= null ? fecha : ''}" required >
         <label for="FechaInput">Fecha</label>
         </div>
           <div class="form-floating mb-3" style="width:100%;">
-        <input type="time" class="form-control" name="hora" id="HoraInput" placeholder="Hora" required>
+        <input type="time" class="form-control" name="hora" id="HoraInput" placeholder="Hora" value="${hora!= null ? hora : ''}"required>
         <label for="HoraInput">Hora</label>
         </div>
       </div>
