@@ -216,7 +216,7 @@ public class CargarDatosPrueba {
 		// Dada de alta por profe: altaActividadDeportivaWeb(nombreInstitucion, nombre, descripcion, duracion, costo, fecha, profesor, categorias, foto)
 	/* A1 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
-					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio, null);
+					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio,"media/actividades/Aparatos_y_Pesas.jfif");
 			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
 			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
 	
@@ -230,7 +230,7 @@ public class CargarDatosPrueba {
 			
 	/* A3 */controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
 					"Para cuidar el aparato cardiovascular",
-					110, (float) 800.0, new Date(121, 4, 30), arrayVacio, null);
+					110, (float) 800.0, new Date(121, 4, 30), arrayVacio,"media/actividades/Aerobica.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Aer\u00F3bica", true);
 			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Gimnasia");
 			controladorInstitucion.agregarCategoriaAActividad("Aer\u00F3bica", "Al aire libre");
@@ -238,7 +238,7 @@ public class CargarDatosPrueba {
 			
 	/* A4 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Kickboxing",
 					"En busca del nuevo campe\u00F3n de boxeo.",
-					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, null);
+					100, (float) 980.0, new Date(121, 5, 7), "TheBoss", arrayVacio, "media/actividades/Kickboxing.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Kickboxing", true);
 			controladorInstitucion.agregarCategoriaAActividad("Kickboxing", "Deportes");
 			
@@ -268,7 +268,7 @@ public class CargarDatosPrueba {
 	/* A8 */String[] categoriasA8 = {"Gimnasia"};
 			controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
 					"El Método Pilates combina diferentes capacidades físicas.",
-					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8, null);
+					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8,"media/actividades/Pilates.jpg");
 			//controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
 					// INGRESADA
 	
@@ -299,23 +299,23 @@ public class CargarDatosPrueba {
 
 	public void cargarClases() {
 		try {
-			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null);
+			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas","media/clases/Caliestenia.jpg");
 			controladorInstitucion.altaClase("Peso libre", new Date(121, 4, 1, 17, 0), 1, 5, "https://www.musculos.com/pesolibre", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null);
 			controladorInstitucion.altaClase("Aparatos", new Date(121, 5, 1, 18, 0), 1, 7, "https://www.musculos.com/aparatos", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null);
-			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol",null);
-			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol",null);
-			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol",null);
+			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol","media/clases/Voleibol.jpg");
+			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Braza.jpg");
+			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Mariposa.jpg");
 			controladorInstitucion.altaClase("Aer\u00F3bica ni\u00F1os", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null);
-			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null);
+			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica","media/clases/Aeróbico_adulto_mayor.jpg");
 			controladorInstitucion.altaClase("Aer\u00F3bica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null);
 			controladorInstitucion.altaClase("Boxeo I", new Date(121, 8, 1, 19, 30), 1, 4, "https://www.musculos.com/boxeo1", new Date(121, 5, 7), "TheBoss", "Kickboxing",null);
-			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing",null);
-			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing",null);
+			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing","media/clases/Boxeo_II.jpg");
+			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/Músculos_para_boxeo.jpg");
 			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo",null);
-			controladorInstitucion.altaClase("200 M", new Date(121, 9, 25, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo",null);
+			controladorInstitucion.altaClase("200 M", new Date(121, 9, 25, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg");
 			controladorInstitucion.altaClase("Posta", new Date(121, 10, 25, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo",null);
-			controladorInstitucion.altaClase("Basquet I", new Date(121, 8, 1, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol",null);
-			controladorInstitucion.altaClase("Basquet II", new Date(121, 9, 1, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol",null);
+			controladorInstitucion.altaClase("Basquet I", new Date(121, 8, 1, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_I.jpg");
+			controladorInstitucion.altaClase("Basquet II", new Date(121, 9, 1, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_II.jpg");
 		} catch (ClaseRepetidaException e) {
 			e.printStackTrace();
 		}
@@ -389,11 +389,11 @@ public class CargarDatosPrueba {
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
 					new Date(121, 7, 1), new Date(121, 8, 30), (float) 0.3, new Date(121, 6, 15),
-					null, (float) 4200);
+					"media/cuponeras/Gimnasia.jpg", (float) 4200);
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
 					new Date(121, 6, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
-					null,(float) 15642);
+					"media/cuponeras/Músculos.jfif",(float) 15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}
