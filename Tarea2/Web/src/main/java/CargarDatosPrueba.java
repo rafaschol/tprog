@@ -299,7 +299,7 @@ public class CargarDatosPrueba {
 
 	public void cargarClases() {
 		try {
-			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas","media/clases/Caliestenia.jpg");
+			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas","media/clases/Calistenia.jpg");
 			controladorInstitucion.altaClase("Peso libre", new Date(121, 4, 1, 17, 0), 1, 5, "https://www.musculos.com/pesolibre", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null);
 			controladorInstitucion.altaClase("Aparatos", new Date(121, 5, 1, 18, 0), 1, 7, "https://www.musculos.com/aparatos", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null);
 			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol","media/clases/Voleibol.jpg");
@@ -312,10 +312,10 @@ public class CargarDatosPrueba {
 			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing","media/clases/Boxeo_II.jpg");
 			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/Músculos_para_boxeo.jpg");
 			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo",null);
-			controladorInstitucion.altaClase("200 M", new Date(121, 9, 25, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg");
+			controladorInstitucion.altaClase("200 M", new Date(121, 10, 5, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg");
 			controladorInstitucion.altaClase("Posta", new Date(121, 10, 25, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo",null);
-			controladorInstitucion.altaClase("Basquet I", new Date(121, 8, 1, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_I.jpg");
-			controladorInstitucion.altaClase("Basquet II", new Date(121, 9, 1, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_II.jpg");
+			controladorInstitucion.altaClase("Basquet I", new Date(121, 10, 3, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_I.jpg");
+			controladorInstitucion.altaClase("Basquet II", new Date(121, 10, 1, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_II.jpg");
 		} catch (ClaseRepetidaException e) {
 			e.printStackTrace();
 		}
@@ -384,7 +384,7 @@ public class CargarDatosPrueba {
 							 // altaCuponera(nombre, descripcion, inicio, fin, descuento, fechaAlta, foto)
 			controladorCuponera.altaCuponera("Pelota",
 					"Deportes con pelota.",
-					new Date(121, 4, 1), new Date(121, 11, 31), (float) 0.2, new Date(121, 3, 30),
+					new Date(121, 4, 1), new Date(121, 6, 31), (float) 0.2, new Date(121, 3, 30),
 					"media/cuponeras/Pelota.jpg", (float) 10680.0);
 			controladorCuponera.altaCuponera("Gimnasia",
 					"Aer\u00F3bica y aparatos.",
@@ -392,7 +392,7 @@ public class CargarDatosPrueba {
 					"media/cuponeras/Gimnasia.jpg", (float) 4200);
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
-					new Date(121, 6, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 7, 1),
+					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 6, 18),
 					"media/cuponeras/Músculos.jfif",(float) 15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
