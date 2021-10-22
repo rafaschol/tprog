@@ -1,4 +1,7 @@
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -60,7 +64,7 @@ public class ClaseCreateServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("actividades",actividades);
-		
+		request.setAttribute("dataTab", "0");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ClaseCreate.jsp");
 		dispatcher.forward(request, response);
@@ -69,8 +73,6 @@ public class ClaseCreateServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ClaseCreate.jsp");
-		
-		
 		
 		HttpSession session = request.getSession();
 		DataProfesor usuarioLogueado = (DataProfesor) session.getAttribute("usuarioLogueado");
@@ -85,12 +87,8 @@ public class ClaseCreateServlet extends HttpServlet {
 		String url = request.getParameter("url");
 		String inputFecha = request.getParameter("fecha");
 		String inputHora = request.getParameter("hora");
-		System.out.println(inputHora);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date fecha;
-		
-	
-		
+		Date fecha;		
 		
 		try {
 			fecha = format.parse(inputFecha);
@@ -109,14 +107,9 @@ public class ClaseCreateServlet extends HttpServlet {
 		
 		
 		/* Manejo de la imagen */
-		String rutaFoto;
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) 
-		rutaFoto = "media/clases/" + nombreClase + ".jpg";
-		else
-		rutaFoto = null;
-		
-		
+		String nombreArchivo = nombreClase.replaceAll(" ", "_") + ".jpg";
+		String rutaFoto = foto.getSize() > 0 ? "media/clases/" + nombreArchivo : null;
 		
 		
 		try {
@@ -126,17 +119,16 @@ public class ClaseCreateServlet extends HttpServlet {
 			if (foto.getSize() > 0) {
 				String pathToImages = request.getServletContext().getResource("/media/clases").getPath();
 				File uploads = new File(pathToImages);
-				String nombreArchivo = nombreClase.replaceAll(" ", "_") + ".jpg";
 				File archivo = new File(uploads, nombreArchivo);
 				
-				try(InputStream fotoStream = foto.getInputStream()) {
-					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				try {
+					InputStream fotoStream = foto.getInputStream();
+					InputStream fotoRecortada = recortarImagen(fotoStream);
+					Files.copy(fotoRecortada, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					rutaFoto = "media/clases/" + nombreClase + ".jpg";
-				} catch(Exception e) {rutaFoto = null;}
-			} else {rutaFoto = null;}
-			
-			
-			
+				} catch(Exception e) {e.printStackTrace();}
+			}
+						
 			response.sendRedirect(request.getContextPath() + "/");
 			
 		} catch (ClaseRepetidaException e) {
@@ -150,8 +142,8 @@ public class ClaseCreateServlet extends HttpServlet {
 					actividades = instituciones[j].getActividades();
 			}
 			
-			request.setAttribute("actividades",actividades);
-		
+			request.setAttribute("dataTab", "0");
+			request.setAttribute("actividades", actividades);
 			
 			request.setAttribute("nombre", nombreClase);
 			request.setAttribute("minSocios", minSocios);
@@ -161,13 +153,38 @@ public class ClaseCreateServlet extends HttpServlet {
 			request.setAttribute("hora", inputHora);
 			request.setAttribute("url", url);
 		
-			
 			dispatcher.forward(request, response);
+		}	
+	}
+	
+	private InputStream recortarImagen(InputStream imagen) {
+		try {
+			BufferedImage originalImage = ImageIO.read(imagen);
+			int originalSizeX = originalImage.getWidth();
+			int originalSizeY = originalImage.getHeight();
+			int w, h, x, y;
+			
+			if (originalSizeX >= originalSizeY) {
+				w = originalSizeY;
+				h = originalSizeY;
+				x = (int) ((originalSizeX - originalSizeY) / 2);
+				y = 0;
+			} else {
+				w = originalSizeX;
+				h = originalSizeX;
+				x = 0;
+				y = (int) ((originalSizeY - originalSizeX) / 2);
+			}
+			
+			BufferedImage imagenRecortada = originalImage.getSubimage(x, y, w, h);
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			ImageIO.write(imagenRecortada, "jpg", os);
+			return new ByteArrayInputStream(os.toByteArray());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return imagen;
 		}
-		
-		
-		
-		
 	}
 
 }

@@ -28,13 +28,13 @@
   <!-- Form page -->
   <main class="form-page tab-page" >
 
-    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="POST" id="activity-form" enctype="multipart/form-data" data-tab="${dataTab}">
+    <form class="text-center py-5 px-4 m-3 bg-white shadow rounded" method="post" enctype="multipart/form-data" id="multitab-form" data-tab="${dataTab}" data-pagetype="actividad">
       <h3>Entrenemos<span class="fw-bold">.uy</span></h3>
       <h5 class="fw-light">Nueva actividad deportiva</h5>
       <div class="border-top my-4"></div>
-      <div class="form-tab active">
+      <div class="form-tab">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="nombre" id="nombreInput" placeholder="Nombre" value="${nombre != null ? nombre : ''}"  aria-describedly="invalidUsername" required>
+          <input type="text" class="form-control${ actividadRepetida != null ? ' is-invalid' : '' }" name="nombre" id="nombreInput" placeholder="Nombre" value="${nombre != null ? nombre : ''}" aria-describedly="invalidUsername" required>
           <label for="nombreInput">Nombre</label>
           <c:if test="${actividadRepetida}">
             <div id="invalidUsername" class="invalid-feedback d-block">
@@ -43,12 +43,12 @@
         </c:if>
         </div>
         <div class="form-floating mb-3">
-          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="DescripciÃ³n" required>${descripcion != null ? descripcion : ''}</textarea>
-          <label for="descripcionTextArea">DescripciÃ³n</label>
+          <textarea class="form-control" name="descripcion" id="descripcionTextArea" placeholder="Descripción" required>${descripcion != null ? descripcion : ''}</textarea>
+          <label for="descripcionTextArea">Descripción</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="DuraciÃ³n (minutos)" value="${duracion != null ? duracion : '60'}" min="1" required>
-          <label for="duracionInput">DuraciÃ³n (minutos)</label>
+          <input type="number" class="form-control" name="duracion" id="duracionInput" placeholder="Duración (minutos)" value="${duracion != null ? duracion : '60'}" min="1" required>
+          <label for="duracionInput">Duración (minutos)</label>
         </div>
         <div class="form-floating mb-3">
           <input type="number" class="form-control" name="costo" id="costoInput" placeholder="Costo ($)" value="${costo != null ? costo : ''}" required>
@@ -56,9 +56,8 @@
         </div>
       </div>
       <div class="form-tab">
-        <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o mÃ¡s categorÃ­as</label>
+        <label for="institucionSelect" class="d-block mb-3 text-start">Selecciona una o más categorías</label>
         <select class="form-select mb-3" multiple name="categorias" id="categoriasSelect" required>
-          <option selected disabled hidden>Selecciona una o mÃ¡s categorÃ­as</option>
           <c:forEach items="${categorias}" var="categoria">
           	<option value="${categoria}">${categoria}</option>
  	      </c:forEach>
@@ -66,15 +65,15 @@
       </div>
       <div class="form-tab">
         <div class="mb-3">
-          <label for="fotoFile" class="form-label">Foto de la Actividad Deportiva</label>
-          <input class="form-control" type="file" name="foto" id="fotoFile"  value="${foto != null ? foto : ''}" accept="image/png, image/jpeg">
+          <label for="fotoFile" class="form-label">Foto de la actividad deportiva</label>
+          <input class="form-control" type="file" name="foto" id="fotoFile" accept="image/png, image/jpeg">
         </div>
       </div>
       <button class="btn btn-secondary rounded-circle" id="prev-button">
         <i class="fas fa-arrow-left" style="padding: 5px 0;"></i>
       </button>
       <button class="btn btn-lg btn-primary w-100 mt-2" id="next-button">Siguiente</button>  
-      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2" id="submit-button">Crear</button> 
+      <button type="submit" class="btn btn-lg btn-primary w-100 mt-2" id="submit-button">Crear</button>
     </form>
 
   </main>

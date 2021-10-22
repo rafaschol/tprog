@@ -28,16 +28,12 @@ import logica.IControladorUsuario;
 public class UsuarioDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
 	
 
     public UsuarioDetailServlet() { 
         super();
         Fabrica fabrica = Fabrica.getInstance();
     	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera(); 
     }
 
 	
@@ -92,6 +88,8 @@ public class UsuarioDetailServlet extends HttpServlet {
 		request.setAttribute("esSocio", esSocio);
 		request.setAttribute("esProfesor", esProfesor);
 		request.setAttribute("usuario", dataUsuario);
+		String nacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(dataUsuario.getFechaNacimiento());
+		request.setAttribute("nacimiento", nacimientoString);
 		request.setAttribute("nSeguidores", nSeguidores);
 		request.setAttribute("nSeguidos", nSeguidos);
 		

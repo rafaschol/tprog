@@ -104,8 +104,7 @@
 	                <div class="row mb-1 perfil-group" id="nacimientoGroup">
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
-	                    <jsp:useBean id="date2" class="java.util.Date"/>
-	                    <input type="text" readonly class="form-control-plaintext editable-field" path="dueDate" class= "date2" name = "nacimiento" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
+	                    <input type="date" readonly class="form-control-plaintext editable-field" name="nacimiento" value="${nacimiento}">
 	                  </div>
 	                </div>
 

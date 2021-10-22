@@ -1,5 +1,8 @@
 
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -69,13 +73,10 @@ public class RegistroServlet extends HttpServlet {
 		}
 		boolean esProfesor = institucion != null && institucion.isEmpty();
 		
-		/* Manejo de la imagen */
-		String rutaFoto;
+		/* Manejo de la imagen */		
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) 
-			rutaFoto = "media/usuarios/" + nombreUsuario + ".jpg";
-		else
-		rutaFoto = null;
+		String nombreArchivo = nombreUsuario.replaceAll(" ", "_") + ".jpg";
+		String rutaFoto = foto.getSize() > 0 ? "media/usuarios/" + nombreArchivo : null;
 		
 		
 		/* Hacer el alta del usuario */
@@ -91,17 +92,18 @@ public class RegistroServlet extends HttpServlet {
 			if (foto.getSize() > 0) {
 				String pathToImages = request.getServletContext().getResource("/media/usuarios").getPath();
 				File uploads = new File(pathToImages);
-				String nombreArchivo = nombreUsuario.replaceAll(" ", "_") + ".jpg";
 				File archivo = new File(uploads, nombreArchivo);
 				
-				try(InputStream fotoStream = foto.getInputStream()) {
+				try {
+					InputStream fotoStream = foto.getInputStream();
+					InputStream fotoRecortada = recortarImagen(fotoStream);
 					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
 					//System.out.println(request.getServletContext().getResource("/img"));
 					//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
-					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(fotoRecortada, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					rutaFoto = "media/usuarios/" + nombreUsuario + ".jpg";
-				} catch(Exception e) {rutaFoto = null;}
-			} else {rutaFoto = null;}
+				} catch(Exception e) {e.printStackTrace();}
+			}
 			
 			HttpSession sesion = request.getSession();
 			DataUsuario usuario;
@@ -145,6 +147,36 @@ public class RegistroServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
+	}
+	
+	private InputStream recortarImagen(InputStream imagen) {
+		try {
+			BufferedImage originalImage = ImageIO.read(imagen);
+			int originalSizeX = originalImage.getWidth();
+			int originalSizeY = originalImage.getHeight();
+			int w, h, x, y;
+			
+			if (originalSizeX >= originalSizeY) {
+				w = originalSizeY;
+				h = originalSizeY;
+				x = (int) ((originalSizeX - originalSizeY) / 2);
+				y = 0;
+			} else {
+				w = originalSizeX;
+				h = originalSizeX;
+				x = 0;
+				y = (int) ((originalSizeY - originalSizeX) / 2);
+			}
+			
+			BufferedImage imagenRecortada = originalImage.getSubimage(x, y, w, h);
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			ImageIO.write(imagenRecortada, "jpg", os);
+			return new ByteArrayInputStream(os.toByteArray());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return imagen;
+		}
 	}
 
 }

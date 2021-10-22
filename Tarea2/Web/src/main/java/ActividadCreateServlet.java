@@ -1,4 +1,7 @@
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.Enumeration;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,26 +32,20 @@ import logica.IControladorUsuario;
 @MultipartConfig
 public class ActividadCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
 	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
 
     public ActividadCreateServlet() {
         super();
         Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
     	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera(); 
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		String[] categorias =  controladorInstitucion.listarCategorias();
 		
 		request.setAttribute("categorias",categorias);
 		request.setAttribute("dataTab", "0");
-		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadCreate.jsp");
 		dispatcher.forward(request, response);
@@ -65,7 +63,7 @@ public class ActividadCreateServlet extends HttpServlet {
 		String costo = request.getParameter("costo");
 		
 		int duracionInt = Integer.parseInt(duracion);
-		float costoInt = Integer.parseInt(costo);
+		float costoFloat = Float.parseFloat(costo);
 		
 		Date fecha = new Date();
 	
@@ -73,51 +71,74 @@ public class ActividadCreateServlet extends HttpServlet {
 		String nombreInstitucion = usuarioLogueado.getInstitucion();
 		
 		/* Manejo de la imagen */
-		String rutaFoto;
 		Part foto = request.getPart("foto");
-		if (foto.getSize() > 0) 
-		rutaFoto = "media/actividades/" + nombreActividad + ".jpg";
-		else
-		rutaFoto = null;
-	
+		String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
+		String rutaFoto = foto.getSize() > 0 ? "media/actividades/" + nombreArchivo : null;
 		
 		try {
-			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoInt, fecha, nickname, categorias, rutaFoto);
+			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoFloat, fecha, nickname, categorias, rutaFoto);
 			
 			/* Manejo de la imagen */
 			if (foto.getSize() > 0) {
 				String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
 				File uploads = new File(pathToImages);
-				String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
 				File archivo = new File(uploads, nombreArchivo);
 				
-				try(InputStream fotoStream = foto.getInputStream()) {
+				try {
+					InputStream fotoStream = foto.getInputStream();
+					InputStream fotoRecortada = recortarImagen(fotoStream);
 					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
 					//System.out.println(request.getServletContext().getResource("/img"));
 					//System.out.println(request.getServletContext().getRealPath("")); NO USAR ESTO, EN INTERNET TODOS RECOMIENDAN NO USARLO
-					Files.copy(fotoStream, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(fotoRecortada, archivo.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					rutaFoto = "media/actividades/" + nombreActividad + ".jpg";
-				} catch(Exception e) {rutaFoto = null;}
-			} else {rutaFoto = null;}
-			
-			
+				} catch(Exception e) {e.printStackTrace();}
+			}
 			
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (ActividadRepetidaException e) {
 			request.setAttribute("actividadRepetida", true);
-			String[] categoriass =  controladorInstitucion.listarCategorias();
-			request.setAttribute("dataTab", "1");
-			request.setAttribute("categorias",categoriass);
-			
+			request.setAttribute("dataTab", "0");
+			request.setAttribute("categorias", controladorInstitucion.listarCategorias());
 			
 			request.setAttribute("nombre", nombreActividad);
 			request.setAttribute("descripcion", descripcion);
 			request.setAttribute("duracion", duracion);
 			request.setAttribute("costo", costo);
+			request.setAttribute("categoriasSeleccionadas", categorias);
 			dispatcher.forward(request, response);
 		}
 		
-		
+	}
+	
+	private InputStream recortarImagen(InputStream imagen) {
+		try {
+			BufferedImage originalImage = ImageIO.read(imagen);
+			int originalSizeX = originalImage.getWidth();
+			int originalSizeY = originalImage.getHeight();
+			int w, h, x, y;
+			
+			if (originalSizeX >= originalSizeY) {
+				w = originalSizeY;
+				h = originalSizeY;
+				x = (int) ((originalSizeX - originalSizeY) / 2);
+				y = 0;
+			} else {
+				w = originalSizeX;
+				h = originalSizeX;
+				x = 0;
+				y = (int) ((originalSizeY - originalSizeX) / 2);
+			}
+			
+			BufferedImage imagenRecortada = originalImage.getSubimage(x, y, w, h);
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			ImageIO.write(imagenRecortada, "jpg", os);
+			return new ByteArrayInputStream(os.toByteArray());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return imagen;
+		}
 	}
 
 }
