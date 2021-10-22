@@ -194,10 +194,11 @@
             <!-- Tab de clases -->
             <div class="tab-pane fade" id="nav-clases" role="tabpanel" aria-labelledby="nav-clases-tab">
               <div class="list-group list-group-flush">
+               <jsp:useBean id="dateFechaCompra" class="java.util.Date"/>
                <c:forEach items="${clases}" var="clase">
 	                <a href="clases/${clase.getNombre()}" class="list-group-item">
 	                  <img class="rounded-circle me-2" src="${clase.getImagen() != null ? clase.getImagen() :  'img/default.jpg'}" alt="clase">
-	                  ${clase.getNombre()}
+	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().getDay()}/${clase.getFechaCompra().getMonth()}/2021)  </c:if>
 	                </a>
                 </c:forEach>
                 

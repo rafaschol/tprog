@@ -502,7 +502,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		iterador = 0;
     		for (Map.Entry<Integer, Registro> iter : regs.entrySet()) {
-    			clases[iterador] =  new DataClase(iter.getValue().getClase(), null, null);
+    			clases[iterador] =  new DataClase(iter.getValue().getClase(), null, null, iter.getValue().getCosto(),iter.getValue().getFecha());
     			iterador++;
     		}
     		

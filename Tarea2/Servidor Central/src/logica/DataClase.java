@@ -1,5 +1,4 @@
 package logica;
-
 import java.util.Date;
 
 public class DataClase {
@@ -13,6 +12,8 @@ public class DataClase {
 	private String actividad;
 	private String institucion;
 	private String imagen;
+	private float precioCompra;
+	private Date fechaCompra;
 	
 	
 	public DataClase(Clase clase, String actividad, String institucion) {
@@ -26,6 +27,20 @@ public class DataClase {
 		this.setActividad(actividad);
 		this.setInstitucion(institucion);
 		this.setImagen(clase.getImagen());
+	}
+	public DataClase(Clase clase, String actividad, String institucion, float precioCompra, Date fechaCompra) {
+		this.setNombre(clase.getNombre());
+		this.setFecha(clase.getFecha());
+		this.setMinPersonas(clase.getMinPersonas());
+		this.setMaxPersonas(clase.getMaxPersonas());
+		this.setURL(clase.getURL());
+		this.setFechaAlta(clase.getFechaAlta());
+		this.setProfesor(clase.getProfesor().getNickname());	
+		this.setActividad(actividad);
+		this.setInstitucion(institucion);
+		this.setImagen(clase.getImagen());
+		this.setPrecioCompra(precioCompra);
+		this.setFechaCompra(fechaCompra);
 	}
 	
 	public String getNombre() {
@@ -111,6 +126,22 @@ public class DataClase {
 
 	private void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public float getPrecioCompra() {
+		return precioCompra;
+	}
+
+	private void setPrecioCompra(float precioCompra) {
+		this.precioCompra = precioCompra;
+	}
+
+	public Date getFechaCompra() {
+		return fechaCompra;
+	}
+
+	private void setFechaCompra(Date fechaCompra) {
+		this.fechaCompra = fechaCompra;
 	}
 
 
