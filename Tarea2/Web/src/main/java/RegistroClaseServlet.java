@@ -63,6 +63,7 @@ public class RegistroClaseServlet extends HttpServlet {
 			DataClase clase = controladorInstitucion.obtenerDataClase(nombreClase);
 			String actividad = clase.getActividad();
 			String[] cuponeras = controladorUsuario.listarCuponerasActividadWeb(nicknameSocio, actividad);
+			request.setAttribute("clase", clase); 
 			request.setAttribute("cuponeras", cuponeras); 
 			request.setAttribute("claseSeleccionada", nombreClase); 
 			// Ac� debo mandar a la segunda tab del formulario

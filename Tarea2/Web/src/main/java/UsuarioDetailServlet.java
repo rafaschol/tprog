@@ -106,6 +106,7 @@ public class UsuarioDetailServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/UsuarioDetail.jsp");
 		String nombreUsuario = request.getPathInfo().substring(1);
@@ -118,7 +119,7 @@ public class UsuarioDetailServlet extends HttpServlet {
 		String nacimientoString = request.getParameter("nacimiento");
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date nacimiento;
-		
+	
 		try {
 			nacimiento = format.parse(nacimientoString);
 		} catch (ParseException e) {

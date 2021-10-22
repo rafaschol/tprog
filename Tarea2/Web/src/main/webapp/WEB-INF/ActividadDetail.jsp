@@ -53,7 +53,7 @@
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$${String.format("%.0f", actividad.getCosto())}</span></td>
             </tr>
             <tr>
-              <td><i class="fas fa-home rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Institucion: <span class="fw-bold ms-1">${actividad.getInstitucion()} </span></td>
+              <td><i class="fas fa-home rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.0px;"></i>Institucion: <span class="fw-bold ms-1">${actividad.getInstitucion()} </span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>

@@ -61,6 +61,9 @@
           <tr>
             <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="time"  dateStyle = "short" timeStyle = "short" /></span></td>
           </tr>
+          <tr>
+              <td><i class="fas fa-link rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>URL: <span class="fw-bold ms-1">${clase.getURL()} </span></td>
+          </tr>
         </table>
       </section>
     </main>

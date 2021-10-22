@@ -108,7 +108,7 @@
 	                <div class="row mb-1 perfil-group" id="nacimientoGroup">
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
-	                    <input type="date" readonly class="form-control-plaintext editable-field" name="nacimiento" value="${nacimiento}">
+	                    <input type="date" readonly class="form-control-plaintext editable-field" id="nacimiento" name="nacimiento" value="${nacimiento}">
 	                  </div>
 	                </div>
 
@@ -153,8 +153,7 @@
 	                <div class="row mb-1 perfil-group" id="nacimientoGroup">
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
-	                    <jsp:useBean id="date" class="java.util.Date"/>
-	                    <input type="text" readonly class="form-control-plaintext editable-field date" path="dueDate" name="nacimiento" value = "<fmt:formatDate value="${usuario.getFechaNacimiento()}" pattern="MM/dd/yyyy" />"/>
+	                    <input type="date" readonly class="form-control-plaintext editable-field" name="nacimiento" value="${nacimiento}">
 	                  </div>
 	                </div>
 	                <div class="row mb-1 perfil-group">
@@ -202,7 +201,7 @@
                <c:forEach items="${clases}" var="clase">
 	                <a href="clases/${clase.getNombre()}" class="list-group-item">
 	                  <img class="rounded-circle me-2" src="${clase.getImagen() != null ? clase.getImagen() :  'img/default.jpg'}" alt="clase">
-	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().getDay()}/${clase.getFechaCompra().getMonth()}/2021)  </c:if>
+	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().getDate()}/${clase.getFechaCompra().getMonth()+1}/${clase.getFechaCompra().getYear()+1900})  </c:if>
 	                </a>
                 </c:forEach>
                 
@@ -282,6 +281,8 @@
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="js/sidebar.js"></script>
+  <script> document.getElementById('nacimiento').max = new Date().toISOString().split("T")[0];</script>
+  
   <c:if test="${uLogueado && (not suCuenta)}"><script src="js/usuario-detail.js"></script></c:if>
   <c:if test="${(esSocio || esProfesor) && suCuenta}"></c:if> <script src="js/edit-perfil.js"></script>
   
