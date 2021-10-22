@@ -218,7 +218,7 @@
 	              </div>
 	            </div>
             </c:if>
-            
+          
            
 	        <c:if test="${esProfesor}">
 		            <!-- Tabs de actividades deportivas -->
@@ -236,7 +236,7 @@
 	            <div class="tab-pane fade" id="nav-actividades-sin-aceptar" role="tabpanel" aria-labelledby="nav-actividades-sin-aceptar-tab">
 	              <div class="list-group list-group-flush">
 	              <c:forEach items="${actividadesPendientes}" var="actividad">
-		                <a href="actividades/${actividad.getNombre()}" class="list-group-item d-flex align-items-center">
+		                <a href="actividades/${actividad.getNombre()}?profesor=${usuario.getNickname()}" class="list-group-item d-flex align-items-center">
 		                  <img class="rounded-circle me-2" src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="cuponera">
 		                  ${actividad.getNombre()}
 		                  <span class="badge bg-danger ms-auto p-2">${actividad.getEstado()}</span>

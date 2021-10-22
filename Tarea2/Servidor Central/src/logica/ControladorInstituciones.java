@@ -216,7 +216,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
         for (int j = 0; j < categorias.length; j++) {
         	actividad.addCategoria(mcat.obtenerCategoria(categorias[j]));
         }
-        
+        mactividad.addActividadSinAceptar(actividad);
         mactividad.addActividad(actividad);
     	//i.addActividad(a);
     	
@@ -352,5 +352,16 @@ public class ControladorInstituciones implements IControladorInstituciones {
 		resultados = ordenar(resultados, orden);
 		return resultados.toArray(DataItem[]::new);
 	}
+	
+	public DataActividad listarDataActividadProfesor(String nombre) {
+    	ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombre);
+    	//Conseguir strings para crear Data Actividad
+    	String[] clases = actividad.listarClases();
+    	String[] cuponeras = actividad.listarCuponeras();
+    	String[] categorias = actividad.listarCategorias();	
+    	DataActividad dataActividad = new DataActividad(actividad, clases, cuponeras, categorias);
+    	return dataActividad;   	
+    }
     
 }

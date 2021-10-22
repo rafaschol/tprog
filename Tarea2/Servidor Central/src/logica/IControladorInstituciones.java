@@ -52,4 +52,6 @@ public interface IControladorInstituciones {
 	public abstract DataCuponera[] listarDataCuponera(String nombreActividad);
 	
 	public abstract DataItem[] buscar(String query, String institucion, String categoria, String orden);
+	
+	public abstract DataActividad listarDataActividadProfesor(String nombre);
 }

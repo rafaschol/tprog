@@ -333,7 +333,8 @@ public class CrearClase extends JInternalFrame {
     	if (esValido()) {
     		Date fechaHoraClase = new Date(fechaClase.getYear(), fechaClase.getMonth(), fechaClase.getDate(), horaInicio.getHours(), horaInicio.getMinutes());
     		try {
-    			controladorInstitucion.altaClase(nombre, fechaHoraClase, minSocios, maxSocios, url, fechaAlta, profesor, actividad);
+    			//no se estan creando con imagenes por el momento
+    			controladorInstitucion.altaClase(nombre, fechaHoraClase, minSocios, maxSocios, url, fechaAlta, profesor, actividad,null);
     			JOptionPane.showMessageDialog(this, "Se cre\u00F3 la clase correctamente.");
     			cerrarFormulario();
     		}

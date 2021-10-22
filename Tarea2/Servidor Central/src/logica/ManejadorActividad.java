@@ -5,12 +5,14 @@ import java.util.Map;
 
 public class ManejadorActividad {
 	private Map<String, ActividadDeportiva> actividades; // Todas las Actividades Depotivas
+	private Map<String, ActividadDeportiva> actividadesSinAceptar; // Todas las Actividades Depotivas
 	private Map<String, ActividadDeportiva> actividadesAceptadas; // Solo las Actividades Depotivas aceptadas por Admin
     private static ManejadorActividad instancia = null;
 
     private ManejadorActividad() {
     	actividades = new HashMap<String, ActividadDeportiva>();
     	actividadesAceptadas = new HashMap<String, ActividadDeportiva>();
+    	actividadesSinAceptar = new HashMap<String, ActividadDeportiva>();
     }
 
     public static ManejadorActividad getinstance() {
@@ -31,10 +33,17 @@ public class ManejadorActividad {
     public ActividadDeportiva obtenerActividadAceptada(String actividad) {
         return (actividadesAceptadas.get(actividad));
     }
+    public ActividadDeportiva obtenerActividadSinAceptar(String actividad) {
+        return (actividadesSinAceptar.get(actividad));
+    }
     
     public void addActividadAceptada(ActividadDeportiva actividad) {
         String nombre = actividad.getNombre();
         actividadesAceptadas.put(nombre, actividad);
+    }
+    public void addActividadSinAceptar(ActividadDeportiva actividad) {
+        String nombre = actividad.getNombre();
+        actividadesSinAceptar.put(nombre, actividad);
     }
     
     public void removeActividad(ActividadDeportiva actividad) {
@@ -49,6 +58,12 @@ public class ManejadorActividad {
 	public Map<String, ActividadDeportiva> getActividadesAceptadas() {
 		return actividadesAceptadas;
 	}
+
+	public Map<String, ActividadDeportiva> getActividadesSinAceptar() {
+		return actividadesSinAceptar;
+	}
+
+	
 
 
 }

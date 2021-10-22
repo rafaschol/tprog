@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logica.DataActividad;
 import logica.DataClase;
 import logica.DataCuponera;
+import logica.DataUsuario;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -33,16 +35,36 @@ public class ActividadDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombreActividad = request.getPathInfo().substring(1);
+		HttpSession session = request.getSession();
+		String nombreProfesor = request.getParameter("profesor");
+		DataUsuario dataUsuario = (DataUsuario) session.getAttribute("usuarioLogueado");
 		
-		DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividad(nombreActividad);
-		request.setAttribute("actividad", actividad);
-		DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
-		request.setAttribute("clases", clases);
-		DataCuponera[] cuponeras = controladorInstitucion.listarDataCuponera(nombreActividad);
-		request.setAttribute("cuponeras", cuponeras);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
-		dispatcher.forward(request, response);
+		if(nombreProfesor !=null) {
+			if (dataUsuario!= null &&  dataUsuario.getNickname().equals(nombreProfesor)) {
+				DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividadProfesor(nombreActividad);
+				request.setAttribute("actividad", actividad);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				//ACA RAFA TIENE QUE REDIRECCIONAR A PAGINA DE ERROR
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Index.jsp");
+				dispatcher.forward(request, response);
+			}
+		}
+		else {
+			DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividad(nombreActividad);
+		    request.setAttribute("actividad", actividad);
+		    DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+			request.setAttribute("clases", clases);
+			DataCuponera[] cuponeras = controladorInstitucion.listarDataCuponera(nombreActividad);
+			request.setAttribute("cuponeras", cuponeras);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
