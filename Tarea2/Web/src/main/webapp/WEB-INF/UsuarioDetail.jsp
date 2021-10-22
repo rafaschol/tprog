@@ -47,7 +47,11 @@
               <a href="#" class="text-decoration-none text-reset"><span class="fw-bold">${nSeguidores}</span> seguidores</a>
             </p>
             <c:if test="${uLogueado && (not suCuenta)}">
-            	<button class="btn btn-primary mt-3" id="seguir-button">Seguir</button>
+              <form action="usuarios/seguir" method="post">
+                <input type="hidden" name="seguir" value="${!siguiendolo}">
+                <input type="hidden" name="usuario" value="${usuario.getNickname()}">
+                <button class="btn mt-3 ${siguiendolo ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${siguiendolo ? 'Siguiendo' : 'Seguir'}</button>
+              </form>
             </c:if>
           </div>
         </div>

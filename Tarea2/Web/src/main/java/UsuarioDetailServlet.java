@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -92,6 +93,13 @@ public class UsuarioDetailServlet extends HttpServlet {
 		request.setAttribute("nacimiento", nacimientoString);
 		request.setAttribute("nSeguidores", nSeguidores);
 		request.setAttribute("nSeguidos", nSeguidos);
+		
+		// Esto se debe calcular:
+		if (uLogueado) {
+			String nicknameLogueado = usuarioLogueado.getNickname();
+			boolean siguiendolo = Arrays.stream(seguidores).anyMatch(seguidor -> seguidor.getNickname().equals(nicknameLogueado));
+			request.setAttribute("siguiendolo", siguiendolo);
+		}
 		
 		 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/UsuarioDetail.jsp");
