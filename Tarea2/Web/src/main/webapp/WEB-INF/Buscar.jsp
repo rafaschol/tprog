@@ -70,7 +70,7 @@
         <c:forEach items="${resultados}" var="resultado">
           <div class="card shadow mb-3">
             <div class="card-content-wrapper">
-              <img src="${resultado.getFoto() != null ? resultado.getFoto() : 'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded-start">
+              <img src="${resultado.getFoto()}" alt="${resultado.getNombre()}" class="img-fluid rounded-start">
               <div class="card-body">
                 <div class="badge ${resultado.getTipo() == 'Cuponera' ? 'bg-warning' : 'bg-info'} badge-elemento fw-light">${resultado.getTipo()}</div>
                 <h5 class="card-title">${resultado.getNombre()}</h5>

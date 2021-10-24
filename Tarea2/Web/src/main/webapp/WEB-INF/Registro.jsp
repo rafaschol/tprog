@@ -83,9 +83,10 @@
       <div id="profesor-tab">
         <div class="form-floating mb-3">
           <select class="form-select" name="institucion" id="institucionSelect">
-            <option ${ institucion == null ? 'selected' : '' }disabled hidden>Selecciona una institución</option>
-            <option ${ institucion == 'Fuerza Bruta' ? 'selected' : '' }value="Fuerza Bruta">Fuerza Bruta</option>
-            <option ${ institucion == 'Telón' ? 'selected' : '' }value="Telón">Telón</option>
+            <option ${ institucion == null ? 'selected ' : '' }disabled hidden>Selecciona una institución</option>
+            <c:forEach items="${instituciones}" var="ins">
+            <option ${institucion != null && institucion == ins.getNombre() ? 'selected ' : ''} value="${ins.getNombre()}">${ins.getNombre()}</option>
+            </c:forEach>
           </select>
           <label for="institucionSelect">Institución</label>
         </div>

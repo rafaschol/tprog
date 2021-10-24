@@ -39,7 +39,7 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="cuponera" class="img-fluid rounded">
+              <img src="${cuponera.getFoto()}" alt="${cuponera.getNombre()}" class="img-fluid rounded">
               <div class="p-3">
                 <h1 class="mb-3">${cuponera.getNombre()}</h1>
                 <p>${cuponera.getDescripcion()}.</p>
@@ -54,7 +54,7 @@
               <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">${String.format("%.1f", descuento)}%</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>PerÃ­odo: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaIni()}" type="date"  dateStyle = "short" timeStyle = "short" /> - <fmt:formatDate value="${cuponera.getFechaFin()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
+              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Período: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaIni()}" type="date"  dateStyle = "short" timeStyle = "short" /> - <fmt:formatDate value="${cuponera.getFechaFin()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
             </tr>
             <tr>
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$${String.format("%.0f", cuponera.getCosto())}</span></td>
@@ -64,11 +64,9 @@
             </tr>
           </table>
           <div class="border-top my-4"></div>
-          <p><span class="fw-bold">CategorÃ­as: </span>
-            <c:forEach items="${categorias}" var="categoria">
-            	 <a  href="buscar?cat=${categoria}" class="text-decoration-none">
-            	 ${categoria} ,
-            	 </a>
+          <p><span class="fw-bold">Categorías: </span>
+            <c:forEach items="${categorias}" var="categoria" varStatus="loop">
+            	 <a  href="buscar?cat=${categoria}" class="text-decoration-none">${categoria}</a>${!loop.last ? ', ' : ''}
              </c:forEach>
           </p>
           <div class="border-top my-4 d-lg-none"></div>
@@ -82,7 +80,7 @@
             <div class="list-group list-group-flush">
              <c:forEach items="${actividades}" var="actividad">
               <a href="actividades/${actividad.getNombre()}" class="list-group-item">
-                <img class="rounded-circle me-2" src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="actividad deportiva">
+                <img class="rounded-circle me-2" src="${actividad.getFoto()}" alt="${actividad.getNombre()}">
                 ${actividad.getNombre()}
               </a>
               </c:forEach>

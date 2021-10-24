@@ -34,7 +34,7 @@ public class ControladorUsuario implements IControladorUsuario {
         if ((socio != null) | (profesor != null)) { // Valida mail
             throw new MailRepetidoException("El mail  " + email + " ya esta registrado"); }
 
-        socio = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena, foto);
+        socio = new Socio(nickname, nombre, apellido, email, fechaNacimiento, contrasena, foto != null ? foto : "img/profile.jpg");
         msocios.addSocio(socio);
     	}
 
@@ -53,7 +53,7 @@ public class ControladorUsuario implements IControladorUsuario {
                 throw new MailRepetidoException("El mail  " + email + " ya esta registrado"); }
             ManejadorInstituciones minst = ManejadorInstituciones.getinstance();
             InstitucionDeportiva ins = minst.obtenerInstitucion(institucion);
-            profesor = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena, foto);
+            profesor = new Profesor(nickname, nombre, apellido, email, fechaNacimiento, descripcion, ins, biografia, sitioWeb, contrasena, foto != null ? foto : "img/profile.jpg");
             mprof.addProfesor(profesor);
             ins.addProfesor(profesor);
         }

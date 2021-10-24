@@ -43,7 +43,7 @@
         <div class="list-group list-group-flush">
           <c:forEach items="${usuarios}" var="usuario">
 	          <a href="usuarios/${usuario.getNickname()}" class="list-group-item">
-	            <img class="rounded-circle me-2" src="${usuario.getFoto() != null ? usuario.getFoto() :  'img/default.jpg'}" alt="NO FOTO">
+	            <img class="rounded-circle me-2" src="${usuario.getFoto()}" alt="${usuario.getNickname()}">
 	            ${usuario.getNombre()}  ${usuario.getApellido()}
 	          </a>
           </c:forEach>

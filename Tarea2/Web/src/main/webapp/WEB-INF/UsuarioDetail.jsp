@@ -22,7 +22,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>sergiop | Entrenemos.uy</title>
+  <title>${usuario.getNickname()} | Entrenemos.uy</title>
 </head>
 <body>
   
@@ -38,7 +38,7 @@
       <section class="details p-3">
 
         <div class="details-main mb-4">
-          <img src="${usuario.getFoto()}" alt="foto de perfil" class="img-fluid rounded">
+          <img src="${usuario.getFoto()}" alt="${usuario.getNombre()}" class="img-fluid rounded">
           <div class="p-3">
             <h1>${usuario.getNombre()} ${usuario.getApellido()}<span class="text-muted fw-light"> (${usuario.getNickname()})</span></h1>
             <p class="lead text-muted mb-1">
@@ -200,7 +200,7 @@
                <jsp:useBean id="dateFechaCompra" class="java.util.Date"/>
                <c:forEach items="${clases}" var="clase">
 	                <a href="clases/${clase.getNombre()}" class="list-group-item">
-	                  <img class="rounded-circle me-2" src="${clase.getImagen() != null ? clase.getImagen() :  'img/default.jpg'}" alt="clase">
+	                  <img class="rounded-circle me-2" src="${clase.getImagen()}" alt="${clase.getNombre()}">
 	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().getDate()}/${clase.getFechaCompra().getMonth()+1}/${clase.getFechaCompra().getYear()+1900})  </c:if>
 	                </a>
                 </c:forEach>
@@ -214,7 +214,7 @@
 	              <div class="list-group list-group-flush">
 	              <c:forEach items="${cuponeras}" var="cuponera">
 	                <a href="cuponeras/${cuponera.getNombre()}" class="list-group-item">
-	                  <img class="rounded-circle me-2" src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="cuponera">
+	                  <img class="rounded-circle me-2" src="${cuponera.getFoto()}" alt="${cuponera.getNombre()}">
 	                  ${cuponera.getNombre()}
 	                </a>
 	              </c:forEach>
@@ -229,7 +229,7 @@
 	              <div class="list-group list-group-flush">
 	              <c:forEach items="${actividades}" var="actividad">
 	                <a href="actividades/${actividad.getNombre()}" class="list-group-item">
-	                  <img class="rounded-circle me-2" src=" ${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="cuponera">
+	                  <img class="rounded-circle me-2" src=" ${actividad.getFoto()}" alt="${actividad.getNombre()}">
 	                  ${actividad.getNombre()}
 	                </a>
 	                </c:forEach>
@@ -240,9 +240,9 @@
 	              <div class="list-group list-group-flush">
 	              <c:forEach items="${actividadesPendientes}" var="actividad">
 		                <a href="actividades/${actividad.getNombre()}?profesor=${usuario.getNickname()}" class="list-group-item d-flex align-items-center">
-		                  <img class="rounded-circle me-2" src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="cuponera">
+		                  <img class="rounded-circle me-2" src="${actividad.getFoto()}" alt="${actividad.getNombre()}">
 		                  ${actividad.getNombre()}
-		                  <span class="badge bg-danger ms-auto p-2">${actividad.getEstado()}</span>
+		                  <span class="badge bg-${actividad.getEstado() == 'Rechazada' ? 'danger' : 'info'} ms-auto p-2">${actividad.getEstado()}</span>
 		                </a>
 	               </c:forEach>
 	              </div>
@@ -254,7 +254,7 @@
               <div class="list-group list-group-flush">
               <c:forEach items="${seguidos}" var="seguido">
 	                <a href="usuarios/${seguido.getNickname()}" class="list-group-item">
-	                  <img class="rounded-circle me-2" src="${seguido.getFoto() != null ? seguido.getFoto() :  'img/default.jpg'}" alt="usuario">
+	                  <img class="rounded-circle me-2" src="${seguido.getFoto()}" alt="${seguido.getNickname()}">
 	                  ${seguido.getNombre()}
 	                </a>
                </c:forEach>
@@ -265,7 +265,7 @@
               <div class="list-group list-group-flush">
                <c:forEach items="${seguidores}" var="seguidor">
 	                <a href="usuarios/${seguidor.getNickname()}" class="list-group-item">
-	                  <img class="rounded-circle me-2" src="${seguidor.getFoto() != null ? seguidor.getFoto() :  'img/default.jpg'}" alt="usuario">
+	                  <img class="rounded-circle me-2" src="${seguidor.getFoto()}" alt="${seguidor.getNickname()}">
 	                  ${seguidor.getNombre()}
 	                </a>
                </c:forEach>

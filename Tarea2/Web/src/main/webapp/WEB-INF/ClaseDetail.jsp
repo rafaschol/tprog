@@ -22,7 +22,7 @@
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/45d333caf9.js" crossorigin="anonymous"></script>
   
-  <title>Voleibol | Entrenemos.uy</title>
+  <title>${clase.getNombre()} | Entrenemos.uy</title>
 </head>
 <body>
   
@@ -37,7 +37,7 @@
 
       <section class="details p-3">
         <div class="details-main mb-3">
-          <img src="${clase.getImagen() != null ? clase.getImagen()  :  'img/default.jpg'}" alt="clase" class="img-fluid rounded">
+          <img src="${clase.getImagen()}" alt="${clase.getNombre()}" class="img-fluid rounded">
           <div class="p-3">
             <h1 class="mb-3">${clase.getNombre()}</h1>
             <p class="lead mb-1">Clase de 
@@ -62,7 +62,7 @@
             <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="time"  dateStyle = "short" timeStyle = "short" /></span></td>
           </tr>
           <tr>
-              <td><i class="fas fa-link rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>URL: <span class="fw-bold ms-1">${clase.getURL()} </span></td>
+              <td><i class="fas fa-link rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px;"></i>URL: <span class="fw-bold ms-1">${clase.getURL()} </span></td>
           </tr>
         </table>
       </section>

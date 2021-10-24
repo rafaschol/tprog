@@ -37,7 +37,7 @@
 
         <section class="details col-12 col-lg-8 p-3">
           <div class="details-main mb-3">
-              <img src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="actividad deportiva" class="img-fluid rounded">
+              <img src="${actividad.getFoto()}" alt="${actividad.getNombre()}" class="img-fluid rounded">
               <div class="p-3">
                 <h1 class="mb-3">${actividad.getNombre()}</h1>
                 <p>${actividad.getDescripcion()}</p>
@@ -53,16 +53,14 @@
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo: <span class="fw-bold ms-1">$${String.format("%.0f", actividad.getCosto())}</span></td>
             </tr>
             <tr>
-              <td><i class="fas fa-home rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.0px;"></i>Institucion: <span class="fw-bold ms-1">${actividad.getInstitucion()} </span></td>
+              <td><i class="fas fa-home rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 7.2px;"></i>Institucion: <span class="fw-bold ms-1">${actividad.getInstitucion()} </span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>
           <p><span class="fw-bold">Categorías: </span>
             
-             <c:forEach items="${actividad.getCategorias()}" var="categoria">
-            	 <a href="buscar?cat=${categoria}" class="text-decoration-none">
-             		${categoria} ,
-             	</a>
+             <c:forEach items="${actividad.getCategorias()}" var="categoria" varStatus="loop">
+            	 <a href="buscar?cat=${categoria}" class="text-decoration-none">${categoria}</a>${!loop.last ? ', ' : ''}
              </c:forEach>
               
            
@@ -79,7 +77,7 @@
 	            <c:forEach items="${clases}" var="clase">
 		            <div class="list-group list-group-flush">
 		              <a href="clases/${clase.getNombre()}" class="list-group-item">
-		                <img class="rounded-circle me-2" src="${clase.getImagen() != null ? clase.getImagen() :  'img/default.jpg'}" alt="clase">
+		                <img class="rounded-circle me-2" src="${clase.getImagen()}" alt="${clase.getNombre()}">
 		                ${clase.getNombre()}
 		              </a> 
 		            </div>
@@ -93,7 +91,7 @@
             <c:forEach items="${cuponeras}" var="cuponera">
 	            <div class="list-group list-group-flush">
 	              <a href="cuponeras/${cuponera.getNombre()}" class="list-group-item">
-	                <img class="rounded-circle me-2" src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="cuponera">
+	                <img class="rounded-circle me-2" src="${cuponera.getFoto()}" alt="${cuponera.getNombre()}">
 	                ${cuponera.getNombre()}
 	              </a>
 	            </div>

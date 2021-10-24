@@ -22,7 +22,7 @@ public class ControladorCuponera implements IControladorCuponera {
     	Cuponera cuponera = mcup.obtenerCuponera(nombre);
     	if (cuponera != null) { 
     		throw new CuponeraRepetidaException("Ya existe una Cuponera con nombre '" + nombre + "' en el sistema"); };
-    	cuponera = new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaAlta, foto, costo);
+    	cuponera = new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaAlta, foto != null ? foto : "img/default.jpg", costo);
     	mcup.addCuponera(cuponera); 	
     }
     

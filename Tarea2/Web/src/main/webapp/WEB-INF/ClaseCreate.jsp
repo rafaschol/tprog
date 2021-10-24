@@ -67,12 +67,12 @@
           </div>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" name="minSocios" id="minSociosInput" placeholder="MÃ­nimo de socios" value="${minSocios != null ? minSocios : '0'}" min="0" required>
-          <label for="minSociosInput">MÃ­nimo de socios</label>
+          <input type="number" class="form-control" name="minSocios" id="minSociosInput" placeholder="Mínimo de socios" value="${minSocios != null ? minSocios : '0'}" min="0" required>
+          <label for="minSociosInput">Mínimo de socios</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" name="maxSocios" id="maxSociosInput" placeholder="MÃ¡ximo de socios" value="${maxSocios!= null ? maxSocios : '1'}" min="1" required>
-          <label for="maxSociosInput">MÃ¡ximo de socios</label>
+          <input type="number" class="form-control" name="maxSocios" id="maxSociosInput" placeholder="Máximo de socios" value="${maxSocios!= null ? maxSocios : '1'}" min="1" required>
+          <label for="maxSociosInput">Máximo de socios</label>
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" name="url" id="urlInput" placeholder="Link de la clase" required>

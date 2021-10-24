@@ -39,7 +39,7 @@
         <c:forEach items="${actividades}" var="actividad">
 	        <div class="card shadow mb-3">
 	          <div class="card-content-wrapper">
-	            <img src="${actividad.getFoto() != null ? actividad.getFoto() :  'img/default.jpg'}" alt="sin foto Actividad" class="img-fluid rounded-start">
+	            <img src="${actividad.getFoto()}" alt="${actividad.getNombre()}" class="img-fluid rounded-start">
 	            <div class="card-body">
 	              <div class="badge bg-info badge-elemento fw-light">Actividad deportiva</div>
 	              <h5 class="card-title">${actividad.getNombre()}</h5>
@@ -53,7 +53,7 @@
         <c:forEach items="${cuponeras}" var="cuponera">
 	        <div class="card shadow mb-3">
 	          <div class="card-content-wrapper">
-	            <img src="${cuponera.getFoto() != null ? cuponera.getFoto() :  'img/default.jpg'}" alt="sin foto Cuponera" class="img-fluid rounded-start">
+	            <img src="${cuponera.getFoto()}" alt="${cuponera.getNombre()}" class="img-fluid rounded-start">
 	            <div class="card-body">
                   <div class="badge bg-warning badge-elemento fw-light">Cuponera</div>
 	              <h5 class="card-title">${cuponera.getNombre()}</h5>

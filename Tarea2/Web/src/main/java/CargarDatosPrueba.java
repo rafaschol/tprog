@@ -53,7 +53,7 @@ public class CargarDatosPrueba {
 
 	public void cargarProfesores() {
 		try {
-							// altaProfesor(usuario , nombre, apellido, email, fechaNacimiento, institucion, descripción, biografía, sitioWeb, contraseña, foto
+							// altaProfesor(usuario , nombre, apellido, email, fechaNacimiento, institucion, descripci\u00F3n, biograf\u00EDa, sitioWeb, contraseña, foto
 	/* VP */controladorUsuario.altaProfesor("viktor", "Victor", "Perez", "vperez@fuerza.com", new Date(77, 0, 1), "Fuerza Bruta",
 					"Victor es un apasionado de los m\u00FAculos. Sus clases son organizadas en funci\u00F3n de distintos aparatos y pesas con el objetivo de desarrollar m\u00FAsculos",
 					"Victor naci\u00F3 en Moscow en 1977. En el a\u00F1o 2005 emigr\u00F3 a Uruguay luego de quedar encantado con el pa\u00EDs en un viaje tur\u00EDstico.",
@@ -267,7 +267,7 @@ public class CargarDatosPrueba {
 			
 	/* A8 */String[] categoriasA8 = {"Gimnasia"};
 			controladorInstitucion.altaActividadDeportivaWeb("Instituto Natural", "Pilates",
-					"El Método Pilates combina diferentes capacidades físicas.",
+					"El M\u00E9todo Pilates combina diferentes capacidades f\u00EDsicas.",
 					45, (float) 600.0, new Date(121, 7, 30), "clazar", categoriasA8,"media/actividades/Pilates.jpg");
 			//controladorInstitucion.agregarCategoriaAActividad("Pilates", "Gimnasia");
 					// INGRESADA
@@ -306,11 +306,11 @@ public class CargarDatosPrueba {
 			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Braza.jpg");
 			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Mariposa.jpg");
 			controladorInstitucion.altaClase("Aer\u00F3bica ni\u00F1os", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null);
-			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica","media/clases/Aeróbico_adulto_mayor.jpg");
+			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica","media/clases/Aer\u00F3bico_adulto_mayor.jpg");
 			controladorInstitucion.altaClase("Aer\u00F3bica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null);
 			controladorInstitucion.altaClase("Boxeo I", new Date(121, 8, 1, 19, 30), 1, 4, "https://www.musculos.com/boxeo1", new Date(121, 5, 7), "TheBoss", "Kickboxing",null);
 			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing","media/clases/Boxeo_II.jpg");
-			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/Músculos_para_boxeo.jpg");
+			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/M\u00FAsculos_para_boxeo.jpg");
 			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo",null);
 			controladorInstitucion.altaClase("200 M", new Date(121, 10, 5, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg");
 			controladorInstitucion.altaClase("Posta", new Date(121, 10, 25, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo",null);
@@ -393,7 +393,7 @@ public class CargarDatosPrueba {
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
 					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 6, 18),
-					"media/cuponeras/Músculos.jfif",(float) 15642);
+					"media/cuponeras/M\u00FAsculos.jfif",(float) 15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}

@@ -32,7 +32,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
         if (actividad != null) {
             throw new ActividadRepetidaException("Ya existe una actividad deportiva con nombre '" + nombre + "' en el sistema"); }
         
-        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion, foto);
+        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion, foto != null ? foto : "img/default.jpg");
         
         for (int j = 0; j < categorias.length; j++) {
         	actividad.addCategoria(mcat.obtenerCategoria(categorias[j]));
@@ -77,7 +77,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
             throw new ClaseRepetidaException("Ya existe una Clase con nombre '" + nombre + "' en el sistema"); }
     	
     	
-    	clase = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta, imagen);
+    	clase = new Clase(nombre, fechaHora, minimo, maximo, url, fechaAlta, imagen != null ? imagen : "img/default.jpg");
     	ManejadorProfesores mprof = ManejadorProfesores.getinstance();
     	clase.setProfesor(mprof.obtenerProfesor(profesor));
     	mprof.obtenerProfesor(profesor).addClase(clase);
@@ -211,7 +211,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
         if (actividad != null) {
             throw new ActividadRepetidaException("Ya existe una actividad deportiva con nombre '" + nombre + "' en el sistema"); }
         
-        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion, foto);
+        actividad = new ActividadDeportiva(fecha, nombre, descripcion, duracion, costo, institucion, foto != null ? foto : "img/default.jpg");
         
         for (int j = 0; j < categorias.length; j++) {
         	actividad.addCategoria(mcat.obtenerCategoria(categorias[j]));

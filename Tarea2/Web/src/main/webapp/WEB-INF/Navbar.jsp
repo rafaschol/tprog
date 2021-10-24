@@ -10,7 +10,7 @@
     <% if (session.getAttribute("usuarioLogueado") != null) { %>
     <div class="navbar-profile me-3 me-lg-0">
       <a href="usuarios/${usuarioLogueado.getNickname()}">
-        <img class="rounded-circle" src="${ usuarioLogueado.getFoto() != null ? usuarioLogueado.getFoto() : 'img/profile.jpg' }" alt="foto de perfil">
+        <img class="rounded-circle" src="${ usuarioLogueado.getFoto()}" alt="${usuarioLogueado.getNombre()}">
       </a>
     </div>
     <% } %>
@@ -29,8 +29,8 @@
       <!-- Logged-out buttons -->
       <% if (session.getAttribute("usuarioLogueado") == null) { %>
       <div class="navbar-buttons">
-        <a href="registro" class="btn btn-outline-light me-2">Registrarme</a>
-        <a href="ingresar" class="btn btn-primary">Iniciar sesión</a>
+        <a href="registro${requestScope['javax.servlet.forward.request_uri'] eq requestScope['javax.servlet.forward.context_path'].concat('/') ? '' : '?continue='.concat(requestScope['javax.servlet.forward.request_uri'])}" class="btn btn-outline-light me-2">Registrarme</a>
+        <a href="ingresar${requestScope['javax.servlet.forward.request_uri'] eq requestScope['javax.servlet.forward.context_path'].concat('/') ? '' : '?continue='.concat(requestScope['javax.servlet.forward.request_uri'])}" class="btn btn-primary">Iniciar sesión</a>
       </div>
       <% } %>
       

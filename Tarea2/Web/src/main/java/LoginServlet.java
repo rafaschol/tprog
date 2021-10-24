@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +44,11 @@ public class LoginServlet extends HttpServlet {
 		try {
 			DataUsuario usuario = controladorUsuario.login(email, password);
 			sesion.setAttribute("usuarioLogueado", usuario);
-			response.sendRedirect(request.getContextPath() + "/");
+			
+			String next = request.getParameter("continue");
+			String redirect = next != null && !next.equals("") ? next : request.getContextPath() + "/";
+
+			response.sendRedirect(redirect);
 		} 
 		catch (DatosLoginIncorrectosException ex){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");

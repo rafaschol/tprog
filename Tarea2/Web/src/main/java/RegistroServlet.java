@@ -29,6 +29,7 @@ import excepciones.MailRepetidoException;
 import excepciones.UsuarioRepetidoException;
 import logica.DataUsuario;
 import logica.Fabrica;
+import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
 
 @WebServlet("/registro")
@@ -36,15 +37,19 @@ import logica.IControladorUsuario;
 public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IControladorUsuario controladorUsuario;
+	private IControladorInstituciones controladorInstitucion;
        
     public RegistroServlet() {
     	super();
     	Fabrica fabrica = Fabrica.getInstance();
     	controladorUsuario = fabrica.getIControladorUsuario();
+    	controladorInstitucion = fabrica.getIControladorInstitucion();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Registro.jsp");
+		
+		request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
 		request.setAttribute("dataTab", "0");
 		dispatcher.forward(request, response);
 	}
@@ -71,7 +76,7 @@ public class RegistroServlet extends HttpServlet {
 			e.printStackTrace();
 			nacimiento = new Date();
 		}
-		boolean esProfesor = institucion != null && institucion.isEmpty();
+		boolean esProfesor = institucion != null && !institucion.isEmpty();
 		
 		/* Manejo de la imagen */		
 		Part foto = request.getPart("foto");
@@ -110,14 +115,18 @@ public class RegistroServlet extends HttpServlet {
 			try {
 				usuario = controladorUsuario.login(correo, contrasena);
 				sesion.setAttribute("usuarioLogueado", usuario);
-			} catch (DatosLoginIncorrectosException e) {}			
-			response.sendRedirect(request.getContextPath() + "/");
+			} catch (DatosLoginIncorrectosException e) {}
+			
+			String next = request.getParameter("continue");
+			String redirect = next != null && !next.equals("") ? next : request.getContextPath() + "/";
+			response.sendRedirect(redirect);
 		} catch (MailRepetidoException ex) {
 			request.setAttribute("mailRepetido", true);
 			request.setAttribute("dataTab", "1");
 			request.setAttribute("userType", esProfesor ? "profesor" : "socio");
 			
 			// Cargar de nuevo los datos ingresados
+			request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
 			request.setAttribute("correo", correo);
 			request.setAttribute("nombre", nombre);
 			request.setAttribute("apellido", apellido);
@@ -135,6 +144,7 @@ public class RegistroServlet extends HttpServlet {
 			request.setAttribute("userType", esProfesor ? "profesor" : "socio");
 			
 			// Cargar de nuevo los datos ingresados
+			request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
 			request.setAttribute("correo", correo);
 			request.setAttribute("nombre", nombre);
 			request.setAttribute("apellido", apellido);
