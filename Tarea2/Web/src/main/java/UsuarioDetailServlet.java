@@ -108,6 +108,7 @@ public class UsuarioDetailServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/UsuarioDetail.jsp");
 		String nombreUsuario = request.getPathInfo().substring(1);
 		

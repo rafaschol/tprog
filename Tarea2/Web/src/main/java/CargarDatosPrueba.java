@@ -216,7 +216,7 @@ public class CargarDatosPrueba {
 		// Dada de alta por profe: altaActividadDeportivaWeb(nombreInstitucion, nombre, descripcion, duracion, costo, fecha, profesor, categorias, foto)
 	/* A1 */controladorInstitucion.altaActividadDeportivaWeb("Fuerza Bruta", "Aparatos y pesas",
 					"Clases de aparatos, pesas y calistenia.",
-					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio,"media/actividades/Aparatos_y_Pesas.jfif");
+					90, (float) 550.0, new Date(121, 2, 31), "viktor", arrayVacio,"media/actividades/Aparatos_y_pesas.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Aparatos y pesas", true);
 			controladorInstitucion.agregarCategoriaAActividad("Aparatos y pesas", "Fitness");
 	
@@ -393,7 +393,7 @@ public class CargarDatosPrueba {
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
 					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 6, 18),
-					"media/cuponeras/M\u00FAsculos.jfif",(float) 15642);
+					"media/cuponeras/M\u00FAsculos.jpg",(float) 15642);
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}

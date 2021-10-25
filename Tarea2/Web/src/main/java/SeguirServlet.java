@@ -29,6 +29,7 @@ public class SeguirServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String seguir = request.getParameter("seguir");
 		String usuarioObjetivo = request.getParameter("usuario");
 		String usuarioActual = ((DataUsuario) request.getSession().getAttribute("usuarioLogueado")).getNickname();

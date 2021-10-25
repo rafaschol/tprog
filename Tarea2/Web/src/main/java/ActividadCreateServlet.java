@@ -52,6 +52,7 @@ public class ActividadCreateServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadCreate.jsp");
 		HttpSession session = request.getSession();
 		DataProfesor usuarioLogueado = (DataProfesor) session.getAttribute("usuarioLogueado");
