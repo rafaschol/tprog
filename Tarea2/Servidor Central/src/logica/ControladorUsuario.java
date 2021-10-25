@@ -170,7 +170,7 @@ public class ControladorUsuario implements IControladorUsuario {
         		}
         				
         	}
-        	float descuento = cuponera.getDescuento() / (float) 100;
+        	float descuento = cuponera.getDescuento();
         	costo = actividad.getCosto();
         	costo -= costo * descuento; 
     		

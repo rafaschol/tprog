@@ -352,7 +352,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.registrarSocio("andy", "Aer\u00F3bico adulto mayor", "Aer\u00F3bica", false, null, new Date(121, 7, 23));
 	/* R25*/controladorUsuario.registrarSocio("caro", "Aer\u00F3bica", "Aer\u00F3bica", true, "Gimnasia", new Date(121, 7, 15));
 			controladorUsuario.registrarSocio("euge", "Aer\u00F3bica", "Aer\u00F3bica", false, null, new Date(121, 7, 26));
-			//controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", true, "M\u00FAsculos", new Date(121, 6, 19));
+			controladorUsuario.registrarSocio("andy", "Boxeo I", "Kickboxing", true, "M\u00FAsculos", new Date(121, 6, 19));
 			controladorUsuario.registrarSocio("tonyp", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("m1k4", "Boxeo I", "Kickboxing", false, null, new Date(121, 7, 24));
 	/* R30*/controladorUsuario.registrarSocio("sergiop", "Boxeo II", "Kickboxing", true, "M\u00FAsculos", new Date(121, 7, 1));
@@ -404,7 +404,7 @@ public class CargarDatosPrueba {
 	public void cargarActividadesCuponeras() {
 		
 		try {
-			controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 1);
+			controladorCuponera.agregarActividadACuponera("Pelota", "Voleibol", 7);
 			controladorCuponera.agregarActividadACuponera("Pelota", "Basquetbol", 18);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aer\u00F3bica", 2);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aparatos y pesas", 8);

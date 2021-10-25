@@ -99,7 +99,7 @@
           <label for="biografiaTextArea">Biografía</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="url" class="form-control" name="sitioWeb" id="sitioWebInput" placeholder="Sitio web" value="${sitioWeb != null ? sitioWeb : ''}">
+          <input type="text" class="form-control" name="sitioWeb" id="sitioWebInput" placeholder="Sitio web" value="${sitioWeb != null ? sitioWeb : ''}">
           <label for="sitioWebInput">Sitio web</label>
         </div>
       </div>

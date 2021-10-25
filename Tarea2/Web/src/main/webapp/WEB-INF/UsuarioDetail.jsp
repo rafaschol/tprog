@@ -153,7 +153,7 @@
 	                <div class="row mb-1 perfil-group" id="nacimientoGroup">
 	                  <label for="nacimientoInput" class="col-6 col-sm-4 col-form-label">Fecha de nacimiento</label>
 	                  <div class="col-6">
-	                    <input type="date" readonly class="form-control-plaintext editable-field" name="nacimiento" value="${nacimiento}">
+	                    <input type="date" readonly class="form-control-plaintext editable-field" id="nacimiento" name="nacimiento" value="${nacimiento}">
 	                  </div>
 	                </div>
 	                <div class="row mb-1 perfil-group">

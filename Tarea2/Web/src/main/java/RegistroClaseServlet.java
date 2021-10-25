@@ -103,7 +103,7 @@ public class RegistroClaseServlet extends HttpServlet {
 		int selector = 0;
 		if (conCuponera) selector = 1;
 		request.setAttribute("selector", selector);
-		
+		request.setAttribute("clase", clase); 
 		
 			try {
 				controladorUsuario.registrarSocio(nickname, nombreClase, nombreActividad, conCuponera, nombreCuponera, fecha);

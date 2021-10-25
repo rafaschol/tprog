@@ -91,7 +91,7 @@
           <option ${nombreCuponera != null ? '' : 'selected '} disabled hidden>Selecciona una cuponera</option>
            <c:forEach items="${cuponeras}" var="cuponera">
          	 	<option ${nombreCuponera != null && nombreCuponera  == cuponera ? 'selected ' : ''}
-         	 	 value="Pelota">${cuponera}</option>
+         	 	 value="${cuponera}">${cuponera}</option>
            </c:forEach>
         </select>
         <label for="cuponeraSelect">Cuponera</label>
