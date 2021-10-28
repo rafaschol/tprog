@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Date;
 
 public class DataClase {
@@ -28,6 +29,7 @@ public class DataClase {
 		this.setInstitucion(institucion);
 		this.setImagen(clase.getImagen());
 	}
+	
 	public DataClase(Clase clase, String actividad, String institucion, float precioCompra, Date fechaCompra) {
 		this.setNombre(clase.getNombre());
 		this.setFecha(clase.getFecha());

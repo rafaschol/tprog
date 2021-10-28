@@ -33,6 +33,7 @@ public class ManejadorActividad {
     public ActividadDeportiva obtenerActividadAceptada(String actividad) {
         return (actividadesAceptadas.get(actividad));
     }
+    
     public ActividadDeportiva obtenerActividadSinAceptar(String actividad) {
         return (actividadesSinAceptar.get(actividad));
     }
@@ -41,6 +42,7 @@ public class ManejadorActividad {
         String nombre = actividad.getNombre();
         actividadesAceptadas.put(nombre, actividad);
     }
+    
     public void addActividadSinAceptar(ActividadDeportiva actividad) {
         String nombre = actividad.getNombre();
         actividadesSinAceptar.put(nombre, actividad);

@@ -1,6 +1,9 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -344,7 +347,7 @@ class TestSistema {
 	
 	;
 	
-	 //DataUsuario login
+	//DataUsuario login
 	@Test
 	void testlogin() throws DatosLoginIncorrectosException {
 		DataUsuario usuarioMail = ctrlU.login("chino@gmail.org.uy", "lkj65D");
@@ -357,6 +360,7 @@ class TestSistema {
 		assertEquals(profesorNick.getEmail(), "TheBoss@gmail.com");
 
 	}
+	
 	;
 	
 	@Test
@@ -364,29 +368,32 @@ class TestSistema {
 		//Usuario user = ((Object) ctrlU).obtenerUsuarioPorNick("andy");
 
 	}
+	
 	;
 	
 	@Test
-	void testNoSigueAUsuario(){
+	void testNoSigueAUsuario() {
 		Boolean res = ctrlU.yaSigueAUsuario("andy", "m1k4");
 		assertEquals(res, false);
 
 	}
+	
 	;
 	
 	@Test
-	void testSeguirAUsuario() throws UsuarioYaSigueAUsuarioException{
+	void testSeguirAUsuario() throws UsuarioYaSigueAUsuarioException {
 		Boolean noSigueAUsuario = ctrlU.yaSigueAUsuario("m1k4", "andy");
 		assertEquals(noSigueAUsuario, false);
 		ctrlU.seguirUsuario("m1k4", "andy");
 		Boolean sigueAUsuario = ctrlU.yaSigueAUsuario("m1k4", "andy");
 		assertEquals(sigueAUsuario, true);
 	}
+	
 	;
 	
 	@Test
-	void testDejarSeguirUsuario() throws UsuarioYaSigueAUsuarioException{
-		Boolean noSigueAUsuario = ctrlU.yaSigueAUsuario( "andy", "m1k4");
+	void testDejarSeguirUsuario() throws UsuarioYaSigueAUsuarioException {
+		Boolean noSigueAUsuario = ctrlU.yaSigueAUsuario("andy", "m1k4");
 		assertEquals(noSigueAUsuario, false);
 		ctrlU.seguirUsuario("andy", "m1k4");
 		Boolean sigueAUsuario = ctrlU.yaSigueAUsuario("andy", "m1k4");
@@ -395,20 +402,22 @@ class TestSistema {
 		Boolean yaNoSigueAUsuario = ctrlU.yaSigueAUsuario("andy", "m1k4");
 		assertEquals(yaNoSigueAUsuario, false);
 	}
+	
 	;
 	
 	@Test
-	void testListarUsuariosWeb(){
+	void testListarUsuariosWeb() {
 		DataUsuario[] usuariosWeb = ctrlU.listarUsuariosWeb();
 		assertEquals(usuariosWeb[0].getNombre(), "Emiliano");
 		assertEquals(usuariosWeb[1].getNombre(), "Micaela");
 		assertEquals(usuariosWeb[2].getNombre(), "Andres");
 
 	}
+	
 	;
 	
 	@Test
-	void testMostrarDataUsuarioWeb(){
+	void testMostrarDataUsuarioWeb() {
 		
 		DataUsuario dataUsuariosWeb = ctrlU.mostrarDataUsuarioWeb("andy");
 		assertEquals(dataUsuariosWeb.getNombre(), "Andres");
@@ -419,15 +428,17 @@ class TestSistema {
 		assertEquals(dataProfesWeb.getApellido(), "Lopez");
 
 	}
+	
 	;
 	
 	
 	@Test
-	void testListarCuponerasActividadWeb(){
+	void testListarCuponerasActividadWeb() {
 		
 		String[] cuponerasActividadesWeb = ctrlU.listarCuponerasActividadWeb("m1k4", "Aerobica");
 		assertEquals(cuponerasActividadesWeb[0], "Musculos");
 	}
+	
 	;
 	
 	
@@ -570,12 +581,14 @@ class TestSistema {
 	void testlistarDataClasesVigentes()  {
 		
 		DataClase[] dataClasesVigentes = ctrlI.listarDataClasesVigentes("Aerobica");
-		assertEquals(dataClasesVigentes[0].getActividad(),"Aerobica");
+		assertEquals(dataClasesVigentes[0].getActividad(), "Aerobica");
 		assertEquals(dataClasesVigentes[0].getInstitucion(), "IN");
-		assertEquals(dataClasesVigentes[0].getNombre(),"Aerobico adulto mayor");
+		assertEquals(dataClasesVigentes[0].getNombre(), "Aerobico adulto mayor");
 		assertEquals(dataClasesVigentes[0].getProfesor(), "TheBoss");
 
-	};
+	}
+	
+	;
 	
 	
 	@Test
@@ -592,7 +605,10 @@ class TestSistema {
 		fail(e.getMessage());
 		e.printStackTrace();
 	}
-	};
+		
+	}
+	
+	;
 
 	
 	@Test
@@ -601,6 +617,7 @@ class TestSistema {
 		DataInstitucion institucion = data[0];
 		assertEquals(institucion.getNombre(), "IN");
 	}
+	
 	;
 	
 	
@@ -609,6 +626,7 @@ class TestSistema {
 		String[] actividadesIngresadas  = ctrlI.listarActividadesIngresadas();
 		assertEquals(actividadesIngresadas[0], "Pesas");
 	}
+	
 	;
 	
 	@Test
@@ -620,6 +638,7 @@ class TestSistema {
 		assertEquals(actividadesIngresadas[0].getTipo(), "Cuponera");
 		assertEquals(actividadesIngresadas[0].getCosto(), 0);
 	}
+	
 	;
 
 	@Test
@@ -629,6 +648,7 @@ class TestSistema {
 		//System.out.print(resultado[0].getNombre());
 	
 	}
+	
 	;
 	
 	@Test
@@ -636,6 +656,7 @@ class TestSistema {
 		ctrlU.listarCuponerasActividad("m1k4", "Musculos");
 		//
 	}
+	
 	;
 	
 	@SuppressWarnings("deprecation")
@@ -701,10 +722,10 @@ class TestSistema {
 		DataActividad[] actWeb = ctrlI.listarActividadesWeb();
 		assertEquals(actWeb[0].getInstitucion(), "IN");
 		assertEquals(actWeb[1].getInstitucion(), "IN");
-		assertEquals(actWeb[0].getEstado(),"Aceptada");
-		assertEquals(actWeb[1].getEstado(),"Aceptada");
-		assertEquals(actWeb[0].getTipo(),"Actividad deportiva");
-		assertEquals(actWeb[1].getTipo(),"Actividad deportiva");	
+		assertEquals(actWeb[0].getEstado(), "Aceptada");
+		assertEquals(actWeb[1].getEstado(), "Aceptada");
+		assertEquals(actWeb[0].getTipo(), "Actividad deportiva");
+		assertEquals(actWeb[1].getTipo(), "Actividad deportiva");	
 		assertEquals(actWeb[0].getNombre(), "Futbol");
 		assertEquals(actWeb[1].getNombre(), "Aerobica");
 		assertEquals(actWeb[0].getDescripcion(), "Para cuidar el aparato cardiovascular");
