@@ -54,4 +54,6 @@ public interface IControladorInstituciones {
 	public abstract DataItem[] buscar(String query, String institucion, String categoria, String orden);
 	
 	public abstract DataActividad listarDataActividadProfesor(String nombre);
+	 
+	public abstract DataUsuario[] lisarSociosClase(String nombreClase, String nombreActividad);
 }

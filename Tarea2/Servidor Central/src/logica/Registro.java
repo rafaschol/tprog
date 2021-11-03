@@ -9,13 +9,15 @@ public class Registro {
 	private Float costo;
 	private Boolean conCuponera;
 	private Clase clase; // Clase a la cual corresponde el registro.
+	private Socio socio;
 	
-	public Registro(Integer identificador, Date fecha, Float costo, Boolean cuponera, Clase clase) {
+	public Registro(Integer identificador, Date fecha, Float costo, Boolean cuponera, Clase clase, Socio socio) {
 		this.setId(identificador);
 		this.setFecha(fecha);
 		this.setCosto(costo);
 		this.setConCuponera(cuponera);
 		this.setClase(clase);
+		this.setSocio(socio);
 	}
 	
 	public int getId() {
@@ -56,6 +58,14 @@ public class Registro {
 
 	public void setClase(Clase clase) {
 		this.clase = clase;
+	}
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
 	}
 
 }

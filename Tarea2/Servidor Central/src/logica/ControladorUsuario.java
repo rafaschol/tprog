@@ -1,11 +1,16 @@
 package logica;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 //import java.util.Arrays;
 import java.util.Set;
+
+import excepciones.ClaseVaciaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraVencidaException;
@@ -176,7 +181,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		
     	}
-    	registro = new Registro(identificador, fecha, costo, conCuponera, clase);	
+    	registro = new Registro(identificador, fecha, costo, conCuponera, clase, socio);	
     	clase.addRegistro(registro);
     	socio.addRegistro(registro);
     	registro.setClase(clase);
@@ -542,6 +547,63 @@ public class ControladorUsuario implements IControladorUsuario {
     		iterador++;
     	}
     	return premios; //falta ver el tema del ordenamiento
+	}
+	public  void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	Integer cantPremios = clase.getCantPremios();
+    	String premio = clase.getPremio();
+    	Date fechaActual = new Date();
+    	
+    	if(clase.cantRegistros() < 1) throw new ClaseVaciaException("No hay socios para sortear");
+    	
+    	Calendar calendario = Calendar.getInstance();
+    	calendario.setTime(fechaActual);
+    	calendario.add(Calendar.DATE, 30);//sumo 30 dias a la frcha actual, que sera la vigencia
+    	Date vigencia = calendario.getTime();
+    	
+    	
+    	
+    	
+    	Map<String, String> mapSocios = new HashMap<String,String>();
+    	for (int j = 0; j < socios.length; j++) {
+    		 mapSocios.put(socios[j], socios[j]);
+    	}
+    	while(cantPremios > 0 && mapSocios.size() > 0) {
+    		Random generador = new Random();
+    		String[] sorteoSocios = (String[]) mapSocios.values().toArray();  
+    		String socioGanador = sorteoSocios[generador.nextInt(sorteoSocios.length)];
+    		Socio socio = msocios.obtenerSocio(socioGanador);
+    		DataPremio dataPremio = new DataPremio(socioGanador,nombreClase,nombreActividad,vigencia,premio);
+    		Ganador ganador = new Ganador(fechaActual,dataPremio,clase,socio);
+    		cantPremios--;
+    		mapSocios.remove(socioGanador);
+    		
+    		clase.getGanadores().add(ganador);
+    		socio.addPremio(ganador);
+    		clase.setSorteo(true);
+    	}	
+    	
+	}
+	
+	public DataUsuario[] mostrarSociosGanadores(String nombreClase, String nombreActividad) {
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	DataUsuario[] resultado = new DataUsuario[clase.getGanadores().size()];
+    	Set<Ganador> ganadores = clase.getGanadores();
+    	Ganador[] arrGanadores = ganadores.toArray(new Ganador[ganadores.size()]);
+    	Integer iterador = 0;
+    	for (int j = 0; j < arrGanadores.length; j++) {
+    		Socio socio = arrGanadores[j].getSocio();
+    		DataUsuario dataSocio = new DataUsuario(socio);
+    		resultado[iterador] = dataSocio;
+    		iterador++;
+    	}
+    	return resultado;
+		
 	}
 	
       

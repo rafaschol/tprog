@@ -22,6 +22,7 @@ public class Clase {
 	private String video;
 	private Integer cantPremios;
 	private Set<Ganador> ganadores;
+	private boolean sorteo;
 	private Map<String, CalificarClase> calificaciones;//la clave es el nombre del socio
 	
 	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta, String imagen, String video, String premio, Integer cantPremios) {
@@ -38,6 +39,7 @@ public class Clase {
 		this.setPremio(premio);
 		this.setCantPremios(cantPremios);
 		this.setVideo(video);
+		this.setSorteo(false);
 	}
 
 	public String getNombre() {
@@ -167,5 +169,13 @@ public class Clase {
 
 	public void setCalificaciones(Map<String, CalificarClase> calificaciones) {
 		this.calificaciones = calificaciones;
+	}
+
+	public boolean isSorteo() {
+		return sorteo;
+	}
+
+	public void setSorteo(boolean sorteo) {
+		this.sorteo = sorteo;
 	}
 }

@@ -363,5 +363,20 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	DataActividad dataActividad = new DataActividad(actividad, clases, cuponeras, categorias);
     	return dataActividad;   	
     }
+	public DataUsuario[] lisarSociosClase(String nombreClase, String nombreActividad){
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	DataUsuario[] resultado = new DataUsuario[clase.getRegistros().size()];
+    	Integer iterador = 0;
+    	for (Entry<Integer, Registro> iter : clase.getRegistros().entrySet()) {
+    		Socio socio = iter.getValue().getSocio();
+    		DataUsuario dataSocio = new DataUsuario(socio);
+    		resultado[iterador] = dataSocio;
+    		iterador++;				
+    	}
+    	return resultado;
+	}
+
     
 }

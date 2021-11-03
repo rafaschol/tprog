@@ -1,6 +1,8 @@
 package logica;
 
 import java.util.Date;
+
+import excepciones.ClaseVaciaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraVencidaException;
@@ -58,5 +60,8 @@ public interface IControladorUsuario {
 	
 	public abstract DataGanador[] listarPremiosSocio(String nickname);
 
+	public abstract void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) throws ClaseVaciaException;
+	
+	public abstract DataUsuario[] mostrarSociosGanadores(String nombreClase, String nombreActividad) ;
     
 }

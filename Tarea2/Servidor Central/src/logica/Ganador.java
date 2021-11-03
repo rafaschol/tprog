@@ -6,11 +6,13 @@ public class Ganador {
 	private Date fecha;
 	private DataPremio comprobante;
 	private Clase clase;
+	private Socio socio;
 	
-	public Ganador(Date fecha, DataPremio comprobante, Clase clase) {
+	public Ganador(Date fecha, DataPremio comprobante, Clase clase, Socio socio) {
 		this.setComprobante(comprobante);
 		this.setFecha(fecha);
 		this.setClase(clase);
+		this.setSocio(socio);
 	}
 	
 	
@@ -38,6 +40,18 @@ public class Ganador {
 
 	public void setClase(Clase clase) {
 		this.clase = clase;
+	}
+
+
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
 	}
 
 }
