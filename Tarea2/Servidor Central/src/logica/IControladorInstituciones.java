@@ -21,7 +21,7 @@ public interface IControladorInstituciones {
 	public abstract DataInstitucion[] listarDataInstituciones(); 
 	
 	public abstract void altaClase(String nombre, Date fecha, Integer minimo,
-		Integer maximo, String url, Date fechaAlta, String profesor, String actividad, String imagen)
+		Integer maximo, String url, Date fechaAlta, String profesor, String actividad, String imagen, String video, String premio, Integer cantPremios)
 		throws ClaseRepetidaException;
 	
 	//Para el caso de uso consultar clase

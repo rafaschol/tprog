@@ -530,6 +530,19 @@ public class ControladorUsuario implements IControladorUsuario {
     	String[] arrCupo = cuponeras.toArray(new String[cuponeras.size()]);
     	return arrCupo;  	
     }
+	public DataGanador[] listarPremiosSocio(String nickname) {
+		ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Socio socio = msocios.obtenerSocio(nickname);
+    	DataGanador[] premios = new DataGanador[socio.getPremios().size()];
+    	Integer iterador = 0;
+    	for (Map.Entry<String, Ganador> iter : socio.getPremios().entrySet()) {
+    		Ganador premio = iter.getValue();
+    		DataGanador dataPremio = new DataGanador(premio);
+    		premios[iterador] = dataPremio;
+    		iterador++;
+    	}
+    	return premios; //falta ver el tema del ordenamiento
+	}
 	
       
 }

@@ -1,6 +1,8 @@
 package logica;
 
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 public class DataClase {
 	private String nombre;
@@ -15,6 +17,11 @@ public class DataClase {
 	private String imagen;
 	private float precioCompra;
 	private Date fechaCompra;
+	private String premio;
+	private String video;
+	private Integer cantPremios;
+
+	
 	
 	
 	public DataClase(Clase clase, String actividad, String institucion) {
@@ -28,6 +35,9 @@ public class DataClase {
 		this.setActividad(actividad);
 		this.setInstitucion(institucion);
 		this.setImagen(clase.getImagen());
+		this.setVideo(clase.getVideo());
+		this.setPremio(clase.getPremio());
+		this.setCantPremios(clase.getCantPremios());
 	}
 	
 	public DataClase(Clase clase, String actividad, String institucion, float precioCompra, Date fechaCompra) {
@@ -43,6 +53,9 @@ public class DataClase {
 		this.setImagen(clase.getImagen());
 		this.setPrecioCompra(precioCompra);
 		this.setFechaCompra(fechaCompra);
+		this.setVideo(clase.getVideo());
+		this.setPremio(clase.getPremio());
+		this.setCantPremios(clase.getCantPremios());
 	}
 	
 	public String getNombre() {
@@ -144,6 +157,30 @@ public class DataClase {
 
 	private void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
+	}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	private void setPremio(String premio) {
+		this.premio = premio;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	private void setVideo(String video) {
+		this.video = video;
+	}
+
+	public Integer getCantPremios() {
+		return cantPremios;
+	}
+
+	private void setCantPremios(Integer cantPremios) {
+		this.cantPremios = cantPremios;
 	}
 
 

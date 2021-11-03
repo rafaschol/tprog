@@ -2,7 +2,9 @@ package logica;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Clase {
 	private String nombre;
@@ -15,8 +17,14 @@ public class Clase {
 	private ActividadDeportiva actividad;
 	private Map<Integer, Registro> registros;
 	private String imagen;
+	//lab 3
+	private String premio;
+	private String video;
+	private Integer cantPremios;
+	private Set<Ganador> ganadores;
+	private Map<String, CalificarClase> calificaciones;//la clave es el nombre del socio
 	
-	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta, String imagen) {
+	public Clase(String nombre, Date fecha, Integer minimo, Integer maximo, String urlClase, Date alta, String imagen, String video, String premio, Integer cantPremios) {
 		this.setNombre(nombre);
 		this.setFecha(fecha);
 		this.setMinPersonas(minimo);
@@ -25,6 +33,11 @@ public class Clase {
 		this.setFechaAlta(alta);
 		this.setRegistros(new HashMap<Integer, Registro>());
 		this.setImagen(imagen);
+		this.setGanadores(new HashSet<Ganador>());
+		this.setCalificaciones(new HashMap<String, CalificarClase>());
+		this.setPremio(premio);
+		this.setCantPremios(cantPremios);
+		this.setVideo(video);
 	}
 
 	public String getNombre() {
@@ -114,5 +127,45 @@ public class Clase {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	public void setPremio(String premio) {
+		this.premio = premio;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	public Integer getCantPremios() {
+		return cantPremios;
+	}
+
+	public void setCantPremios(Integer cantPremios) {
+		this.cantPremios = cantPremios;
+	}
+
+	public Set<Ganador> getGanadores() {
+		return ganadores;
+	}
+
+	public void setGanadores(Set<Ganador> ganadores){
+		this.ganadores = ganadores;
+	}
+
+	public Map<String, CalificarClase> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(Map<String, CalificarClase> calificaciones) {
+		this.calificaciones = calificaciones;
 	}
 }
