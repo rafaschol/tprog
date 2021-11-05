@@ -17,6 +17,7 @@ public class Clase {
 	private ActividadDeportiva actividad;
 	private Map<Integer, Registro> registros;
 	private String imagen;
+	private float valoracion;
 	//lab 3
 	private String premio;
 	private String video;
@@ -40,6 +41,7 @@ public class Clase {
 		this.setCantPremios(cantPremios);
 		this.setVideo(video);
 		this.setSorteo(false);
+		this.setValoracion(0);
 	}
 
 	public String getNombre() {
@@ -122,6 +124,9 @@ public class Clase {
 		Integer identificador = registro.getId();
 		this.registros.put(identificador, registro);
 	}
+	public void addCalificacion(CalificarClase calificacion, String socio) {
+		this.calificaciones.put(socio, calificacion);
+	}
 
 	public String getImagen() {
 		return imagen;
@@ -177,5 +182,13 @@ public class Clase {
 
 	public void setSorteo(boolean sorteo) {
 		this.sorteo = sorteo;
+	}
+
+	public float getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(float valoracion) {
+		this.valoracion = valoracion;
 	}
 }

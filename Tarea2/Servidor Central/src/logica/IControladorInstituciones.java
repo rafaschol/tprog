@@ -56,4 +56,10 @@ public interface IControladorInstituciones {
 	public abstract DataActividad listarDataActividadProfesor(String nombre);
 	 
 	public abstract DataUsuario[] lisarSociosClase(String nombreClase, String nombreActividad);
+	
+	public abstract void finalizarActividadDeportiva(String nombreActividad);
+	
+	public abstract void marcarActividadFavorita(String nombreActividad, String nickname);
+	
+	public abstract void desmarcarActividadFavorita(String nombreActividad, String nickname);
 }

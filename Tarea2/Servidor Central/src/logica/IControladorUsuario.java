@@ -63,5 +63,7 @@ public interface IControladorUsuario {
 	public abstract void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) throws ClaseVaciaException;
 	
 	public abstract DataUsuario[] mostrarSociosGanadores(String nombreClase, String nombreActividad) ;
+	
+	public abstract void ValorarProfesor(String nombreActividad, String nombreClase, Integer valoracion, String nicknameSocio);
     
 }

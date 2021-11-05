@@ -11,9 +11,10 @@ public class Socio extends Usuario {
 	private Map<Integer, Registro> registros; //Coleccion de registros.
 	private Set<Compra> compras; // Coleccion de compras de cuponera.
 	private Set<Participa> participa; // Coleccion de paricipa a actividad de cuponera.
-	private Map<String, CalificarProfesor> calificaciones;//lA CLAVE ES EL NOMBRE DEL PROFESOR
-	private Map<String, CalificarClase> calificacionesClase;//lA CLAVE ES EL NOMBRE DE LA CLASE
+	
+	private Map<String, CalificarClase> calificaciones;//lA CLAVE ES EL NOMBRE DE LA CLASE
 	private Map<String, Ganador> premios;//lA CLAVE ES EL NOMBRE DE LA CLASE
+	private Map<String, ActividadDeportiva> actFavoritas;
 	
 	public Socio(String nick, String nombre, String apellido, String email, Date fecha, String contrasena, String foto) {
 		this.nickname = nick;
@@ -28,9 +29,9 @@ public class Socio extends Usuario {
 		this.contrasena = contrasena;
 		this.seguidos = new HashMap<String, Usuario>();
 		this.seguidores = new HashMap<String, Usuario>();
-		this.calificaciones = new HashMap<String, CalificarProfesor>();
-		this.calificacionesClase = new HashMap<String, CalificarClase>();
+		this.calificaciones = new HashMap<String, CalificarClase>();
 		this.premios =  new HashMap<String, Ganador>();
+		this.actFavoritas = new HashMap<String, ActividadDeportiva>();
 	
 	}
 
@@ -77,20 +78,12 @@ public class Socio extends Usuario {
 		return this.nombre;
 	}
 
-	public Map<String, CalificarProfesor> getCalificaciones() {
+	public Map<String, CalificarClase> getCalificaciones() {
 		return calificaciones;
 	}
 
-	public void setCalificaciones(Map<String, CalificarProfesor> calificaciones) {
-		this.calificaciones = calificaciones;
-	}
-
-	public Map<String, CalificarClase> getCalificacionesClase() {
-		return calificacionesClase;
-	}
-
-	public void setCalificacionesClase(Map<String, CalificarClase> calificacionesClase) {
-		this.calificacionesClase = calificacionesClase;
+	public void setCalificaciones(Map<String, CalificarClase> calificacionesClase) {
+		this.calificaciones = calificacionesClase;
 	}
 
 	public Map<String, Ganador> getPremios() {
@@ -103,6 +96,14 @@ public class Socio extends Usuario {
 	public void addPremio(Ganador premio) {
 		String clase = premio.getClase().getNombre();
 		this.premios.put(clase, premio);
+	}
+
+	public Map<String, ActividadDeportiva> getActFavoritas() {
+		return actFavoritas;
+	}
+
+	public void setActFavoritas(Map<String, ActividadDeportiva> actFavoritas) {
+		this.actFavoritas = actFavoritas;
 	}
 	
 }

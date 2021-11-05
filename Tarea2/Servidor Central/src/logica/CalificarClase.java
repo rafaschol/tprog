@@ -3,13 +3,15 @@ package logica;
 public class CalificarClase {
 	private Integer calificacion;
 	private Clase clase;
-	private Profesor profesor;
+	private Socio socio;
 	
 	
-	public CalificarClase(Integer calificacion, Clase clase, Profesor profesor) {
+	
+	public CalificarClase(Integer calificacion, Clase clase,  Socio socio) {
 		this.setCalificacion(calificacion);
 		this.setClase(clase);
-		this.setProfesor(profesor);
+		this.setSocio(socio);
+		
 	}
 
 	public Integer getCalificacion() {
@@ -20,13 +22,7 @@ public class CalificarClase {
 		this.calificacion = calificacion;
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
-	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
 
 	public Clase getClase() {
 		return clase;
@@ -34,5 +30,13 @@ public class CalificarClase {
 
 	public void setClase(Clase clase) {
 		this.clase = clase;
+	}
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
 	}
 }

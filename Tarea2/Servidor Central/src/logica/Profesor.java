@@ -13,7 +13,7 @@ public class Profesor extends Usuario {
 	private float valoracion;
 	private Map<String, Clase> clases;
 	private Map<String, ActividadDeportiva> actividades;
-	private Map<String, CalificarProfesor> calificaciones;//La clave es el nombre del socio
+	private Map<String, CalificarClase> calificaciones;//La clave es el nombre del socio
 
 	public Profesor(String nick, String nombre, String apellido, String email, Date fecha, 
 					String descripcion, InstitucionDeportiva inst,  String biografia, String sitioWeb, String contrasena, String foto) {
@@ -33,7 +33,8 @@ public class Profesor extends Usuario {
 		this.seguidos = new HashMap<String, Usuario>();
 		this.seguidores = new HashMap<String, Usuario>();
 		this.actividades = new HashMap<String, ActividadDeportiva>();
-		this.setCalificaciones(new HashMap<String, CalificarProfesor>());
+		this.setCalificaciones(new HashMap<String, CalificarClase>());
+		this.setValoracion(0);
 	}
 
 	public String getDescripcion() {
@@ -144,11 +145,11 @@ public class Profesor extends Usuario {
 		this.valoracion = valoracion;
 	}
 
-	public Map<String, CalificarProfesor> getCalificaciones() {
+	public Map<String, CalificarClase> getCalificaciones() {
 		return calificaciones;
 	}
 
-	public void setCalificaciones(Map<String, CalificarProfesor> calificaciones) {
+	public void setCalificaciones(Map<String, CalificarClase> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 

@@ -21,6 +21,7 @@ public class ActividadDeportiva {
 	private Set<ActividadDeCuponera> actividadesCuponera;
 	private InstitucionDeportiva institucion;
 	private Map<String, Categoria> categorias; 
+	private Map<String, Socio> favoritos;
 	private Estado estado;
 	
 	public ActividadDeportiva(Date fecha, String nombre, String descripcion, Integer duracion, Float costo, InstitucionDeportiva institucion, String foto) {
@@ -35,6 +36,7 @@ public class ActividadDeportiva {
 		this.categorias = new HashMap<String, Categoria>();
 		this.estado = Estado.Ingresada;
 		this.foto = foto;
+		this.favoritos = new HashMap<String, Socio>();
 	}
 	
 	public String getNombre() {
@@ -198,5 +200,13 @@ public class ActividadDeportiva {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Map<String, Socio> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(Map<String, Socio> favoritos) {
+		this.favoritos = favoritos;
 	}
 }

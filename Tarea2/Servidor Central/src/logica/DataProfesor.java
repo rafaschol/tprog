@@ -10,6 +10,7 @@ public class DataProfesor extends DataUsuario {
 	private String[] actividadesAceptadas; 
 	private String[] actividadesRechazadas;
 	private String[] actividadesIngresadas;
+	private float valoracion;
 	
 	//operaciones para la web
 	private DataActividad[] actividadesAceptadasWeb;
@@ -27,6 +28,7 @@ public class DataProfesor extends DataUsuario {
 		this.setActividadesRechazadas(Profesor.class.cast(usuario).getActividadesRechazadas());
 		this.setActividadesAceptadas(Profesor.class.cast(usuario).getActividadesAceptadas());
 		this.setActividadesIngresadas(Profesor.class.cast(usuario).getActividadesIngresadas());
+		this.setValoracion(Profesor.class.cast(usuario).getValoracion());
 		}
 	
 	public DataProfesor(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores,  DataActividad[] actividadesAceptadasWeb, DataActividad[] actividadesSinAceptarWeb) {
@@ -41,6 +43,7 @@ public class DataProfesor extends DataUsuario {
 		this.setActividadesIngresadas(Profesor.class.cast(usuario).getActividadesIngresadas());
 		this.setActividadesAceptadasWeb(actividadesAceptadasWeb);
 		this.setActividadesSinAceptarWeb(actividadesSinAceptarWeb);
+		this.setValoracion(Profesor.class.cast(usuario).getValoracion());
 		}
 
 	public String getDescripcion() {
@@ -132,5 +135,13 @@ public class DataProfesor extends DataUsuario {
 
 	private void setActividadesSinAceptarWeb(DataActividad[] actividadesSinAceptadarWeb) {
 		this.actividadesSinAceptarWeb = actividadesSinAceptadarWeb;
+	}
+
+	public float getValoracion() {
+		return valoracion;
+	}
+
+	private void setValoracion(float valoracion) {
+		this.valoracion = valoracion;
 	}
 }

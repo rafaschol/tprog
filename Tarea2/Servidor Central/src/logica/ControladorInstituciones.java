@@ -365,7 +365,7 @@ public class ControladorInstituciones implements IControladorInstituciones {
     }
 	public DataUsuario[] lisarSociosClase(String nombreClase, String nombreActividad){
 		ManejadorActividad mactividad = ManejadorActividad.getinstance();
-    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
     	Clase clase = actividad.obtenerClase(nombreClase);
     	DataUsuario[] resultado = new DataUsuario[clase.getRegistros().size()];
     	Integer iterador = 0;
@@ -378,5 +378,32 @@ public class ControladorInstituciones implements IControladorInstituciones {
     	return resultado;
 	}
 
+	public  void finalizarActividadDeportiva(String nombreActividad) {
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	actividad.setEstado(Estado.Finalizada);
+    	mactividad.getActividadesAceptadas().remove(nombreActividad);
+    	//Ver despues como manejar el tema de la persistencia de datos.
+	}
+	
+	public void marcarActividadFavorita(String nombreActividad, String nickname) {
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Socio socio = msocios.obtenerSocio(nickname);
+    	actividad.getFavoritos().put(nickname, socio);
+    	socio.getActFavoritas().put(nombreActividad, actividad);
+    	
+	}
+	
+	public void desmarcarActividadFavorita(String nombreActividad, String nickname) {
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Socio socio = msocios.obtenerSocio(nickname);
+    	actividad.getFavoritos().remove(nickname);
+    	socio.getActFavoritas().remove(nombreActividad);
+    	
+	}
     
 }

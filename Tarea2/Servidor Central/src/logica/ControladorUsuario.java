@@ -550,7 +550,7 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 	public  void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
 		ManejadorActividad mactividad = ManejadorActividad.getinstance();
-    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
     	ManejadorSocios msocios = ManejadorSocios.getinstance();
     	Clase clase = actividad.obtenerClase(nombreClase);
     	Integer cantPremios = clase.getCantPremios();
@@ -590,7 +590,7 @@ public class ControladorUsuario implements IControladorUsuario {
 	
 	public DataUsuario[] mostrarSociosGanadores(String nombreClase, String nombreActividad) {
 		ManejadorActividad mactividad = ManejadorActividad.getinstance();
-    	ActividadDeportiva actividad = mactividad.obtenerActividadSinAceptar(nombreActividad);
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
     	Clase clase = actividad.obtenerClase(nombreClase);
     	DataUsuario[] resultado = new DataUsuario[clase.getGanadores().size()];
     	Set<Ganador> ganadores = clase.getGanadores();
@@ -604,6 +604,40 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
     	return resultado;
 		
+	}
+	
+	public void ValorarProfesor(String nombreActividad, String nombreClase, Integer valoracion, String nicknameSocio) {
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Socio socio = msocios.obtenerSocio(nicknameSocio);
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	Profesor profesor = clase.getProfesor();
+    	CalificarClase calificacion = new CalificarClase(valoracion,clase,socio);
+    	clase.addCalificacion(calificacion, nicknameSocio);
+    	socio.getCalificaciones().put(nombreClase, calificacion);
+    	
+    	//Renderizar la valoracion de la clase y del profesor
+    	float valoracionClase = 0;
+    	int cantValoracionesClase = 0;
+    	float valoracionProfesor = 0;
+    	int cantValoracionesProfesor = 0;
+    	
+    	for (Map.Entry<String, Clase> iter : profesor.getClases().entrySet()) {
+    		Clase iterClase = iter.getValue();
+   
+			for (Map.Entry<String, CalificarClase> iter2 : iterClase.getCalificaciones().entrySet()) {
+				valoracionProfesor += iter2.getValue().getCalificacion();
+				cantValoracionesProfesor++;
+			}
+    	}
+    	for (Map.Entry<String, CalificarClase> iter2 : clase.getCalificaciones().entrySet()) {
+    		valoracionClase += iter2.getValue().getCalificacion();
+			cantValoracionesClase++;
+    	}
+    	clase.setValoracion(valoracionClase/cantValoracionesClase);
+    	profesor.setValoracion(valoracionProfesor/cantValoracionesProfesor);
+    	
 	}
 	
       
