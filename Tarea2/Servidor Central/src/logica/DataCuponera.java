@@ -2,6 +2,11 @@ package logica;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataCuponera extends DataItem {
 	private String nombre;
 	private String descripcion;
@@ -14,6 +19,8 @@ public class DataCuponera extends DataItem {
 	private DataActividadCuponera[] actividadesCuponera;
 	private String[] instituciones;
 	private String[] categorias;
+	
+	public DataCuponera() {}
 
 	public DataCuponera(Cuponera cuponera, DataActividadCuponera[] dataActividad) {
 		this.setNombre(cuponera.getNombre());

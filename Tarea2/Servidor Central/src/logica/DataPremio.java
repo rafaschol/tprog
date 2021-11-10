@@ -2,6 +2,10 @@ package logica;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataPremio {
 	private String socio;
 	private String clase;
@@ -9,6 +13,8 @@ public class DataPremio {
 	private Date vigencia;
 	private String premio;
 	
+	
+	public DataPremio() {}
 	
 	public DataPremio(String socio, String clase, String actividad, Date vigencia,String premio) {
 		this.setActividad(actividad);

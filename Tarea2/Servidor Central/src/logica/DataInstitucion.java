@@ -1,5 +1,9 @@
 package logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataInstitucion {
 	  	private String nombre;
 	    private String[] profesores;
@@ -8,6 +12,9 @@ public class DataInstitucion {
 	    //
 	    private String descripcion;
 		private String url;
+		
+		
+		public DataInstitucion() {}
 
 
 	    public DataInstitucion(String nombre, String[] profesores, String[] actividades) {

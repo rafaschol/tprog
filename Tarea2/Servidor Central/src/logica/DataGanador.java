@@ -2,12 +2,19 @@ package logica;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataGanador {
 	private Date fecha;
 	private DataPremio comprobante;
 	private String nombreActividad;
 	private String nombreClase;
 	
+	
+	public DataGanador() {}
 	
 	public DataGanador(Ganador ganador){
 		this.setComprobante(ganador.getComprobante());

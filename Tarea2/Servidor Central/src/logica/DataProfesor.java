@@ -1,5 +1,9 @@
 package logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataProfesor extends DataUsuario {
 	
 	private String descripcion;
@@ -16,7 +20,8 @@ public class DataProfesor extends DataUsuario {
 	private DataActividad[] actividadesAceptadasWeb;
 	private DataActividad[] actividadesSinAceptarWeb;
 	
-
+	
+	public DataProfesor() {}
 	public DataProfesor(Usuario usuario, String[] clases, String[] actividades) {
 		super(usuario, clases);
   // Dynamic Cast a Profesor.

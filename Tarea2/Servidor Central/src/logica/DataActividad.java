@@ -2,6 +2,10 @@ package logica;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataActividad extends DataItem {
 	private Date fecha;
 	private String nombre;
@@ -15,7 +19,7 @@ public class DataActividad extends DataItem {
 	private String[] categorias;
 	private String foto;
 	
-	
+	public DataActividad() {}
 	
 	public DataActividad(ActividadDeportiva actividad, String[] clases, String[] cuponeras, String[] categorias) {
 		this.setNombre(actividad.getNombre());
@@ -30,6 +34,7 @@ public class DataActividad extends DataItem {
 		this.setFoto(actividad.getFoto());
 		this.setEstado(actividad.getEstado().toString());
 	}
+	
 	
 	
 	

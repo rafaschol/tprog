@@ -42,7 +42,7 @@ public class PublicadorUsuario {
 
     @WebMethod(exclude = true)
     public void publicar(){
-         endpoint = Endpoint.publish("http://localhost:9129/publicador", this);
+         endpoint = Endpoint.publish("http://localhost:8080/publicador", this);
     }
 
     @WebMethod(exclude = true)

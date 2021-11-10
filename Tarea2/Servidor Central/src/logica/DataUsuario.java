@@ -2,6 +2,9 @@ package logica;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataUsuario  {
 	private String nickname;
 	private String tipoUsuario;
@@ -22,7 +25,7 @@ public class DataUsuario  {
 	
 	
 	
-	
+	public DataUsuario() {}
 	
 	public DataUsuario(Usuario usuario, String[] clases) {
 		this.setNickname(usuario.getNickname());

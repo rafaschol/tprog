@@ -4,6 +4,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataClase {
 	private String nombre;
 	private Date fecha;
@@ -22,7 +27,7 @@ public class DataClase {
 	private Integer cantPremios;
 
 	
-	
+	public DataClase() {}
 	
 	public DataClase(Clase clase, String actividad, String institucion) {
 		this.setNombre(clase.getNombre());

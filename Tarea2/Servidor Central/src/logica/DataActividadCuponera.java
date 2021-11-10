@@ -1,8 +1,14 @@
 package logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataActividadCuponera {
 	private Integer cantidadDeClases;
 	private String actividad;
+	
+	public DataActividadCuponera() {}
 	
 	public DataActividadCuponera(ActividadDeCuponera adc) {
 		this.setCantidadDeClases(adc.getCantidadDeClases());
