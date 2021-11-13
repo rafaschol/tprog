@@ -10,31 +10,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logica.DataActividad;
-import logica.DataClase;
-import logica.DataProfesor;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.ClaseRepetidaException;
+import servidor.DataActividad;
+import servidor.DataUsuario;
+import servidor.DataClase;
+import servidor.DataItem;
+import servidor.DataProfesor;
+import servidor.DataInstitucion;
 
 @WebServlet("/clases/*")
 public class ClaseDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
+
 
     public ClaseDetailServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera();
+
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
+		
 		String nombreClase = request.getPathInfo().substring(1);
 		HttpSession session = request.getSession();
 		DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");
@@ -45,9 +45,16 @@ public class ClaseDetailServlet extends HttpServlet {
 		esSocio= usuarioLogueado.getTipoUsuario().equals("Socio");	 
 		
 		
-		DataClase clase = (DataClase) controladorInstitucion.obtenerDataClase(nombreClase);
+		DataClase clase = (DataClase) port.obtenerDataClase(nombreClase);
 		Date fechaActual = new Date();
-		boolean noExpiro = clase.getFecha().after(fechaActual);
+		
+		
+		
+		//CONVIERTO GREGORIAN CALENDAR A DATE
+		Date date = clase.getFecha().toGregorianCalendar().getTime();
+		boolean noExpiro = date.after(fechaActual);
+		
+		
 		
 		request.setAttribute("clase", clase);
 		request.setAttribute("esSocio", esSocio);

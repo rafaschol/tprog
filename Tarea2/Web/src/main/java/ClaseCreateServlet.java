@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -23,44 +24,52 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import excepciones.ClaseRepetidaException;
-import logica.DataInstitucion;
-import logica.DataProfesor;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.ClaseRepetidaException;
+import servidor.ClaseRepetidaException_Exception;
+import servidor.DataActividad;
+import servidor.DataUsuario;
+import servidor.DataClase;
+import servidor.DataItem;
+import servidor.DataProfesor;
+import servidor.DataInstitucion;
 
 @WebServlet("/clases/nueva")
 @MultipartConfig
 public class ClaseCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
+
 	
 
     public ClaseCreateServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera(); 
+    
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
 		
 		HttpSession session = request.getSession();
 		DataProfesor usuarioLogueado = (DataProfesor) session.getAttribute("usuarioLogueado");
 		String nombreInstitucion = usuarioLogueado.getInstitucion();
-		DataInstitucion[] instituciones = controladorInstitucion.listarDataInstituciones();
+		
+		DataContenedor contInstitucion = port.listarDataInstituciones();
+		DataInstitucion[] instituciones = contInstitucion.getInstituciones().toArray(new DataInstitucion[0]);
+		
+		
+		
+		
 		String[] actividades = null;
 		
 		for(int j = 0; j < instituciones.length; j++) {
 			if(instituciones[j].getNombre().equals(nombreInstitucion))
-				actividades = instituciones[j].getActividades();
+				actividades = instituciones[j].getActividades().toArray(new String[0]);
 		}
 		
 		request.setAttribute("actividades",actividades);
@@ -72,6 +81,9 @@ public class ClaseCreateServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ClaseCreate.jsp");
 		
@@ -113,8 +125,26 @@ public class ClaseCreateServlet extends HttpServlet {
 		String rutaFoto = foto.getSize() > 0 ? "media/clases/" + nombreArchivo : null;
 		
 		
+		
+		
+		//FALTA TERMINAR EL CASO DE USO ACTUALIZADO
+		String hola = "hola";
+		//
+		
+		
+		
 		try {
-			controladorInstitucion.altaClase(nombreClase, fecha, min, max,url,fechaAlta,nickname,nombreActividad, rutaFoto);
+			
+			GregorianCalendar c = new GregorianCalendar();
+			c.setTime(fecha);
+			XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+			GregorianCalendar c2 = new GregorianCalendar();
+			c.setTime(fechaAlta);
+			XMLGregorianCalendar fechaAltaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c2);
+			
+			
+			
+			port.altaClase(nombreClase, fechaGregorian, min, max,url,fechaAltaGregorian,nickname,nombreActividad, rutaFoto,hola,hola,6);
 			
 			/* Manejo de la imagen */
 			if (foto.getSize() > 0) {
@@ -132,15 +162,19 @@ public class ClaseCreateServlet extends HttpServlet {
 						
 			response.sendRedirect(request.getContextPath() + "/");
 			
-		} catch (ClaseRepetidaException e) {
+		} catch (ClaseRepetidaException_Exception e ) {
 			request.setAttribute("claseRepetida", true);
 			String nombreInstitucion = usuarioLogueado.getInstitucion();
-			DataInstitucion[] instituciones = controladorInstitucion.listarDataInstituciones();
+			
+			DataContenedor contInstitucion = port.listarDataInstituciones();
+			DataInstitucion[] instituciones = contInstitucion.getInstituciones().toArray(new DataInstitucion[0]);
+			
+			
 			String[] actividades = null;
 			
 			for(int j = 0; j < instituciones.length; j++) {
 				if(instituciones[j].getNombre().equals(nombreInstitucion))
-					actividades = instituciones[j].getActividades();
+					actividades = instituciones[j].getActividades().toArray(new String[0]);
 			}
 			
 			request.setAttribute("dataTab", "0");
@@ -155,6 +189,9 @@ public class ClaseCreateServlet extends HttpServlet {
 			request.setAttribute("url", url);
 		
 			dispatcher.forward(request, response);
+		} catch (DatatypeConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}	
 	}
 	

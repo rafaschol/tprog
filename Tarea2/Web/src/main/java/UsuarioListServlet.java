@@ -8,29 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataUsuario;
+
+
 
 @WebServlet("/usuarios")
 public class UsuarioListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
 
     public UsuarioListServlet() {
+ 
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera();
+
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DataUsuario[] usuarios = controladorUsuario.listarUsuariosWeb();
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        
+        DataContenedor contUsuario = port.listarUsuariosWeb();
+        DataUsuario[] usuarios = contUsuario.getUsuarios().toArray(new DataUsuario[0]);
+	
 		
 		request.setAttribute("usuarios", usuarios);
 		

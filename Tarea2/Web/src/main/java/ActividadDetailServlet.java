@@ -9,31 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logica.DataActividad;
-import logica.DataClase;
-import logica.DataCuponera;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.DataActividad;
+import servidor.DataUsuario;
+import servidor.DataClase;
 
 @WebServlet("/actividades/*")
 public class ActividadDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
+
 
     public ActividadDetailServlet() {
     	super();
-    	Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera();
+
     }
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
+		
+		
+		
 		String nombreActividad = request.getPathInfo().substring(1);
 		HttpSession session = request.getSession();
 		String nombreProfesor = request.getParameter("profesor");
@@ -41,7 +40,7 @@ public class ActividadDetailServlet extends HttpServlet {
 		
 		if(nombreProfesor !=null) {
 			if (dataUsuario!= null &&  dataUsuario.getNickname().equals(nombreProfesor)) {
-				DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividadProfesor(nombreActividad);
+				DataActividad actividad = (DataActividad) port.listarDataActividadProfesor(nombreActividad);
 				request.setAttribute("actividad", actividad);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
 				dispatcher.forward(request, response);
@@ -53,11 +52,18 @@ public class ActividadDetailServlet extends HttpServlet {
 			}
 		}
 		else {
-			DataActividad actividad = (DataActividad) controladorInstitucion.listarDataActividad(nombreActividad);
+			DataActividad actividad = (DataActividad) port.listarDataActividad(nombreActividad);
 		    request.setAttribute("actividad", actividad);
-		    DataClase[] clases = controladorInstitucion.listarDataClases(nombreActividad);
+		    
+		    DataContenedor contClases = port.listarDataClases(nombreActividad);
+		    DataClase[] clases = contClases.getClases().toArray(new DataClase[0]);
+		  
 			request.setAttribute("clases", clases);
-			DataCuponera[] cuponeras = controladorInstitucion.listarDataCuponera(nombreActividad);
+			
+			DataContenedor contCuponera = port.listarDataCuponera(nombreActividad);
+			DataCuponera[] cuponeras  = contCuponera.getCuponeras().toArray(new DataCuponera[0]);
+		    
+			
 			request.setAttribute("cuponeras", cuponeras);
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadDetail.jsp");
 			dispatcher.forward(request, response);

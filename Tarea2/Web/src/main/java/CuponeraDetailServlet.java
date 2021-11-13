@@ -9,35 +9,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logica.ActividadDeCuponera;
-import logica.DataActividad;
-import logica.DataCuponera;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+
+import servidor.DataActividad;
+
 
 @WebServlet("/cuponeras/*")
 public class CuponeraDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private IControladorCuponera controladorCuponera;
+	
 
     public CuponeraDetailServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorCuponera = fabrica.getIControladorCuponera();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
 		
 		String nombreCuponera= request.getPathInfo().substring(1); 
 		
-		DataCuponera cuponera = (DataCuponera) controladorCuponera.consultaCuponera(nombreCuponera);
+		DataCuponera cuponera = (DataCuponera) port.consultaCuponera(nombreCuponera);
 		request.setAttribute("cuponera", cuponera);
-		String[] categorias = controladorCuponera.getCategorasCuponera(nombreCuponera);
+		
+		DataContenedor contStrings = port.getCategorasCuponera(nombreCuponera);
+		String[] categorias = contStrings.getStrings().toArray(new String[0]);
+		
 		request.setAttribute("categorias", categorias);
-		DataActividad[] actividades = controladorCuponera.listarDataActividades(nombreCuponera);
+		
+		DataContenedor contActividad = port.listarDataActividades(nombreCuponera);
+		DataActividad[] actividades = contActividad.getActividades().toArray(new DataActividad[0]);
+		
+		
+		
 		request.setAttribute("actividades", actividades);
 		
 		Float descuento = cuponera.getDescuento()*100;

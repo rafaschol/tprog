@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,38 +14,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import logica.ActividadDeportiva;
-import logica.DataActividad;
-import logica.DataClase;
-import logica.DataCuponera;
-import logica.DataProfesor;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataActividad;
+import servidor.DataClase;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.DataItem;
+import servidor.DataProfesor;
+import servidor.DataUsuario;
+
 
 @WebServlet("/usuarios/*")
 public class UsuarioDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
+	
 	
 
     public UsuarioDetailServlet() { 
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
+       
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
 		
 		String nombreUsuario = request.getPathInfo().substring(1);
 		HttpSession session = request.getSession();
 		DataUsuario usuarioLogueado = (DataUsuario) session.getAttribute("usuarioLogueado");
 		
-		DataUsuario dataUsuario = (DataUsuario)  controladorUsuario.mostrarDataUsuarioWeb(nombreUsuario);
+		DataUsuario dataUsuario = (DataUsuario)  port.mostrarDataUsuarioWeb(nombreUsuario);
 		
 		
 	
@@ -56,17 +59,18 @@ public class UsuarioDetailServlet extends HttpServlet {
 	
 		
 		
-		DataClase[] clases = dataUsuario.getClasesWeb();
-		DataCuponera[] cuponeras = dataUsuario.getCuponerasWeb();
-		DataUsuario[] seguidos = dataUsuario.getSeguidos();
-		DataUsuario[] seguidores = dataUsuario.getSeguidores();
+		
+		DataClase[] clases = dataUsuario.getClasesWeb().toArray(new DataClase[0]);
+		DataCuponera[] cuponeras = dataUsuario.getCuponerasWeb().toArray(new DataCuponera[0]);
+		DataUsuario[] seguidos = dataUsuario.getSeguidos().toArray(new DataUsuario[0]);
+		DataUsuario[] seguidores = dataUsuario.getSeguidores().toArray(new DataUsuario[0]);
 		
 		
 		if(dataUsuario.getTipoUsuario().equals("Profesor")){
 			DataProfesor prof = (DataProfesor) dataUsuario;
-			DataActividad[] actividades = prof.getActividadesAceptadasWeb();
+			DataActividad[] actividades = prof.getActividadesAceptadasWeb().toArray(new DataActividad[0]);
 		
-			DataActividad[] actividadesPendientes = prof.getActividadesSinAceptarWeb();
+			DataActividad[] actividadesPendientes = prof.getActividadesSinAceptarWeb().toArray(new DataActividad[0]);;
 
 			
 			request.setAttribute("actividadesPendientes", actividadesPendientes);
@@ -108,6 +112,10 @@ public class UsuarioDetailServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/UsuarioDetail.jsp");
 		String nombreUsuario = request.getPathInfo().substring(1);
@@ -130,15 +138,37 @@ public class UsuarioDetailServlet extends HttpServlet {
 		}
 		
 		
-		DataUsuario dataUsuario = (DataUsuario)  controladorUsuario.mostrarDataUsuarioWeb(nombreUsuario);
+		DataUsuario dataUsuario = (DataUsuario)  port.mostrarDataUsuarioWeb(nombreUsuario);
 		boolean esProfesor = dataUsuario.getTipoUsuario().equals("Profesor");
 		
 		
 			if (esProfesor) {
-				controladorUsuario.modificarDatosProfesor(nombreUsuario, nombre, apellido, nacimiento, descripcion, biografia, sitioWeb);
+				GregorianCalendar c = new GregorianCalendar();
+				c.setTime(nacimiento);
+				XMLGregorianCalendar fechaGregorian;
+				try {
+					fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+					port.modificarDatosProfesor(nombreUsuario, nombre, apellido, fechaGregorian, descripcion, biografia, sitioWeb);
+				} catch (DatatypeConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 			else {
-				controladorUsuario.modificarDatosSocio(nombreUsuario,nombre,apellido, nacimiento);
+				GregorianCalendar c = new GregorianCalendar();
+				c.setTime(nacimiento);
+				XMLGregorianCalendar fechaGregorian;
+				try {
+					fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+					port.modificarDatosSocio(nombreUsuario,nombre,apellido, fechaGregorian);
+				} catch (DatatypeConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 			
 			response.sendRedirect("");

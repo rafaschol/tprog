@@ -10,44 +10,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import excepciones.InstitucionRepetidaException;
-import excepciones.MailRepetidoException;
-import excepciones.UsuarioRepetidoException;
-import logica.DataActividad;
-import logica.DataCuponera;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
-import logica.ManejadorSocios;
-import logica.Socio;
+
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.DataActividad;
 
 @WebServlet("")
 public class IndexServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
+	//private IControladorInstituciones controladorInstitucion;
+	//private IControladorCuponera controladorCuponera;
 
     public IndexServlet() {
     	super();
-    	Fabrica fabrica = Fabrica.getInstance();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera= fabrica.getIControladorCuponera();
+    	//Fabrica fabrica = Fabrica.getInstance();
+    	//controladorInstitucion = fabrica.getIControladorInstitucion();
+    	//controladorCuponera= fabrica.getIControladorCuponera();
+    	
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String[] cuponeras = controladorCuponera.listarCuponeras();
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        DataContenedor contCuponera = port.listarCuponeras();
+        String[] cuponeras = contCuponera.getStrings().toArray(new String[0]);
 		DataCuponera[] dataCuponeras = new DataCuponera[cuponeras.length];
 		for (int j = 0; j < dataCuponeras.length; j++) {
-			dataCuponeras[j] = controladorCuponera.consultaCuponera(cuponeras[j]);
+			dataCuponeras[j] = port.consultaCuponera(cuponeras[j]);
 		
 		}
 		request.setAttribute("cuponeras", dataCuponeras);
 		
 		
-		DataActividad[] dataActividades = controladorInstitucion.listarActividadesWeb();
+		
+		DataContenedor contActividad = port.listarActividadesWeb();
+		
+		
+		DataActividad[]  dataActividades = contActividad.getActividades().toArray(new DataActividad[0]);
 		
 		request.setAttribute("actividades", dataActividades);
 		

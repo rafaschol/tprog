@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,48 +10,54 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import excepciones.ClasesRestantesException;
-import excepciones.CuponeraVencidaException;
-import excepciones.CuposAgotadosException;
-import excepciones.SocioRegistradoException;
-import logica.DataActividad;
-import logica.DataClase;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.ClasesRestantesException_Exception;
+import servidor.CuponeraVencidaException_Exception;
+import servidor.CuposAgotadosException_Exception;
+import servidor.DataActividad;
+import servidor.DataClase;
+import servidor.DataContenedor;
+import servidor.DataUsuario;
+import servidor.SocioRegistradoException_Exception;
+
+
 
 @WebServlet("/clases/registro")
 public class RegistroClaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
+
 
     public RegistroClaseServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera(); 
+ 
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
 		String nombreActividad = request.getParameter("actividad");
 		String nombreClase = request.getParameter("clase");
 		
 		if (nombreClase == null) {
 			// Llevo a la primera tab: la de seleccionar la clase
-			DataActividad[] actividades = controladorInstitucion.listarActividadesWeb();
+			
+			DataContenedor contActividad = port.listarActividadesWeb();
+			DataActividad[] actividades = contActividad.getActividades().toArray(new DataActividad[0]);
+		
 			request.setAttribute("actividades", actividades);
 			
 			if (nombreActividad != null) {
 				// Si ya se ingres� una actividad deportiva, se carga esta de nuevo en la request y se cargan tambi�n sus clases
 				request.setAttribute("actividadSeleccionada", nombreActividad);
 				
-				DataClase[] clases = controladorInstitucion.listarDataClasesVigentes(nombreActividad);
+				DataContenedor contClase = port.listarDataClasesVigentes(nombreActividad);
+				DataClase[] clases = contClase.getClases().toArray(new DataClase[0]);
+				
+				
 				request.setAttribute("clases", clases);
 			}
 			// Cargo la tab que voy a mostrar luego: la primer tab
@@ -60,9 +67,13 @@ public class RegistroClaseServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			DataUsuario dataUsuario = (DataUsuario) session.getAttribute("usuarioLogueado");
 			String nicknameSocio = dataUsuario.getNickname();
-			DataClase clase = controladorInstitucion.obtenerDataClase(nombreClase);
+			DataClase clase = port.obtenerDataClase(nombreClase);
 			String actividad = clase.getActividad();
-			String[] cuponeras = controladorUsuario.listarCuponerasActividadWeb(nicknameSocio, actividad);
+			
+			DataContenedor contString = port.listarCuponerasActividadWeb(nicknameSocio, actividad);
+			String[] cuponeras  = contString.getStrings().toArray(new String[0]);
+			
+			
 			request.setAttribute("clase", clase); 
 			request.setAttribute("cuponeras", cuponeras); 
 			request.setAttribute("claseSeleccionada", nombreClase); 
@@ -78,6 +89,10 @@ public class RegistroClaseServlet extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/RegistroClase.jsp");
 	
@@ -90,14 +105,17 @@ public class RegistroClaseServlet extends HttpServlet {
 		
 		String nickname = dataUsuario.getNickname();
 		String nombreClase = request.getParameter("clase");
-		DataClase clase = controladorInstitucion.obtenerDataClase(nombreClase);
+		DataClase clase = port.obtenerDataClase(nombreClase);
 		String nombreActividad = clase.getActividad();
 		String nombreCuponera = request.getParameter("cuponera");
 		Date fecha = new Date();
 		boolean conCuponera = nombreCuponera != null;
 		request.setAttribute("claseSeleccionada", nombreClase); 
 		request.setAttribute("dataTab", "1");
-		String[] cuponeras = controladorUsuario.listarCuponerasActividadWeb(nickname, nombreActividad);
+		
+		DataContenedor contString = port.listarCuponerasActividadWeb(nickname, nombreActividad);;
+		String[] cuponeras  = contString.getStrings().toArray(new String[0]);
+		
 		request.setAttribute("cuponeras", cuponeras);
 		request.setAttribute("nombreCuponera", nombreCuponera);
 		int selector = 0;
@@ -106,23 +124,30 @@ public class RegistroClaseServlet extends HttpServlet {
 		request.setAttribute("clase", clase); 
 		
 			try {
-				controladorUsuario.registrarSocio(nickname, nombreClase, nombreActividad, conCuponera, nombreCuponera, fecha);
+				GregorianCalendar c = new GregorianCalendar();
+				c.setTime(fecha);
+				XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+				
+				port.registrarSocio(nickname, nombreClase, nombreActividad, conCuponera, nombreCuponera, fechaGregorian);
 				response.sendRedirect(request.getContextPath() + "/");
-			} catch (CuposAgotadosException e) {
+			} catch (CuposAgotadosException_Exception e) {
 				
 				request.setAttribute("CuposAgotados", true);
 				dispatcher.forward(request, response);
-			} catch (SocioRegistradoException e) {
+			} catch (SocioRegistradoException_Exception e) {
 				request.setAttribute("SocioRegistrado", true);
 				dispatcher.forward(request, response);
-			} catch (ClasesRestantesException e) {
+			} catch (ClasesRestantesException_Exception e) {
 				// TODO Auto-generated catch block
 				request.setAttribute("ClasesRestantes", true);
 				dispatcher.forward(request, response);
-			} catch (CuponeraVencidaException e) {
+			} catch (CuponeraVencidaException_Exception e) {
 				// TODO Auto-generated catch block
 				request.setAttribute("CuponeraVencida", true);
 				dispatcher.forward(request, response);
+			} catch (DatatypeConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		

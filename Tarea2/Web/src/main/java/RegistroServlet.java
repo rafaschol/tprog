@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -23,38 +24,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import excepciones.DatosLoginIncorrectosException;
-import excepciones.MailRepetidoException;
-import excepciones.UsuarioRepetidoException;
-import logica.DataUsuario;
-import logica.Fabrica;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.DataInstitucion;
+import servidor.DataActividad;
+import servidor.DataUsuario;
+import servidor.DatosLoginIncorrectosException_Exception;
+import servidor.MailRepetidoException_Exception;
+import servidor.UsuarioRepetidoException_Exception;
+import servidor.DataClase;
+import servidor.DataItem;
 
 @WebServlet("/registro")
 @MultipartConfig
 public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
+
        
     public RegistroServlet() {
     	super();
-    	Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
+  
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Registro.jsp");
 		
-		request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
+		request.setAttribute("instituciones", port.listarDataInstituciones());
 		request.setAttribute("dataTab", "0");
 		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Registro.jsp");
 		
@@ -88,11 +98,20 @@ public class RegistroServlet extends HttpServlet {
 		/* Hacer el alta del usuario */
 		try {
 			if (esProfesor) {
-				controladorUsuario.altaProfesor(nombreUsuario, nombre, apellido, correo, nacimiento, institucion, descripcion, biografia, sitioWeb, contrasena, rutaFoto);
+				GregorianCalendar c = new GregorianCalendar();
+				c.setTime(nacimiento);
+				XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+				
+				
+				port.altaProfesor(nombreUsuario, nombre, apellido, correo, fechaGregorian, institucion, descripcion, biografia, sitioWeb, contrasena, rutaFoto);
 				
 			}
 			else {
-				controladorUsuario.altaSocio(nombreUsuario, nombre, apellido, correo, nacimiento, contrasena, rutaFoto);
+				GregorianCalendar c = new GregorianCalendar();
+				c.setTime(nacimiento);
+				XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+				
+				port.altaSocio(nombreUsuario, nombre, apellido, correo, fechaGregorian, contrasena, rutaFoto);
 			}
 			/* Manejo de la imagen */
 			if (foto.getSize() > 0) {
@@ -114,20 +133,24 @@ public class RegistroServlet extends HttpServlet {
 			HttpSession sesion = request.getSession();
 			DataUsuario usuario;
 			try {
-				usuario = controladorUsuario.login(correo, contrasena);
+				usuario = port.login(correo, contrasena);
 				sesion.setAttribute("usuarioLogueado", usuario);
-			} catch (DatosLoginIncorrectosException e) {}
+			} catch (DatosLoginIncorrectosException_Exception e) {}
 			
 			String next = request.getParameter("continue");
 			String redirect = next != null && !next.equals("") ? next : request.getContextPath() + "/";
 			response.sendRedirect(redirect);
-		} catch (MailRepetidoException ex) {
+		} catch (MailRepetidoException_Exception ex) {
 			request.setAttribute("mailRepetido", true);
 			request.setAttribute("dataTab", "1");
 			request.setAttribute("userType", esProfesor ? "profesor" : "socio");
 			
 			// Cargar de nuevo los datos ingresados
-			request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
+			
+			DataContenedor contInstituciones = port.listarDataInstituciones();
+			DataInstitucion[] instituciones = contInstituciones.getInstituciones().toArray(new DataInstitucion[0]);
+			
+			request.setAttribute("instituciones", instituciones);
 			request.setAttribute("correo", correo);
 			request.setAttribute("nombre", nombre);
 			request.setAttribute("apellido", apellido);
@@ -139,13 +162,18 @@ public class RegistroServlet extends HttpServlet {
 			request.setAttribute("sitioWeb", sitioWeb);
 			
 			dispatcher.forward(request, response);
-		} catch (UsuarioRepetidoException ex) {
+		} catch (UsuarioRepetidoException_Exception ex) {
 			request.setAttribute("usuarioRepetido", true);
 			request.setAttribute("dataTab", "1");
 			request.setAttribute("userType", esProfesor ? "profesor" : "socio");
 			
+			
 			// Cargar de nuevo los datos ingresados
-			request.setAttribute("instituciones", controladorInstitucion.listarDataInstituciones());
+			
+			DataContenedor contInstituciones = port.listarDataInstituciones();
+			DataInstitucion[] instituciones = contInstituciones.getInstituciones().toArray(new DataInstitucion[0]);
+			
+			request.setAttribute("instituciones", instituciones);
 			request.setAttribute("correo", correo);
 			request.setAttribute("nombre", nombre);
 			request.setAttribute("apellido", apellido);
@@ -156,6 +184,9 @@ public class RegistroServlet extends HttpServlet {
 			request.setAttribute("biografia", biografia);
 			request.setAttribute("sitioWeb", sitioWeb);
 			dispatcher.forward(request, response);
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

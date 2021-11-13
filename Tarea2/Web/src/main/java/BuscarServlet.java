@@ -8,22 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logica.DataItem;
-import logica.Fabrica;
-import logica.IControladorInstituciones;
+import servidor.DataContenedor;
+import servidor.DataCuponera;
+import servidor.DataActividad;
+import servidor.DataUsuario;
+import servidor.DataClase;
+import servidor.DataItem;
 
 @WebServlet("/buscar")
 public class BuscarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorInstituciones controladorInstitucion;
+	
        
     public BuscarServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-        controladorInstitucion = fabrica.getIControladorInstitucion();
+        
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        
+        
 		String busqueda = request.getParameter("q");
 		String institucion = request.getParameter("ins");
 		String categoria = request.getParameter("cat");
@@ -42,7 +48,10 @@ public class BuscarServlet extends HttpServlet {
 			request.setAttribute("orden", orden);
 		}
 		
-		DataItem[] resultados = controladorInstitucion.buscar(busqueda, institucion, categoria, orden);
+		DataContenedor contItems = port.buscar(busqueda, institucion, categoria, orden);
+		DataItem[] resultados = contItems.getItems().toArray(new DataItem[0]);
+		
+
 		request.setAttribute("resultados", resultados);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Buscar.jsp");

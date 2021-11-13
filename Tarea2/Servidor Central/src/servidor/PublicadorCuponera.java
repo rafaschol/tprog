@@ -34,7 +34,7 @@ public class PublicadorCuponera {
 
     @WebMethod(exclude = true)
     public void publicar(){
-         endpoint = Endpoint.publish("http://localhost:9129/publicador", this);
+         endpoint = Endpoint.publish("http://localhost:9130/publicador", this);
     }
 
     @WebMethod(exclude = true)
