@@ -1,16 +1,19 @@
 
-
+/*
 import java.util.Arrays;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import logica.DataInstitucion;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
 import logica.IControladorUsuario;
+import servidor.MailRepetidoException_Exception;
+import servidor.UsuarioRepetidoException_Exception;
 
 @WebListener
 public class InicioListener implements ServletContextListener {
@@ -26,12 +29,18 @@ public class InicioListener implements ServletContextListener {
     	controladorInstitucion = fabrica.getIControladorInstitucion();
     	controladorCuponera = fabrica.getIControladorCuponera();
     	datosPrueba = new CargarDatosPrueba(controladorUsuario, controladorInstitucion, controladorCuponera);
+    	
     }
-
+    
     public void contextInitialized(ServletContextEvent sce)  { 
     	datosPrueba.cargarInstituciones();
 		datosPrueba.cargarCategorias();
-		datosPrueba.cargarSocios();
+		try {
+			datosPrueba.cargarSocios();
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		datosPrueba.cargarProfesores();
 		datosPrueba.cargarActividadesDeportivas();
 		datosPrueba.cargarClases();
@@ -49,4 +58,4 @@ public class InicioListener implements ServletContextListener {
 		sce.getServletContext().setAttribute("categorias", categorias);
     }
 	
-}
+}*/
