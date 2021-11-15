@@ -1,4 +1,3 @@
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -20,29 +20,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import excepciones.ActividadRepetidaException;
-import logica.DataProfesor;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.ActividadRepetidaException;
+import servidor.ActividadRepetidaException_Exception;
+import servidor.DataContenedor;
+import servidor.DataItem;
+import servidor.DataProfesor;
+
+
 
 @WebServlet("/actividades/nueva")
 @MultipartConfig
 public class ActividadCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IControladorInstituciones controladorInstitucion;
+	
 
     public ActividadCreateServlet() {
         super();
-        Fabrica fabrica = Fabrica.getInstance();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
+       
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        
+        
+        DataContenedor contItems = port.listarCategorias();
+        String[] categorias = contItems.getStrings().toArray(new String[0]);
 		
-		String[] categorias =  controladorInstitucion.listarCategorias();
 		
 		request.setAttribute("categorias",categorias);
 		request.setAttribute("dataTab", "0");
@@ -52,6 +58,11 @@ public class ActividadCreateServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+		
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ActividadCreate.jsp");
 		HttpSession session = request.getSession();
@@ -76,16 +87,20 @@ public class ActividadCreateServlet extends HttpServlet {
 		String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
 		String rutaFoto = foto.getSize() > 0 ? "media/actividades/" + nombreArchivo : null;
 		
-		try {
-			controladorInstitucion.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoFloat, fecha, nickname, categorias, rutaFoto);
+		//try {
+			//GregorianCalendar c = new GregorianCalendar();
+			//c.setTime(fecha);
+			//XMLGregorianCalendar fechaGregorian;
+			
+			//port.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoFloat, fecha, nickname, categorias, rutaFoto);
 			
 			/* Manejo de la imagen */
-			if (foto.getSize() > 0) {
-				String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
-				File uploads = new File(pathToImages);
-				File archivo = new File(uploads, nombreArchivo);
+			//if (foto.getSize() > 0) {
+				//String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
+				//File uploads = new File(pathToImages);
+				//File archivo = new File(uploads, nombreArchivo);
 				
-				try {
+				/*try {
 					InputStream fotoStream = foto.getInputStream();
 					InputStream fotoRecortada = recortarImagen(fotoStream);
 					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
@@ -97,10 +112,10 @@ public class ActividadCreateServlet extends HttpServlet {
 			}
 			
 			response.sendRedirect(request.getContextPath() + "/");
-		} catch (ActividadRepetidaException e) {
+		} catch (ActividadRepetidaException_Exception e) {
 			request.setAttribute("actividadRepetida", true);
 			request.setAttribute("dataTab", "0");
-			request.setAttribute("categorias", controladorInstitucion.listarCategorias());
+			//request.setAttribute("categorias", controladorInstitucion.listarCategorias());
 			
 			request.setAttribute("nombre", nombreActividad);
 			request.setAttribute("descripcion", descripcion);
@@ -108,7 +123,7 @@ public class ActividadCreateServlet extends HttpServlet {
 			request.setAttribute("costo", costo);
 			request.setAttribute("categoriasSeleccionadas", categorias);
 			dispatcher.forward(request, response);
-		}
+		}*/
 		
 	}
 	

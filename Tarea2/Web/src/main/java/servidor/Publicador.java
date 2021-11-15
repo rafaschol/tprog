@@ -67,117 +67,6 @@ public interface Publicador {
      * 
      * @param arg3
      * @param arg2
-     * @param arg5
-     * @param arg4
-     * @param arg1
-     * @param arg0
-     * @param arg10
-     * @param arg7
-     * @param arg6
-     * @param arg9
-     * @param arg8
-     * @throws UsuarioRepetidoException_Exception
-     * @throws MailRepetidoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://servidor/Publicador/altaProfesorRequest", output = "http://servidor/Publicador/altaProfesorResponse", fault = {
-        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://servidor/Publicador/altaProfesor/Fault/UsuarioRepetidoException"),
-        @FaultAction(className = MailRepetidoException_Exception.class, value = "http://servidor/Publicador/altaProfesor/Fault/MailRepetidoException")
-    })
-    public void altaProfesor(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        XMLGregorianCalendar arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        String arg5,
-        @WebParam(name = "arg6", partName = "arg6")
-        String arg6,
-        @WebParam(name = "arg7", partName = "arg7")
-        String arg7,
-        @WebParam(name = "arg8", partName = "arg8")
-        String arg8,
-        @WebParam(name = "arg9", partName = "arg9")
-        String arg9,
-        @WebParam(name = "arg10", partName = "arg10")
-        String arg10)
-        throws MailRepetidoException_Exception, UsuarioRepetidoException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg3
-     * @param arg2
-     * @param arg5
-     * @param arg4
-     * @param arg1
-     * @param arg0
-     * @throws CuponeraVencidaException_Exception
-     * @throws CuposAgotadosException_Exception
-     * @throws ClasesRestantesException_Exception
-     * @throws SocioRegistradoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://servidor/Publicador/registrarSocioRequest", output = "http://servidor/Publicador/registrarSocioResponse", fault = {
-        @FaultAction(className = CuposAgotadosException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/CuposAgotadosException"),
-        @FaultAction(className = SocioRegistradoException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/SocioRegistradoException"),
-        @FaultAction(className = ClasesRestantesException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/ClasesRestantesException"),
-        @FaultAction(className = CuponeraVencidaException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/CuponeraVencidaException")
-    })
-    public void registrarSocio(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        boolean arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        XMLGregorianCalendar arg5)
-        throws ClasesRestantesException_Exception, CuponeraVencidaException_Exception, CuposAgotadosException_Exception, SocioRegistradoException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg3
-     * @param arg2
-     * @param arg5
-     * @param arg4
-     * @param arg1
-     * @param arg0
-     * @param arg6
-     */
-    @WebMethod
-    @Action(input = "http://servidor/Publicador/modificarDatosProfesorRequest", output = "http://servidor/Publicador/modificarDatosProfesorResponse")
-    public void modificarDatosProfesor(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        XMLGregorianCalendar arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        String arg5,
-        @WebParam(name = "arg6", partName = "arg6")
-        String arg6);
-
-    /**
-     * 
-     * @param arg3
-     * @param arg2
      * @param arg1
      * @param arg0
      */
@@ -291,6 +180,117 @@ public interface Publicador {
     @WebResult(partName = "return")
     @Action(input = "http://servidor/Publicador/listarUsuariosWebRequest", output = "http://servidor/Publicador/listarUsuariosWebResponse")
     public DataContenedor listarUsuariosWeb();
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg5
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @param arg10
+     * @param arg7
+     * @param arg6
+     * @param arg9
+     * @param arg8
+     * @throws UsuarioRepetidoException_Exception
+     * @throws MailRepetidoException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://servidor/Publicador/altaProfesorRequest", output = "http://servidor/Publicador/altaProfesorResponse", fault = {
+        @FaultAction(className = UsuarioRepetidoException_Exception.class, value = "http://servidor/Publicador/altaProfesor/Fault/UsuarioRepetidoException"),
+        @FaultAction(className = MailRepetidoException_Exception.class, value = "http://servidor/Publicador/altaProfesor/Fault/MailRepetidoException")
+    })
+    public void altaProfesor(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        XMLGregorianCalendar arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        String arg5,
+        @WebParam(name = "arg6", partName = "arg6")
+        String arg6,
+        @WebParam(name = "arg7", partName = "arg7")
+        String arg7,
+        @WebParam(name = "arg8", partName = "arg8")
+        String arg8,
+        @WebParam(name = "arg9", partName = "arg9")
+        String arg9,
+        @WebParam(name = "arg10", partName = "arg10")
+        String arg10)
+        throws MailRepetidoException_Exception, UsuarioRepetidoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg5
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @throws SocioRegistradoException_Exception
+     * @throws ClasesRestantesException_Exception
+     * @throws CuposAgotadosException_Exception
+     * @throws CuponeraVencidaException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://servidor/Publicador/registrarSocioRequest", output = "http://servidor/Publicador/registrarSocioResponse", fault = {
+        @FaultAction(className = CuposAgotadosException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/CuposAgotadosException"),
+        @FaultAction(className = SocioRegistradoException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/SocioRegistradoException"),
+        @FaultAction(className = ClasesRestantesException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/ClasesRestantesException"),
+        @FaultAction(className = CuponeraVencidaException_Exception.class, value = "http://servidor/Publicador/registrarSocio/Fault/CuponeraVencidaException")
+    })
+    public void registrarSocio(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        boolean arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        XMLGregorianCalendar arg5)
+        throws ClasesRestantesException_Exception, CuponeraVencidaException_Exception, CuposAgotadosException_Exception, SocioRegistradoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg5
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @param arg6
+     */
+    @WebMethod
+    @Action(input = "http://servidor/Publicador/modificarDatosProfesorRequest", output = "http://servidor/Publicador/modificarDatosProfesorResponse")
+    public void modificarDatosProfesor(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        XMLGregorianCalendar arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        String arg5,
+        @WebParam(name = "arg6", partName = "arg6")
+        String arg6);
 
     /**
      * 

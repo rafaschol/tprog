@@ -25,9 +25,6 @@ import excepciones.SocioRegistradoException;
 import excepciones.UsuarioRepetidoException;
 import excepciones.UsuarioYaSigueAUsuarioException;
 import logica.ActividadDeCuponera;
-import logica.ControladorCuponera;
-import logica.ControladorInstituciones;
-import logica.ControladorUsuario;
 import logica.DataActividad;
 import logica.DataClase;
 import logica.DataContenedor;
@@ -37,6 +34,10 @@ import logica.DataInstitucion;
 import logica.DataItem;
 import logica.DataProfesor;
 import logica.DataUsuario;
+import logica.Fabrica;
+import logica.IControladorCuponera;
+import logica.IControladorInstituciones;
+import logica.IControladorUsuario;
 import logica.ManejadorSocios;
 import logica.Participa;
 import logica.Socio;
@@ -44,13 +45,19 @@ import logica.Socio;
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class Publicador{
+	 
 
-    private ControladorUsuario ctrUsuario = new ControladorUsuario();
-    private ControladorInstituciones ctrInstitucion = new ControladorInstituciones();
-    private ControladorCuponera ctrCuponera = new ControladorCuponera();
+    private IControladorUsuario ctrUsuario;
+    private IControladorInstituciones ctrInstitucion;
+    private IControladorCuponera ctrCuponera;
     private Endpoint endpoint = null;
     //Constructor
-    public Publicador(){}
+    public Publicador(){
+    	Fabrica fabrica = Fabrica.getInstance();
+    	ctrUsuario = fabrica.getIControladorUsuario();
+    	ctrInstitucion = fabrica.getIControladorInstitucion();
+    	ctrCuponera = fabrica.getIControladorCuponera();
+    }
 
     //Operaciones las cuales quiero publicar
 
@@ -63,6 +70,8 @@ public class Publicador{
     public Endpoint getEndpoint() {
             return endpoint;
     }
+    
+  
     
     @WebMethod
     public void altaSocio(String nickname, String nombre, String apellido, String email,
