@@ -122,6 +122,7 @@ public class RegistroClaseServlet extends HttpServlet {
 		if (conCuponera) selector = 1;
 		request.setAttribute("selector", selector);
 		request.setAttribute("clase", clase); 
+		if (nombreCuponera == null) nombreCuponera = "";
 		
 			try {
 				GregorianCalendar c = new GregorianCalendar();

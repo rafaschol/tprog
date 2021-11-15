@@ -65,14 +65,14 @@
       <div class="row g-2 mb-3">
 	    <div class="col-md-6">
             <div class="form-floating ">
-		  		<input type="text" readonly class="form-control" name="clase" id="claseInput" value="<fmt:formatDate value="${clase.getFecha()}" type="date"  dateStyle = "short" timeStyle = "short" />">
+		  		<input type="text" readonly class="form-control" name="clase" id="claseInput" value="<fmt:formatDate value="${clase.getFecha().toGregorianCalendar().getTime()}" type="date"  dateStyle = "short" timeStyle = "short" />">
 		 	    <label for="claseInput">Fecha:</label>
 	 	    </div>
 	 	 </div>
 	     
 	     <div class="col-md-6">
             <div class="form-floating ">
-		  		<input type="text" readonly class="form-control" name="clase" id="claseInput" value="<fmt:formatDate value="${clase.getFecha()}" type="time"  dateStyle = "short" timeStyle = "short" />">
+		  		<input type="text" readonly class="form-control" name="clase" id="claseInput" value="<fmt:formatDate value="${clase.getFecha().toGregorianCalendar().getTime()}" type="time"  dateStyle = "short" timeStyle = "short" />">
 		 	    <label for="claseInput">Hora:</label>
 	        </div>
 	    </div>

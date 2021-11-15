@@ -42,6 +42,7 @@ class Principal {
     private AgregarActividadCuponera agregarActividadCuponeraIF;
     private AceptarRechazarActividad aceptarRechazarActividadIF;
     private CargarDatosPrueba datosPrueba;
+    private boolean publicado;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
@@ -58,6 +59,7 @@ class Principal {
 
     public Principal() throws UsuarioRepetidoException, MailRepetidoException {
         initialize();
+        
         publicador = new Publicador();
         publicador.publicar();
         Fabrica fabrica = Fabrica.getInstance();
@@ -66,6 +68,7 @@ class Principal {
         icc = fabrica.getIControladorCuponera();
         
         datosPruebaCargados = false;
+        publicado = false;
         crearUsuarioIF = new CrearUsuario(icu, ici);
         crearActividadDeportivaIF = new CrearActividadDeportiva(ici);
         crearClaseIF = new CrearClase(ici);

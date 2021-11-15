@@ -20,8 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import net.java.dev.jaxb.array.StringArray;
 import servidor.ActividadRepetidaException;
 import servidor.ActividadRepetidaException_Exception;
 import servidor.DataContenedor;
@@ -80,27 +83,31 @@ public class ActividadCreateServlet extends HttpServlet {
 		Date fecha = new Date();
 	
 		String[] categorias = request.getParameterValues("categorias"); //VER SI ANDA BIEN
+		//ACA RAFA HAY QUE CONVERIR CATEOGORIAS A STRINGARRAY 
+		
+		StringArray aaaa = new StringArray();
 		String nombreInstitucion = usuarioLogueado.getInstitucion();
+		
 		
 		/* Manejo de la imagen */
 		Part foto = request.getPart("foto");
 		String nombreArchivo = nombreActividad.replaceAll(" ", "_") + ".jpg";
-		String rutaFoto = foto.getSize() > 0 ? "media/actividades/" + nombreArchivo : null;
+		String rutaFoto = foto.getSize() > 0 ? "media/actividades/" + nombreArchivo : "";
 		
-		//try {
-			//GregorianCalendar c = new GregorianCalendar();
-			//c.setTime(fecha);
-			//XMLGregorianCalendar fechaGregorian;
+		try {
+			GregorianCalendar c = new GregorianCalendar();
+			c.setTime(fecha);
+			XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 			
-			//port.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoFloat, fecha, nickname, categorias, rutaFoto);
+			port.altaActividadDeportivaWeb(nombreInstitucion, nombreActividad, descripcion, duracionInt, costoFloat, fechaGregorian, nickname, aaaa , rutaFoto);
 			
 			/* Manejo de la imagen */
-			//if (foto.getSize() > 0) {
-				//String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
-				//File uploads = new File(pathToImages);
-				//File archivo = new File(uploads, nombreArchivo);
+			if (foto.getSize() > 0) {
+				String pathToImages = request.getServletContext().getResource("/media/actividades").getPath();
+				File uploads = new File(pathToImages);
+				File archivo = new File(uploads, nombreArchivo);
 				
-				/*try {
+				try {
 					InputStream fotoStream = foto.getInputStream();
 					InputStream fotoRecortada = recortarImagen(fotoStream);
 					//System.out.println(new File( System.getProperty( "catalina.base" ) ).getAbsoluteFile());
@@ -115,7 +122,11 @@ public class ActividadCreateServlet extends HttpServlet {
 		} catch (ActividadRepetidaException_Exception e) {
 			request.setAttribute("actividadRepetida", true);
 			request.setAttribute("dataTab", "0");
-			//request.setAttribute("categorias", controladorInstitucion.listarCategorias());
+			
+			DataContenedor contString = port.listarCategorias();
+			String[] listaCategorias = contString.getStrings().toArray(new String[0]);
+			
+			request.setAttribute("categorias", listaCategorias);
 			
 			request.setAttribute("nombre", nombreActividad);
 			request.setAttribute("descripcion", descripcion);
@@ -123,7 +134,10 @@ public class ActividadCreateServlet extends HttpServlet {
 			request.setAttribute("costo", costo);
 			request.setAttribute("categoriasSeleccionadas", categorias);
 			dispatcher.forward(request, response);
-		}*/
+		} catch (DatatypeConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 	

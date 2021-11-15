@@ -54,13 +54,13 @@
               <td><i class="fas fa-percent rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Descuento: <span class="fw-bold ms-1">${String.format("%.1f", descuento)}%</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Período: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaIni()}" type="date"  dateStyle = "short" timeStyle = "short" /> - <fmt:formatDate value="${cuponera.getFechaFin()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
+              <td><i class="far fa-calendar-plus rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px;"></i>Período: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaIni().toGregorianCalendar().getTime()}" type="date"  dateStyle = "short" timeStyle = "short" /> - <fmt:formatDate value="${cuponera.getFechaFin().toGregorianCalendar().getTime()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
             </tr>
             <tr>
               <td><i class="fas fa-dollar-sign rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 12.6px;"></i>Costo total: <span class="fw-bold ms-1">$${String.format("%.0f", cuponera.getCosto())}</span></td>
             </tr>
             <tr>
-              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaAlta()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
+              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha de alta: <span class="fw-bold ms-1"><fmt:formatDate value="${cuponera.getFechaAlta().toGregorianCalendar().getTime()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
             </tr>
           </table>
           <div class="border-top my-4"></div>

@@ -201,7 +201,7 @@
                <c:forEach items="${clases}" var="clase">
 	                <a href="clases/${clase.getNombre()}" class="list-group-item">
 	                  <img class="rounded-circle me-2" src="${clase.getImagen()}" alt="${clase.getNombre()}">
-	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().getDate()}/${clase.getFechaCompra().getMonth()+1}/${clase.getFechaCompra().getYear()+1900})  </c:if>
+	                  ${clase.getNombre()} <c:if test="${esSocio && suCuenta}">(Comprada por $${clase.getPrecioCompra()} el ${clase.getFechaCompra().toGregorianCalendar().getTime().getDate()}/${clase.getFechaCompra().toGregorianCalendar().getTime().getMonth()+1}/${clase.getFechaCompra().toGregorianCalendar().getTime().getYear()+1900})  </c:if>
 	                </a>
                 </c:forEach>
                 

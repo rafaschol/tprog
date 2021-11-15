@@ -55,7 +55,7 @@ public class ClaseDetailServlet extends HttpServlet {
 		boolean noExpiro = date.after(fechaActual);
 		
 		
-		
+		request.setAttribute("fecha", date);
 		request.setAttribute("clase", clase);
 		request.setAttribute("esSocio", esSocio);
 		request.setAttribute("noExpiro", noExpiro);

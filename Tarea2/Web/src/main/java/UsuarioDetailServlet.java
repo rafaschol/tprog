@@ -93,7 +93,8 @@ public class UsuarioDetailServlet extends HttpServlet {
 		request.setAttribute("esSocio", esSocio);
 		request.setAttribute("esProfesor", esProfesor);
 		request.setAttribute("usuario", dataUsuario);
-		String nacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(dataUsuario.getFechaNacimiento());
+		Date date = dataUsuario.getFechaNacimiento().toGregorianCalendar().getTime();
+		String nacimientoString = new SimpleDateFormat("yyyy-MM-dd").format(date);
 		request.setAttribute("nacimiento", nacimientoString);
 		request.setAttribute("nSeguidores", nSeguidores);
 		request.setAttribute("nSeguidos", nSeguidos);

@@ -56,7 +56,12 @@ public class RegistroServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Registro.jsp");
 		
-		request.setAttribute("instituciones", port.listarDataInstituciones());
+		
+		DataContenedor contInstituciones = port.listarDataInstituciones();
+		DataInstitucion[] instituciones = contInstituciones.getInstituciones().toArray(new DataInstitucion[0]);
+		
+		
+		request.setAttribute("instituciones", instituciones);
 		request.setAttribute("dataTab", "0");
 		dispatcher.forward(request, response);
 	}
@@ -92,7 +97,7 @@ public class RegistroServlet extends HttpServlet {
 		/* Manejo de la imagen */		
 		Part foto = request.getPart("foto");
 		String nombreArchivo = nombreUsuario.replaceAll(" ", "_") + ".jpg";
-		String rutaFoto = foto.getSize() > 0 ? "media/usuarios/" + nombreArchivo : null;
+		String rutaFoto = foto.getSize() > 0 ? "media/usuarios/" + nombreArchivo : "";
 		
 		
 		/* Hacer el alta del usuario */
@@ -111,7 +116,7 @@ public class RegistroServlet extends HttpServlet {
 				c.setTime(nacimiento);
 				XMLGregorianCalendar fechaGregorian = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 				
-				port.altaSocio(nombreUsuario, nombre, apellido, correo, fechaGregorian, contrasena, rutaFoto);
+				port.altaSocio(nombreUsuario, nombre, apellido, correo, fechaGregorian, contrasena, "");
 			}
 			/* Manejo de la imagen */
 			if (foto.getSize() > 0) {

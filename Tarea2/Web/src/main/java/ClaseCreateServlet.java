@@ -122,7 +122,7 @@ public class ClaseCreateServlet extends HttpServlet {
 		/* Manejo de la imagen */
 		Part foto = request.getPart("foto");
 		String nombreArchivo = nombreClase.replaceAll(" ", "_") + ".jpg";
-		String rutaFoto = foto.getSize() > 0 ? "media/clases/" + nombreArchivo : null;
+		String rutaFoto = foto.getSize() > 0 ? "media/clases/" + nombreArchivo : "";
 		
 		
 		

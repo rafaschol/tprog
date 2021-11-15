@@ -37,16 +37,23 @@ public class BuscarServlet extends HttpServlet {
 		
 		if (busqueda != null && !busqueda.equals("")) {
 			request.setAttribute("busqueda", busqueda);
-		}
+		} 
+		else busqueda =  "";
+		
 		if (institucion != null && !institucion.equals("")) {
 			request.setAttribute("institucion", institucion);
 		}
+		else institucion =  "";
+		
 		if (categoria != null && !categoria.equals("")) {
 			request.setAttribute("categoria", categoria);
 		}
+		else categoria =  "";
+		
 		if (orden != null && !orden.equals("")) {
 			request.setAttribute("orden", orden);
 		}
+		else orden =  "";
 		
 		DataContenedor contItems = port.buscar(busqueda, institucion, categoria, orden);
 		DataItem[] resultados = contItems.getItems().toArray(new DataItem[0]);
