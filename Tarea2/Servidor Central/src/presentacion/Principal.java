@@ -7,6 +7,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import excepciones.InstitucionRepetidaException;
+import excepciones.MailRepetidoException;
+import excepciones.UsuarioRepetidoException;
 import logica.Fabrica;
 import logica.IControladorCuponera;
 import logica.IControladorInstituciones;
@@ -14,9 +16,12 @@ import logica.IControladorUsuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+
+import servidor.Publicador;
 
 class Principal {
-
+	private Publicador publicador;
 	private IControladorUsuario icu;
 	private IControladorInstituciones ici;
 	private IControladorCuponera icc;
@@ -51,14 +56,15 @@ class Principal {
         });
     }
 
-    public Principal() {
+    public Principal() throws UsuarioRepetidoException, MailRepetidoException {
         initialize();
-        
+        publicador = new Publicador();
+        publicador.publicar();
         Fabrica fabrica = Fabrica.getInstance();
         icu = fabrica.getIControladorUsuario();
         ici = fabrica.getIControladorInstitucion();
         icc = fabrica.getIControladorCuponera();
-
+        
         datosPruebaCargados = false;
         crearUsuarioIF = new CrearUsuario(icu, ici);
         crearActividadDeportivaIF = new CrearActividadDeportiva(ici);
@@ -243,6 +249,8 @@ class Principal {
         			datosPrueba.cargarRegistrosClases();
         			datosPrueba.cargarActividadesCuponeras();
         			datosPrueba.cargarCompraCuponera();
+        			datosPrueba.cargarSeguidores();
+        			
         			datosPruebaCargados = true;
     				JOptionPane.showMessageDialog(mainFrame, "Se cargaron los datos de prueba correctamente.");
         		} else {

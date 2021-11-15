@@ -1,4 +1,4 @@
-<%@ page import="logica.DataUsuario" %>
+<%@ page import="servidor.DataUsuario" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <aside class="sidebar border-end bg-white p-3">
   <ul class="list-unstyled mt-3 ps-0">

@@ -1,5 +1,5 @@
 
-/*
+
 import java.util.Arrays;
 
 import javax.servlet.ServletContextEvent;
@@ -7,55 +7,41 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import logica.DataInstitucion;
-import logica.Fabrica;
-import logica.IControladorCuponera;
-import logica.IControladorInstituciones;
-import logica.IControladorUsuario;
+import servidor.DataContenedor;
+import servidor.DataInstitucion;
+import servidor.DataItem;
 import servidor.MailRepetidoException_Exception;
 import servidor.UsuarioRepetidoException_Exception;
 
 @WebListener
 public class InicioListener implements ServletContextListener {
 	
-	private IControladorUsuario controladorUsuario;
-	private IControladorInstituciones controladorInstitucion;
-	private IControladorCuponera controladorCuponera;
-	private CargarDatosPrueba datosPrueba;
+
 
     public InicioListener() {
-    	Fabrica fabrica = Fabrica.getInstance();
-    	controladorUsuario = fabrica.getIControladorUsuario();
-    	controladorInstitucion = fabrica.getIControladorInstitucion();
-    	controladorCuponera = fabrica.getIControladorCuponera();
-    	datosPrueba = new CargarDatosPrueba(controladorUsuario, controladorInstitucion, controladorCuponera);
+    	
     	
     }
     
     public void contextInitialized(ServletContextEvent sce)  { 
-    	datosPrueba.cargarInstituciones();
-		datosPrueba.cargarCategorias();
-		try {
-			datosPrueba.cargarSocios();
-		} catch (DatatypeConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		datosPrueba.cargarProfesores();
-		datosPrueba.cargarActividadesDeportivas();
-		datosPrueba.cargarClases();
-		datosPrueba.cargarCuponeras();
-		datosPrueba.cargarRegistrosClases();
-		datosPrueba.cargarActividadesCuponeras();
-		datosPrueba.cargarCompraCuponera();
-		datosPrueba.cargarSeguidores();
+    	servidor.PublicadorService service = new servidor.PublicadorService();
+        servidor.Publicador port = service.getPublicadorPort();
+        
+        DataContenedor contString = port.listarDataInstituciones();
+		DataInstitucion[] colInst = contString.getInstituciones().toArray(new DataInstitucion[0]);
+        
+      
 		
-		String[] instituciones = Arrays.stream(controladorInstitucion.listarDataInstituciones())
+		
+		String[] instituciones = Arrays.stream(colInst)
 				.map(institucion -> institucion.getNombre()).toArray(String[]::new);
 		sce.getServletContext().setAttribute("instituciones", instituciones);
 		
-		String[] categorias = controladorInstitucion.listarCategorias();
+		DataContenedor contString2 = port.listarCategorias();
+		String[] categorias = contString2.getStrings().toArray(new String[0]);
+		
+		
 		sce.getServletContext().setAttribute("categorias", categorias);
     }
 	
-}*/
+}

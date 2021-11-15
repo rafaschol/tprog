@@ -58,7 +58,11 @@ public class Publicador{
     	ctrInstitucion = fabrica.getIControladorInstitucion();
     	ctrCuponera = fabrica.getIControladorCuponera();
     }
+    
+    
 
+    
+    
     //Operaciones las cuales quiero publicar
 
     @WebMethod(exclude = true)
