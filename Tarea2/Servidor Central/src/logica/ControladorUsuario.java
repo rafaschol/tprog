@@ -548,7 +548,7 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
     	return premios; //falta ver el tema del ordenamiento
 	}
-	public  void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
+	public  void realizarSorteo(String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
 		ManejadorActividad mactividad = ManejadorActividad.getinstance();
     	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
     	ManejadorSocios msocios = ManejadorSocios.getinstance();
@@ -564,7 +564,12 @@ public class ControladorUsuario implements IControladorUsuario {
     	calendario.add(Calendar.DATE, 30);//sumo 30 dias a la frcha actual, que sera la vigencia
     	Date vigencia = calendario.getTime();
     	
-    	
+    	String[] socios = new String[clase.getRegistros().size()];
+    	int iterador = 0;
+    	for (Map.Entry<Integer, Registro> iter : clase.getRegistros().entrySet()) {
+    		socios[iterador] = iter.getValue().getSocio().getNombre();
+    		iterador++;
+    	}
     	
     	
     	Map<String, String> mapSocios = new HashMap<String,String>();
@@ -637,6 +642,42 @@ public class ControladorUsuario implements IControladorUsuario {
     	}
     	clase.setValoracion(valoracionClase/cantValoracionesClase);
     	profesor.setValoracion(valoracionProfesor/cantValoracionesProfesor);
+    	
+	}
+	
+	public  void realizarSorteoHarcodeado(String[] socios, String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
+		ManejadorActividad mactividad = ManejadorActividad.getinstance();
+    	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	ManejadorSocios msocios = ManejadorSocios.getinstance();
+    	Clase clase = actividad.obtenerClase(nombreClase);
+    	Integer cantPremios = clase.getCantPremios();
+    	String premio = clase.getPremio();
+    	Date fechaActual = new Date();
+    	
+    	if(clase.cantRegistros() < 1) throw new ClaseVaciaException("No hay socios para sortear");
+    	
+    	Calendar calendario = Calendar.getInstance();
+    	calendario.setTime(fechaActual);
+    	calendario.add(Calendar.DATE, 30);//sumo 30 dias a la frcha actual, que sera la vigencia
+    	Date vigencia = calendario.getTime(); 	
+    	
+    	int iterador = 0;
+    	
+    	while(cantPremios > 0 && iterador < socios.length) {
+    	
+    	
+    		String socioGanador = socios[iterador];
+    		Socio socio = msocios.obtenerSocio(socioGanador);
+    		DataPremio dataPremio = new DataPremio(socioGanador,nombreClase,nombreActividad,vigencia,premio);
+    		Ganador ganador = new Ganador(fechaActual,dataPremio,clase,socio);
+    		
+    		cantPremios--;
+    		
+    		clase.getGanadores().add(ganador);
+    		socio.addPremio(ganador);
+    		clase.setSorteo(true);
+    		iterador++;
+    	}	
     	
 	}
 	

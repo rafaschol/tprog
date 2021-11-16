@@ -46,6 +46,11 @@
             <p class="lead mb-1">Dictada por  
               <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
             </p>
+            <form action="usuarios/seguir" method="post">
+                <input type="hidden" name="seguir" value="${!siguiendolo}">
+                <input type="hidden" name="usuario" value="${usuario.getNickname()}">
+                <button class="btn mt-3 ${siguiendolo ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${siguiendolo ? 'Ver Ganadores' : 'Realizar Sorteo'}</button>
+              </form>
             <c:if test="${esSocio && noExpiro}">
             	<a href="clases/registro?clase=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
             </c:if>

@@ -4,11 +4,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -86,6 +90,9 @@ public class ActividadCreateServlet extends HttpServlet {
 		//ACA RAFA HAY QUE CONVERIR CATEOGORIAS A STRINGARRAY 
 		
 		StringArray aaaa = new StringArray();
+		
+	
+		
 		String nombreInstitucion = usuarioLogueado.getInstitucion();
 		
 		

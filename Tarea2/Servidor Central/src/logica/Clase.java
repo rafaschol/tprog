@@ -42,6 +42,7 @@ public class Clase {
 		this.setVideo(video);
 		this.setSorteo(false);
 		this.setValoracion(0);
+		
 	}
 
 	public String getNombre() {

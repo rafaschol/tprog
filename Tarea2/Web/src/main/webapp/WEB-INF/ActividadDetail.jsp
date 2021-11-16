@@ -41,8 +41,16 @@
               <div class="p-3">
                 <h1 class="mb-3">${actividad.getNombre()}</h1>
                 <p>${actividad.getDescripcion()}</p>
+                
+                <form action="usuarios/favorita" method="post">
+                <input type="hidden" name="seguir" value="${!siguiendolo}">
+                <input type="hidden" name="actividad" value="${usuario.getNickname()}">
+                <button class="btn mt-3 ${siguiendolo ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${siguiendolo ? 'Quitar de favoritas' : 'Añadir a favoritas'}</button>
+              </form>
               </div>
+              
           </div>
+          
           <div class="border-top my-4"></div>
           <h4 class="fw-light">Detalles</h4>
           <table class="table table-borderless">

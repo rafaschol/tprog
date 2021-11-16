@@ -381,6 +381,8 @@ public class ControladorInstituciones implements IControladorInstituciones {
 	public  void finalizarActividadDeportiva(String nombreActividad) {
 		ManejadorActividad mactividad = ManejadorActividad.getinstance();
     	ActividadDeportiva actividad = mactividad.obtenerActividadAceptada(nombreActividad);
+    	InstitucionDeportiva institucion = actividad.getInstitucion();
+    	institucion.getActividades().remove(nombreActividad);
     	actividad.setEstado(Estado.Finalizada);
     	mactividad.getActividadesAceptadas().remove(nombreActividad);
     	//Ver despues como manejar el tema de la persistencia de datos.

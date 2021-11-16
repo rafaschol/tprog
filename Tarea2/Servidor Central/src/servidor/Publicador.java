@@ -213,9 +213,9 @@ public class Publicador{
     }
     
     @WebMethod
-    public  void realizarSorteo(String[] socios, String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
+    public  void realizarSorteo(String nombreClase, String nombreActividad) 	throws 	ClaseVaciaException{
     	try {
-    		ctrUsuario.realizarSorteo(socios, nombreClase, nombreActividad);
+    		ctrUsuario.realizarSorteo(nombreClase, nombreActividad);
     	}
     	catch(ClaseVaciaException e) {
     		throw e;

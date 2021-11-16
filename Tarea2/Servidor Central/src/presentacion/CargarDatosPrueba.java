@@ -10,6 +10,7 @@ import excepciones.ActividadDeCuponeraRepetidaException;
 import excepciones.ActividadRepetidaException;
 import excepciones.CategoriaRepetidaException;
 import excepciones.ClaseRepetidaException;
+import excepciones.ClaseVaciaException;
 import excepciones.ClasesRestantesException;
 import excepciones.CuponeraCompradaException;
 import excepciones.CuponeraRepetidaException;
@@ -231,6 +232,7 @@ public class CargarDatosPrueba {
 					120, (float) 750.0, new Date(121, 3, 20), "denis", arrayVacio, "media/actividades/Voleibol.jpg");
 			controladorInstitucion.aceptarRechazarActividad("Voleibol", true);
 			controladorInstitucion.agregarCategoriaAActividad("Voleibol", "Deportes");
+		
 			
 			
 	/* A3 */controladorInstitucion.altaActividadDeportiva("Instituto Natural", "Aer\u00F3bica",
@@ -304,23 +306,25 @@ public class CargarDatosPrueba {
 
 	public void cargarClases() {
 		try {
-			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas","media/clases/Calistenia.jpg","","",0);
-			controladorInstitucion.altaClase("Peso libre", new Date(121, 4, 1, 17, 0), 1, 5, "https://www.musculos.com/pesolibre", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null,"","",0);
-			controladorInstitucion.altaClase("Aparatos", new Date(121, 5, 1, 18, 0), 1, 7, "https://www.musculos.com/aparatos", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null,"","",0);
-			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol","media/clases/Voleibol.jpg","","",0);
-			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Braza.jpg","","",0);
-			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Mariposa.jpg","","",0);
-			controladorInstitucion.altaClase("Aer\u00F3bica ni\u00F1os", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null,"","",0);
-			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica","media/clases/Aer\u00F3bico_adulto_mayor.jpg","","",0);
-			controladorInstitucion.altaClase("Aer\u00F3bica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null,"","",0);
-			controladorInstitucion.altaClase("Boxeo I", new Date(121, 8, 1, 19, 30), 1, 4, "https://www.musculos.com/boxeo1", new Date(121, 5, 7), "TheBoss", "Kickboxing",null,"","",0);
-			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing","media/clases/Boxeo_II.jpg","","",0);
-			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/M\u00FAsculos_para_boxeo.jpg","","",0);
-			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo",null,"","",0);
-			controladorInstitucion.altaClase("200 M", new Date(121, 10, 5, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg","","",0);
-			controladorInstitucion.altaClase("Posta", new Date(121, 10, 25, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo",null,"","",0);
-			controladorInstitucion.altaClase("Basquet I", new Date(121, 10, 3, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_I.jpg","","",0);
-			controladorInstitucion.altaClase("Basquet II", new Date(121, 10, 1, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_II.jpg","","",0);
+			controladorInstitucion.altaClase("Calistenia", new Date(121, 3, 15, 15, 30), 1, 5, "https://www.musculos.com/Calistenia", new Date(121, 2, 31), "viktor", "Aparatos y pesas","media/clases/Calistenia.jpg","https://www.youtube.com/watch?v=_IMil1Lj-Z8","No hay",0);
+			controladorInstitucion.altaClase("Peso libre", new Date(121, 4, 1, 17, 0), 1, 5, "https://www.musculos.com/pesolibre", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null,"https://www.youtube.com/watch?v=KHFHi6ci9Fg","No hay",0);
+			controladorInstitucion.altaClase("Aparatos", new Date(121, 5, 1, 18, 0), 1, 7, "https://www.musculos.com/aparatos", new Date(121, 2, 31), "viktor", "Aparatos y pesas",null,"https://www.youtube.com/watch?v=6YTVPjjm3e8","Rueda de abdominales",3);
+			controladorInstitucion.altaClase("Voleibol", new Date(121, 5, 10, 19, 0), 10, 21, "https://telon.com.uy/voley", new Date(121, 3, 20), "denis", "Voleibol","media/clases/Voleibol.jpg","https://www.youtube.com/watch?v=PwBsJxHFz98","No hay",0);
+			controladorInstitucion.altaClase("Braza", new Date(121, 6, 10, 20, 0), 2, 6, "https://telon.com.uy/natacionB", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Braza.jpg","","No hay",0);
+			controladorInstitucion.altaClase("Mariposa", new Date(121, 7, 10, 17, 45), 2, 6, "https://telon.com.uy/natacionM", new Date(121, 3, 20), "Nelson", "Voleibol","media/clases/Mariposa.jpg","","Lentes de natacion",2);
+			controladorInstitucion.altaClase("Aer\u00F3bica ni\u00F1os", new Date(121, 7, 15, 16, 30), 5, 10, "https://www.inatural.com/aeroni", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null,"","Caramañola infantil",3);
+			controladorInstitucion.altaClase("Aer\u00F3bico adulto mayor", new Date(121, 7, 31, 19, 30), 5, 12, "https://www.inatural.com/aeroam", new Date(121, 4, 30), "clazar", "Aer\u00F3bica","media/clases/Aer\u00F3bico_adulto_mayor.jpg","","No hay",0);
+			controladorInstitucion.altaClase("Aer\u00F3bica", new Date(121, 8, 30, 20, 0), 5, 20, "https://www.inatural.com/aerogral", new Date(121, 4, 30), "clazar", "Aer\u00F3bica",null,"","Caramañola",2);
+			controladorInstitucion.altaClase("Boxeo I", new Date(121, 8, 1, 19, 30), 1, 4, "https://www.musculos.com/boxeo1", new Date(121, 5, 7), "TheBoss", "Kickboxing",null,"https://www.youtube.com/watch?v=-gGx_WqKAh8","No hay",0);
+			controladorInstitucion.altaClase("Boxeo II", new Date(121, 8, 30, 17, 0), 2, 2, "https://www.musculos.com/boxeo2", new Date(121, 5, 7), "TheBoss", "Kickboxing","media/clases/Boxeo_II.jpg","https://www.youtube.com/watch?v=-gGx_WqKAh8","Guantillas",2);
+			controladorInstitucion.altaClase("M\u00FAsculos para boxeo", new Date(121, 9, 15, 20, 0), 1, 5, "https://www.musculos.com/muscbox", new Date(121, 5, 7), "viktor", "Kickboxing","media/clases/M\u00FAsculos_para_boxeo.jpg","","No hay",0);
+			controladorInstitucion.altaClase("100 M", new Date(121, 8, 25, 19, 0), 3, 10, "https://telon.com.uy/100m", new Date(121, 6, 8), "lale", "Atletismo",null,"","No hay",0);
+			controladorInstitucion.altaClase("200 M", new Date(121, 10, 5, 18, 30), 3, 10, "https://telon.com.uy/200m", new Date(121, 6, 8), "lale", "Atletismo","media/clases/200_M.jpg","","No hay",0);
+			controladorInstitucion.altaClase("Posta", new Date(121, 10, 29, 17, 45), 8, 16, "https://telon.com.uy/posta", new Date(121, 6, 8), "lale", "Atletismo",null,"https://www.youtube.com/watch?v=OGs4c0C8jx8","No hay",0);
+			controladorInstitucion.altaClase("Basquet I", new Date(121, 10, 3, 21, 0), 10, 15, "https://telon.com.uy/bball1", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_I.jpg","https://www.youtube.com/watch?v=VMeQ4yRvGrc","No hay",0);
+			controladorInstitucion.altaClase("Basquet II", new Date(121, 10, 27, 21, 0), 10, 10, "https://telon.com.uy/bball2", new Date(121, 6, 31), "aldo", "Basquetbol","media/clases/Basquet_II.jpg","https://www.youtube.com/watch?v=VMeQ4yRvGrc","Juego de muñequeras",5);
+			controladorInstitucion.altaClase("Aparatos II", new Date(121, 10, 30, 20, 0), 1, 5, "https://www.musculos.com/aparatos", new Date(121, 10, 15), "viktor", "Aparatos y pesas",null,"https://www.youtube.com/watch?v=6YTVPjjm3e8","Pesa rusa 5K",2);
+			controladorInstitucion.altaClase("Boxeo III", new Date(121, 11, 1, 17, 0), 2, 6, "https://www.musculos.com/boxeo2", new Date(121, 10, 10), "TheBoss", "Kickboxing",null,"","Guantillas",2);
 		} catch (ClaseRepetidaException e) {
 			e.printStackTrace();
 		}
@@ -370,7 +374,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.registrarSocio("charly", "100 M", "Atletismo", false, null, new Date(121, 8, 3));
 			controladorUsuario.registrarSocio("Emi71", "200 M", "Atletismo", false, null, new Date(121, 7, 16));
 			controladorUsuario.registrarSocio("charly", "200 M", "Atletismo", false, null, new Date(121, 8, 6));
-	/* R40*/controladorUsuario.registrarSocio("caro", "Posta", "Atletismo", false, null, new Date(121, 8, 1));
+	/* R40*/controladorUsuario.registrarSocio("caro", "Posta", "Atletismo", true, "Pista", new Date(121, 8, 1));
 			controladorUsuario.registrarSocio("sergiop", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 16));
 			controladorUsuario.registrarSocio("Emi71", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 20));
 			controladorUsuario.registrarSocio("tonyp", "Basquet I", "Basquetbol", false, null, new Date(121, 8, 31));
@@ -397,8 +401,13 @@ public class CargarDatosPrueba {
 					"media/cuponeras/Gimnasia.jpg", (float) 4200);
 			controladorCuponera.altaCuponera("M\u00FAsculos",
 					"Pesas.",
-					new Date(121, 7, 15), new Date(121, 10, 15), (float) 0.1, new Date(121, 6, 18),
+					new Date(121, 7, 15), new Date(121, 11, 15), (float) 0.1, new Date(121, 6, 18),
 					"media/cuponeras/M\u00FAsculos.jpg",(float) 15642);
+			controladorCuponera.altaCuponera("Pista",
+					"Entrenamiento de atletismo",
+					new Date(121, 9, 1), new Date(121, 11, 31), (float) 0.15, new Date(121, 8, 1),
+					null,(float) 8500);
+			
 		} catch (CuponeraRepetidaException e) {
 			e.printStackTrace();
 		}
@@ -413,8 +422,9 @@ public class CargarDatosPrueba {
 			controladorCuponera.agregarActividadACuponera("Pelota", "Basquetbol", 18);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aer\u00F3bica", 2);
 			controladorCuponera.agregarActividadACuponera("Gimnasia", "Aparatos y pesas", 8);
-			controladorCuponera.agregarActividadACuponera("M\u00FAsculos", "Kickboxing", 11);
-			controladorCuponera.agregarActividadACuponera("M\u00FAsculos", "Aparatos y pesas", 12);
+			controladorCuponera.agregarActividadACuponera("M\u00FAsculos", "Kickboxing", 11);	
+			controladorCuponera.agregarActividadACuponera("Pista", "Atletismo", 20);
+			
 		} catch (ActividadDeCuponeraRepetidaException e) {
 			e.printStackTrace();
 		}
@@ -431,6 +441,7 @@ public class CargarDatosPrueba {
 			controladorUsuario.compraCuponera("sergiop", "M\u00FAsculos", new Date(121, 5, 31));
 			controladorUsuario.compraCuponera("andy", "M\u00FAsculos", new Date(121, 5, 31));
 			controladorUsuario.compraCuponera("Emi71", "Pelota", new Date(121, 5, 31));
+			controladorUsuario.compraCuponera("caro", "Pista", new Date(121, 5, 31));
 		} catch (CuponeraCompradaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -451,6 +462,82 @@ public class CargarDatosPrueba {
 			e.printStackTrace();
 		}
 	}
+	
+	public void valorarProfesores() {
+		
+			controladorUsuario.ValorarProfesor("Voleibol", "Voleibol", 4, "Emi71");
+			controladorUsuario.ValorarProfesor("Aer\u00F3bica", "Aer\u00F3bico adulto mayor", 5, "Emi71");
+			controladorUsuario.ValorarProfesor("Aparatos y pesas", "Calistenia", 4, "caro");
+			controladorUsuario.ValorarProfesor("Aparatos y pesas", "Peso libre", 5, "caro");
+			controladorUsuario.ValorarProfesor("Aparatos y pesas", "Aparatos", 4, "caro");
+			controladorUsuario.ValorarProfesor("Voleibol", "Braza", 5, "guille");
+			controladorUsuario.ValorarProfesor("Aer\u00F3bica", "Aer\u00F3bico adulto mayor", 3, "guille");
+			controladorUsuario.ValorarProfesor("Voleibol", "Mariposa", 4, "sergiop");
+			controladorUsuario.ValorarProfesor("Voleibol", "Mariposa", 2, "andy");
+			controladorUsuario.ValorarProfesor("Kickboxing", "Boxeo I", 4, "andy");
+			controladorUsuario.ValorarProfesor("Aer\u00F3bica", "Aer\u00F3bica ni\u00F1os", 5, "m1k4");
+			controladorUsuario.ValorarProfesor("Kickboxing","Boxeo I", 5, "m1k4");
+	}
+	
+	public void cargarActividadesFavoritas() {
+		controladorInstitucion.marcarActividadFavorita("Voleibol", "Emi71");
+		controladorInstitucion.marcarActividadFavorita("Atletismo", "caro");
+		controladorInstitucion.marcarActividadFavorita("Aparatos y pesas", "caro");
+		controladorInstitucion.marcarActividadFavorita("Kickboxing", "guille");
+		controladorInstitucion.marcarActividadFavorita("Aparatos y pesas", "sergiop");
+		controladorInstitucion.marcarActividadFavorita("Voleibol", "andy");
+		controladorInstitucion.marcarActividadFavorita("Kickboxing", "andy");
+		controladorInstitucion.marcarActividadFavorita("Voleibol", "m1k4");
+		controladorInstitucion.marcarActividadFavorita("Kickboxing", "m1k4");
+		
+	}
+	
+	public void finalizarActividades() {
+		
+		controladorInstitucion.finalizarActividadDeportiva("Voleibol");
+
+	}
+	
+	public void cargarSorteos() {
+		
+		
+		try {
+			
+			String[] sorteo1 = new String[3];
+			sorteo1[0] = "charly";
+			sorteo1[1] = "caro";
+			sorteo1[2] = "m1k4";
+			controladorUsuario.realizarSorteoHarcodeado(sorteo1 ,"Aparatos", "Aparatos y pesas");
+			
+			String[] sorteo2 = new String[2];
+			sorteo2[0] = "charly";
+			sorteo2[1] = "sergiop";
+			controladorUsuario.realizarSorteoHarcodeado(sorteo2 ,"Mariposa", "Voleibol");
+			
+			String[] sorteo3 = new String[1];
+			sorteo3[0] = "m1k4";
+			controladorUsuario.realizarSorteoHarcodeado(sorteo3 ,"Aer\u00F3bica ni\u00F1os", "Aer\u00F3bica");
+			
+			String[] sorteo4 = new String[2];
+			sorteo4[0] = "caro";
+			sorteo4[1] = "euge";
+			controladorUsuario.realizarSorteoHarcodeado(sorteo4 ,"Aer\u00F3bica", "Aer\u00F3bica");
+			
+			String[] sorteo5 = new String[2];
+			sorteo5[0] = "sergiop";
+			sorteo5[1] = "guille";
+			controladorUsuario.realizarSorteoHarcodeado(sorteo5 ,"Boxeo II", "Kickboxing");
+			
+			
+		} catch (ClaseVaciaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 
 	
 	
