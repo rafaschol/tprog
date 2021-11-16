@@ -34,43 +34,70 @@
 
     <!-- Page content -->
     <main class="main-content bg-white" id="clase-page">
+      <div class="row g-0">
 
-      <section class="details p-3">
-        <div class="details-main mb-3">
-          <img src="${clase.getImagen()}" alt="${clase.getNombre()}" class="img-fluid rounded">
-          <div class="p-3">
-            <h1 class="mb-3">${clase.getNombre()}</h1>
-            <p class="lead mb-1">Clase de 
-              <a href="actividades/${clase.getActividad()}" class="text-decoration-none">${clase.getActividad()}</a>
-            </p>
-            <p class="lead mb-1">Dictada por  
-              <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
-            </p>
-            <form action="usuarios/seguir" method="post">
-                <input type="hidden" name="seguir" value="${!siguiendolo}">
-                <input type="hidden" name="usuario" value="${usuario.getNickname()}">
-                <button class="btn mt-3 ${siguiendolo ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${siguiendolo ? 'Ver Ganadores' : 'Realizar Sorteo'}</button>
-              </form>
-            <c:if test="${esSocio && noExpiro}">
-            	<a href="clases/registro?clase=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
-            </c:if>
+        <section class="details col-12 col-lg-8 p-3">
+          <div class="details-main mb-3">
+            <img src="${clase.getImagen()}" alt="${clase.getNombre()}" class="img-fluid rounded">
+            <div class="p-3">
+              <h1 class="mb-3">${clase.getNombre()}</h1>
+              <p class="lead mb-1">Clase de 
+                <a href="actividades/${clase.getActividad()}" class="text-decoration-none">${clase.getActividad()}</a>
+              </p>
+              <p class="lead mb-1">Dictada por  
+                <a href="usuarios/${clase.getProfesor()}" class="text-decoration-none">${clase.getProfesor()}</a>
+              </p>
+              <c:if test="${esSocio && noExpiro}">
+                <a href="clases/registro?clase=${clase.getNombre()}"  class="btn btn-primary mt-3">Registrarme a la clase</a>
+              </c:if>
+            </div>
           </div>
-        </div>
-        <div class="border-top my-4"></div>
-        <h4 class="fw-light">Detalles</h4>
-        <jsp:useBean id="date" class="java.util.Date"/>
-        <table class="table table-borderless">
-          <tr>
-            <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1"><fmt:formatDate value="${date}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
-          </tr>
-          <tr>
-            <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1"><fmt:formatDate value="${date}" type="time"  dateStyle = "short" timeStyle = "short" /></span></td>
-          </tr>
-          <tr>
-              <td><i class="fas fa-link rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px;"></i>URL: <span class="fw-bold ms-1">${clase.getUrl()} </span></td>
-          </tr>
-        </table>
-      </section>
+          <div class="border-top my-4"></div>
+          <h4 class="fw-light">Detalles</h4>
+          <jsp:useBean id="date" class="java.util.Date"/>
+          <table class="table table-borderless">
+            <tr>
+              <td><i class="far fa-calendar rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px 9.6px"></i>Fecha: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="date"  dateStyle = "short" timeStyle = "short" /></span></td>
+            </tr>
+            <tr>
+              <td><i class="far fa-clock rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Hora: <span class="fw-bold ms-1"><fmt:formatDate value="${clase.getFecha()}" type="time"  dateStyle = "short" timeStyle = "short" /></span></td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-link rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px;"></i>URL: <span class="fw-bold ms-1">${clase.getURL()} </span></td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-gift rounded-circle me-2" style="font-size: 1.2rem; padding: 8.4px"></i>Premio: <span class="fw-bold ms-1">guantillas (2)</span></td>
+            </tr>
+          </table>
+        </section>
+        
+        <aside class="detail-sidebar col-lg-4 px-3 pb-3 py-lg-3">
+          <div class="ratio ratio-4x3 mb-3">
+            <iframe src="https://www.youtube.com/embed/_IMil1Lj-Z8" title="YouTube video" allowfullscreen></iframe>
+          </div>
+          <div class="border-top my-4"></div>
+          <div class="card mb-3">
+            <div class="card-header">
+              Socios ganadores del sorteo
+            </div>
+            <div class="list-group list-group-flush">
+              <a href="clase_detail.html" class="list-group-item">
+                <img class="rounded-circle me-2" src="img/andy.jpg" alt="socio">
+                andy
+              </a>
+              <a href="clase_detail.html" class="list-group-item">
+                <img class="rounded-circle me-2" src="img/denis.jpg" alt="socio">
+                denis
+              </a>
+              <a href="clase_detail.html" class="list-group-item">
+                <img class="rounded-circle me-2" src="img/Emi71.jpg" alt="socio">
+                Emi71
+              </a>
+            </div>
+          </div>
+        </aside>
+      
+      </div>
     </main>
 
   </div>

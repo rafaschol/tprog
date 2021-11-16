@@ -70,6 +70,7 @@
 	          </c:if>
 	          <c:if test="${esSocio && suCuenta}">
 	          	<button class="nav-link" id="nav-cuponeras-tab" data-bs-toggle="tab" data-bs-target="#nav-cuponeras" type="button" role="tab" aria-controls="nav-cuponeras" aria-selected="false">Cuponeras</button>
+	          	<button class="nav-link" id="nav-premios-tab" data-bs-toggle="tab" data-bs-target="#nav-premios" type="button" role="tab" aria-controls="nav-premios" aria-selected="false">Premios ganados</button>
 	          </c:if>
               <button class="nav-link" id="nav-seguidos-tab" data-bs-toggle="tab" data-bs-target="#nav-seguidos" type="button" role="tab" aria-controls="nav-seguidos" aria-selected="false">Seguidos</button>
               <button class="nav-link" id="nav-seguidores-tab" data-bs-toggle="tab" data-bs-target="#nav-seguidores" type="button" role="tab" aria-controls="nav-seguidores" aria-selected="false">Seguidores</button>
@@ -220,6 +221,16 @@
 	              </c:forEach>
 	              </div>
 	            </div>
+	            
+	            <!-- Tab de premios ganados -->
+                <div class="tab-pane fade" id="nav-premios" role="tabpanel" aria-labelledby="nav-premios-tab">
+                  <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item">
+                      <img class="rounded-circle me-2" src="img/andy.jpg" alt="premio">
+                      caramañola
+                    </a>
+                  </div>
+                </div>
             </c:if>
           
            

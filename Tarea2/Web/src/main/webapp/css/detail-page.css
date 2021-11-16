@@ -21,7 +21,7 @@
     width: 50% !important;
   }
 
-  .main-content#user-page .details-main img, .main-content#clase-page .details-main img {
+  .main-content#user-page .details-main img {
     width: 20% !important;
   }
 }
