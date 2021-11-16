@@ -35,6 +35,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="cuponerasWeb" type="{http://servidor/}dataCuponera" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="seguidos" type="{http://servidor/}dataUsuario" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="seguidores" type="{http://servidor/}dataUsuario" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="actividadesFavoritas" type="{http://servidor/}dataActividad" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -57,7 +58,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "clasesWeb",
     "cuponerasWeb",
     "seguidos",
-    "seguidores"
+    "seguidores",
+    "actividadesFavoritas"
 })
 @XmlSeeAlso({
     DataProfesor.class
@@ -83,6 +85,8 @@ public class DataUsuario {
     protected List<DataUsuario> seguidos;
     @XmlElement(nillable = true)
     protected List<DataUsuario> seguidores;
+    @XmlElement(nillable = true)
+    protected List<DataActividad> actividadesFavoritas;
 
     /**
      * Obtiene el valor de la propiedad nickname.
@@ -419,6 +423,35 @@ public class DataUsuario {
             seguidores = new ArrayList<DataUsuario>();
         }
         return this.seguidores;
+    }
+
+    /**
+     * Gets the value of the actividadesFavoritas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actividadesFavoritas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActividadesFavoritas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DataActividad }
+     * 
+     * 
+     */
+    public List<DataActividad> getActividadesFavoritas() {
+        if (actividadesFavoritas == null) {
+            actividadesFavoritas = new ArrayList<DataActividad>();
+        }
+        return this.actividadesFavoritas;
     }
 
 }

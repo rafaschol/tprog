@@ -41,12 +41,13 @@
               <div class="p-3">
                 <h1 class="mb-3">${actividad.getNombre()}</h1>
                 <p>${actividad.getDescripcion()}</p>
-                
-                <form action="usuarios/favorita" method="post">
-                <input type="hidden" name="seguir" value="${!siguiendolo}">
-                <input type="hidden" name="actividad" value="${usuario.getNickname()}">
-                <button class="btn mt-3 ${siguiendolo ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${siguiendolo ? 'Quitar de favoritas' : 'Añadir a favoritas'}</button>
-              </form>
+                <c:if test="${esSocio}">
+	              <form action="actividades/favorita" method="post">
+	                <input type="hidden" name="seguir" value="${!esFavorita}">
+	                <input type="hidden" name="actividad" value="${actividad.getNombre()}">
+	                <button class="btn mt-3 ${esFavorita ? 'btn-outline-primary siguiendo' : 'btn-primary'}" id="seguir-button">${esFavorita ? 'Quitar de favoritas' : 'Añadir a favoritas'}</button>
+	              </form>
+	           </c:if>
               </div>
               
           </div>
@@ -115,6 +116,6 @@
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="js/sidebar.js"></script>
-  
+  <script src="js/edit-perfil.js"></script>
 </body>
 </html>

@@ -475,7 +475,7 @@ public class ControladorUsuario implements IControladorUsuario {
     		
     		
     		
-    		res = new DataProfesor(profesor, clases, null, seguidos, seguidores, actividadesAceptadas, actividadesSinAceptar);
+    		res = new DataProfesor(profesor, clases, null, seguidos, seguidores, actividadesAceptadas, actividadesSinAceptar,null);
     	} else {
     		// usuario es un socio
     		int iterador = 0;
@@ -511,7 +511,16 @@ public class ControladorUsuario implements IControladorUsuario {
     			iterador++;
     		}
     		
-    		res = new DataUsuario(socio, clases, cuponeras, seguidos, seguidores);
+    		DataActividad[] favoritas =  new DataActividad[socio.getActFavoritas().size()];
+    		
+    		iterador = 0;
+    		for (Map.Entry<String, ActividadDeportiva> iter : socio.getActFavoritas().entrySet()) {
+    			favoritas[iterador] = new DataActividad( iter.getValue(),null,null,null);
+    			iterador++;
+    		}
+    		
+    		
+    		res = new DataUsuario(socio, clases, cuponeras, seguidos, seguidores,favoritas);
     	}
     	
     	return res;

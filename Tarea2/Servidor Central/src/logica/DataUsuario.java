@@ -22,6 +22,7 @@ public class DataUsuario  {
 	private DataCuponera[] cuponerasWeb;
 	private DataUsuario[] seguidos;
 	private DataUsuario[] seguidores;
+	private DataActividad[] actividadesFavoritas;
 	
 	
 	
@@ -39,7 +40,7 @@ public class DataUsuario  {
 		this.setContrasena(usuario.getContrasena());
 	}
 	
-	public DataUsuario(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores) {
+	public DataUsuario(Usuario usuario, DataClase[] clasesWeb, DataCuponera[] cuponerasWeb, DataUsuario[] seguidos, DataUsuario[] seguidores, DataActividad[] favoritas) {
 		this.setNickname(usuario.getNickname());
 		this.setTipoUsuario(usuario.getClass() == Socio.class ? "Socio" : "Profesor");
 		this.setNombre(usuario.getNombre());
@@ -52,6 +53,7 @@ public class DataUsuario  {
 		this.setCuponerasWeb(cuponerasWeb);
 		this.setSeguidores(seguidores);
 		this.setSeguidos(seguidos);
+		this.setActividadesFavoritas(favoritas);
 	}
 	
 	public DataUsuario(Usuario usuario) {
@@ -170,4 +172,14 @@ public class DataUsuario  {
 	public void setSeguidores(DataUsuario[] seguidores) {
 		this.seguidores = seguidores;
 	}
+
+	public DataActividad[] getActividadesFavoritas() {
+		return actividadesFavoritas;
+	}
+
+	public void setActividadesFavoritas(DataActividad[] actividadesFavoritas) {
+		this.actividadesFavoritas = actividadesFavoritas;
+	}
+
+	
 }

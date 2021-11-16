@@ -11,7 +11,7 @@ import servidor.DataUsuario;
 import servidor.UsuarioYaSigueAUsuarioException_Exception;
 
 
-@WebServlet("/usuarios/favorita")
+@WebServlet("/actividades/favorita")
 public class FavoritaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

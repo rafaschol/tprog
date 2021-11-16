@@ -38,6 +38,30 @@ public class ActividadDetailServlet extends HttpServlet {
 		String nombreProfesor = request.getParameter("profesor");
 		DataUsuario dataUsuario = (DataUsuario) session.getAttribute("usuarioLogueado");
 		
+		
+		//datos para el caso de uso actividad favorita
+		boolean esSocio = false;
+		if(dataUsuario != null) {
+			esSocio = dataUsuario.getTipoUsuario().equals("Socio");
+		}
+		request.setAttribute("esSocio", esSocio);
+		if(esSocio){
+			DataUsuario dataSocio = port.mostrarDataUsuarioWeb(dataUsuario.getNickname());
+			DataActividad[] favoritas = dataSocio.getActividadesFavoritas().toArray(new DataActividad[0]);
+		
+			
+			boolean esFavorita = false;
+			
+			for(int j=0; j<favoritas.length;j++) {
+				if(favoritas[j].getNombre().equals(nombreActividad)) esFavorita = true;
+			}
+			System.out.println(esFavorita);
+			request.setAttribute("esFavorita", esFavorita);
+			
+		}
+		
+		
+		
 		if(nombreProfesor !=null) {
 			if (dataUsuario!= null &&  dataUsuario.getNickname().equals(nombreProfesor)) {
 				DataActividad actividad = (DataActividad) port.listarDataActividadProfesor(nombreActividad);

@@ -623,6 +623,19 @@ public interface Publicador {
      * 
      * @param arg0
      * @return
+     *     returns servidor.DataClase
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://servidor/Publicador/obtenerDataClaseRequest", output = "http://servidor/Publicador/obtenerDataClaseResponse")
+    public DataClase obtenerDataClase(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns servidor.DataContenedor
      */
     @WebMethod
@@ -634,16 +647,13 @@ public interface Publicador {
 
     /**
      * 
-     * @param arg0
      * @return
-     *     returns servidor.DataClase
+     *     returns servidor.DataContenedor
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://servidor/Publicador/obtenerDataClaseRequest", output = "http://servidor/Publicador/obtenerDataClaseResponse")
-    public DataClase obtenerDataClase(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+    @Action(input = "http://servidor/Publicador/listarCuponerasRequest", output = "http://servidor/Publicador/listarCuponerasResponse")
+    public DataContenedor listarCuponeras();
 
     /**
      * 
@@ -694,16 +704,6 @@ public interface Publicador {
 
     /**
      * 
-     * @return
-     *     returns servidor.DataContenedor
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://servidor/Publicador/listarCuponerasRequest", output = "http://servidor/Publicador/listarCuponerasResponse")
-    public DataContenedor listarCuponeras();
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns servidor.DataCuponera
@@ -733,10 +733,10 @@ public interface Publicador {
      * @param arg4
      * @param arg1
      * @param arg0
-     * @throws CuponeraVencidaException_Exception
-     * @throws ClasesRestantesException_Exception
      * @throws CuposAgotadosException_Exception
+     * @throws ClasesRestantesException_Exception
      * @throws SocioRegistradoException_Exception
+     * @throws CuponeraVencidaException_Exception
      */
     @WebMethod
     @Action(input = "http://servidor/Publicador/registrarSocioRequest", output = "http://servidor/Publicador/registrarSocioResponse", fault = {
